@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .class-name-is-here {
+    @apply text-green-600 flex flex-row flex-wrap hover:text-yellow-200 hover:transition-all duration-500 rounded-sm hover:rounded-3xl bg-gray-500 shadow-lg cursor-pointer px-2;
+  }
+
+  .toni {
+    @apply flex flex-row scale-0;
+  }
+}
