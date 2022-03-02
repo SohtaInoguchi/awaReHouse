@@ -2,9 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const server = require("http").createServer(app);
-// const io = require("socket.io")(7777, {
-//   cors: { origin: ["http://localhost:3000"] },
-// });
+const io = require("socket.io")(7777, {
+  cors: { origin: ["http://localhost:3000"] },
+});
 const jwt = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 8000;
@@ -17,8 +17,9 @@ app.get("/", (_, res) => {
   res.send("hehehehe");
 });
 
-app.get("/login", (req, res) => {
-  console.log("login is ghrehe");
+app.post("/login", (req, res) => {
+  const username = req.body;
+  console.log(username);
   res.send("login page");
 });
 

@@ -3,11 +3,11 @@ import "../input.css";
 import React, { useState } from "react";
 import Login from "./Login";
 function App() {
-  //change it to .env variable later
+  // change it to .env variable later
   // const socket = io("http://localhost:7777");
   // socket.on("connection", () => {});
   // socket.on("receive-message", (message) => {
-  // console.log(message);
+  //   console.log(message);
   // });
   // console.log(document.getElementById("message1").textContent);
   const [message, setMessage] = useState("Screen");
