@@ -4,9 +4,10 @@ export default function Login() {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <input id="email" type="text" placeholder="Email Address" />
+        {/* <input id="email" type="text" placeholder="Email Address" /> */}
         <input id="first_name" type="text" placeholder="First Name" />
         <input id="last_name" type="text" placeholder="Last Name" />
+        <input id="password" type="password" placeholder="Password" />
         <button
           className=""
           onClick={(e) => {
@@ -14,8 +15,10 @@ export default function Login() {
             axios.post("/login", {
               first_name: document.getElementById("first_name").value,
               last_name: document.getElementById("last_name").value,
-              email: document.getElementById("email").value,
+              //   email: document.getElementById("email").value,
+              password: document.getElementById("password").value,
             });
+            // axios.get("/login");
           }}
         >
           Login
