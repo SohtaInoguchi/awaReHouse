@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import App from './App';
-
+// require('dotenv').config();
 
 export default function Chat () {
     
@@ -12,7 +12,8 @@ export default function Chat () {
     // socket io
     // const PORT = process.env.PORT || 7777;
     const socketUrl = process.env.URL || `localhost:7777`
-    const socket = io(`${socketUrl}`);
+    // const socket = io(`${socketUrl}`);
+    const socket = io('https://awarehouse-staging.herokuapp.com/');
 
     socket.on("receive-message", (message) => {
         let temp = [...receivedMessage];
