@@ -11,9 +11,8 @@ export default function Chat () {
     
     // socket io
     const PORT = process.env.PORT || 7777;
-    const socket = io(`localhost:${PORT}`);
-    socket.on('connect', () => {
-    });
+    const socketUrl = process.env.URL || `localhost:`
+    const socket = io(`${socketUrl}${PORT}`);
 
     socket.on("receive-message", (message) => {
         let temp = [...receivedMessage];
@@ -21,14 +20,12 @@ export default function Chat () {
         setReceivedMessage(temp);
     });
 
-
     const sendMessage = (e) => {
         e.preventDefault();
         let temp = [...chatMessages];
         temp.push(inputRef.current.value);
         setChatMessage(temp);
         inputRef.current.value = "";
-        console.log(chatMessages);
         socket.emit('send-message', inputRef.current.value);
     }
 

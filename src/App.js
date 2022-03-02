@@ -1,5 +1,4 @@
 import "./input.css";
-import React, { useState, useEffect } from 'react';
 import Chat from "./Chat";
 
 function App() {

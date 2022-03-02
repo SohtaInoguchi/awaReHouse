@@ -3,12 +3,13 @@ const cors = require("cors");
 const app = express();
 
 const PORT = process.env.PORT || 8000;
-const socketPort = 8001;
 
 // socket io
-const io = require('socket.io')(7777, {
+const socketioPORT = process.env.PORT || 7777;
+const originURL = process.env.URL || ['http://localhost:3000'];
+const io = require('socket.io')(socketioPORT, {
   cors: {
-    origin: ['http://localhost:3000']
+    origin: originURL
   }
 });
 
@@ -23,7 +24,6 @@ app.get("/", (_, res) => {
 io.on('connection', (socket) => {
   console.log("Socket io connected");
   socket.on('send-message', (text) => {
-    console.log(text);
     io.emit("receive-message", "Please pack in box");
   })
 });
