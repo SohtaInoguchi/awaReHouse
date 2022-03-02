@@ -8,11 +8,13 @@ const PORT = process.env.PORT || 8000;
 const http = require('http');
 const server = http.createServer(app);
 const socketioPORT = server.address.port || 7777;
-const originURL = process.env.URL || ['http://localhost:3000'];
+// const socketioPORT = 7777;
+const originURL = process.env.URL || ['http://localhost:8000'];
 const io = require('socket.io')(socketioPORT, {
 // const io = require('socket.io')(server.address.port, {
   cors: {
-    origin: originURL
+    origin: originURL,
+    methods: ["GET", "POST"]
   }
 });
 
