@@ -14,6 +14,7 @@ function App() {
           <div className="toni group-hover:scale-100">NOICE</div>
         </div>
       </div>
+          {/* <Chat chatMessage={chatMessage} setChatMessage={setChatMessage}/> */}
           <Chat/>
     </div>
   );

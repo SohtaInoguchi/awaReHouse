@@ -5,11 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const socketPort = 8001;
 
-// for socket io
-// const http = require('http');
-// const server = http.createServer(app);
-// const io = new Server(server);
-// const { Server } = require('socket.io');
+// socket io
 const io = require('socket.io')(7777, {
   cors: {
     origin: ['http://localhost:3000']
@@ -28,11 +24,8 @@ io.on('connection', (socket) => {
   console.log("Socket io connected");
   socket.on('send-message', (text) => {
     console.log(text);
+    io.emit("receive-message", "Please pack in box");
   })
 });
-
-// server.listen(socketPort, () => {
-//   console.log(`listening on ${socketPort}`);
-// })
 
 app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));

@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
+import App from './App';
 
 
 export default function Chat () {
-    const socket = io('localhost:7777');
-    const sendMessage = () => {
-        socket.emit('send-message', "TESTING!!!!!!");
+    
+    const inputRef = React.createRef();
+    const [chatMessages, setChatMessage] = useState([]);
+    const [receivedMessage, setReceivedMessage] = useState([]);
+    
+    // socket io
+    const PORT = process.env.PORT || 7777;
+    const socket = io(`localhost:${PORT}`);
+    socket.on('connect', () => {
+    });
+
+    socket.on("receive-message", (message) => {
+        let temp = [...receivedMessage];
+        temp.push(message);
+        setReceivedMessage(temp);
+    });
+
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        let temp = [...chatMessages];
+        temp.push(inputRef.current.value);
+        setChatMessage(temp);
+        inputRef.current.value = "";
+        console.log(chatMessages);
+        socket.emit('send-message', inputRef.current.value);
     }
 
-    const [chatMessage, setChatMessage] = useState('');
-
-    // const socket = io('http://localhost:3000', {
-    //   path: "/socket-path/"
-    // });
-    // const socket = io('ws://localhost:3001');
-    // socket.on("connection");
-    
-    useEffect(() => {
-      socket.on('connect', () => {
-        setChatMessage(`Socket id ${socket.id}`);
-      });
-    }, [])
   
     return (
         <>
-        <h1>{chatMessage}</h1>
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage}>Send messege</button><br/>
+        <input ref={inputRef} type='text' placeholder='Enter message'/>
+        <div id='sent-message'>{chatMessages.map((message, index) => <p key={index}>{message}</p>)}</div>
+        <div id='received-message'>{receivedMessage.map((message, index) => <p key={index}>{message}</p>)}</div>
         </>
     );
 }
