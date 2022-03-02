@@ -2,9 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv").config();
-
-
-// This is your test secret API key.
 const stripe = require('stripe')(process.env.API_KEY);
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
