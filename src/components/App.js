@@ -1,17 +1,14 @@
 import { io } from "socket.io-client";
 import "../input.css";
 import React, { useState } from "react";
+import Login from "./Login";
 function App() {
   //change it to .env variable later
-  const socket = io("http://localhost:7777");
-  socket.on("connection", () => {
-    console.log("frontend connected");
-    console.log(document.getElementsByClassName("screen").value);
-    // displayMessage(`YOU CONNECTED ID with ${socket.id}`);
-  });
-  socket.on("receive-message", (message) => {
-    console.log(message);
-  });
+  // const socket = io("http://localhost:7777");
+  // socket.on("connection", () => {});
+  // socket.on("receive-message", (message) => {
+  // console.log(message);
+  // });
   // console.log(document.getElementById("message1").textContent);
   const [message, setMessage] = useState("Screen");
   return (
@@ -19,44 +16,41 @@ function App() {
       <div className="text-green-500 flex justify-center items-center flex-col">
         {" "}
         super
-        <div className="class-name-is-here group">
-          hehehe
-          <div className="toni group-hover:scale-100">NOICE</div>
-        </div>
+        <Login />
         <div className="border-2 w-max h-max flex flex-col">
           <div className="screen flex justify-center bg-blue-300 text-yellow-200">
             {message}
           </div>
           <button
-            onClick={() => {
-              setMessage("easy piecy");
-              socket.emit(
-                "send-message",
-                document.getElementById("message1").textContent
-              );
-            }}
+          // onClick={() => {
+          //   setMessage("easy piecy");
+          //   socket.emit(
+          //     "send-message",
+          //     document.getElementById("message1").textContent
+          //   );
+          // }}
           >
             <div id="message1">How to pay money?</div>
           </button>
           <button
-            onClick={() => {
-              setMessage("ABSOLUTELY YAAASSSSS");
-              socket.emit(
-                "send-message",
-                document.getElementById("message2").textContent
-              );
-            }}
+          // onClick={() => {
+          //   setMessage("ABSOLUTELY YAAASSSSS");
+          //   socket.emit(
+          //     "send-message",
+          //     document.getElementById("message2").textContent
+          //   );
+          // }}
           >
             <div id="message2">Am I look good?</div>
           </button>
           <button
-            onClick={() => {
-              setMessage("ASK ETIENNE");
-              socket.emit(
-                "send-message",
-                document.getElementById("message3").textContent
-              );
-            }}
+          // onClick={() => {
+          //   setMessage("ASK ETIENNE");
+          //   socket.emit(
+          //     "send-message",
+          //     document.getElementById("message3").textContent
+          //   );
+          // }}
           >
             <div id="message3">How to become a rich man?</div>
           </button>

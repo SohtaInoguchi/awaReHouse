@@ -2,10 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const server = require("http").createServer(app);
-const io = require("socket.io")(7777, {
-  cors: { origin: ["http://localhost:3000"] },
-});
-// const socket = require("socket.io");
+// const io = require("socket.io")(7777, {
+//   cors: { origin: ["http://localhost:3000"] },
+// });
+const jwt = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 8000;
 
@@ -17,15 +17,17 @@ app.get("/", (_, res) => {
   res.send("hehehehe");
 });
 
-//const server
+app.get("/login", (req, res) => {
+  console.log("login is ghrehe");
+  res.send("login page");
+});
+
 app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
-// const io = socket(server);
-
-io.on("connection", (socket) => {
-  console.log(`backend id:${socket.id}`);
-  socket.on("send-message", (input) => {
-    console.log(input);
-  });
-  socket.emit("receive-message", "MESSAGE RECEIVED");
-});
+// io.on("connection", (socket) => {
+//   // console.log(`backend id:${socket.id}`);
+//   socket.on("send-message", (input) => {
+//     console.log(input);
+//   });
+//   socket.emit("receive-message", "MESSAGE RECEIVED");
+// });
