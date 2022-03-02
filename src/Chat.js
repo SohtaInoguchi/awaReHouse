@@ -10,9 +10,9 @@ export default function Chat () {
     const [receivedMessage, setReceivedMessage] = useState([]);
     
     // socket io
-    const PORT = process.env.PORT || 7777;
-    const socketUrl = process.env.URL || `localhost:`
-    const socket = io(`${socketUrl}${PORT}`);
+    // const PORT = process.env.PORT || 7777;
+    const socketUrl = process.env.URL || `localhost:7777`
+    const socket = io(`${socketUrl}`);
 
     socket.on("receive-message", (message) => {
         let temp = [...receivedMessage];
@@ -28,7 +28,6 @@ export default function Chat () {
         inputRef.current.value = "";
         socket.emit('send-message', inputRef.current.value);
     }
-
   
     return (
         <>
