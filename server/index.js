@@ -54,10 +54,10 @@ app.get("/post", authenticateToken, (req, res) => {
 
 app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
-// io.on("connection", (socket) => {
-//   // console.log(`backend id:${socket.id}`);
-//   socket.on("send-message", (input) => {
-//     console.log(input);
-//   });
-//   socket.emit("receive-message", "MESSAGE RECEIVED");
-// });
+io.on("connection", (socket) => {
+  // console.log(`backend id:${socket.id}`);
+  socket.on("send-message", (input) => {
+    console.log(input);
+  });
+  socket.emit("receive-message", "MESSAGE RECEIVED");
+});

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-export default function Login() {
+export default function Login({ setIsLogin }) {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
@@ -12,13 +12,14 @@ export default function Login() {
           className=""
           onClick={(e) => {
             e.preventDefault();
-            axios.post("/login", {
-              first_name: document.getElementById("first_name").value,
-              last_name: document.getElementById("last_name").value,
-              //   email: document.getElementById("email").value,
-              password: document.getElementById("password").value,
-            });
-            // axios.get("/login");
+            axios
+              .post("/login", {
+                first_name: document.getElementById("first_name").value,
+                last_name: document.getElementById("last_name").value,
+                //   email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+              })
+              .then((res) => setIsLogin(res.data));
           }}
         >
           Login
