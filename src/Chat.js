@@ -13,7 +13,7 @@ export default function Chat () {
     // const PORT = process.env.PORT || 7777;
     const socketUrl = process.env.URL || `localhost:7777`
     // const socket = io(`${socketUrl}`);
-    const socket = io('https://awarehouse-staging.herokuapp.com/');
+    const socket = io(`https://awarehouse-staging.herokuapp.com/${process.env.PORT}`);
 
     socket.on("receive-message", (message) => {
         let temp = [...receivedMessage];
