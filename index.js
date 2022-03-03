@@ -1,55 +1,64 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const socketIO = require('socket.io');
-// const app = express();
-// const cors = require("cors");
-
 const PORT = process.env.PORT || 8000;
-const app = express()
-  .use(express.static(__dirname + "/build"))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-const io = socketIO(app);
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
-});
-
-// app.use(express.json());
-// app.use(cors());
-// app.use(express.static(__dirname + "/build"));
-
-// app.get("/", (_, res) => {
-//   res.send("hehehehe");
-// });
-
-io.on('connection', (socket) => {
-  console.log("Socket io connected");
-  socket.on('send-message', (text) => {
-    io.emit("receive-message", "Please pack in box");
-  })
-});
-
-
-
-
 const cors = require("cors");
-// const app = express();
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
 const knex = require("./server/db");
-const PORT = process.env.PORT || 8000;
+
+const app = express()
+// .use(cors())
+// .use(express.static(__dirname + "/build"))
+// .use(express.urlencoded({ extended: true }))
+// .use(express.json())
+// .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+/////////////////////////////////////
+// const server = express()
+//   .use(express.static(__dirname + "/build"))
+//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// const server = express()
+/////////////////////////////////////////////////////////
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
-
-const stripe = require("stripe")(process.env.API_KEY);
 app.use(express.urlencoded({ extended: true }));
 
-// app.get("/", (_, res) => {
-//   res.send("hehehehe");
+const stripe = require("stripe")(process.env.API_KEY);
+
+const server = app.use(cors()).use(express.static(__dirname + "/build")).listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+
+// ----------SOCKET IO SERVER---------
+// const server = express()
+//   .use(cors())
+//   .use(express.static(__dirname + "/build"))
+//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// ----------SOCKET IO SERVER---------
+
+
+const socketIO = require('socket.io');
+
+// -------SOCKET IO----------
+const io = socketIO(server);
+// io.on('connection', (socket) => {
+//   console.log('Client connected');
+//   // socket.on('disconnect', () => console.log('Client disconnected'));
 // });
+
+io.on('connection', (socket) => {
+    console.log("Socket io connected");
+    socket.on('send-message', (text) => {
+      // io.emit("receive-message","Please pack in box");
+    // socket.emit('send-message', (text) => {
+      console.log('is called')
+      console.log(text)
+      // io.emit("receive-message", (message)=> {console.log("Please pack in box" )});
+    })
+  });
+
+// ---------SOCKET IO ------------->
+
 
 app.post("/test", (req, res) => {
   const input = {
@@ -215,4 +224,3 @@ app.post(
 
 /////////////////STRIPE API/////////////////////////////
 
-app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
