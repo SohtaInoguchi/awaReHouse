@@ -12,6 +12,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
+exports.CLOUD_NAME = process.env.CLOUD_NAME || 'cloud-name';
+exports.API_KEY = process.env.CLOUD_API_KEY || 'api-key';
+exports.API_SECRET = process.env.CLOUD_API_SECRET || 'secret-key';
+
 app.get("/", (_, res) => {
   res.send("hehehehe");
 });
