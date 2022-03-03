@@ -5,7 +5,7 @@ const app = express();
 const server = require("http").createServer(app);
 const jwt = require("jsonwebtoken");
 const db = require("./db");
-
+const knex = require("./db");
 const PORT = process.env.PORT || 8000;
 
 app.use(cors());
@@ -15,9 +15,9 @@ app.use(express.static(__dirname + "/build"));
 const stripe = require("stripe")(process.env.API_KEY);
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
+// app.get("/", (_, res) => {
+//   res.send("hehehehe");
+// });
 
 app.post("/test", (req, res) => {
   const input = {
