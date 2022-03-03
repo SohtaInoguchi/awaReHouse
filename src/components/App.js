@@ -4,6 +4,7 @@ import Providerpage from "./Providerpage.js";
 import React, { useState } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
+import NewCustomer from "./NewCustomer"
 
 function App() {
   //for user
@@ -12,12 +13,13 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
-  console.log(isLogin);
+  const [newCustomer, setNewCustomer] = useState(false);
+
   return (
     <div>
       {mode === "homePage" ? (
         <div>
-          <Homepage setMode={setMode} />
+          <Homepage setMode={setMode} setNewCustomer={setNewCustomer} />
           <Userpage />
           <Providerpage />
         </div>
@@ -29,6 +31,8 @@ function App() {
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
         <div>Provider Login Page</div>
+      ) : mode === "registration" ? (
+          <NewCustomer/>
       ) : (
         <div>admin page</div>
       )}
