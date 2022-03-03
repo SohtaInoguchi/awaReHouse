@@ -11,7 +11,8 @@ export default function Login({ setIsLogin }) {
         <button
           className=""
           onClick={(e) => {
-            e.preventDefault();
+            // e.preventDefault();
+            console.log("clicked");
             axios
               .post("/login", {
                 first_name: document.getElementById("first_name").value,

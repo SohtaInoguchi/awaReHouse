@@ -6,51 +6,65 @@ import Login from "./Login";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [mode, setMode] = useState("homePage");
+  console.log(isLogin);
   return (
     <div>
-      {isLogin ? <div>Welcome</div> : <Login setIsLogin={setIsLogin} />}
-      <div className="homepageContainer">
-        <div className="containerHomeLeft">
-          <img
-            className="logo"
-            src={require("./pictures/LOGO.png")}
-            alt="logo awaReHouse"
-          />
-          <h1 className="welcomeMessage">
-            Welcome to <br></br> awaReHouse
-          </h1>
+      {mode === "homePage" ? (
+        <div>
+          <div className="homepageContainer">
+            <div className="containerHomeLeft">
+              <img
+                className="logo"
+                src={require("./pictures/LOGO.png")}
+                alt="logo awaReHouse"
+              />
+              <h1 className="welcomeMessage">
+                Welcome to <br></br> awaReHouse
+              </h1>
+            </div>
+            <div className="containerHomeRight">
+              <img
+                className="homeImages"
+                src={require("./pictures/1.jpg")}
+                alt="moving boxes"
+              />
+              <img
+                className="homeImages"
+                src={require("./pictures/2.jpg")}
+                alt="storage place"
+              />
+            </div>
+          </div>
+          <div className="homeButtons">
+            <div className="homeUser">
+              <button
+                className="loginButton"
+                onClick={() => setMode("userLogin")}
+              >
+                User LOGIN
+              </button>
+              <div>
+                Want to become a user? <br></br>
+                <p className="signup">SIGN UP</p>
+              </div>
+            </div>
+            <div className="homeProvider">
+              <button className="loginButton">Provider LOGIN</button>
+              <div>
+                Want to become a provider? <br></br>
+                <p className="signup">SIGN UP</p>
+              </div>
+            </div>
+          </div>
+          <Userpage />
+          <Providerpage />
         </div>
-        <div className="containerHomeRight">
-          <img
-            className="homeImages"
-            src={require("./pictures/1.jpg")}
-            alt="moving boxes"
-          />
-          <img
-            className="homeImages"
-            src={require("./pictures/2.jpg")}
-            alt="storage place"
-          />
-        </div>
-      </div>
-      <div className="homeButtons">
-        <div className="homeUser">
-          <button className="loginButton">User LOGIN</button>
-          <p>
-            Want to become a user? <br></br>
-            <p className="signup">SIGN UP</p>
-          </p>
-        </div>
-        <div className="homeProvider">
-          <button className="loginButton">Provider LOGIN</button>
-          <p>
-            Want to become a provider? <br></br>
-            <p className="signup">SIGN UP</p>
-          </p>
-        </div>
-      </div>
-      <Userpage />
-      <Providerpage />
+      ) : mode === "userLogin" && isLogin ? (
+        <div>Welcome</div>
+      ) : (
+        <Login setIsLogin={setIsLogin} />
+      )}
     </div>
   );
 }

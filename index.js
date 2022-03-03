@@ -3,12 +3,12 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const server = require("http").createServer(app);
-const io = require("socket.io")(7777, {
-  cors: { origin: ["http://localhost:3000"] },
-});
+// const io = require("socket.io")(7777, {
+//   cors: { origin: ["http://localhost:3000"] },
+// });
 // const jwt = require("jsonwebtoken");
 const db = require("./server/db");
-const knex = require("./server/db");
+// const knex = require("./server/db");
 
 const PORT = process.env.PORT || 8000;
 
@@ -36,7 +36,7 @@ app.post("/login", async (req, res) => {
 
   const boolean =
     user.length >= 1 && input.password === user[0].password ? true : false;
-
+  console.log(boolean);
   res.json(boolean);
 });
 
@@ -54,10 +54,10 @@ app.get("/post", authenticateToken, (req, res) => {
 
 app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
-io.on("connection", (socket) => {
-  // console.log(`backend id:${socket.id}`);
-  socket.on("send-message", (input) => {
-    console.log(input);
-  });
-  socket.emit("receive-message", "MESSAGE RECEIVED");
-});
+// io.on("connection", (socket) => {
+//   // console.log(`backend id:${socket.id}`);
+//   socket.on("send-message", (input) => {
+//     console.log(input);
+//   });
+//   socket.emit("receive-message", "MESSAGE RECEIVED");
+// });
