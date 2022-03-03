@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Homepage({ setMode }) {
+export default function Homepage({ setMode, setNewCustomer }) {
   return (
     <div>
       <div className="homepageContainer">
@@ -34,7 +34,7 @@ export default function Homepage({ setMode }) {
           </button>
           <div>
             Want to become a user? <br></br>
-            <p className="signup">SIGN UP</p>
+            <p className="signup" onClick={() => setMode("registration")}>SIGN UP</p>
           </div>
         </div>
         <div className="homeProvider">
@@ -49,7 +49,7 @@ export default function Homepage({ setMode }) {
           </button>
           <div>
             Want to become a provider? <br></br>
-            <p className="signup">SIGN UP</p>
+            <p className="signup" onClick={() => setMode("registration")}>SIGN UP</p>
           </div>
         </div>
       </div>

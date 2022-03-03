@@ -9,7 +9,8 @@ exports.seed = function(knex) {
             adress:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
             bank_reference:"Shinsei Bank, 540-6981117",
             emergency_contact_person:"Suga Sohta",
-            emergency_contact_phone_number:"026-367-2828"
+            emergency_contact_phone_number:"026-367-2828",
+            email:"mioriatsuga@gmail.com"
           },
           {
             first_name:"Toshio",
@@ -18,7 +19,8 @@ exports.seed = function(knex) {
             adress:"3882 Yasuda, Agano, Niigata, 959-2221",
             bank_reference:"SMBC, 211-0227783",
             emergency_contact_person:"Masuda Ryoko",
-            emergency_contact_phone_number:"025-262-6969"
+            emergency_contact_phone_number:"025-262-6969",
+            email:"sagachisama66@softbank.co.jp"
           },
           {
             first_name:"Tomoko",
@@ -27,7 +29,8 @@ exports.seed = function(knex) {
             adress:"Minamisatsuma, Kasedahigashihoncho 12-2, Kagoshima, 897-0031",
             bank_reference:"SMBC, 211-4505051",
             emergency_contact_person:"Saito Kenji",
-            emergency_contact_phone_number:"099-353-8102"
+            emergency_contact_phone_number:"099-353-8102",
+            email:"bana24tomochi@yahoo.co.jp"
           },
           {
             first_name:"Go",
@@ -36,7 +39,8 @@ exports.seed = function(knex) {
             adress:"Shikishimacho 1-14, Nemuro, Hokkaido, 087-0026",
             bank_reference:"Hokkaido Bank, 123-568-11-67",
             emergency_contact_person:"Sazuka Ue",
-            emergency_contact_phone_number:"015-323-4448"
+            emergency_contact_phone_number:"015-323-4448",
+            email:"asasasa112233@gmail.com"
           },
           {
             first_name:"Hiroki",
@@ -45,7 +49,8 @@ exports.seed = function(knex) {
             adress:"Ho Hinomikomachi, Hakusan, Ishikawa, 920-2153",
             bank_reference:"Hokuriku Bank, 010-033-01-97",
             emergency_contact_person:"Natsume Satoshi",
-            emergency_contact_phone_number:"076-272-1811"
+            emergency_contact_phone_number:"076-272-1811",
+            email:"hnatsumehironatsu@ezweb.ne.jp"
           }
       ]);
     });
