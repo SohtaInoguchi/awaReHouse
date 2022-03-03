@@ -6,7 +6,7 @@ const dotenv = require("dotenv").config();
 
 // This is your test secret API key.
 const stripe = require('stripe')(process.env.API_KEY);
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -23,7 +23,7 @@ app.get("/", (_, res) => {
 
 
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+
 
 app.post('/create-checkout-session', async (req, res) => {
   const prices = await stripe.prices.list({
