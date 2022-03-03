@@ -12,17 +12,22 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
+// app.get("/", (_, res) => {
+//   res.send("hehehehe");
+// });
 
-app.post("/test", (req, res) => {
-  const input = {
-    firstname: "Toni",
-    lastname: "Peña",
-    email: "toni@gmail.com",
-    password: "toniTheBest",
-  };
+// app.post("/test", (req, res) => {
+//   const input = {
+//     firstname: "Toni",
+//     lastname: "Peña",
+//     email: "toni@gmail.com",
+//     password: "toniTheBest",
+//   };
+
+// This is your test secret API key.
+const stripe = require('stripe')(process.env.API_KEY);
+// app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });
