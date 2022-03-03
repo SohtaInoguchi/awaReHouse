@@ -20,6 +20,11 @@ const app = express()
 // const server = express()
 /////////////////////////////////////////////////////////
 
+// This is your test secret API key.
+const stripe = require('stripe')(process.env.API_KEY);
+// app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
@@ -45,6 +50,9 @@ const io = socketIO(server);
 //   console.log('Client connected');
 //   // socket.on('disconnect', () => console.log('Client disconnected'));
 // });
+app.get("/", (_, res) => {
+  res.send("hehehehe");
+});
 
 io.on('connection', (socket) => {
     // console.log("Socket io connected");
@@ -68,6 +76,7 @@ app.post("/test", (req, res) => {
     email: "toni@gmail.com",
     password: "toniTheBest",
   };
+
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });

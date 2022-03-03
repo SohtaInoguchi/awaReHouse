@@ -4,8 +4,10 @@ import Providerpage from "./Providerpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
+import NewCustomer from "./NewCustomer"
 import Success from "./Success";
 import Subscription from "./Subscription";
+import Admin from "./Admin";
 
 function App() {
   //for user
@@ -14,6 +16,7 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
+  const [newCustomer, setNewCustomer] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -44,7 +47,7 @@ function App() {
         <Subscription />
       ) : mode === "homePage" ? (
         <div>
-          <Homepage setMode={setMode} />
+          <Homepage setMode={setMode} setNewCustomer={setNewCustomer} />
           <Userpage />
           <Providerpage />
         </div>
@@ -60,8 +63,10 @@ function App() {
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
         <div>Provider Login Page</div>
+      ) : mode === "registration" ? (
+          <NewCustomer/>
       ) : (
-        <div>admin page</div>
+        <Admin/>
       )}
     </div>
   );
