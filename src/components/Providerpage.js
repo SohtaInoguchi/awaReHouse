@@ -1,12 +1,8 @@
-import "./input.css";
+import "../input.css";
 import { useState, useEffect } from "react";
 
 function Providerpage() {
-    return (
-        <div>
-
-        </div>
-    );
+  return <div></div>;
 }
 
 export default Providerpage;

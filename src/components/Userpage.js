@@ -1,4 +1,4 @@
-import "./input.css";
+import "../input.css";
 import { useState, useEffect } from "react";
 
 function Userpage() {
