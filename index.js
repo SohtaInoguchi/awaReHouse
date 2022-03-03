@@ -2,9 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv").config();
-const stripe = require('stripe')(process.env.API_KEY);
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 
 
 app.use(express.json());
@@ -12,15 +9,25 @@ app.use(cors());
 app.use(express.static(__dirname + "/build"));
 
 
+// This is your test secret API key.
+const stripe = require('stripe')(process.env.API_KEY);
+// app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
+
+
+
+
 
 
 app.get("/", (_, res) => {
+  
   res.send("hehehehe");
 });
 
 
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
 app.post('/create-checkout-session', async (req, res) => {
   const prices = await stripe.prices.list({
