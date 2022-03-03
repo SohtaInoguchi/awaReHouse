@@ -17,6 +17,11 @@ export default function Chat () {
     const socket = io();
     // const socket = io(`https://awarehouse-staging.herokuapp.com/${process.env.PORT}`);
     // const socket = process.env.NODE_ENV === "development" ? io(`localhost:7777`) : io();
+    // let socket;
+
+    // useEffect(() => {
+    //     socket = io();
+    // }, []);
 
     socket.on("receive-message", (message) => {
         let temp = [...receivedMessage];
@@ -29,14 +34,20 @@ export default function Chat () {
         let temp = [...chatMessages];
         temp.push(inputRef.current.value);
         setChatMessage(temp);
-        inputRef.current.value = "";
         socket.emit('send-message', inputRef.current.value);
+        inputRef.current.value = "";    
+    }
+
+    const sendQuery = (e) => {
+        e.preventDefault();
+        socket.emit('send-message', "Ask Etienne");
     }
   
     return (
         <>
         <button onClick={sendMessage}>Send messege</button><br/>
         <input ref={inputRef} type='text' placeholder='Enter message'/>
+        <button onClick={sendQuery}>How can I be rich?</button>
         <div id='sent-message'>{chatMessages.map((message, index) => <p key={index}>{message}</p>)}</div>
         <div id='received-message'>{receivedMessage.map((message, index) => <p key={index}>{message}</p>)}</div>
         </>

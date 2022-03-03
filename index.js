@@ -47,13 +47,14 @@ const io = socketIO(server);
 // });
 
 io.on('connection', (socket) => {
-    console.log("Socket io connected");
+    // console.log("Socket io connected");
     socket.on('send-message', (text) => {
-      // io.emit("receive-message","Please pack in box");
-    // socket.emit('send-message', (text) => {
       console.log('is called')
       console.log(text)
-      // io.emit("receive-message", (message)=> {console.log("Please pack in box" )});
+      io.emit("receive-message",text);
+    // socket.emit('send-message', (text) => {
+      // io.emit("receive-message", (message) => 
+      // {console.log("Please pack in box" )});
     })
   });
 
