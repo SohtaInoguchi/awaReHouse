@@ -18,6 +18,7 @@ app.use(express.static(__dirname + "/build"));
 
 
 app.get("/", (_, res) => {
+  
   res.send("hehehehe");
 });
 
