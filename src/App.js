@@ -7,8 +7,6 @@ function App() {
 
   return (
     <div>
-        {/* <Chat chatMessage={chatMessage} setChatMessage={setChatMessage}/> */}
-        <Chat/>
       <div className = "homepageContainer">
       <div className="containerHomeLeft">
         <img
