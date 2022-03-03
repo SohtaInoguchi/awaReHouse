@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from "react";
 import "../input.css";
-import { useState, useEffect } from "react";
+const axios = require("axios");
 
 function NewCustomer() {
 
@@ -8,31 +9,47 @@ function NewCustomer() {
   const [userPassword, setUserPassword] = useState("");
   const [userAddress, setUserAddress] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [userPicture, setUserPicture] = useState(null);
+  const [picValues, setPicValues] = useState({
+    imagePreviewUrl: "", 
+    picFile: null
+ })
+ let fileInput = React.createRef(); 
 
 const createFirstName = (e) =>{
   setUserFirstName(e.target.value)
 }
+
 const createLastName = (e) =>{
   setUserLastName(e.target.value)
 }
+
 const createPassword = (e) =>{
   setUserPassword(e.target.value)
 }
 const createAddress = (e) =>{
   setUserAddress(e.target.value)
 }
+
 const createEmail = (e) =>{
   setUserEmail(e.target.value)
 }
+
 const pictureHandler = (e) =>{
-  console.log(e.target.value)
-  setUserPicture(e.target.value)
-}
+  e.preventDefault();
+  let reader = new FileReader();
+  let inFile = e.target.files[0];
+  reader.onloadend = () => {
+     setPicValues({...picValues, 
+        picFile: inFile, 
+        imagePreviewUrl: reader.result
+      })
+    }
+    reader.readAsDataURL(inFile);
+  };
 
 const handleSubmit = (e) =>{
   e.preventDefault()
-  console.log(userFirstName, userLastName, userPassword, userAddress, userEmail, userPicture)
+  console.log(`First Name:${userFirstName}, Last Name:${userLastName}, Password:${userPassword}, Address:${userAddress}, Email:${userEmail}`, picValues)
 }
 
   return <div className="containerNewRegistration">
