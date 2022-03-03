@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const db = require("./server/db");
 const knex = require("./server/db");
 
-const app = express()
+const app = express();
 // .use(cors())
 // .use(express.static(__dirname + "/build"))
 // .use(express.urlencoded({ extended: true }))
@@ -27,7 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const stripe = require("stripe")(process.env.API_KEY);
 
-const server = app.use(cors()).use(express.static(__dirname + "/build")).listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+const server = app
+  .use(cors())
+  .use(express.static(__dirname + "/build"))
+  .listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
 // ----------SOCKET IO SERVER---------
 // const server = express()
@@ -36,8 +39,7 @@ const server = app.use(cors()).use(express.static(__dirname + "/build")).listen(
 //   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 // ----------SOCKET IO SERVER---------
 
-
-const socketIO = require('socket.io');
+const socketIO = require("socket.io");
 
 // -------SOCKET IO----------
 const io = socketIO(server);
@@ -46,19 +48,17 @@ const io = socketIO(server);
 //   // socket.on('disconnect', () => console.log('Client disconnected'));
 // });
 
-io.on('connection', (socket) => {
-    console.log("Socket io connected");
-    socket.on('send-message', (text) => {
-      // io.emit("receive-message","Please pack in box");
+io.on("connection", (socket) => {
+  // console.log("Socket io connected");
+  socket.on("send-message", (text) => {
     // socket.emit('send-message', (text) => {
-      console.log('is called')
-      console.log(text)
-      // io.emit("receive-message", (message)=> {console.log("Please pack in box" )});
-    })
+    console.log("is called");
+    console.log(text);
+    // io.emit("receive-message", "Please pack in box");
   });
+});
 
 // ---------SOCKET IO ------------->
-
 
 app.post("/test", (req, res) => {
   const input = {
@@ -223,4 +223,3 @@ app.post(
 );
 
 /////////////////STRIPE API/////////////////////////////
-
