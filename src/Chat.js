@@ -11,10 +11,10 @@ export default function Chat () {
     
     // socket io
     // const PORT = process.env.PORT || 7777;
-    const socketUrl = process.env.URL || `localhost:7777`
+    // const socketUrl = process.env.URLTWO || `localhost:7777`
     // const socketUrl = process.env.URL || `localhost:8000`
-    const socket = io(`${socketUrl}`);
-    // const socket = io();
+    // const socket = io(`${socketUrl}`);
+    const socket = io();
     // const socket = io(`https://awarehouse-staging.herokuapp.com/${process.env.PORT}`);
     // const socket = process.env.NODE_ENV === "development" ? io(`localhost:7777`) : io();
 
