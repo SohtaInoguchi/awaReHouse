@@ -7,8 +7,8 @@ const io = require("socket.io")(7777, {
   cors: { origin: ["http://localhost:3000"] },
 });
 // const jwt = require("jsonwebtoken");
-const db = require("./db");
-const knex = require("./db");
+const db = require("./server/db");
+const knex = require("./server/db");
 
 const PORT = process.env.PORT || 8000;
 
