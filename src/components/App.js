@@ -7,6 +7,7 @@ import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer"
 import Success from "./Success";
 import Subscription from "./Subscription";
+import Admin from "./Admin";
 
 function App() {
   //for user
@@ -65,7 +66,7 @@ function App() {
       ) : mode === "registration" ? (
           <NewCustomer/>
       ) : (
-        <div>admin page</div>
+        <Admin/>
       )}
     </div>
   );
