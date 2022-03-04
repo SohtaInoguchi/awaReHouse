@@ -24,7 +24,7 @@ app.use(express.static(__dirname + "/build"));
 //Grabs single persons items
 
 //Grabs all items
-app.get("/allItems", async (req, res) => {
+app.get("/allItems:user", async (req, res) => {
   console.log(req.params)
   const items = await db.select("*").from("inventory")
   res.send(items);

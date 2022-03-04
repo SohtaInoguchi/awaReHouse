@@ -22,9 +22,9 @@ function App() {
 
   //Axios
   useEffect(() => {
-    axios.get(`/allItems`).then(response => setItems(response.data))
+    axios.get(`/allItems:${user}`).then(response => setItems(response.data))
     
-  }, [items])
+  }, [user])
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
