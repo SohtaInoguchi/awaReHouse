@@ -10,7 +10,7 @@ exports.seed = function(knex) {
             weight_in_kg:5.23,
             declared_as_fragile:true,
             expected_retrieval_season:"autumn",
-            user_owner:5
+            user_owner:"hirochanyakosen@yahoo.co.jp"
           },
           {
             declared_content_one:"Beach volley ball",
@@ -20,7 +20,7 @@ exports.seed = function(knex) {
             weight_in_kg:17.11,
             declared_as_fragile:false,
             expected_retrieval_season:"spring",
-            user_owner:4
+            user_owner:"cakelover012&3@softbank.co.jp"
           },
           {
             declared_content_one:"Barbecue set",
@@ -30,7 +30,7 @@ exports.seed = function(knex) {
             weight_in_kg:14.81,
             declared_as_fragile:false,
             expected_retrieval_season:"spring",
-            user_owner:1
+            user_owner:"figo1234@yahoo.co.jp"
           },
           {
             declared_content_one:"Diving cylinders",
@@ -40,7 +40,7 @@ exports.seed = function(knex) {
             weight_in_kg:15.73,
             declared_as_fragile:false,
             expected_retrieval_season:"spring",
-            user_owner:2
+            user_owner:"k13.Mizuumi@gmail.com"
           },
           {
             declared_content_one:"Diving camera",
@@ -50,7 +50,7 @@ exports.seed = function(knex) {
             weight_in_kg:2.47,
             declared_as_fragile:true,
             expected_retrieval_season:"spring",
-            user_owner:3
+            user_owner:"k.nagoshi976@ezweb.ne.jp"
           }
       ]);
     });
