@@ -8,28 +8,47 @@ const db = require("./server/db");
 const knex = require("./server/db");
 const PORT = process.env.PORT || 8000;
 
-
 // This is your test secret API key.
-const stripe = require('stripe')(process.env.API_KEY);
+const stripe = require("stripe")(process.env.API_KEY);
 // app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
-
 //Grabs single persons items
 
 //Grabs all items
-app.get("/allItems:user", async (req, res) => {
-  console.log(req.params)
-  const items = await db.select("*").from("inventory")
-  res.send(items);
-});
+app.post("/allItems", async (req, res) => {
+  //NEED A TRY CATCH BLOCK, TEMP GETS SENT AS EMPTY SINCE IT"S ASYNC
 
+  // try {
+    let user = req.body.user;
+
+    const emails = await db
+      .select("email")
+      .from("users")
+      .where("first_name", user).then((u) => console.log(u[0].email === 'hirochanyakosen@yahoo.co.jp'))
+
+      const inventory = await db.select('*').from('inventory').where('user_owner', 'hirochanyakosen@yahoo.co.jp')
+      .then((a) => console.log(a))
+
+      res.send("WOOOOOOWOWOWOOWOWOOW")
+
+
+      // res.send("OOOOOOOOOOOOOOOOOOOOOOOOOO")
+
+    // const items = await db
+    //   .select("declared_content_one")
+    //   .from("inventory")
+    //   .where("user_owner", email[0].email)
+    //   .then((item) => console.log(item));
+  // } catch (error) {
+  //   res.status(500).json({ message: "Can not get items" });
+  // }
+});
 
 app.get("/", (_, res) => {
   res.send("hehehehe");
@@ -42,7 +61,6 @@ app.post("/test", (req, res) => {
     email: "toni@gmail.com",
     password: "toniTheBest",
   };
-
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });
@@ -67,7 +85,6 @@ app.post("/login", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     };
-
 
     jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
       token && res.json({ token });
@@ -209,9 +226,6 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //   socket.emit("receive-message", "MESSAGE RECEIVED");
 // });
 
-<<<<<<< HEAD
-=======
-
 // app.get("/users", async (req,res)=>{
 //   try{
 //       const allData = await db.select("*").from("users");
@@ -221,14 +235,13 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //   }
 // })
 
-app.post("/users", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    const newInput = await db("users").insert(postData)
+app.post("/users", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    const newInput = await db("users").insert(postData);
     res.status(201).json(newInput);
-} catch {
+  } catch {
     console.error(err.message);
-}
-})
->>>>>>> 270bf892eade5e770e5ff656604675b9fca9f0a4
+  }
+});

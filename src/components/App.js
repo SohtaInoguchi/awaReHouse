@@ -22,7 +22,10 @@ function App() {
 
   //Axios
   useEffect(() => {
-    axios.get(`/allItems:${user}`).then(response => setItems(response.data))
+    if(user === 'guest') return;
+    axios.post(`/allItems`,{
+      user:user
+    }).then(response => setItems(response.data))
     
   }, [user])
 

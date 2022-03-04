@@ -13,9 +13,9 @@ function Userpage({ user, message, success, items }) {
       Welcome {user}
       <h3>NEXT RETRIEVAL DATE IS BETWEEN: 2022/01-2022/03</h3>
       <ol>
-        {items.map((item) => {
+        {/* {items.map((item) => {
           return <li key = {item.box_id}>{item.declared_content_one}</li>
-        })}
+        })} */}
       </ol>
 
       <button>Add Item</button>
