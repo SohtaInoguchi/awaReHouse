@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 function Admin() {
   return <div>
-      <p>1234</p>
+      <h1>1234</h1>
   </div>;
 }
 
