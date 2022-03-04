@@ -206,13 +206,33 @@ app.get("/users", async (req,res)=>{
   }
 })
 
+app.get("/providers", async (req,res)=>{
+  try{
+      const allData = await db.select("*").from("providers");
+      res.json(allData)
+  } catch {
+      console.error(err.message);
+  }
+})
+
 app.post("/users", async (req,res)=>{
   const postData = req.body
   try{
     console.log(req.body)
     await db("users").insert(postData)
-    res.status(201).send("YEP");
+    res.status(201).send("YEP users");
 } catch {
-    console.log("Backend server does not work");
+    console.log("Backend server does not work - users");
+}
+})
+
+app.post("/providers", async (req,res)=>{
+  const postData = req.body
+  try{
+    console.log(req.body)
+    await db("providers").insert(postData)
+    res.status(201).send("YEP providers");
+} catch {
+    console.log("Backend server does not work - providers");
 }
 })

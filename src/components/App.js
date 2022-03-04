@@ -64,7 +64,7 @@ function App() {
       ) : mode === "providerLogin" && !isLogin2 ? (
         <div>Provider Login Page</div>
       ) : mode === "registration" ? (
-          <NewCustomer/>
+          <NewCustomer setMode={setMode}/>
       ) : (
         <Admin/>
       )}
