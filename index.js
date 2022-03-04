@@ -197,22 +197,22 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 // });
 
 
-// app.get("/users", async (req,res)=>{
-//   try{
-//       const allData = await db.select("*").from("users");
-//       res.json(allData)
-//   } catch {
-//       console.error(err.message);
-//   }
-// })
+app.get("/users", async (req,res)=>{
+  try{
+      const allData = await db.select("*").from("users");
+      res.json(allData)
+  } catch {
+      console.error(err.message);
+  }
+})
 
 app.post("/users", async (req,res)=>{
   const postData = req.body
   try{
     console.log(req.body)
-    const newInput = await db("users").insert(postData)
-    res.status(201).json(newInput);
+    await db("users").insert(postData)
+    res.status(201).send("YEP");
 } catch {
-    console.error(err.message);
+    console.log("Backend server does not work");
 }
 })

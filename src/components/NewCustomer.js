@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../input.css";
-const axios = require("axios");
 
 function NewCustomer() {
   
@@ -48,17 +48,27 @@ const pictureHandler = (e) =>{
     reader.readAsDataURL(inFile);
   };
 
-  const userObject = {};
+
+const sendUser = () => {
+  axios.post("/users", {
+  first_name:userFirstName,
+  last_name:userLastName,
+  password:userPassword,
+  adress:userAddress,
+  email:userEmail,
+  picture_file:picValues.imagePreviewUrl
+  })
+  .then(()=> {
+    console.log("Your database has been updated!");
+  })
+  .catch(function (error) {
+    console.log("NOPE! User Data NOT sent");
+  });  
+}
 
 const handleSubmit = (e) =>{
   e.preventDefault()
-  userObject["first_name"]=userFirstName;
-  userObject["last_name"]=userLastName;
-  userObject["password"]=userPassword;
-  userObject["adress"]=userAddress;
-  userObject["email"]=userEmail;
-  userObject["picture_file"]=picValues.imagePreviewUrl
-  console.log(userObject)
+  sendUser()
 }
 
 
