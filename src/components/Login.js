@@ -4,10 +4,10 @@ export default function Login({ setIsLogin, setUser }) {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <input id="email" value="k13.Mizuumi@gmail.com" type="text" placeholder="Email Address" />
-        <input id="first_name" value="Kaori" type="text" placeholder="First Name" />
-        <input id="last_name" value="Mizumi" type="text" placeholder="Last Name" />
-        <input id="password" value="ichiGO111" type="password" placeholder="Password" />
+        <input id="email" value="hirochanyakosen@yahoo.co.jp" type="text" placeholder="Email Address" />
+        <input id="first_name" value="Hiromi" type="text" placeholder="First Name" />
+        <input id="last_name" value="Sato" type="text" placeholder="Last Name" />
+        <input id="password" value="SatoHiro2307" type="password" placeholder="Password" />
         <button
           className=""
           onClick={(e) => {

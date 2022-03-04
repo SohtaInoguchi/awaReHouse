@@ -30,8 +30,6 @@ app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 app.use(express.urlencoded({ extended: true }));
 
-const stripe = require("stripe")(process.env.API_KEY);
-
 const server = app.use(cors()).use(express.static(__dirname + "/build")).listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
 // ----------SOCKET IO SERVER---------
@@ -55,14 +53,14 @@ app.get("/", (_, res) => {
 });
 
 io.on('connection', (socket) => {
-    // console.log("Socket io connected");
+    console.log("Socket io connected");
     socket.on('send-message', (text) => {
-      console.log('is called')
-      console.log(text)
-      io.emit("receive-message",text);
-    // socket.emit('send-message', (text) => {
-      // io.emit("receive-message", (message) => 
-      // {console.log("Please pack in box" )});
+      console.log('socket', socket);
+      console.log(text);
+      socket.emit("receive-message", "Please pack in box");
+      socket.on('disconnect', () => {
+        console.log('user disconnected');
+      });
     })
   });
 
@@ -101,7 +99,6 @@ app.post("/login", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     };
-
     // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     //   token && res.json({ token });
     // });
@@ -111,7 +108,6 @@ app.post("/login", async (req, res) => {
       .from("users")
       .where("email", req.body.email)
       .andWhere("first_name", req.body.first_name);
-
     const boolean =
       user.length >= 1 && input.password === user[0].password ? true : false;
 
