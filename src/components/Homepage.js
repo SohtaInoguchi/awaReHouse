@@ -29,17 +29,21 @@ export default function Homepage({ setMode, setNewCustomer }) {
       </div>
       <div className="homeButtons">
         <div className="homeUser">
-          <button className="loginButton" onClick={() => setMode("userLogin")}>
+          <button className="loginButton" 
+          style={{cursor:"pointer"}}
+          onClick={() => setMode("userLogin")}>
             User LOGIN
           </button>
           <div>
+          <br></br>
             Want to become a user? <br></br>
-            <p className="signup" onClick={() => setMode("registration")}>SIGN UP</p>
+            <p className="signup" style={{cursor:"pointer"}} onClick={() => setMode("registration")}>SIGN UP</p>
           </div>
         </div>
         <div className="homeProvider">
           <button
             className="loginButton"
+            style={{cursor:"pointer"}}
             onClick={() => {
               console.log("provider login page");
               setMode("providerLogin");
@@ -48,8 +52,9 @@ export default function Homepage({ setMode, setNewCustomer }) {
             Provider LOGIN
           </button>
           <div>
+            <br></br>
             Want to become a provider? <br></br>
-            <p className="signup" onClick={() => setMode("registration")}>SIGN UP</p>
+            <p className="signup" style={{cursor:"pointer"}} onClick={() => setMode("registration")}>SIGN UP</p>
           </div>
         </div>
       </div>
