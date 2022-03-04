@@ -6,6 +6,7 @@ import Login from "./Login";
 import Homepage from "./Homepage";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import axios from 'axios'
 
 function App() {
   //for user
@@ -17,6 +18,13 @@ function App() {
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [items, setItems] = useState([])
+
+  //Axios
+  useEffect(() => {
+    axios.get('/items').then(response => setItems(response.data))
+    
+  }, [items])
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -53,7 +61,7 @@ function App() {
       {mode === "homePage" ? (
         <Homepage setMode={setMode} />
       ) : mode === "userLogin" && isLogin ? (
-        <Userpage user={user} message={message} success={success} />
+        <Userpage user={user} message={message} success={success} items = {items} />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} />
       ) : mode === "providerLogin" && isLogin2 ? (

@@ -8,7 +8,6 @@ const db = require("./server/db");
 const knex = require("./server/db");
 const PORT = process.env.PORT || 8000;
 
-<<<<<<< HEAD
 
 // This is your test secret API key.
 const stripe = require('stripe')(process.env.API_KEY);
@@ -17,18 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(express.json());
-=======
->>>>>>> 5e2f8be968bbbd4720a475bbeec33c4bb69f71d8
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
-const stripe = require("stripe")(process.env.API_KEY);
-app.use(express.urlencoded({ extended: true }));
 
-// app.get("/", (_, res) => {
-//   res.send("hehehehe");
-// });
+app.get("/items", async (req, res) => {
+  const items = await db.select("*").from("inventory")
+  res.send(items);
+});
 
 app.post("/test", (req, res) => {
   const input = {
@@ -62,13 +58,10 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-<<<<<<< HEAD
 
-=======
     // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     //   token && res.json({ token });
     // });
->>>>>>> 5e2f8be968bbbd4720a475bbeec33c4bb69f71d8
 
     const user = await db
       .select("password", "first_name")
