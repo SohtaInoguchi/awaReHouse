@@ -21,9 +21,18 @@ app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
 
-app.get("/items", async (req, res) => {
+//Grabs single persons items
+
+//Grabs all items
+app.get("/allItems", async (req, res) => {
+  console.log(req.params)
   const items = await db.select("*").from("inventory")
   res.send(items);
+});
+
+
+app.get("/", (_, res) => {
+  res.send("hehehehe");
 });
 
 app.post("/test", (req, res) => {
@@ -33,6 +42,7 @@ app.post("/test", (req, res) => {
     email: "toni@gmail.com",
     password: "toniTheBest",
   };
+
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });
@@ -59,9 +69,9 @@ app.post("/login", async (req, res) => {
     };
 
 
-    // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-    //   token && res.json({ token });
-    // });
+    jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+      token && res.json({ token });
+    });
 
     const user = await db
       .select("password", "first_name")
@@ -189,8 +199,6 @@ app.post(
   }
 );
 
-/////////////////STRIPE API/////////////////////////////
-
 app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
 // io.on("connection", (socket) => {
@@ -200,3 +208,4 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //   });
 //   socket.emit("receive-message", "MESSAGE RECEIVED");
 // });
+
