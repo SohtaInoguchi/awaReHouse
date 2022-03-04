@@ -1,9 +1,11 @@
 import "../input.css";
 import { useState, useEffect } from "react";
+import ChatAdmin from "./ChatAdmin";
 
-function Admin() {
+function Admin({ chatMessages, setChatMessages }) {
   return <div>
-      <h1>1234</h1>
+      <h1>Admin</h1>
+      <ChatAdmin chatMessages={chatMessages} setChatMessages={setChatMessages}/>
   </div>;
 }
 

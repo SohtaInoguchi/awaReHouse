@@ -71,7 +71,9 @@ function App() {
       ) : mode === "registration" ? (
         <NewCustomer />
       ) : (
-        <Admin />
+        <Admin chatMessages={chatMessages}
+        setChatMessages={setChatMessages}
+      />
       )}
     </div>
   );

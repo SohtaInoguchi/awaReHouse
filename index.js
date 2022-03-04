@@ -37,7 +37,7 @@ const io = socketIO(server);
 
 io.on("connection", (socket) => {
   socket.on("send-message", (text) => {
-    socket.emit("send-back-message", "TADAAAAAAA");
+    // socket.emit("send-back-message", "TADAAAAAAA");
 
     console.log(`backend ${text}`);
   });
