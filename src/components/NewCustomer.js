@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../input.css";
+import Compress from "react-image-file-resizer"
 
 function NewCustomer() {
   
@@ -36,18 +37,31 @@ const createEmail = (e) =>{
 }
 
 const pictureHandler = (e) =>{
-  e.preventDefault();
-  let reader = new FileReader();
-  let inFile = e.target.files[0];
-  reader.onloadend = () => {
-     setPicValues({...picValues, 
-        picFile: inFile, 
-        imagePreviewUrl: reader.result
-      })
-    }
-    reader.readAsDataURL(inFile);
-  };
-
+  // e.preventDefault();
+  // let reader = new FileReader();
+  // let inFile = e.target.files[0];
+  // reader.onloadend = () => {
+  //    setPicValues({...picValues, 
+  //       picFile: inFile, 
+  //       imagePreviewUrl: reader.result
+  //     })
+  //   }
+  //   reader.readAsDataURL(inFile);
+  // };
+  const file = e.target.files[0];
+  const output = Compress.imageFileResizer(
+    file, 
+    480, 
+    480, 
+    "JPEG", 
+    70,
+    0, 
+    (uri) => {
+      setPicValues(uri)
+    },
+    "base64"
+  );
+}
 
 const sendUser = () => {
   axios.post("/users", {
@@ -56,7 +70,7 @@ const sendUser = () => {
   password:userPassword,
   adress:userAddress,
   email:userEmail,
-  picture_file:picValues.imagePreviewUrl
+  picture_file:picValues
   })
   .then(()=> {
     console.log("Your database has been updated!");
