@@ -71,16 +71,10 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-<<<<<<< HEAD
     // please comment out this line yet
     // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     //   token && res.json({ token });
     // });
-=======
-    jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-      token && res.json({ token });
-    });
->>>>>>> c10c245ee3af82d440550b7f6e97ce444520f96a
 
     const user = await db
       .select("password", "first_name", "email")
