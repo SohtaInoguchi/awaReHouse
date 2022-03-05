@@ -68,7 +68,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
 
   return (
     <>
-      <button onClick={sendMessage}>Send messege</button>
       <br />
       {/* <div>{chatMessages}</div>
       <div>{receivedMessage}</div> */}
@@ -106,6 +105,7 @@ export default function Chat({ chatMessages, setChatMessages }) {
           <p key={index}>{message}</p>
         ))}
       </div>
+      <button onClick={sendMessage}>Send messege</button>
     </>
   );
 }
