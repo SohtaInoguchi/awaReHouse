@@ -212,7 +212,6 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //   socket.emit("receive-message", "MESSAGE RECEIVED");
 // });
 
-<<<<<<< HEAD
 // app.get("/users", async (req, res) => {
 //   try {
 //     const allData = await db.select("*").from("users");
@@ -228,28 +227,7 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //     console.log(req.body);
 //     const newInput = await db("users").insert(postData);
 //     res.status(201).json(newInput);
-=======
-// app.get("/users", async (req,res)=>{
-//   try{
-//       const allData = await db.select("*").from("users");
-//       res.json(allData)
->>>>>>> c10c245ee3af82d440550b7f6e97ce444520f96a
 //   } catch {
 //     console.error(err.message);
 //   }
-<<<<<<< HEAD
 // });
-=======
-// })
-
-app.post("/users", async (req, res) => {
-  const postData = req.body;
-  try {
-    console.log(req.body);
-    const newInput = await db("users").insert(postData);
-    res.status(201).json(newInput);
-  } catch {
-    console.error(err.message);
-  }
-});
->>>>>>> c10c245ee3af82d440550b7f6e97ce444520f96a
