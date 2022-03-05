@@ -26,8 +26,8 @@ export default function Chat({ chatMessages, setChatMessages }) {
       const temp2 = [...receivedMessage];
       temp2.push(res);
       setReceivedMessage(temp2);
-  });
-  return () => socket.off('send-back-message');
+    });
+    return () => socket.off('send-back-message');
   })
 
   const sendMessage = () => {

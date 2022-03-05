@@ -22,13 +22,13 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
         const temp2 = [...receivedMessage];
         temp2.push(res);
         setReceivedMessage(temp2);
-    });
-    return () => socket.off('send-back-message');
+      });
+      return () => socket.off('send-back-message');
     })
   
 
   const sendMessage = async () => {
-    const socket = io();
+    // const socket = io();
     const chat = document.getElementById("chat");
     
     let temp = [...chatMessages];
@@ -50,8 +50,8 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
         
         setReceivedMessage(temp2);
         
-        socket.disconnect("send-back-message");
-        console.log("Admin disconect after receive");
+        // socket.disconnect("send-back-message");
+        // console.log("Admin disconect after receive");
         // const socketIo = io();
         // setSocket(socketIo);    
       });
