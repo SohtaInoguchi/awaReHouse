@@ -8,17 +8,30 @@ export default function Chat({ chatMessages, setChatMessages }) {
   //   const [chatMessages, setChatMessage] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [aaa, setAAA] = useState([]);
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState();
 
 
-  // useEffect(() => {
-  //   console.log("useeffect user");
-  //   const socketIo = io();
-  //   setSocket(socketIo);
-  // }, []);
+  useEffect(() => {
+    console.log("useeffect user");
+    const newSocket = io();
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, []);
+
+  useEffect(() => {
+    if (socket == null) return
+    socket.on("send-back-message", (res) => {
+      console.log("user chat res", res);
+      // setChatMessages(temp);      
+      const temp2 = [...receivedMessage];
+      temp2.push(res);
+      setReceivedMessage(temp2);
+  });
+  return () => socket.off('send-back-message');
+  })
 
   const sendMessage = () => {
-    const socket = io();
+    // const socket = io();
     // socket = io();
     const chat = document.getElementById("chat");
     
@@ -30,7 +43,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
     
     // send message
     // socket.on("connection", () => {
-      console.log("socket", socket);
       socket.emit("send-message", chat.value);
       // })
       
@@ -45,8 +57,8 @@ export default function Chat({ chatMessages, setChatMessages }) {
         
         setReceivedMessage(temp2);
         
-        socket.disconnect("send-back-message");
-        console.log("user disconect after receive");
+        // socket.disconnect("send-back-message");
+        // console.log("user disconect after receive");
         // const socketIo = io();
         // setSocket(socketIo);    
     });

@@ -4,14 +4,28 @@ import { io } from 'socket.io-client';
 export default function ChatAdmin({ chatMessages, setChatMessages }) {
 
   const [receivedMessage, setReceivedMessage] = useState([]);
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState();
 
 
-  // useEffect(() => {
-  //     console.log("useeffect admin");
-  //     const socketIo = io();
-  //     setSocket(socketIo);
-  //   }, []);
+  useEffect(() => {
+      console.log("useeffect admin");
+      const newSocket = io();
+      setSocket(newSocket);
+      return () => newSocket.close();
+    }, []);
+
+    useEffect(() => {
+      if (socket == null) return
+      socket.on("send-back-message", (res) => {
+        console.log("admin chat res", res);
+        // setChatMessages(temp);      
+        const temp2 = [...receivedMessage];
+        temp2.push(res);
+        setReceivedMessage(temp2);
+    });
+    return () => socket.off('send-back-message');
+    })
+  
 
   const sendMessage = async () => {
     const socket = io();
