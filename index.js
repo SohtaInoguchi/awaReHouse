@@ -13,6 +13,7 @@ const stripe = require("stripe")(process.env.API_KEY);
 // app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
@@ -61,6 +62,19 @@ io.on("connection", (socket) => {
 
   //   console.log(`backend ${text}`);
   // });
+
+//Grabs all items
+app.post("/allItems", async (req, res) => {
+  const items = await db
+    .select("*")
+    .from("inventory")
+    .where("user_owner", req.body.email);
+  console.log(items);
+  res.send(items);
+});
+
+app.get("/", (_, res) => {
+  res.send("hehehehe");
 });
 
 // ---------SOCKET IO ------------->
@@ -97,12 +111,13 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
+    // please comment out this line yet
     // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     //   token && res.json({ token });
     // });
 
     const user = await db
-      .select("password", "first_name")
+      .select("password", "first_name", "email")
       .from("users")
       .where("email", req.body.email)
       .andWhere("first_name", req.body.first_name);
@@ -110,7 +125,7 @@ app.post("/login", async (req, res) => {
     const boolean =
       user.length >= 1 && input.password === user[0].password ? true : false;
 
-    res.json({ boolean, first_name: user[0].first_name });
+    res.json({ boolean, first_name: user[0].first_name, email: user[0].email });
   } catch {
     res.json({ boolean: false, first_name: "User not found" });
   }
