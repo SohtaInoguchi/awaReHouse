@@ -6,7 +6,6 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [socket, setSocket] = useState();
 
-
   useEffect(() => {
       console.log("useeffect admin");
       const newSocket = io();
