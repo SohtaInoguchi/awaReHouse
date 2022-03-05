@@ -4,9 +4,17 @@ import { io } from 'socket.io-client';
 export default function ChatAdmin({ chatMessages, setChatMessages }) {
 
   const [receivedMessage, setReceivedMessage] = useState([]);
+  
+  let socket;
+
+  useEffect(() => {
+      console.log("useeffect admin");
+    socket = io();
+  }, []);
 
   const sendMessage = async () => {
-    const socket = io();
+    // const socket = io();
+    socket = io();
     const chat = document.getElementById("chat");
 
     let temp = [...chatMessages];

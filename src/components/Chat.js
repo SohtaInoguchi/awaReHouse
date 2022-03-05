@@ -9,8 +9,16 @@ export default function Chat({ chatMessages, setChatMessages }) {
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [aaa, setAAA] = useState([]);
 
+  let socket;
+
+  useEffect(() => {
+    console.log("useeffect user");
+    socket = io();
+  }, []);
+
   const sendMessage = async () => {
-    const socket = io();
+    // const socket = io();
+    socket = io();
     const chat = document.getElementById("chat");
 
     const faq = document.getElementById("faq");
@@ -55,16 +63,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
     });
   }
 
-  // useEffect(() => {
-  //   const chat = document.getElementById("chat");
-
-  //   socket.on("send-message", (chatMessages) => {
-  //     setChatMessages([...chatMessages, chat.value]);
-  //   });
-  //   return () => {
-  //     socket.off("send-message");
-  //   };
-  // }, [chatMessages]);
 
   return (
     <>
