@@ -18,44 +18,22 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
       if (socket == null) return
       socket.on("send-back-message", (res) => {
         console.log("admin chat res", res);
-        // setChatMessages(temp);      
         const temp2 = [...receivedMessage];
         temp2.push(res);
         setReceivedMessage(temp2);
       });
       return () => socket.off('send-back-message');
-    })
+    });
   
 
   const sendMessage = async () => {
-    // const socket = io();
     const chat = document.getElementById("chat");
     
     let temp = [...chatMessages];
     temp.push(chat.value);
     setChatMessages(temp);
-    
-    // send message
-    // socket.on("connection", () => {
-      socket.emit("send-message", chat.value);
-      // })
-      
-      socket.on("send-back-message", (res) => {
-        console.log("chatAdmin res", res);
-        
-        // setChatMessages(temp);
-        
-        const temp2 = [...receivedMessage];
-        temp2.push(res);
-        
-        setReceivedMessage(temp2);
-        
-        // socket.disconnect("send-back-message");
-        // console.log("Admin disconect after receive");
-        // const socketIo = io();
-        // setSocket(socketIo);    
-      });
 
+    socket.emit("send-message", chat.value);      
     chat.value = "";
   };
 
