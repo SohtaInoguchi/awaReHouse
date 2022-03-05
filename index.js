@@ -8,28 +8,32 @@ const db = require("./server/db");
 const knex = require("./server/db");
 const PORT = process.env.PORT || 8000;
 
-
 // This is your test secret API key.
-const stripe = require('stripe')(process.env.API_KEY);
+const stripe = require("stripe")(process.env.API_KEY);
 // app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
 
-
 //Grabs single persons items
 
 //Grabs all items
-app.get("/allItems:user", async (req, res) => {
-  console.log(req.params)
-  const items = await db.select("*").from("inventory")
+// app.get("/allItems:user", async (req, res) => {
+//   console.log(req.params);
+//   const items = await db.select("*").from("inventory");
+//   res.send(items);
+// });
+app.post("/allItems", async (req, res) => {
+  const items = await db
+    .select("*")
+    .from("inventory")
+    .where("user_owner", req.body.email);
+  console.log(items);
   res.send(items);
 });
-
 
 app.get("/", (_, res) => {
   res.send("hehehehe");
@@ -42,7 +46,6 @@ app.post("/test", (req, res) => {
     email: "toni@gmail.com",
     password: "toniTheBest",
   };
-
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });
@@ -68,13 +71,13 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-
-    jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-      token && res.json({ token });
-    });
+    // please comment out this line yet
+    // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+    //   token && res.json({ token });
+    // });
 
     const user = await db
-      .select("password", "first_name")
+      .select("password", "first_name", "email")
       .from("users")
       .where("email", req.body.email)
       .andWhere("first_name", req.body.first_name);
@@ -82,7 +85,7 @@ app.post("/login", async (req, res) => {
     const boolean =
       user.length >= 1 && input.password === user[0].password ? true : false;
 
-    res.json({ boolean, first_name: user[0].first_name });
+    res.json({ boolean, first_name: user[0].first_name, email: user[0].email });
   } catch {
     res.json({ boolean: false, first_name: "User not found" });
   }
@@ -209,26 +212,22 @@ app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 //   socket.emit("receive-message", "MESSAGE RECEIVED");
 // });
 
-<<<<<<< HEAD
-=======
-
-// app.get("/users", async (req,res)=>{
-//   try{
-//       const allData = await db.select("*").from("users");
-//       res.json(allData)
+// app.get("/users", async (req, res) => {
+//   try {
+//     const allData = await db.select("*").from("users");
+//     res.json(allData);
 //   } catch {
-//       console.error(err.message);
+//     console.error(err.message);
 //   }
-// })
+// });
 
-app.post("/users", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    const newInput = await db("users").insert(postData)
-    res.status(201).json(newInput);
-} catch {
-    console.error(err.message);
-}
-})
->>>>>>> 270bf892eade5e770e5ff656604675b9fca9f0a4
+// app.post("/users", async (req, res) => {
+//   const postData = req.body;
+//   try {
+//     console.log(req.body);
+//     const newInput = await db("users").insert(postData);
+//     res.status(201).json(newInput);
+//   } catch {
+//     console.error(err.message);
+//   }
+// });

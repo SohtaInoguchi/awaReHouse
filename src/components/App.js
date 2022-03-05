@@ -3,8 +3,8 @@ import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
-import NewCustomer from "./NewCustomer"
-import axios from 'axios'
+import NewCustomer from "./NewCustomer";
+import axios from "axios";
 import Admin from "./Admin";
 
 function App() {
@@ -18,13 +18,15 @@ function App() {
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([]);
+  const [email, setEmail] = useState("");
 
   //Axios
   useEffect(() => {
-    axios.get(`/allItems:${user}`).then(response => setItems(response.data))
-    
-  }, [user])
+    // axios.get(`/allItems:${user}`).then((response) => setItems(response.data));
+
+    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+  }, [email]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -61,17 +63,22 @@ function App() {
       {mode === "homePage" ? (
         <Homepage setMode={setMode} />
       ) : mode === "userLogin" && isLogin ? (
-        <Userpage user={user} message={message} success={success} items = {items} />
+        <Userpage
+          user={user}
+          message={message}
+          success={success}
+          items={items}
+        />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} />
+        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
         <div>Provider Login Page</div>
       ) : mode === "registration" ? (
-          <NewCustomer/>
+        <NewCustomer />
       ) : (
-        <Admin/>
+        <Admin />
       )}
     </div>
   );
