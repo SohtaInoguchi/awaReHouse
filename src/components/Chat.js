@@ -8,29 +8,47 @@ export default function Chat({ chatMessages, setChatMessages }) {
   //   const [chatMessages, setChatMessage] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [aaa, setAAA] = useState([]);
+  // const [socket, setSocket] = useState(null);
 
-  const sendMessage = async () => {
+
+  // useEffect(() => {
+  //   console.log("useeffect user");
+  //   const socketIo = io();
+  //   setSocket(socketIo);
+  // }, []);
+
+  const sendMessage = () => {
     const socket = io();
+    // socket = io();
     const chat = document.getElementById("chat");
-
+    
     const faq = document.getElementById("faq");
-
+    
     let temp = [...chatMessages];
     temp.push(chat.value);
     setChatMessages(temp);
-    socket.emit("send-message", chat.value);
-
-    socket.on("send-back-message", (res) => {
-      console.log(res);
-
-      // setChatMessages(temp);
-
-      const temp2 = [...receivedMessage];
-      temp2.push(res);
-
-      setReceivedMessage(temp2);
-
-      socket.disconnect("send-back-message");
+    
+    // send message
+    // socket.on("connection", () => {
+      console.log("socket", socket);
+      socket.emit("send-message", chat.value);
+      // })
+      
+      // receive response
+      socket.on("send-back-message", (res) => {
+        console.log("user chat res", res);
+        
+        // setChatMessages(temp);
+        
+        const temp2 = [...receivedMessage];
+        temp2.push(res);
+        
+        setReceivedMessage(temp2);
+        
+        socket.disconnect("send-back-message");
+        console.log("user disconect after receive");
+        // const socketIo = io();
+        // setSocket(socketIo);    
     });
 
     chat.value = "";
@@ -55,16 +73,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
     });
   }
 
-  // useEffect(() => {
-  //   const chat = document.getElementById("chat");
-
-  //   socket.on("send-message", (chatMessages) => {
-  //     setChatMessages([...chatMessages, chat.value]);
-  //   });
-  //   return () => {
-  //     socket.off("send-message");
-  //   };
-  // }, [chatMessages]);
 
   return (
     <>
