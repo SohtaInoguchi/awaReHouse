@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AiOutlineSend } from "react-icons/ai";
 import { io } from "socket.io-client";
 
 export default function ChatAdmin({ chatMessages, setChatMessages }) {
@@ -25,7 +26,7 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
 
   const sendMessage = async () => {
     const chat = document.getElementById("chat");
-
+    if (chat.value.length === 0) return;
     let temp = [...chatMessages];
     temp.push(chat.value);
     setChatMessages(temp);
@@ -35,22 +36,36 @@ export default function ChatAdmin({ chatMessages, setChatMessages }) {
   };
 
   return (
-    <div>
-      <div>ChatAdmin</div>
-      <button onClick={sendMessage}>Send messege</button>
-      <input id="chat" type="text" placeholder="Enter message" />
+    <div className="message-container">
+      <div className="message-elements">
+        <div id="sent-message" className="send-message">
+          {chatMessages.map((message, idx) => (
+            <div className="send-child" key={idx}>
+              {message}
+            </div>
+          ))}
+        </div>
 
-      <div id="sent-message" className="bg-red-700">
-        {chatMessages.map((message, idx) => (
-          <div key={idx}>{message}</div>
-        ))}
-      </div>
+        <div id="received-message">
+          {receivedMessage.map((message, index) => (
+            <p key={index}>{message}</p>
+          ))}
+        </div>
 
-      <div id="received-message">
-        {receivedMessage.map((message, index) => (
-          <p key={index}>{message}</p>
-        ))}
+        <div className="message-input">
+          <input id="chat" type="text" placeholder="Enter message" />
+          <button onClick={sendMessage} className="send-button">
+            <SendComponent
+              icon={<AiOutlineSend size="14" />}
+              // onClick={sendMessage}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );
+}
+
+function SendComponent({ icon }) {
+  return <div className="send-icon">{icon}</div>;
 }
