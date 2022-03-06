@@ -163,14 +163,32 @@ body {
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
-  margin-left: 0px;
-  margin-right: 0px;
+  margin: 10px 10px;
+  padding: 5px 10px;
+  width: 50px;
 
   border-radius: 0.5rem;
   justify-content: center;
   align-items: center;
   border: 2px rgb(209, 19, 19) solid;
 }
+
+.received-message {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  margin: 10px 10px;
+  padding: 5px 10px;
+
+  border-radius: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border: 2px rgb(32, 19, 209) solid;
+}
+
+/* .message-wrapper {
+  display: flex;
+} */
 
 .message-input {
   display: flex;
