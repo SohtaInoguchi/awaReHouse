@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
-// require('dotenv').config();
 
 export default function Chat({ chatMessages, setChatMessages }) {
   const inputRef = React.createRef();
@@ -21,7 +20,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
     if (socket == null) return;
     socket.on("send-back-message", (res) => {
       console.log("user chat res", res);
-      // setChatMessages(temp);
       const temp2 = [...receivedMessage];
       temp2.push(res);
       setReceivedMessage(temp2);
@@ -30,8 +28,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
   });
 
   const sendMessage = () => {
-    // const socket = io();
-    // socket = io();
     const chat = document.getElementById("chat");
 
     let temp = [...chatMessages];

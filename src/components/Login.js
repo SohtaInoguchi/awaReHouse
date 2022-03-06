@@ -8,25 +8,21 @@ export default function Login({ setIsLogin, setUser, setEmail }) {
           id="email"
           type="text"
           placeholder="Email Address"
-          value="hirochanyakosen@yahoo.co.jp"
         />
         <input
           id="first_name"
           type="text"
           placeholder="First Name"
-          value="Hiromi"
         />
         <input
           id="last_name"
           type="text"
           placeholder="Last Name"
-          value="Sato"
         />
         <input
           id="password"
           type="password"
           placeholder="Password"
-          value="SatoHiro2307"
         />
         <button
           className=""
