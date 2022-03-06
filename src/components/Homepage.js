@@ -52,6 +52,7 @@ export default function Homepage({ setMode, setNewCustomer }) {
             <p className="signup" onClick={() => setMode("registration")}>SIGN UP</p>
           </div>
         </div>
+        <h1 className="admin" onClick={() => setMode("admin")}>Admin</h1>
       </div>
     </div>
   );

@@ -1,38 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
-// require('dotenv').config();
 
 export default function Chat({ chatMessages, setChatMessages }) {
   const inputRef = React.createRef();
   //   const [chatMessages, setChatMessage] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [aaa, setAAA] = useState([]);
+  const [socket, setSocket] = useState();
 
-  const sendMessage = async () => {
-    const socket = io();
+
+  useEffect(() => {
+    console.log("useeffect user");
+    const newSocket = io();
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, []);
+
+  useEffect(() => {
+    if (socket == null) return
+    socket.on("send-back-message", (res) => {
+      console.log("user chat res", res);
+      const temp2 = [...receivedMessage];
+      temp2.push(res);
+      setReceivedMessage(temp2);
+    });
+    return () => socket.off('send-back-message');
+  });
+
+  const sendMessage = () => {
     const chat = document.getElementById("chat");
-
     const faq = document.getElementById("faq");
-
+    
     let temp = [...chatMessages];
     temp.push(chat.value);
     setChatMessages(temp);
+    
+    // send message
     socket.emit("send-message", chat.value);
-
-    socket.on("send-back-message", (res) => {
-      console.log(res);
-
-      // setChatMessages(temp);
-
-      const temp2 = [...receivedMessage];
-      temp2.push(res);
-
-      setReceivedMessage(temp2);
-
-      socket.disconnect("send-back-message");
-    });
-
     chat.value = "";
   };
 
@@ -55,16 +60,6 @@ export default function Chat({ chatMessages, setChatMessages }) {
     });
   }
 
-  // useEffect(() => {
-  //   const chat = document.getElementById("chat");
-
-  //   socket.on("send-message", (chatMessages) => {
-  //     setChatMessages([...chatMessages, chat.value]);
-  //   });
-  //   return () => {
-  //     socket.off("send-message");
-  //   };
-  // }, [chatMessages]);
 
   return (
     <>

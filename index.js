@@ -36,11 +36,13 @@ const socketIO = require("socket.io");
 const io = socketIO(server);
 
 io.on("connection", (socket) => {
+  console.log("chat connected");
   socket.on("send-message", (text) => {
-    socket.emit("send-back-message", "TADAAAAAAA");
-
     console.log(`backend ${text}`);
+    socket.broadcast.emit("send-back-message", text);
+    socket.on('disconnect', () => console.log('Client disconnected'));
   });
+
   socket.on("bot-message", (req) => {
     console.log(req);
     let text;
