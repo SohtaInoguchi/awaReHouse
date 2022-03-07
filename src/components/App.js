@@ -17,11 +17,11 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
-  const [newCustomer, setNewCustomer] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const[email, setEmail] = useState("");
   // const socket = io();
 
   useEffect(() => {
@@ -61,9 +61,11 @@ function App() {
           success={success}
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
+          setMode={ setMode }
+          email={email}
         />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} />
+        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail}/>
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (

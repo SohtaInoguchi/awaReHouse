@@ -1,6 +1,7 @@
-import React from "react";
 import axios from "axios";
-export default function Login({ setIsLogin, setUser }) {
+import React, { useState, useEffect } from "react";
+export default function Login({ setIsLogin, setUser, setEmail }) {
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center">

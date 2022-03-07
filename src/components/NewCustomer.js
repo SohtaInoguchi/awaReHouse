@@ -163,6 +163,7 @@ const handleProviderSubmit = (e) =>{
 
   if (registrationDone === false) {
     return <div className="containerNewRegistration">
+      <button onClick={()=>setMode("homePage")}>Back to homepage</button>
       <div className="newUser">
           REGISTER AS A STORAGE USER
           <form>
