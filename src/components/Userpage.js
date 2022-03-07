@@ -20,48 +20,55 @@ function Userpage({
   }
 
   const [addItem, setAddItem] = useState(false);
-  const [boxAChecked, setBoxAChecked] = useState(false);
-  const [boxBChecked, setBoxBChecked] = useState(false);
-  const [boxCChecked, setBoxCChecked] = useState(false);
-  const [boxDChecked, setBoxDChecked] = useState(false);
+  const[typeBox, setTypeBox]=useState(null);
+  const [address, setAddress] = useState("");
+  const [confirmation, setConfirmation] = useState(false);
+  const[tryAgain, setTryAgain] = useState(false)
 
-  const handleAChange = (e) => {
-    setBoxAChecked(!boxAChecked);
+  const handleChange = (e) => {  
+    setTypeBox(e.target.value)
   }
 
-  const handleBChange = (e) => {
-    setBoxBChecked(!boxBChecked);
-  }
-
-  const handleCChange = (e) => {
-    setBoxCChecked(!boxCChecked);
-  }
-
-  const handleDChange = (e) => {
-    setBoxDChecked(!boxDChecked);
-  }
-
-  const boxObject = {
-    "Type A": boxAChecked,
-    "Type B": boxBChecked,
-    "Type C": boxCChecked,
-    "Type D": boxDChecked
-  }
   
   const retrieveAddress = async () => {
     await axios.get(`/users/${email}`)
     .then((res)=> {
-      console.log(res.data);
+      setAddress(res.data[0].adress);
     })
     .catch(function (error) {
       console.log("NOPE! Address data not retrieved");
     });  
   }
-  retrieveAddress()
+
+  useEffect(()=>{
+retrieveAddress()
+  },[setAddItem])
+
+
+const submit1 = () => {
+  console.log(typeBox)
+  if(typeBox===null){
+    setTryAgain(true);
+  }
+  if (typeBox!==null){
+    setConfirmation(true)
+  }
+}
+
+const submit2 = () => {
+
+}
+
+const cancel = () =>{
+  setAddItem(false);
+  setTryAgain(false)
+  setTypeBox(null)
+}
+
 
   return (
     <div>
-      <button onClick={()=>setMode("homePage")}>Back to homepage</button>
+      <button style={{cursor:"pointer"}} onClick={()=>setMode("homePage")}>Back to homepage</button>
       <br></br>
       Welcome {user}
         <br></br>
@@ -86,11 +93,11 @@ function Userpage({
           );
         })}
       </ol>
-        <button onClick={()=>setAddItem(true)}>Add Storage Items</button>
+        <button style={{cursor:"pointer"}} onClick={()=>setAddItem(true)}>Add Storage Items</button>
         {addItem === true ? 
         <div className="containerNewItem">
         <div className="newUser">
-          PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
+          PLEASE SELECT ONE SUITABLE BOX FOR YOUR GOODS
           <br></br>
           <br></br>
           <img
@@ -101,22 +108,43 @@ function Userpage({
           <br></br>
           <br></br>
             Box Type A (27cm x 38cm x 29cm):
-            <input type="checkbox" id="box1" name="boxType" value="A" onChange={handleAChange}/>
+            <input type="radio" name="boxType" value="A (27cm x 38cm x 29cm)" id="A" onChange={handleChange}/>
             <br></br>
             Box Type B (32cm x 46cm x 29cm):
-            <input type="checkbox" id="box2" name="boxType" value="B" onChange={handleBChange}/>
+            <input type="radio" name="boxType" value="B" id="B (32cm x 46cm x 29cm)" onChange={handleChange}/>
             <br></br>
             Box Type C (40cm x 60cm x 40cm):
-            <input type="checkbox" id="box3" name="boxType" value="C" onChange={handleCChange}/>
+            <input type="radio" name="boxType" value="C (40cm x 60cm x 40cm)" onChange={handleChange}/>
             <br></br>
             Box Type D (175cm x 30cm x 15cm):
-            <input type="checkbox" id="box4" name="boxType" value="D" onChange={handleDChange}/>
+            <input type="radio" name="boxType" value="D (175cm x 30cm x 15cm)" onChange={handleChange}/>
             <br></br>
           <br></br>
-          <input type="submit" value="Submit" onClick={()=>console.log(boxObject)}/>
-          <button onClick={()=>setAddItem(false)}>Cancel</button>
+          <input type="submit" value="Submit" onClick={submit1}/>
+          <button style={{cursor:"pointer"}} onClick={cancel}>Cancel</button>
           </div>
         </div>: <div></div>}
+        {confirmation === true ? <div>
+          <form>
+          <br></br>
+          You selected a type{typeBox} box. Please provde a brief description of the goods you want to store (e.g. Snowboard, summer clothes, barbecue set...)
+          <br></br>
+          <label>
+            Goods description (required):
+            <input type="text" name="description1" placeholder="Goods description" /><br></br>
+            Goods description (optional):
+            <input type="text" name="description2" placeholder="Goods description" /><br></br>
+            Goods description (optional):
+            <input type="text" name="description3" placeholder="Goods description" /><br></br>
+          </label>
+          <br></br>
+          The boxes will be sent to your registered address: {address}
+          <br></br>
+          <input type="submit" value="Submit" style={{cursor:"pointer"}}/>
+          </form>
+          <button onClick={()=>setConfirmation(false)} style={{cursor:"pointer"}}>Cancel</button>
+        </div> : <div></div>}
+        {tryAgain === true ? <h4> PLEASE SELECT ONE BOX </h4>:<div></div>}
       {success === true ? <Success message={message} /> : <Subscription />}
       <button onClick={retrieveData}>Retrieval</button>
       <button>Storage</button>
