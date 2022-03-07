@@ -8,7 +8,7 @@ function retrieveData() {
   console.log("CALLLLLLLLED");
 }
 
-function Userpage({ user, message, success, items }) {
+export default function Userpage({ user, message, success, items }) {
   return (
     <div>
       Welcome {user}
@@ -33,6 +33,6 @@ function Userpage({ user, message, success, items }) {
         })}
       </ol>
       <button>Add Item</button>
-
-
-export default Userpage;
+    </div>
+  );
+}
