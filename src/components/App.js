@@ -9,6 +9,7 @@ import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
 import Admin from "./Admin";
+import ExtraCharge from "./ExtraCharge";
 
 function App() {
   //for user
@@ -61,6 +62,8 @@ function App() {
           success={success}
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
+          setMode={setMode}
+          mode={mode}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} />
@@ -70,6 +73,8 @@ function App() {
         <div>Provider Login Page</div>
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
+      ) : mode === "extraCharge" ? (
+        <ExtraCharge/>
       ) : (
         <Admin chatMessages={chatMessages}
         setChatMessages={setChatMessages}

@@ -7,21 +7,25 @@ export default function Login({ setIsLogin, setUser }) {
         <input
           id="email"
           type="text"
+          value="hirochanyakosen@yahoo.co.jp"
           placeholder="Email Address"
         />
         <input
           id="first_name"
           type="text"
+          value="Hiromi"
           placeholder="First Name"
         />
         <input
           id="last_name"
           type="text"
+          value="Sato"
           placeholder="Last Name"
         />
         <input
           id="password"
           type="password"
+          value="SatoHiro2307"
           placeholder="Password"
         />
         <button
