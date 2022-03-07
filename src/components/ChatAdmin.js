@@ -64,7 +64,10 @@ export default function ChatAdmin() {
         <div className="message-wrapper">
           {messages.map((message, index) => <div 
           className="send-message"
-          style={{ marginLeft: message.sentOrReceive === "sent" ? '0px' : '50px'}} 
+          style={{ marginLeft: message.sentOrReceive === "sent" ? 
+          '0px' : '50px', 
+          marginRight: message.sentOrReceive === "received" ? 
+          '0px' : '50px'}} 
           key={index}>{message.message}</div>)}
           {/* <div id="sent-message"> */}
             {/* {chatMessages.map((message, idx) => (
