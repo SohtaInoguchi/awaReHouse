@@ -4,11 +4,17 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
-function retrieveData() {
-  console.log("CALLLLLLLLED");
-}
-
-export default function Userpage({ user, message, success, items }) {
+function Userpage({
+  user,
+  message,
+  success,
+  items,
+  chatMessages,
+  setChatMessages,
+}) {
+  function retrieveData() {
+    console.log("clicked hehehe");
+  }
   return (
     <div>
       Welcome {user}
@@ -33,6 +39,12 @@ export default function Userpage({ user, message, success, items }) {
         })}
       </ol>
       <button>Add Item</button>
+      {success === true ? <Success message={message} /> : <Subscription />}
+      <button onClick={retrieveData}>Retrieval</button>
+      <button>Storage</button>
+      <br />
+      <br />
+      <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>
   );
 }

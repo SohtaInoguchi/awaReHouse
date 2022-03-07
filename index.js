@@ -4,7 +4,6 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
-const knex = require("./server/db");
 
 const app = express();
 
@@ -58,25 +57,34 @@ io.on("connection", (socket) => {
     socket.emit("bot-send-back", text);
     // socket.disconnect("bot-message");
   });
-  // socket.emit("send-back-message", "TADAAAAAAA");
-  // socket.off("send-message", (text) => {
-  //   socket.emit("send-back-message", "TADAAAAAAA");
+});
 
-  //Grabs single persons items
+//////////////////SOCKET IO /////////////////////////
 
-  //Grabs all items
-  // app.get("/allItems:user", async (req, res) => {
-  //   console.log(req.params);
-  //   const items = await db.select("*").from("inventory");
-  //   res.send(items);
-  // });
-  app.post("/allItems", async (req, res) => {
-    const items = await db
-      .select("*")
-      .from("inventory")
-      .where("user_owner", req.body.email);
-    console.log(items);
-    res.send(items);
+app.get("/", (_, res) => {
+  res.send("hehehehe");
+});
+
+//Grabs all items
+app.post("/allItems", async (req, res) => {
+  const items = await db
+    .select("*")
+    .from("inventory")
+    .where("user_owner", req.body.email);
+  console.log(items);
+  res.send(items);
+});
+
+app.post("/test", (req, res) => {
+  const input = {
+    firstname: "Toni",
+    lastname: "Peña",
+    email: "toni@gmail.com",
+    password: "toniTheBest",
+  };
+
+  jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+    token && res.json({ token });
   });
 
   app.get("/", (_, res) => {
@@ -141,49 +149,12 @@ io.on("connection", (socket) => {
     }
   });
 
-  function authenticateToken(req, res, next) {
-    const authHeader = req.headers["authorization"];
-
-    console.log(authHeader);
-    if (authHeader) {
-      const token = authHeader.split(" ")[1];
-      req.token = token;
-      next();
-    }
-
-    res.sendStatus(403);
-  }
-
   app.get("/post", authenticateToken, (req, res) => {
     res.send("hehehehcjodhcnae");
   });
 
-  const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
-
   /////////////////STRIPE API/////////////////////////////
-
-  app.post("/create-checkout-session", async (req, res) => {
-    const prices = await stripe.prices.list({
-      lookup_keys: [req.body.lookup_key],
-      expand: ["data.product"],
-    });
-    const session = await stripe.checkout.sessions.create({
-      billing_address_collection: "auto",
-      line_items: [
-        {
-          price: prices.data[0].id,
-          // For metered billing, do not pass quantity
-          quantity: 1,
-        },
-      ],
-      mode: "subscription",
-      success_url: `${YOUR_DOMAIN}/?success=true`,
-
-      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-    });
-
-    res.redirect(303, session.url);
-  });
+  const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
   app.post(
     "/webhook",
@@ -256,32 +227,6 @@ io.on("connection", (socket) => {
   );
 
   app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
-
-  // io.on("connection", (socket) => {
-  //   // console.log(`backend id:${socket.id}`);
-  //   socket.on("send-message", (input) => {
-  //     console.log(input);
-  //   });
-  //   socket.emit("receive-message", "MESSAGE RECEIVED");
-  // });
-
-  // app.get("/users", async (req, res) => {
-  //   try {
-  //     const allData = await db.select("*").from("users");
-  //     res.json(allData);
-  //   } catch {
-  //     console.error(err.message);
-  //   }
-  // });
-
-  // app.post("/users", async (req, res) => {
-  //   const postData = req.body;
-  //   try {
-  //     console.log(req.body);
-  //     const newInput = await db("users").insert(postData);
-  //     res.status(201).json(newInput);
-  //   } catch {
-  //     console.error(err.message);
-  //   }
-  // });
 });
+
+/////////////////STRIPE API////////////////////////////

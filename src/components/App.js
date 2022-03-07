@@ -5,9 +5,9 @@ import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
-import axios from "axios";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import axios from "axios";
 import Admin from "./Admin";
 
 function App() {
@@ -21,25 +21,15 @@ function App() {
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [chatMessages, setChatMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
+  // const socket = io();
 
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, [email]);
-  const [chatMessages, setChatMessages] = useState([]);
-  // const socket = io();
-
-  useEffect(() => {
-    // io.on();
-    // socket.on("send-back-message", (res) => {
-    //   console.log("app side");
-    // });
-    console.log("useEffect was called");
-  }, [chatMessages]);
-
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -68,9 +58,9 @@ function App() {
           user={user}
           message={message}
           success={success}
-          items={items}
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
+          items={items}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
@@ -81,9 +71,7 @@ function App() {
       ) : mode === "registration" ? (
         <NewCustomer />
       ) : (
-        <Admin chatMessages={chatMessages}
-        setChatMessages={setChatMessages}
-      />
+        <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
     </div>
   );
