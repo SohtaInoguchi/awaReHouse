@@ -299,3 +299,13 @@ app.post("/providers", async (req,res)=>{
     console.log("Backend server does not work - providers");
 }
 })
+
+app.get("/users/:email", async (req,res)=>{
+  try{
+      const{email} = req.params;
+      const userAddress = await db.select("adress").from("users").where({email});
+      res.json(userAddress)
+  } catch {
+      console.log("Error in retrieving address");
+  }
+})

@@ -3,6 +3,7 @@ import Success from "../components/Success";
 import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
+import axios from "axios";
 
 function Userpage({
   user,
@@ -40,27 +41,52 @@ function Userpage({
     setBoxDChecked(!boxDChecked);
   }
 
-  const finalObject = {
+  const boxObject = {
     "Type A": boxAChecked,
     "Type B": boxBChecked,
     "Type C": boxCChecked,
-    "Type D": boxDChecked,
-    "email": email
+    "Type D": boxDChecked
   }
+  
+  const retrieveAddress = async () => {
+    await axios.get(`/users/${email}`)
+    .then((res)=> {
+      console.log(res.data);
+    })
+    .catch(function (error) {
+      console.log("NOPE! Address data not retrieved");
+    });  
+  }
+  retrieveAddress()
 
   return (
     <div>
       <button onClick={()=>setMode("homePage")}>Back to homepage</button>
       <br></br>
       Welcome {user}
-      <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
-      {success === true ? <Success message={message} /> : <Subscription />}
-        <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
-        {success === true ? <Success message={message} /> : <Subscription />}
         <br></br>
-        <div>NEXT RETRIEVAL PERIOD: <p>May 5th - May 15th</p></div>
+        <h3>NEXT RETRIEVAL PERIOD: 2022/04/25-2022/05/10</h3>
+      <ol>
+        CURRENTLY STORED GOODS:
+        {items.map((item) => {
+          return (
+            <div key={item.box_id}>
+              <li>{item.declared_content_one}</li>
+              <li>
+                {item.declared_content_two
+                  ? item.declared_content_two
+                  : "No Items added"}
+              </li>
+              <li>
+                {item.declared_content_three
+                  ? item.declared_content_three
+                  : "No Items added"}
+              </li>
+            </div>
+          );
+        })}
+      </ol>
         <button onClick={()=>setAddItem(true)}>Add Storage Items</button>
-        <button onClick={()=>setAddItem(false)}>Cancel</button>
         {addItem === true ? 
         <div className="containerNewItem">
         <div className="newUser">
@@ -87,32 +113,10 @@ function Userpage({
             <input type="checkbox" id="box4" name="boxType" value="D" onChange={handleDChange}/>
             <br></br>
           <br></br>
-          <input type="submit" value="Submit" onClick={()=>console.log(finalObject)}/>
+          <input type="submit" value="Submit" onClick={()=>console.log(boxObject)}/>
+          <button onClick={()=>setAddItem(false)}>Cancel</button>
           </div>
         </div>: <div></div>}
-      
-      <button onClick={()=>setMode("homePage")}>Back to homepage</button>
-      <h3>NEXT RETRIEVAL DATE IS BETWEEN: 2022/01-2022/03</h3>
-      <ol>
-        {items.map((item) => {
-          return (
-            <div key={item.box_id}>
-              <li>{item.declared_content_one}</li>
-              <li>
-                {item.declared_content_two
-                  ? item.declared_content_two
-                  : "No Items added"}
-              </li>
-              <li>
-                {item.declared_content_three
-                  ? item.declared_content_three
-                  : "No Items added"}
-              </li>
-            </div>
-          );
-        })}
-      </ol>
-      <button>Add Item</button>
       {success === true ? <Success message={message} /> : <Subscription />}
       <button onClick={retrieveData}>Retrieval</button>
       <button>Storage</button>
