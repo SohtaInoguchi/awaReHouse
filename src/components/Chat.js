@@ -6,7 +6,7 @@ export default function Chat({ chatMessages, setChatMessages }) {
   const inputRef = React.createRef();
   //   const [chatMessages, setChatMessage] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
-  const [aaa, setAAA] = useState([]);
+
   const [socket, setSocket] = useState();
 
   useEffect(() => {
