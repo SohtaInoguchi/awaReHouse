@@ -6,9 +6,8 @@ export default function Chat() {
   const inputRef = React.createRef();
     const [chatMessages, setChatMessages] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
-  const [aaa, setAAA] = useState([]);
-  const [socket, setSocket] = useState();
 
+  const [socket, setSocket] = useState();
 
   useEffect(() => {
     console.log("useeffect user");
@@ -18,26 +17,45 @@ export default function Chat() {
   }, []);
 
   useEffect(() => {
-    if (socket == null) return
+    if (socket == null) return;
     socket.on("send-back-message", (res) => {
       console.log("user chat res", res);
       const temp2 = [...receivedMessage];
       temp2.push(res);
       setReceivedMessage(temp2);
     });
-    return () => socket.off('send-back-message');
+    return () => socket.off("send-back-message");
   });
 
   const sendMessage = () => {
     const chat = document.getElementById("chat");
-    const faq = document.getElementById("faq");
-    
+
     let temp = [...chatMessages];
     temp.push(chat.value);
     setChatMessages(temp);
-    
+
     // send message
+    // socket.on("connection", () => {
     socket.emit("send-message", chat.value);
+    // })
+
+    // receive response
+    socket.on("send-back-message", (res) => {
+      console.log("user chat res", res);
+
+      // setChatMessages(temp);
+
+      const temp2 = [...receivedMessage];
+      temp2.push(res);
+
+      setReceivedMessage(temp2);
+
+      // socket.disconnect("send-back-message");
+      // console.log("user disconect after receive");
+      // const socketIo = io();
+      // setSocket(socketIo);
+    });
+
     chat.value = "";
   };
 
@@ -60,10 +78,8 @@ export default function Chat() {
     });
   }
 
-
   return (
     <>
-      <button onClick={sendMessage}>Send messege</button>
       <br />
       {/* <div>{chatMessages}</div>
       <div>{receivedMessage}</div> */}
@@ -101,6 +117,7 @@ export default function Chat() {
           <p key={index}>{message}</p>
         ))}
       </div>
+      <button onClick={sendMessage}>Send messege</button>
     </>
   );
 }
