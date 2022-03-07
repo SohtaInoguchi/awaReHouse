@@ -23,12 +23,26 @@ function Userpage({
   const[typeBox, setTypeBox]=useState(null);
   const [address, setAddress] = useState("");
   const [confirmation, setConfirmation] = useState(false);
-  const[tryAgain, setTryAgain] = useState(false)
+  const[tryAgain, setTryAgain] = useState(false);
+  const[description1, setDescription1]=useState("");
+  const[description2, setDescription2]=useState("");
+  const[description3, setDescription3]=useState("");
+
+  const createDescription1 = (e) =>{
+    setDescription1(e.target.value)
+  }
+
+  const createDescription2 = (e) =>{
+    setDescription2(e.target.value)
+  }
+
+  const createDescription3 = (e) =>{
+    setDescription3(e.target.value)
+  }
 
   const handleChange = (e) => {  
     setTypeBox(e.target.value)
   }
-
   
   const retrieveAddress = async () => {
     await axios.get(`/users/${email}`)
@@ -44,7 +58,6 @@ function Userpage({
 retrieveAddress()
   },[setAddItem])
 
-
 const submit1 = () => {
   console.log(typeBox)
   if(typeBox===null){
@@ -55,8 +68,9 @@ const submit1 = () => {
   }
 }
 
-const submit2 = () => {
-
+const submit2 = (e) => {
+  e.preventDefault()
+console.log(description1, description2, description3)
 }
 
 const cancel = () =>{
@@ -131,16 +145,16 @@ const cancel = () =>{
           <br></br>
           <label>
             Goods description (required):
-            <input type="text" name="description1" placeholder="Goods description" /><br></br>
+            <input type="text" name="description1" placeholder="Goods description" value={description1} onChange={createDescription1}/><br></br>
             Goods description (optional):
-            <input type="text" name="description2" placeholder="Goods description" /><br></br>
+            <input type="text" name="description2" placeholder="Goods description" value={description2} onChange={createDescription2}/><br></br>
             Goods description (optional):
-            <input type="text" name="description3" placeholder="Goods description" /><br></br>
+            <input type="text" name="description3" placeholder="Goods description" value={description3} onChange={createDescription3}/><br></br>
           </label>
           <br></br>
           The boxes will be sent to your registered address: {address}
           <br></br>
-          <input type="submit" value="Submit" style={{cursor:"pointer"}}/>
+          <input type="submit" value="Submit" style={{cursor:"pointer"}} onClick={submit2}/>
           </form>
           <button onClick={()=>setConfirmation(false)} style={{cursor:"pointer"}}>Cancel</button>
         </div> : <div></div>}
