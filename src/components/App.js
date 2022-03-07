@@ -61,6 +61,7 @@ function App() {
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
           items={items}
+          email={email}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
