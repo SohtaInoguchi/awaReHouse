@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-export default function Login({ setIsLogin, setUser, setEmail }) {
+export default function Login({ setIsLogin, setUser }) {
 
   return (
     <div>

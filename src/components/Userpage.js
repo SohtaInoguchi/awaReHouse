@@ -4,7 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
-function Userpage({ user, message, success, chatMessages, setChatMessages, email, setMode }) {
+function Userpage({ user, message, success, chatMessages, setChatMessages, setMode }) {
 
   const [addItem, setAddItem] = useState(false);
   const [boxAChecked, setBoxAChecked] = useState(false);
@@ -33,7 +33,7 @@ function Userpage({ user, message, success, chatMessages, setChatMessages, email
     "Type B": boxBChecked,
     "Type C": boxCChecked,
     "Type D": boxDChecked,
-    "email": email
+    "email": ""
   }
   
   return (
