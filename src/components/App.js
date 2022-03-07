@@ -1,10 +1,13 @@
 import "../input.css";
+import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import axios from "axios";
+import Success from "./Success";
+import Subscription from "./Subscription";
 import Admin from "./Admin";
 
 function App() {
@@ -18,15 +21,25 @@ function App() {
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
 
   //Axios
   useEffect(() => {
-    // axios.get(`/allItems:${user}`).then((response) => setItems(response.data));
-
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, [email]);
+  const [chatMessages, setChatMessages] = useState([]);
+  // const socket = io();
+
+  useEffect(() => {
+    // io.on();
+    // socket.on("send-back-message", (res) => {
+    //   console.log("app side");
+    // });
+    console.log("useEffect was called");
+  }, [chatMessages]);
+
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -48,18 +61,6 @@ function App() {
 
   return (
     <div>
-      {/* success === true ? (
-        <Success message={message} />
-      ) : success === false ? (
-        <Subscription />
-      ) : mode === "homePage" ? (
-        <div>
-          <Homepage setMode={setMode} setNewCustomer={setNewCustomer} />
-          <Userpage />
-          <Providerpage />
-        </div>
-      ) : */}
-
       {mode === "homePage" ? (
         <Homepage setMode={setMode} />
       ) : mode === "userLogin" && isLogin ? (
@@ -68,6 +69,8 @@ function App() {
           message={message}
           success={success}
           items={items}
+          chatMessages={chatMessages}
+          setChatMessages={setChatMessages}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
@@ -78,7 +81,9 @@ function App() {
       ) : mode === "registration" ? (
         <NewCustomer />
       ) : (
-        <Admin />
+        <Admin chatMessages={chatMessages}
+        setChatMessages={setChatMessages}
+      />
       )}
     </div>
   );

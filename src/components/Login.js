@@ -4,10 +4,26 @@ export default function Login({ setIsLogin, setUser, setEmail }) {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <input id="email" type="text" placeholder="Email Address" />
-        <input id="first_name" type="text" placeholder="First Name" />
-        <input id="last_name" type="text" placeholder="Last Name" />
-        <input id="password" type="password" placeholder="Password" />
+        <input
+          id="email"
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          id="first_name"
+          type="text"
+          placeholder="First Name"
+        />
+        <input
+          id="last_name"
+          type="text"
+          placeholder="Last Name"
+        />
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+        />
         <button
           className=""
           onClick={(e) => {
