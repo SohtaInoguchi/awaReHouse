@@ -4,14 +4,6 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
-// <<<<<<< HEAD
-// function Userpage({ user, message, success, chatMessages, setChatMessages, setMode }) {
-
-//   const extraChargeOnClick = () => {
-//     setMode("extraCharge");
-//   }
-
-// =======
 function Userpage({
   user,
   message,
@@ -21,15 +13,16 @@ function Userpage({
   setChatMessages,
   setMode
 }) {
-  function retrieveData() {
-    console.log("clicked hehehe");
-  }
 
-  const extraChargeOnClick = () => {
+  function retrieveData() {
     setMode("extraCharge");
   }
 
-// >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8
+  const storeOnClick = () => {
+    console.log("store clicked");
+  }
+
+
   return (
     <div>
       Welcome {user}
@@ -37,7 +30,7 @@ function Userpage({
       <ol>
         {items.map((item) => {
           return (
-            <div key={item.box_id}>
+            <ul key={item.box_id}>
               <li>{item.declared_content_one}</li>
               <li>
                 {item.declared_content_two
@@ -49,21 +42,17 @@ function Userpage({
                   ? item.declared_content_three
                   : "No Items added"}
               </li>
-            </div>
+            </ul>
           );
         })}
       </ol>
       <button>Add Item</button>
       {success === true ? <Success message={message} /> : <Subscription />}
-{/* <<<<<<< HEAD */}
-      <button onClick={extraChargeOnClick} id="extra-charge">Extra retrieval/storage</button>
-{/* ======= */}
       <button onClick={retrieveData}>Retrieval</button>
-      <button>Storage</button>
+      <button onClick={storeOnClick}>Storage</button>
       <br />
       <br />
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
-{/* >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8 */}
     </div>
   );
 }

@@ -23,22 +23,15 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-// <<<<<<< HEAD
-// =======
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
-  // const socket = io();
-// >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8
 
   //Axios
   useEffect(() => {
-// <<<<<<< HEAD
     console.log("useEffect was called");
-  // }, [chatMessages]);
-// =======
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
+    console.log("items", items);
   }, [email]);
-// >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -82,8 +75,7 @@ function App() {
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
       ) : mode === "extraCharge" ? (
-        // <ExtraCharge user={user} items={items}/>
-        <ExtraCharge user={user}/>
+        <ExtraCharge user={user} items={items}/>
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
