@@ -9,14 +9,11 @@ const app = express();
 
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.API_KEY);
-// app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use(express.json());
 app.use(express.static(__dirname + "/build"));
-app.use(express.urlencoded({ extended: true }));
 
 const server = app
   .use(cors())
