@@ -1,10 +1,11 @@
 import "../input.css";
+import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
 import Providerpage from "./Providerpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
-import NewCustomer from "./NewCustomer"
+import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
 import Admin from "./Admin";
@@ -20,6 +21,16 @@ function App() {
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState([]);
+  // const socket = io();
+
+  useEffect(() => {
+    // io.on();
+    // socket.on("send-back-message", (res) => {
+    //   console.log("app side");
+    // });
+    console.log("useEffect was called");
+  }, [chatMessages]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -41,22 +52,16 @@ function App() {
 
   return (
     <div>
-      {/* success === true ? (
-        <Success message={message} />
-      ) : success === false ? (
-        <Subscription />
-      ) : mode === "homePage" ? (
-        <div>
-          <Homepage setMode={setMode} setNewCustomer={setNewCustomer} />
-          <Userpage />
-          <Providerpage />
-        </div>
-      ) : */}
-
       {mode === "homePage" ? (
         <Homepage setMode={setMode} />
       ) : mode === "userLogin" && isLogin ? (
-        <Userpage user={user} message={message} success={success} />
+        <Userpage
+          user={user}
+          message={message}
+          success={success}
+          chatMessages={chatMessages}
+          setChatMessages={setChatMessages}
+        />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} />
       ) : mode === "providerLogin" && isLogin2 ? (
@@ -66,7 +71,9 @@ function App() {
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
       ) : (
-        <Admin/>
+        <Admin chatMessages={chatMessages}
+        setChatMessages={setChatMessages}
+      />
       )}
     </div>
   );

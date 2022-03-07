@@ -1,25 +1,71 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
+const PORT = process.env.PORT || 8000;
 const cors = require("cors");
-const app = express();
-const server = require("http").createServer(app);
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
 const knex = require("./server/db");
-const PORT = process.env.PORT || 8000;
+
+const app = express();
 
 // This is your test secret API key.
-const stripe = require('stripe')(process.env.API_KEY);
+const stripe = require("stripe")(process.env.API_KEY);
 // app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
+const server = app
+  .use(cors())
+  .use(express.static(__dirname + "/build"))
+  .listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+
+// ----------SOCKET IO SERVER---------
+// const server = express()
+//   .use(cors())
+//   .use(express.static(__dirname + "/build"))
+//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// ----------SOCKET IO SERVER---------
+
+const socketIO = require("socket.io");
+
+// -------SOCKET IO----------
+const io = socketIO(server);
+
+io.on("connection", (socket) => {
+  console.log("chat connected");
+  socket.on("send-message", (text) => {
+    console.log(`backend ${text}`);
+    socket.broadcast.emit("send-back-message", text);
+    socket.on('disconnect', () => console.log('Client disconnected'));
+  });
+
+  socket.on("bot-message", (req) => {
+    console.log(req);
+    let text;
+    if (req === "Where can I check the seasonal retrieval / store period?")
+      text = "You can find the period on your user page :)";
+    else if (req === "extra")
+      text =
+        "You can click extra retrieval / storage. But please bear in mind it will apply charge :)";
+    else
+      text =
+        "Please go to user page in the middle of the page, you can find it there :)";
+    socket.emit("bot-send-back", text);
+    // socket.disconnect("bot-message");
+  });
+  // socket.emit("send-back-message", "TADAAAAAAA");
+  // socket.off("send-message", (text) => {
+  //   socket.emit("send-back-message", "TADAAAAAAA");
+
+  //   console.log(`backend ${text}`);
+  // });
 });
+
+// ---------SOCKET IO ------------->
 
 app.post("/test", (req, res) => {
   const input = {
@@ -28,7 +74,6 @@ app.post("/test", (req, res) => {
     email: "toni@gmail.com",
     password: "toniTheBest",
   };
-
 
   jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     token && res.json({ token });
@@ -186,15 +231,15 @@ app.post(
 
 /////////////////STRIPE API/////////////////////////////
 
-app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+// app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
-// io.on("connection", (socket) => {
-//   // console.log(`backend id:${socket.id}`);
-//   socket.on("send-message", (input) => {
-//     console.log(input);
-//   });
-//   socket.emit("receive-message", "MESSAGE RECEIVED");
-// });
+// // io.on("connection", (socket) => {
+// //   // console.log(`backend id:${socket.id}`);
+// //   socket.on("send-message", (input) => {
+// //     console.log(input);
+// //   });
+// //   socket.emit("receive-message", "MESSAGE RECEIVED");
+// // });
 
 
 app.get("/users", async (req,res)=>{
