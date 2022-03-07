@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-export default function Login({ setIsLogin, setUser }) {
+export default function Login({ setIsLogin, setUser, setEmail }) {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
@@ -43,6 +43,7 @@ export default function Login({ setIsLogin, setUser }) {
               .then((res) => {
                 setIsLogin(res.data.boolean);
                 setUser(res.data.first_name);
+                setEmail(res.data.email);
               });
           }}
         >

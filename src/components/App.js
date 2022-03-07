@@ -1,13 +1,13 @@
 import "../input.css";
 import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
-import Providerpage from "./Providerpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
 
@@ -23,10 +23,22 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+// <<<<<<< HEAD
+// =======
+  const [items, setItems] = useState([]);
+  const [email, setEmail] = useState("");
+  // const socket = io();
+// >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8
 
+  //Axios
   useEffect(() => {
+// <<<<<<< HEAD
     console.log("useEffect was called");
-  }, [chatMessages]);
+  // }, [chatMessages]);
+// =======
+    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+  }, [email]);
+// >>>>>>> ef5e10e5eb04acfea18b9bc93a5b0788cc307df8
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -59,9 +71,10 @@ function App() {
           setChatMessages={setChatMessages}
           setMode={setMode}
           mode={mode}
+          items={items}
         />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} />
+        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
@@ -72,9 +85,7 @@ function App() {
         // <ExtraCharge user={user} items={items}/>
         <ExtraCharge user={user}/>
       ) : (
-        <Admin chatMessages={chatMessages}
-        setChatMessages={setChatMessages}
-      />
+        <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
     </div>
   );
