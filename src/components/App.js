@@ -23,13 +23,8 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  // const socket = io();
 
   useEffect(() => {
-    // io.on();
-    // socket.on("send-back-message", (res) => {
-    //   console.log("app side");
-    // });
     console.log("useEffect was called");
   }, [chatMessages]);
 
@@ -74,7 +69,8 @@ function App() {
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
       ) : mode === "extraCharge" ? (
-        <ExtraCharge/>
+        // <ExtraCharge user={user} items={items}/>
+        <ExtraCharge user={user}/>
       ) : (
         <Admin chatMessages={chatMessages}
         setChatMessages={setChatMessages}

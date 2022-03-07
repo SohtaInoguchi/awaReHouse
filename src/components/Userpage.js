@@ -4,11 +4,10 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
-function Userpage({ user, message, success, chatMessages, setChatMessages, setMode, mode }) {
+function Userpage({ user, message, success, chatMessages, setChatMessages, setMode }) {
 
   const extraChargeOnClick = () => {
     setMode("extraCharge");
-    console.log("mode", mode);
   }
 
   return (
