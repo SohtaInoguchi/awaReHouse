@@ -67,7 +67,7 @@ function App() {
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
-        <div>Provider Login Page</div>
+        <Providerpage user = {user}/>
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
       ) : (
@@ -75,6 +75,7 @@ function App() {
         setChatMessages={setChatMessages}
       />
       )}
+      
     </div>
   );
 }
