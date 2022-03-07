@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 
-export default function Chat({ chatMessages, setChatMessages }) {
+export default function Chat() {
   const inputRef = React.createRef();
-  //   const [chatMessages, setChatMessage] = useState([]);
+    const [chatMessages, setChatMessages] = useState([]);
   const [receivedMessage, setReceivedMessage] = useState([]);
 
   const [socket, setSocket] = useState();

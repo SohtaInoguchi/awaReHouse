@@ -7,6 +7,7 @@ import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import Providerpage from './Providerpage'
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
@@ -71,7 +72,7 @@ function App() {
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
-        <div>Provider Login Page</div>
+        <Providerpage user = {user}/>
       ) : mode === "registration" ? (
           <NewCustomer setMode={setMode}/>
       ) : mode === "extraCharge" ? (
@@ -79,6 +80,7 @@ function App() {
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
+      
     </div>
   );
 }
