@@ -4,7 +4,6 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
-const knex = require("./server/db");
 
 const app = express();
 
@@ -13,6 +12,7 @@ const stripe = require("stripe")(process.env.API_KEY);
 // app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
@@ -57,15 +57,29 @@ io.on("connection", (socket) => {
     socket.emit("bot-send-back", text);
     // socket.disconnect("bot-message");
   });
-  // socket.emit("send-back-message", "TADAAAAAAA");
-  // socket.off("send-message", (text) => {
-  //   socket.emit("send-back-message", "TADAAAAAAA");
+});
+// socket.emit("send-back-message", "TADAAAAAAA");
+// socket.off("send-message", (text) => {
+//   socket.emit("send-back-message", "TADAAAAAAA");
 
-  //   console.log(`backend ${text}`);
-  // });
+//   console.log(`backend ${text}`);
+// });
+
+//////////////////SOCKET IO /////////////////////////
+
+app.get("/", (_, res) => {
+  res.send("hehehehe");
 });
 
-// ---------SOCKET IO ------------->
+//Grabs all items
+app.post("/allItems", async (req, res) => {
+  const items = await db
+    .select("*")
+    .from("inventory")
+    .where("user_owner", req.body.email);
+  console.log(items);
+  res.send(items);
+});
 
 app.post("/test", (req, res) => {
   const input = {
@@ -99,12 +113,13 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
+    // please comment out this line yet
     // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
     //   token && res.json({ token });
     // });
 
     const user = await db
-      .select("password", "first_name")
+      .select("password", "first_name", "email")
       .from("users")
       .where("email", req.body.email)
       .andWhere("first_name", req.body.first_name);
@@ -112,7 +127,11 @@ app.post("/login", async (req, res) => {
     const boolean =
       user.length >= 1 && input.password === user[0].password ? true : false;
 
-    res.json({ boolean, first_name: user[0].first_name });
+    res.json({
+      boolean,
+      first_name: user[0].first_name,
+      email: user[0].email,
+    });
   } catch {
     res.json({ boolean: false, first_name: "User not found" });
   }
@@ -135,9 +154,8 @@ app.get("/post", authenticateToken, (req, res) => {
   res.send("hehehehcjodhcnae");
 });
 
-const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
-
 /////////////////STRIPE API/////////////////////////////
+const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
 app.post("/create-checkout-session", async (req, res) => {
   const prices = await stripe.prices.list({
