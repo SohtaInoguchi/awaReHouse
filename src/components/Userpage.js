@@ -4,7 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
-function Userpage({
+export default function Userpage({
   user,
   message,
   success,
