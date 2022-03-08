@@ -24,12 +24,13 @@ function App() {
   const [chatMessages, setChatMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
-  // const socket = io();
+  // email for provider
+  const [email2, setEmail2] = useState("");
 
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [email]);
+  }, [items]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -67,9 +68,13 @@ function App() {
       ) : mode === "providerLogin" && isLogin2 ? (
         <div>Welcome Provider </div>
       ) : mode === "providerLogin" && !isLogin2 ? (
-        <div>Provider Login Page</div>
+        <Login
+          setIsLogin={setIsLogin2}
+          setUser={setUser}
+          setEmail={setEmail2}
+        />
       ) : mode === "registration" ? (
-          <NewCustomer setMode={setMode}/>
+        <NewCustomer setMode={setMode} />
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
