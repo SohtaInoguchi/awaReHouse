@@ -4,15 +4,12 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
-
+const bcrypt = require("bcrypt");
 const app = express();
 
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.API_KEY);
-// app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
@@ -22,13 +19,6 @@ const server = app
   .use(cors())
   .use(express.static(__dirname + "/build"))
   .listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
-
-// ----------SOCKET IO SERVER---------
-// const server = express()
-//   .use(cors())
-//   .use(express.static(__dirname + "/build"))
-//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
-// ----------SOCKET IO SERVER---------
 
 const socketIO = require("socket.io");
 
@@ -40,7 +30,7 @@ io.on("connection", (socket) => {
   socket.on("send-message", (text) => {
     console.log(`backend ${text}`);
     socket.broadcast.emit("send-back-message", text);
-    socket.on('disconnect', () => console.log('Client disconnected'));
+    socket.on("disconnect", () => console.log("Client disconnected"));
   });
 
   socket.on("bot-message", (req) => {
@@ -55,15 +45,8 @@ io.on("connection", (socket) => {
       text =
         "Please go to user page in the middle of the page, you can find it there :)";
     socket.emit("bot-send-back", text);
-    // socket.disconnect("bot-message");
   });
 });
-// socket.emit("send-back-message", "TADAAAAAAA");
-// socket.off("send-message", (text) => {
-//   socket.emit("send-back-message", "TADAAAAAAA");
-
-//   console.log(`backend ${text}`);
-// });
 
 //////////////////SOCKET IO /////////////////////////
 
@@ -73,39 +56,28 @@ app.get("/", (_, res) => {
 
 //Grabs all items
 app.post("/allItems", async (req, res) => {
-  const items = await db
-    .select("*")
-    .from("inventory")
-    .where("user_owner", req.body.email);
-  console.log(items);
-  res.send(items);
-});
-
-app.post("/test", (req, res) => {
-  const input = {
-    firstname: "Toni",
-    lastname: "Peña",
-    email: "toni@gmail.com",
-    password: "toniTheBest",
-  };
-
-  jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-    token && res.json({ token });
-  });
-});
-
-app.post("/post", authenticateToken, (req, res) => {
-  jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
-    if (err) res.sendStatus(403);
-    res.json({
-      message: "NOICE HEHEHEHEHEH",
-      data,
-    });
-  });
+  try {
+    const items = await db
+      .select("*")
+      .from("inventory")
+      .where("user_owner", req.body.email);
+    console.log(items);
+    res.send(items);
+  } catch {
+    res.send("No items found yet");
+  }
 });
 
 app.post("/login", async (req, res) => {
   try {
+    const user = await db
+      .select("password", "first_name", "email")
+      .from("users")
+      .where("email", req.body.email);
+    console.log(user);
+
+    // if (await bcrypt.compare(req.body.password, temp)) console.log("sameee");
+
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -114,50 +86,67 @@ app.post("/login", async (req, res) => {
     };
 
     // please comment out this line yet
-    // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-    //   token && res.json({ token });
-    // });
+    const token = await jwt.sign(
+      { user: input },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    console.log(`token is below`);
+    console.log(token);
 
-    const user = await db
-      .select("password", "first_name", "email")
-      .from("users")
-      .where("email", req.body.email)
-      .andWhere("first_name", req.body.first_name);
+    // const user = await db
+    //   .select("password", "first_name", "email")
+    //   .from("users")
+    //   .where("email", req.body.email)
+    //   .andWhere("first_name", req.body.first_name);
 
-    const boolean =
-      user.length >= 1 && input.password === user[0].password ? true : false;
+    // const boolean =
+    // user.length >= 1 && input.password === user[0].password ? true : false;
+    // ? true
+    // : false;
+    console.log("here");
+    console.log(user);
+    const boolean = await bcrypt.compare(req.body.password, user[0].password);
+
+    console.log(`is it working?`);
+    console.log(boolean);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
 
     res.json({
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
     });
-  } catch {
-    res.json({ boolean: false, first_name: "User not found" });
+  } catch (err) {
+    res.json({
+      boolean: false,
+      first_name: "User not found",
+      message: `${err}`,
+    });
   }
 });
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-
+  const authHeader = req.headers.cookie.split(" ")[3];
+  console.log(`auth page`);
   console.log(authHeader);
   if (authHeader) {
-    const token = authHeader.split(" ")[1];
+    const token = authHeader.split("=")[1];
+    console.log(authHeader);
+    console.log(token);
     req.token = token;
     next();
-  }
-
-  res.sendStatus(403);
+  } else res.send(403);
 }
-
-app.get("/post", authenticateToken, (req, res) => {
-  res.send("hehehehcjodhcnae");
-});
 
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
-app.post("/create-checkout-session", async (req, res) => {
+app.post("/create-checkout-session", authenticateToken, async (req, res) => {
+  console.log("checkout page");
+  console.log(req.token);
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
@@ -259,43 +248,55 @@ app.post(
 // //   socket.emit("receive-message", "MESSAGE RECEIVED");
 // // });
 
-
-app.get("/users", async (req,res)=>{
-  try{
-      const allData = await db.select("*").from("users");
-      res.json(allData)
+app.get("/users", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("users");
+    res.json(allData);
   } catch {
-      console.error(err.message);
+    console.error(err.message);
   }
-})
+});
 
-app.get("/providers", async (req,res)=>{
-  try{
-      const allData = await db.select("*").from("providers");
-      res.json(allData)
+app.get("/providers", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("providers");
+    res.json(allData);
   } catch {
-      console.error(err.message);
+    console.error(err.message);
   }
-})
+});
 
-app.post("/users", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    await db("users").insert(postData)
+app.post("/users", async (req, res) => {
+  const postData = req.body;
+  const salt = await bcrypt.genSalt();
+  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+  const user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password: encryptedPassword,
+    adress: req.body.adress,
+    email: req.body.email,
+    picture_file: req.body.picture_file,
+  };
+
+  try {
+    console.log("from here");
+    console.log(user);
+    await db("users").insert(user);
     res.status(201).send("YEP users");
-} catch {
+  } catch (err) {
     console.log("Backend server does not work - users");
-}
-})
+    console.error(err);
+  }
+});
 
-app.post("/providers", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    await db("providers").insert(postData)
+app.post("/providers", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("providers").insert(postData);
     res.status(201).send("YEP providers");
-} catch {
+  } catch {
     console.log("Backend server does not work - providers");
-}
-})
+  }
+});
