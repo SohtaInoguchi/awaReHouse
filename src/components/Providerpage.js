@@ -21,7 +21,7 @@ function Providerpage({user}) {
   return (
   <div>
     <h1>Welcome {user}</h1>
-    <h3>Next visit will be 01/01/22</h3>
+    <h3>Next visit will be 02/02/22</h3>
     <h4>Items store in box</h4>
     <h4>Your next pay day is: {today}</h4>
     <h4>Your amount of money made: </h4>
