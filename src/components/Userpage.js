@@ -136,7 +136,7 @@ const submit2 = (e) => {
                   : "No Items added"}
               </li>
             </ul> */}
-// =======
+{/* // ======= */}
               {item.declared_content_two !== "" ? <li>
                 {item.declared_content_two}</li>:<></>}
                 {item.declared_content_three !== "" ? <li>
