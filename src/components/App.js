@@ -19,7 +19,6 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
-  const [newCustomer, setNewCustomer] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -31,8 +30,12 @@ function App() {
   useEffect(() => {
     console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    console.log("items", items);
-  }, [email]);
+// <<<<<<< HEAD
+//     console.log("items", items);
+//   }, [email]);
+// =======
+  }, [setItems]);
+// >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -66,6 +69,7 @@ function App() {
           setMode={setMode}
           mode={mode}
           items={items}
+          email={email}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />

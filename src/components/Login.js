@@ -7,25 +7,25 @@ export default function Login({ setIsLogin, setUser, setEmail }) {
         <input
           id="email"
           type="text"
-          value="hirochanyakosen@yahoo.co.jp"
+          // value="hirochanyakosen@yahoo.co.jp"
           placeholder="Email Address"
         />
         <input
           id="first_name"
           type="text"
-          value="Hiromi"
+          // value="Hiromi"
           placeholder="First Name"
         />
         <input
           id="last_name"
           type="text"
-          value="Sato"
+          // value="Sato"
           placeholder="Last Name"
         />
         <input
           id="password"
           type="password"
-          value="SatoHiro2307"
+          // value="SatoHiro2307"
           placeholder="Password"
         />
         <button
@@ -41,6 +41,7 @@ export default function Login({ setIsLogin, setUser, setEmail }) {
                 password: document.getElementById("password").value,
               })
               .then((res) => {
+                console.log(res.data);
                 setIsLogin(res.data.boolean);
                 setUser(res.data.first_name);
                 setEmail(res.data.email);

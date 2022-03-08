@@ -5,7 +5,7 @@ export default function Subscription() {
     <section>
       <div className="product">
         <div className="description">
-          <h3>Basic box</h3>
+          <h3>Basic plan</h3>
           <h5>1000円 / month</h5>
         </div>
       </div>
