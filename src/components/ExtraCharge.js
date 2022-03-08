@@ -37,6 +37,7 @@ export default function ExtraCharge({ user, items }) {
         <h2>It will cost you</h2>
         <h2>¥5000</h2>
         <form action="/create-checkout-session" method="POST">  
+          <input type="hidden" name="price" value={{mode: "payment", price: "price_1KU0vXJv2BSK7V9OJLfULWxJ"}} />
           <button id="checkout-and-portal-button" type="submit">Yes</button>
         </form>
         <h3>No</h3>

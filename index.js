@@ -23,13 +23,6 @@ const server = app
   .use(express.static(__dirname + "/build"))
   .listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
 
-// ----------SOCKET IO SERVER---------
-// const server = express()
-//   .use(cors())
-//   .use(express.static(__dirname + "/build"))
-//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
-// ----------SOCKET IO SERVER---------
-
 const socketIO = require("socket.io");
 
 // -------SOCKET IO----------
@@ -58,12 +51,6 @@ io.on("connection", (socket) => {
     // socket.disconnect("bot-message");
   });
 });
-// socket.emit("send-back-message", "TADAAAAAAA");
-// socket.off("send-message", (text) => {
-//   socket.emit("send-back-message", "TADAAAAAAA");
-
-//   console.log(`backend ${text}`);
-// });
 
 //////////////////SOCKET IO /////////////////////////
 
@@ -158,22 +145,26 @@ app.get("/post", authenticateToken, (req, res) => {
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
 app.post("/create-checkout-session", async (req, res) => {
+  await console.table(req.body.name);
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
   });
+  const temp = prices.data.filter(e => e.product.name === req.body.name);
+  console.log(temp.id);
   const session = await stripe.checkout.sessions.create({
     billing_address_collection: "auto",
     line_items: [
       {
-        price: prices.data[0].id,
+        price: temp.id,
+        // price: req.body,
         // For metered billing, do not pass quantity
         quantity: 1,
       },
     ],
     mode: "subscription",
+    // mode: req.body.mode,
     success_url: `${YOUR_DOMAIN}/?success=true`,
-
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
