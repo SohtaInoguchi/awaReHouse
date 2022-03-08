@@ -106,6 +106,8 @@ app.post("/login", async (req, res) => {
     console.log("here");
     console.log(user);
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
+    console.log(req.body.password)
+    console.log(user[0].password)
 
     console.log(`is it working?`);
     console.log(boolean);
@@ -278,7 +280,6 @@ app.post("/users", async (req, res) => {
     email: req.body.email,
     picture_file: req.body.picture_file,
   };
-
   try {
     console.log("from here");
     console.log(user);
@@ -290,6 +291,31 @@ app.post("/users", async (req, res) => {
   }
 });
 
+app.get("/inventory", async (req,res)=>{
+  try{
+      const allData = await db.select("*").from("inventory");
+      res.json(allData)
+  } catch {
+      console.error(err.message);
+  }
+})
+
+// app.post("/users", async (req,res)=>{
+//   const postData = req.body
+//   try{
+//     console.log(req.body)
+//     await db("users").insert(postData)
+//   try {
+//     console.log("from here");
+//     console.log(user);
+//     await db("users").insert(user);
+//     res.status(201).send("YEP users");
+//   } catch (err) {
+//     console.log("Backend server does not work - users");
+//     console.error(err);
+//   }
+// });
+
 app.post("/providers", async (req, res) => {
   const postData = req.body;
   try {
@@ -298,5 +324,26 @@ app.post("/providers", async (req, res) => {
     res.status(201).send("YEP providers");
   } catch {
     console.log("Backend server does not work - providers");
+}
+})
+
+app.get("/users/:email", async (req,res)=>{
+  try{
+      const{email} = req.params;
+      const userAddress = await db.select("adress").from("users").where({email});
+      res.json(userAddress)
+  } catch {
+      console.log("Error in retrieving address");
   }
-});
+})
+
+app.post("/inventory", async (req,res)=>{
+  const postData = req.body
+  try{
+    console.log(req.body)
+    await db("inventory").insert(postData)
+    res.status(201).send("YEP inventory");
+} catch {
+    console.log("Backend server does not work - inventory");
+}
+})

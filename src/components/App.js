@@ -18,7 +18,6 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
-  const [newCustomer, setNewCustomer] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -30,7 +29,7 @@ function App() {
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [email]);
+  }, [setItems]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -62,6 +61,8 @@ function App() {
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
           items={items}
+          email={email}
+          setMode={setMode}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />

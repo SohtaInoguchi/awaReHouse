@@ -212,6 +212,8 @@ const handleProviderSubmit = (e) =>{
           <input type="submit" value="Submit" style={{cursor:"pointer"}} onClick={handleProviderSubmit}/>
           </form>
           </div>
+          <button onClick={()=>setMode("homePage")}>Back to homepage</button>
+      <br></br>
       </div>
       } 
       if (registrationDone === true) {
