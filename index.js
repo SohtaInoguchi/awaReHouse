@@ -298,6 +298,15 @@ app.get("/inventory", async (req,res)=>{
   } catch {
       console.error(err.message);
   }
+});
+
+app.get("/extra", async (req,res)=>{
+  try{
+      const allData = await db.select("*").from("extra");
+      res.json(allData)
+  } catch {
+      console.error(err.message);
+  }
 })
 
 // app.post("/users", async (req,res)=>{
