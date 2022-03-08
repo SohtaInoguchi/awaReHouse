@@ -3,7 +3,12 @@ import { io } from "socket.io-client";
 import App from "./App";
 
 export default function Chat() {
+
   const [chatMessages, setChatMessages] = useState([]);
+
+
+
+
   const [receivedMessage, setReceivedMessage] = useState([]);
 
   const [socket, setSocket] = useState();
