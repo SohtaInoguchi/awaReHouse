@@ -7,6 +7,7 @@ import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 
@@ -66,7 +67,7 @@ function App() {
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
       ) : mode === "providerLogin" && isLogin2 ? (
-        <div>Welcome Provider </div>
+        <Providerpage user={user} />
       ) : mode === "providerLogin" && !isLogin2 ? (
         <Login
           setIsLogin={setIsLogin2}
