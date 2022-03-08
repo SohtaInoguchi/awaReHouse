@@ -264,8 +264,6 @@ app.get("/providers", async (req, res) => {
 
 app.post("/users", async (req, res) => {
   const postData = req.body;
-  console.log("backend");
-  // console.log(req.body.picture_file);
   const salt = await bcrypt.genSalt();
   const encryptedPassword = await bcrypt.hash(req.body.password, salt);
   const user = {
@@ -276,13 +274,12 @@ app.post("/users", async (req, res) => {
     email: req.body.email,
     picture_file: req.body.picture_file,
   };
-  res.send(user);
 
   try {
     console.log("from here");
     console.log(user);
-    // await db("users").insert(user);
-    // res.status(201).send("YEP users");
+    await db("users").insert(user);
+    res.status(201).send("YEP users");
   } catch (err) {
     console.log("Backend server does not work - users");
     console.error(err);
