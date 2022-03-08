@@ -70,14 +70,21 @@ app.post("/allItems", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    const user = await db
-      .select("password", "first_name", "email")
-      .from("users")
-      .where("email", req.body.email);
-    console.log(user);
+    // for user
+    let user;
+    req.body.mode === "user"
+      ? (user = await db
+          .select("password", "first_name", "email")
+          .from("users")
+          .where("email", req.body.email))
+      : (user = await db
+          .select("password", "first_name", "email")
+          .from("providers")
+          .where("email", req.body.email));
 
-    // if (await bcrypt.compare(req.body.password, temp)) console.log("sameee");
-
+    console.log("user is here");
+    console.log(req.body);
+    console.log(`login backend`);
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -106,8 +113,9 @@ app.post("/login", async (req, res) => {
     console.log("here");
     console.log(user);
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    console.log(req.body.password)
-    console.log(user[0].password)
+    console.log(req.body.password);
+    console.log(user[0].password);
+    console.log(await bcrypt.compare(req.body.password, user[0].password));
 
     console.log(`is it working?`);
     console.log(boolean);
@@ -291,14 +299,14 @@ app.post("/users", async (req, res) => {
   }
 });
 
-app.get("/inventory", async (req,res)=>{
-  try{
-      const allData = await db.select("*").from("inventory");
-      res.json(allData)
+app.get("/inventory", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("inventory");
+    res.json(allData);
   } catch {
-      console.error(err.message);
+    console.error(err.message);
   }
-})
+});
 
 // app.post("/users", async (req,res)=>{
 //   const postData = req.body
@@ -324,26 +332,29 @@ app.post("/providers", async (req, res) => {
     res.status(201).send("YEP providers");
   } catch {
     console.log("Backend server does not work - providers");
-}
-})
-
-app.get("/users/:email", async (req,res)=>{
-  try{
-      const{email} = req.params;
-      const userAddress = await db.select("adress").from("users").where({email});
-      res.json(userAddress)
-  } catch {
-      console.log("Error in retrieving address");
   }
-})
+});
 
-app.post("/inventory", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    await db("inventory").insert(postData)
+app.get("/users/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("users")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.post("/inventory", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("inventory").insert(postData);
     res.status(201).send("YEP inventory");
-} catch {
+  } catch {
     console.log("Backend server does not work - inventory");
-}
-})
+  }
+});

@@ -26,6 +26,7 @@ function App() {
   const [email, setEmail] = useState("");
   // email for provider
   const [email2, setEmail2] = useState("");
+  // const [user_provider, setUser_provider] = useState("");
 
   //Axios
   useEffect(() => {
@@ -66,7 +67,12 @@ function App() {
           setMode={setMode}
         />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
+        <Login
+          setIsLogin={setIsLogin}
+          setUser={setUser}
+          setEmail={setEmail}
+          mode="user"
+        />
       ) : mode === "providerLogin" && isLogin2 ? (
         <Providerpage user={user} />
       ) : mode === "providerLogin" && !isLogin2 ? (
@@ -74,6 +80,7 @@ function App() {
           setIsLogin={setIsLogin2}
           setUser={setUser}
           setEmail={setEmail2}
+          mode="provider"
         />
       ) : mode === "registration" ? (
         <NewCustomer setMode={setMode} />
