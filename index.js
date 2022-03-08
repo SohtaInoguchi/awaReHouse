@@ -154,7 +154,7 @@ function authenticateToken(req, res, next) {
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
-app.post("/create-checkout-session", authenticateToken, async (req, res) => {
+app.post("/create-checkout-session", async (req, res) => {
   await console.table(req.body.name);
   console.log("checkout page");
   console.log(req.token);
