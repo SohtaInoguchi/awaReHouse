@@ -13,8 +13,7 @@ function Userpage({
   chatMessages,
   setChatMessages,
   setMode,
-  email,
-  setUpdateList
+  email
 }) {
   function retrieveData() {
     console.log("clicked hehehe");
@@ -105,7 +104,6 @@ const submit2 = (e) => {
   e.preventDefault();
   setBoxOrderReceived(true);
   sendBoxRequest()
-  setUpdateList(true)
 }
 
   return (
@@ -121,16 +119,10 @@ const submit2 = (e) => {
           return (
             <div key={item.box_id}>
               <li>{item.declared_content_one}</li>
-              <li>
-                {item.declared_content_two
-                  ? item.declared_content_two
-                  : "-"}
-              </li>
-              <li>
-                {item.declared_content_three
-                  ? item.declared_content_three
-                  : "-"}
-              </li>
+              {item.declared_content_two !== "" ? <li>
+                {item.declared_content_two}</li>:<></>}
+                {item.declared_content_three !== "" ? <li>
+                {item.declared_content_three}</li>:<></>}
             </div>
           );
         })}

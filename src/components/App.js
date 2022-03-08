@@ -24,13 +24,12 @@ function App() {
   const [chatMessages, setChatMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
-  const [updateList, setUpdateList]=useState(false);
   // const socket = io();
 
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [setUpdateList]);
+  }, [items]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -64,7 +63,6 @@ function App() {
           items={items}
           email={email}
           setMode={setMode}
-          setUpdateList={setUpdateList}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
