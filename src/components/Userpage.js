@@ -13,7 +13,8 @@ function Userpage({
   chatMessages,
   setChatMessages,
   setMode,
-  email
+  email,
+  setUpdateList
 }) {
   function retrieveData() {
     console.log("clicked hehehe");
@@ -68,16 +69,6 @@ const submit1 = () => {
   }
 }
 
-const submit2 = (e) => {
-  setDescription1("");
-  setDescription2("");
-  setDescription3("");
-  setConfirmation(false)
-  e.preventDefault();
-  setBoxOrderReceived(true);
-console.log(description1, description2, description3, typeBox)
-
-}
 
 const cancel = () =>{
   setAddItem(false);
@@ -89,13 +80,14 @@ const cancel = () =>{
 
 const sendBoxRequest = () => {
   axios.post("/inventory", {
-  declared_content_one:description1,
-  declared_content_two:description2,
-  declared_content_three:description3,
-  storage_location:"Ho Hinomikomachi, Hakusan, Ishikawa, 920-2153",
-  weight_in_kg:"3.41",
-  declared_as_fragile:false,
-  expected_retrieval_season:"autumn"
+    declared_content_one:description1,
+    declared_content_two:description2,
+    declared_content_three:description3,
+    storage_location:"Ho Hinomikomachi, Hakusan, Ishikawa, 920-2153",
+    weight_in_kg:"3.41",
+    declared_as_fragile:false,
+    expected_retrieval_season:"autumn",
+    user_owner: email
   })
   .then(()=> {
     console.log("Your database has been updated!");
@@ -105,6 +97,16 @@ const sendBoxRequest = () => {
   });  
 }
 
+const submit2 = (e) => {
+  setDescription1("");
+  setDescription2("");
+  setDescription3("");
+  setConfirmation(false)
+  e.preventDefault();
+  setBoxOrderReceived(true);
+  sendBoxRequest()
+  setUpdateList(true)
+}
 
   return (
     <div>
