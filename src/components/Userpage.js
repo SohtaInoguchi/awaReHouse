@@ -27,6 +27,7 @@ function Userpage({
   const[description1, setDescription1]=useState("");
   const[description2, setDescription2]=useState("");
   const[description3, setDescription3]=useState("");
+  const [boxOrderReceived, setBoxOrderReceived] =useState(false);
 
   const createDescription1 = (e) =>{
     setDescription1(e.target.value)
@@ -59,7 +60,6 @@ retrieveAddress()
   },[setAddItem])
 
 const submit1 = () => {
-  console.log(typeBox)
   if(typeBox===null){
     setTryAgain(true);
   }
@@ -69,14 +69,21 @@ const submit1 = () => {
 }
 
 const submit2 = (e) => {
-  e.preventDefault()
-console.log(description1, description2, description3)
+  setDescription1("");
+  setDescription2("");
+  setDescription3("");
+  setConfirmation(false)
+  e.preventDefault();
+  setBoxOrderReceived(true);
+console.log(description1, description2, description3, typeBox)
+
 }
 
 const cancel = () =>{
   setAddItem(false);
-  setTryAgain(false)
-  setTypeBox(null)
+  setTryAgain(false);
+  setTypeBox(null);
+  setBoxOrderReceived(false)
 }
 
 
@@ -84,11 +91,11 @@ const cancel = () =>{
     <div>
       <button style={{cursor:"pointer"}} onClick={()=>setMode("homePage")}>Back to homepage</button>
       <br></br>
-      Welcome {user}
+      Welcome back {user},
         <br></br>
-        <h3>NEXT RETRIEVAL PERIOD: 2022/04/25-2022/05/10</h3>
+        <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <ol>
-        CURRENTLY STORED GOODS:
+        List of goods currently stored at awaReHouse locations:
         {items.map((item) => {
           return (
             <div key={item.box_id}>
@@ -96,12 +103,12 @@ const cancel = () =>{
               <li>
                 {item.declared_content_two
                   ? item.declared_content_two
-                  : "No Items added"}
+                  : "-"}
               </li>
               <li>
                 {item.declared_content_three
                   ? item.declared_content_three
-                  : "No Items added"}
+                  : "-"}
               </li>
             </div>
           );
@@ -125,7 +132,7 @@ const cancel = () =>{
             <input type="radio" name="boxType" value="A (27cm x 38cm x 29cm)" id="A" onChange={handleChange}/>
             <br></br>
             Box Type B (32cm x 46cm x 29cm):
-            <input type="radio" name="boxType" value="B" id="B (32cm x 46cm x 29cm)" onChange={handleChange}/>
+            <input type="radio" name="boxType" value="B (32cm x 46cm x 29cm)" id="B" onChange={handleChange}/>
             <br></br>
             Box Type C (40cm x 60cm x 40cm):
             <input type="radio" name="boxType" value="C (40cm x 60cm x 40cm)" onChange={handleChange}/>
@@ -135,13 +142,13 @@ const cancel = () =>{
             <br></br>
           <br></br>
           <input type="submit" value="Submit" onClick={submit1}/>
-          <button style={{cursor:"pointer"}} onClick={cancel}>Cancel</button>
+          <button style={{cursor:"pointer"}} onClick={cancel}>Go back</button>
           </div>
         </div>: <div></div>}
         {confirmation === true ? <div>
           <form>
           <br></br>
-          You selected a type{typeBox} box. Please provde a brief description of the goods you want to store (e.g. Snowboard, summer clothes, barbecue set...)
+          You selected a type {typeBox} box. Please provde a brief description of the goods you want to store (e.g. Snowboard, summer clothes, barbecue set...)
           <br></br>
           <label>
             Goods description (required):
@@ -158,7 +165,8 @@ const cancel = () =>{
           </form>
           <button onClick={()=>setConfirmation(false)} style={{cursor:"pointer"}}>Cancel</button>
         </div> : <div></div>}
-        {tryAgain === true ? <h4> PLEASE SELECT ONE BOX </h4>:<div></div>}
+        {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4>:<div></div>}
+        {boxOrderReceived === true ? <h4> Thank you, your order is on its way. You can submit another request or click on "Go Back" to exit this section</h4>:<div></div>}
       {success === true ? <Success message={message} /> : <Subscription />}
       <button onClick={retrieveData}>Retrieval</button>
       <button>Storage</button>

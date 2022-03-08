@@ -278,6 +278,15 @@ app.get("/providers", async (req,res)=>{
   }
 })
 
+app.get("/inventory", async (req,res)=>{
+  try{
+      const allData = await db.select("*").from("inventory");
+      res.json(allData)
+  } catch {
+      console.error(err.message);
+  }
+})
+
 app.post("/users", async (req,res)=>{
   const postData = req.body
   try{
@@ -308,4 +317,15 @@ app.get("/users/:email", async (req,res)=>{
   } catch {
       console.log("Error in retrieving address");
   }
+})
+
+app.post("/inventory", async (req,res)=>{
+  const postData = req.body
+  try{
+    console.log(req.body)
+    await db("inventory").insert(postData)
+    res.status(201).send("YEP inventory");
+} catch {
+    console.log("Backend server does not work - inventory");
+}
 })
