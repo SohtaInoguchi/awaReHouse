@@ -7,7 +7,7 @@ import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
-import Providerpage from './Providerpage'
+import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
@@ -25,18 +25,16 @@ function App() {
   const [chatMessages, setChatMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
+  // email for provider
+  const [email2, setEmail2] = useState("");
+  // const [user_provider, setUser_provider] = useState("");
 
   //Axios
   useEffect(() => {
     console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-// <<<<<<< HEAD
-//     console.log("items", items);
-//   }, [email]);
-// =======
   }, [setItems]);
-// >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
-
+  
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -72,19 +70,28 @@ function App() {
           email={email}
         />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
+        <Login
+          setIsLogin={setIsLogin}
+          setUser={setUser}
+          setEmail={setEmail}
+          mode="user"
+        />
       ) : mode === "providerLogin" && isLogin2 ? (
-        <div>Welcome Provider </div>
+        <Providerpage user={user} />
       ) : mode === "providerLogin" && !isLogin2 ? (
-        <Providerpage user = {user}/>
+        <Login
+          setIsLogin={setIsLogin2}
+          setUser={setUser}
+          setEmail={setEmail2}
+          mode="provider"
+        />
       ) : mode === "registration" ? (
-          <NewCustomer setMode={setMode}/>
+        <NewCustomer setMode={setMode} />
       ) : mode === "extraCharge" ? (
-        <ExtraCharge user={user} items={items}/>
+        <ExtraCharge user={user} items={items} />
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
-      
     </div>
   );
 }

@@ -32,8 +32,9 @@ export default function ExtraCharge({ user, items }) {
       return newDate;
     }
 
+
   return (
-      <>
+    <>
       <h1>{user}</h1>
         <h1>Which items to take / store?</h1>
         {items.map((item) => {
@@ -61,13 +62,17 @@ export default function ExtraCharge({ user, items }) {
             />
         <button onClick={handleOnclickDate}>Press to set retrieval date</button>
         {isSelected ? <div>You selected {selectedDateString}</div> : <div>Date not selected</div>}
+
         <h2>It will cost you</h2>
-        <h2>¥5000</h2>
-        <form action="/create-checkout-session" method="POST">  
-          <input type="hidden" name="price" value={{mode: "payment", price: "price_1KU0vXJv2BSK7V9OJLfULWxJ"}} />
-          <button id="checkout-and-portal-button" type="submit">Yes</button>
-        </form>
-        <h3>No</h3>
-      </>
-    )
+      <h2>JPY15000</h2>
+      <form action="/create-checkout-session" method="POST">
+        <input type="hidden" name="name" value="Extra retrieval" />
+        <button id="checkout-and-portal-button" type="submit">
+          Yes
+        </button>
+      </form>
+      <h3>No</h3>
+    </>
+  );
 }
+

@@ -1,44 +1,26 @@
 import React from "react";
 import axios from "axios";
-export default function Login({ setIsLogin, setUser, setEmail }) {
+export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <input
-          id="email"
-          type="text"
-          value="figo1234@yahoo.co.jp"
-          placeholder="Email Address"
-        />
-        <input
-          id="first_name"
-          type="text"
-          value="Satoshi"
-          placeholder="First Name"
-        />
-        <input
-          id="last_name"
-          type="text"
-          value="Kinokawa"
-          placeholder="Last Name"
-        />
-        <input
-          id="password"
-          type="password"
-          value="figo1234AB"
-          placeholder="Password"
-        />
+        <input id="email" type="text" placeholder="Email Address" />
+        <input id="first_name" type="text" placeholder="First Name" />
+        <input id="last_name" type="text" placeholder="Last Name" />
+        <input id="password" type="password" placeholder="Password" />
         <button
           className=""
           onClick={(e) => {
             // e.preventDefault();
             console.log("clicked");
+            console.log(mode);
             axios
               .post("/login", {
                 first_name: document.getElementById("first_name").value,
                 last_name: document.getElementById("last_name").value,
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value,
+                mode,
               })
               .then((res) => {
                 console.log(res.data);
