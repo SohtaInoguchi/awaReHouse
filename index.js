@@ -106,6 +106,8 @@ app.post("/login", async (req, res) => {
     console.log("here");
     console.log(user);
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
+    console.log(req.body.password)
+    console.log(user[0].password)
 
     console.log(`is it working?`);
     console.log(boolean);

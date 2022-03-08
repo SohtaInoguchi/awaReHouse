@@ -29,7 +29,7 @@ function App() {
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [items]);
+  }, [setItems]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
