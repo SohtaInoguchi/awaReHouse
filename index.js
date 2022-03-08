@@ -154,25 +154,33 @@ function authenticateToken(req, res, next) {
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
-app.post("/create-checkout-session", authenticateToken, async (req, res) => {
+// <<<<<<< HEAD
+// app.post("/create-checkout-session", async (req, res) => {
+//   =======
+  app.post("/create-checkout-session", authenticateToken, async (req, res) => {
+  await console.table(req.body.name);
   console.log("checkout page");
   console.log(req.token);
+// >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
   });
+  const temp = prices.data.filter(e => e.product.name === req.body.name);
+  console.log(temp.id);
   const session = await stripe.checkout.sessions.create({
     billing_address_collection: "auto",
     line_items: [
       {
-        price: prices.data[0].id,
+        price: temp.id,
+        // price: req.body,
         // For metered billing, do not pass quantity
         quantity: 1,
       },
     ],
     mode: "subscription",
+    // mode: req.body.mode,
     success_url: `${YOUR_DOMAIN}/?success=true`,
-
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 

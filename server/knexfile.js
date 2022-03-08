@@ -5,7 +5,6 @@ module.exports = {
     connection: {
       database: "awarehouse",
       user: process.env.DB_USER,
-      password: "",
     },
     pool: {
       min: 2,

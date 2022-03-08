@@ -15,8 +15,13 @@ function Userpage({
   setMode,
   email
 }) {
+
   function retrieveData() {
-    console.log("clicked hehehe");
+    setMode("extraCharge");
+  }
+
+  const storeOnClick = () => {
+    console.log("store clicked");
   }
 
   const [addItem, setAddItem] = useState(false);
@@ -117,13 +122,28 @@ const submit2 = (e) => {
         List of goods currently stored at awaReHouse locations:
         {items.map((item) => {
           return (
-            <div key={item.box_id}>
+            <ul key={item.box_id}>
               <li>{item.declared_content_one}</li>
+{/* <<<<<<< HEAD */}
+              {/* <li>
+                {item.declared_content_two
+                  ? item.declared_content_two
+                  : "No Items added"}
+              </li>
+              <li>
+                {item.declared_content_three
+                  ? item.declared_content_three
+                  : "No Items added"}
+              </li>
+            </ul> */}
+{/* // ======= */}
               {item.declared_content_two !== "" ? <li>
                 {item.declared_content_two}</li>:<></>}
                 {item.declared_content_three !== "" ? <li>
                 {item.declared_content_three}</li>:<></>}
-            </div>
+            {/* </div> */}
+            </ul>
+// >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
           );
         })}
       </ol>
@@ -182,7 +202,7 @@ const submit2 = (e) => {
         {boxOrderReceived === true ? <h4> Thank you, your order is on its way. You can submit another request or click on "Go Back" to exit this section</h4>:<div></div>}
       {success === true ? <Success message={message} /> : <Subscription />}
       <button onClick={retrieveData}>Retrieval</button>
-      <button>Storage</button>
+      <button onClick={storeOnClick}>Storage</button>
       <br />
       <br />
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />

@@ -10,6 +10,7 @@ import Subscription from "./Subscription";
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
+import ExtraCharge from "./ExtraCharge";
 
 function App() {
   //for user
@@ -30,8 +31,14 @@ function App() {
 
   //Axios
   useEffect(() => {
+    console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
+    // <<<<<<< HEAD
+    //     console.log("items", items);
+    //   }, [email]);
+    // =======
   }, [setItems]);
+  // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -62,9 +69,10 @@ function App() {
           success={success}
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
+          setMode={setMode}
+          mode={mode}
           items={items}
           email={email}
-          setMode={setMode}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login
@@ -84,6 +92,8 @@ function App() {
         />
       ) : mode === "registration" ? (
         <NewCustomer setMode={setMode} />
+      ) : mode === "extraCharge" ? (
+        <ExtraCharge user={user} items={items} />
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}
