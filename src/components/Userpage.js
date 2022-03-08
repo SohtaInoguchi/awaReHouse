@@ -83,7 +83,26 @@ const cancel = () =>{
   setAddItem(false);
   setTryAgain(false);
   setTypeBox(null);
+  setConfirmation(false);
   setBoxOrderReceived(false)
+}
+
+const sendBoxRequest = () => {
+  axios.post("/inventory", {
+  declared_content_one:description1,
+  declared_content_two:description2,
+  declared_content_three:description3,
+  storage_location:"Ho Hinomikomachi, Hakusan, Ishikawa, 920-2153",
+  weight_in_kg:"3.41",
+  declared_as_fragile:false,
+  expected_retrieval_season:"autumn"
+  })
+  .then(()=> {
+    console.log("Your database has been updated!");
+  })
+  .catch(function (error) {
+    console.log("NOPE! Problem with inventory update");
+  });  
 }
 
 
