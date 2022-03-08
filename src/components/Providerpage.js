@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 
+
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -31,7 +32,17 @@ function Providerpage({user}) {
     <br/>
     <Chat/>
 
-  </div>
+
+      <button
+        onClick={(e) => {
+          window.confirm("Are you sure about to quit the provider?");
+        }}
+      >
+        Stop being a provider
+      </button>
+      <br />
+      <Chat />
+    </div>
   );
 }
 

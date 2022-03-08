@@ -70,14 +70,21 @@ app.post("/allItems", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    const user = await db
-      .select("password", "first_name", "email")
-      .from("users")
-      .where("email", req.body.email);
-    console.log(user);
+    // for user
+    let user;
+    req.body.mode === "user"
+      ? (user = await db
+          .select("password", "first_name", "email")
+          .from("users")
+          .where("email", req.body.email))
+      : (user = await db
+          .select("password", "first_name", "email")
+          .from("providers")
+          .where("email", req.body.email));
 
-    // if (await bcrypt.compare(req.body.password, temp)) console.log("sameee");
-
+    console.log("user is here");
+    console.log(req.body);
+    console.log(`login backend`);
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -106,8 +113,9 @@ app.post("/login", async (req, res) => {
     console.log("here");
     console.log(user);
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    console.log(req.body.password)
-    console.log(user[0].password)
+    console.log(req.body.password);
+    console.log(user[0].password);
+    console.log(await bcrypt.compare(req.body.password, user[0].password));
 
     console.log(`is it working?`);
     console.log(boolean);
@@ -146,25 +154,44 @@ function authenticateToken(req, res, next) {
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
-app.post("/create-checkout-session", authenticateToken, async (req, res) => {
+app.post("/create-checkout-session", async (req, res) => {
+  await console.table(req.body.name);
   console.log("checkout page");
   console.log(req.token);
+  console.log(req.body.name === "Storage fee");
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
   });
+  console.log(prices.data);
+
+  let mode;
+  let price;
+
+  req.body.name === "Storage fee"
+    ? (mode = "subscription")
+    : (mode = "payment");
+
+  const gotya = prices.data.filter((e) => e.product.name === req.body.name);
+  price = gotya[0].id;
+
+  console.log(req.body);
+
+  const temp = prices.data.filter((e) => e.product.name === req.body.name);
+  console.log(temp.id);
   const session = await stripe.checkout.sessions.create({
     billing_address_collection: "auto",
     line_items: [
       {
-        price: prices.data[0].id,
+        // price: "price_1KU0vXJv2BSK7V9OJLfULWxJ",
+        price: price,
         // For metered billing, do not pass quantity
         quantity: 1,
       },
     ],
-    mode: "subscription",
+    // mode: "payment",
+    mode: mode,
     success_url: `${YOUR_DOMAIN}/?success=true`,
-
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
@@ -291,14 +318,14 @@ app.post("/users", async (req, res) => {
   }
 });
 
-app.get("/inventory", async (req,res)=>{
-  try{
-      const allData = await db.select("*").from("inventory");
-      res.json(allData)
+app.get("/inventory", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("inventory");
+    res.json(allData);
   } catch {
-      console.error(err.message);
+    console.error(err.message);
   }
-})
+});
 
 // app.post("/users", async (req,res)=>{
 //   const postData = req.body
@@ -324,26 +351,29 @@ app.post("/providers", async (req, res) => {
     res.status(201).send("YEP providers");
   } catch {
     console.log("Backend server does not work - providers");
-}
-})
-
-app.get("/users/:email", async (req,res)=>{
-  try{
-      const{email} = req.params;
-      const userAddress = await db.select("adress").from("users").where({email});
-      res.json(userAddress)
-  } catch {
-      console.log("Error in retrieving address");
   }
-})
+});
 
-app.post("/inventory", async (req,res)=>{
-  const postData = req.body
-  try{
-    console.log(req.body)
-    await db("inventory").insert(postData)
+app.get("/users/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("users")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.post("/inventory", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("inventory").insert(postData);
     res.status(201).send("YEP inventory");
-} catch {
+  } catch {
     console.log("Backend server does not work - inventory");
-}
-})
+  }
+});
