@@ -77,11 +77,11 @@ app.post("/login", async (req, res) => {
         ? (user = await db
             .select("Password", "First_name", "Email")
             .from("users")
-            .where("email", req.body.email))
+            .where("Email", req.body.email))
         : (user = await db
             .select("Password", "First_name", "Email")
             .from("providers")
-            .where("email", req.body.email));
+            .where("Email", req.body.email));
 
       const input = {
         firstname: req.body.first_name,
