@@ -90,8 +90,8 @@ app.post("/login", async (req, res) => {
         password: req.body.password,
       };
     } catch (error) {
-      res.send({ message: error, from: "db side" });
-      // console.error(error);
+      // res.send({ message: error, from: "db side" });
+      console.error(error);
     }
 
     // please comment out this line yet
