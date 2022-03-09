@@ -93,7 +93,8 @@ app.post("/login", async (req, res) => {
       // res.send({ message: error, from: "db side" });
       console.error(error);
     }
-
+    console.log("----- here ----");
+    console.log(user);
     // please comment out this line yet
     // try {
     //   const token = await jwt.sign(
