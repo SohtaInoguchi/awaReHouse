@@ -118,6 +118,8 @@ function Userpage({
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
         user_owner: email,
+        fragile: isFragile,
+        heavy: isHeavy
         // send heavy and fragile boolean
       })
       .then(() => {
