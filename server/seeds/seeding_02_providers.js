@@ -1,5 +1,6 @@
-exports.seed = function(knex) {
-    return knex('providers').del()
+exports.seed = function (knex) {
+  return knex("providers")
+    .del()
     .then(function () {
       return knex('providers').insert([
           {
@@ -59,4 +60,4 @@ exports.seed = function(knex) {
           }
       ]);
     });
-  };
+};
