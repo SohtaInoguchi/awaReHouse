@@ -33,6 +33,7 @@ function Userpage({
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
   const [boxOrderReceived, setBoxOrderReceived] = useState(false);
+  const [displayTable, setDisplayTable] = useState (false);
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -117,6 +118,11 @@ function Userpage({
     updateItemList();
   };
 
+  const retrieveList=()=>{
+    updateItemList();
+    setDisplayTable(!displayTable)
+  }
+
   return (
     <div>
       <button style={{ cursor: "pointer" }} onClick={() => setMode("homePage")}>
@@ -125,7 +131,10 @@ function Userpage({
       <br></br>
       Welcome back {user},<br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
-      <ol>
+      <br></br>
+      <button onClick={retrieveList}>LIST OF STORED GOODS</button>
+      <br></br>
+      {displayTable === true ? <ol>
         List of goods currently stored at awaReHouse locations:
         {items.map((item) => {
           return (
@@ -145,7 +154,7 @@ function Userpage({
             </ul>
           );
         })}
-      </ol>
+      </ol> : <></>}
       <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
         Add Storage Items
       </button>
