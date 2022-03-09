@@ -72,6 +72,7 @@ app.post("/login", async (req, res) => {
   try {
     // for user
     let user;
+
     req.body.mode === "user"
       ? (user = await db
           .select("password", "first_name", "email")
@@ -81,6 +82,7 @@ app.post("/login", async (req, res) => {
           .select("password", "first_name", "email")
           .from("providers")
           .where("email", req.body.email));
+
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -88,24 +90,19 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-    // please comment out this line yet
-    try {
-      const token = await jwt.sign(
-        { user: input },
-        process.env.ACCESS_TOKEN_SECRET
-      );
-    } catch (error) {
-      res.json({ from: "JWT sign", message: error });
-    }
+
+
+    const token = await jwt.sign(
+      { user: input },
+      process.env.ACCESS_TOKEN_SECRET
+    );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    try {
-      res.cookie("token", token, {
-        httpOnly: true,
-      });
-    } catch (error) {
-      res.send({ from: "cookie token", message: error });
-    }
+
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+
 
     res.json({
       boolean,
