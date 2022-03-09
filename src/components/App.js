@@ -28,7 +28,6 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   // const [user_provider, setUser_provider] = useState("");
-  const [listOfGoods, setListOfGoods] = useState("");
 
   //Axios
   useEffect(() => {
@@ -75,8 +74,6 @@ function App() {
           items={items}
           email={email}
           setItems={setItems}
-          setListOfGoods={setListOfGoods}
-          listOfGoods={listOfGoods}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login
