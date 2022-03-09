@@ -92,6 +92,7 @@ function Userpage({
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
         user_owner: email,
+        // send heavy and fragile boolean
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -217,6 +218,10 @@ function Userpage({
                 value={description1}
                 onChange={createDescription1}
               />
+              <p style={{display: 'inline'}}>Check if goods are heavy</p>
+              <input type="checkbox" className="isHeavy" />
+              <p style={{display: 'inline'}}>Check if goods are fragile</p>
+              <input type="checkbox" className="isFragile"/>
               <br></br>
               Goods description (optional):
               <input
