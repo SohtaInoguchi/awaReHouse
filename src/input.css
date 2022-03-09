@@ -148,11 +148,11 @@ body {
 /* ------------Chat popup------------- */
 
 #chat-box {
-  max-width: 30%;
-  border: solid 5px red;
-  min-height: 200px;
-  margin: 10px 10px;
+  max-width: 40%;
+  min-height: 300px;
   max-height: 20rem;
+  border: solid 5px red;
+  margin: 10px 10px;
   overflow: scroll;
   /* display: flex;
   flex-direction: row;
@@ -207,6 +207,16 @@ body {
   color: rgb(255, 255, 255);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   cursor: pointer;
+}
+
+#send-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+#send-section-wrapper {
+  display: flex;
+  margin: auto auto;
 }
 
 /* .send-icon {

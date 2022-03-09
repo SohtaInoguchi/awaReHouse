@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 
 
 export default function Chat() {
@@ -12,6 +12,7 @@ export default function Chat() {
   const [socket, setSocket] = useState();
   const [isChatOpened, setIsChatOpened] = useState(false);
 
+  // open socket io connection
   useEffect(() => {
     console.log("useeffect user");
     const newSocket = io();
@@ -19,6 +20,7 @@ export default function Chat() {
     return () => newSocket.close();
   }, []);
 
+  // For receiving message from admin
   useEffect(() => {
     if (socket == null) return;
     socket.on("send-back-message", (res) => {
@@ -57,13 +59,13 @@ export default function Chat() {
     socket.emit("send-message", chat.value);
 
     // receive response
-    socket.on("send-back-message", (res) => {
-      console.log("user chat res", res);
+    // socket.on("send-back-message", (res) => {
+      // console.log("user chat res", res);
       // const temp2 = [...receivedMessage];
       // temp2.push(res);
 
       // setReceivedMessage(temp2);
-    });
+    // });
 
     chat.value = "";
   };
@@ -102,8 +104,8 @@ export default function Chat() {
   }
 
   const renderChatBox = () => {
-    return <div id="chat-box">
-            <input id="chat" type="text" placeholder="Enter message" />
+    return <>
+          <div id="chat-box">
               <button
                 id="faq"
                 value="Where can I check the seasonal retrieval / store period?"
@@ -111,17 +113,39 @@ export default function Chat() {
               >
                 Where can I check the seasonal retrieval / store period?
               </button>
+              <button
+                id="faq"
+                value="What do I need to do to get items out of seasonal period?"
+                onClick={chatbot}
+              >
+                What do I need to do to get items out of seasonal period?
+              </button>
+              <button
+                id="faq"
+                value="Where can I check items I store?"
+                onClick={chatbot}
+              >
+                Where can I check items I store?
+              </button>
 
               {chatMessages.map((message, idx) => (
                 <div key={idx} className="messages">{message}</div>
               ))}
-            <CloseChatComponent 
-            icon={<AiFillCloseCircle 
-            size="50" 
-            onClick={toggleChatOpen}
-            className="chat-icons"
-            />}/>
+              <div id="send-section-wrapper">
+                <input id="chat" type="text" placeholder="Enter message" />
+                <SendComponent 
+                icon={<AiOutlineSend id="send-icon"/>} 
+                onClick={sendMessage}
+                />
+              </div>
           </div>
+          <CloseChatComponent 
+          icon={<AiFillCloseCircle 
+          size="50" 
+          onClick={toggleChatOpen}
+          className="chat-icons"
+          />}/>
+          </>
   }
 
   const check = (e) => {
@@ -131,9 +155,8 @@ export default function Chat() {
 
   return (
     <>
-      <br />
 
-      <input id="chat" type="text" placeholder="Enter message" />
+      {/* <input id="chat" type="text" placeholder="Enter message" />
       <button
         id="faq"
         value="Where can I check the seasonal retrieval / store period?"
@@ -141,6 +164,7 @@ export default function Chat() {
       >
         Where can I check the seasonal retrieval / store period?
       </button>
+
       <button
         id="faq"
         value="What do I need to do to get items out of seasonal period?"
@@ -154,8 +178,8 @@ export default function Chat() {
         onClick={chatbot}
       >
         Where can I check items I store?
-      </button>
-      <button onClick={(e) => check(e)}>Check</button>
+      </button> */}
+      {/* <button onClick={(e) => check(e)}>Button to Check state</button> */}
 
       {
       isChatOpened ? 
@@ -180,7 +204,7 @@ export default function Chat() {
           <p key={index}>{message}</p>
         ))}
       </div> */}
-      <button onClick={sendMessage}>Send messege</button>
+      {/* <button onClick={sendMessage}>Send messege</button> */}
     </>
   );
 }
@@ -192,4 +216,8 @@ function OpenChatComponent({ icon }) {
 function CloseChatComponent({ icon }) {
   // return <div className="chat-icons">{icon}</div>;
   return <div className="chat-icons">{icon}</div>;
+}
+
+function SendComponent({ icon }) {
+  return <div id="send-icon">{icon}</div>;
 }
