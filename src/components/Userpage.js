@@ -36,12 +36,6 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
 
-  const check = (e) => {
-    e.preventDefault();
-    console.log("isHeavy", isHeavy);
-    console.log("isfragile", isFragile);
-  }
-
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
   };
@@ -71,7 +65,7 @@ function Userpage({
 
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
-    if (!isHeavy) {
+    if (isHeavy === false) {
       setIsHeavy(true);
     } else {
       setIsHeavy(false);
@@ -79,7 +73,7 @@ function Userpage({
   }
 
   const toggleIsFragile = () => {
-    if (!isFragile) {
+    if (isFragile === false) {
       setIsFragile(true);
     } else {
       setIsFragile(false);
@@ -250,7 +244,6 @@ function Userpage({
               <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/>
               <p style={{display: 'inline'}}>Check if goods are fragile</p>
               <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
-              <button onClick={(e) => check(e)}>Check state</button>
               <br></br>
               Goods description (optional):
               <input
