@@ -37,7 +37,7 @@ function App() {
     //     console.log("items", items);
     //   }, [email]);
     // =======
-  }, [setItems]);
+  }, []);
   // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
 
   useEffect(() => {
@@ -73,6 +73,7 @@ function App() {
           mode={mode}
           items={items}
           email={email}
+          setItems={setItems}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login
