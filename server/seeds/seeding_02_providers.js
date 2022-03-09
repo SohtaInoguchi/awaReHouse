@@ -10,7 +10,8 @@ exports.seed = function(knex) {
             bank_reference:"Shinsei Bank, 540-6981117",
             emergency_contact_person:"Suga Sohta",
             emergency_contact_phone_number:"026-367-2828",
-            email:"mioriatsuga@gmail.com"
+            email:"mioriatsuga@gmail.com",
+            floor:1
           },
           {
             first_name:"Toshio",
@@ -20,7 +21,8 @@ exports.seed = function(knex) {
             bank_reference:"SMBC, 211-0227783",
             emergency_contact_person:"Masuda Ryoko",
             emergency_contact_phone_number:"025-262-6969",
-            email:"sagachisama66@softbank.co.jp"
+            email:"sagachisama66@softbank.co.jp",
+            floor:2
           },
           {
             first_name:"Tomoko",
@@ -30,7 +32,8 @@ exports.seed = function(knex) {
             bank_reference:"SMBC, 211-4505051",
             emergency_contact_person:"Saito Kenji",
             emergency_contact_phone_number:"099-353-8102",
-            email:"bana24tomochi@yahoo.co.jp"
+            email:"bana24tomochi@yahoo.co.jp",
+            floor:1
           },
           {
             first_name:"Go",
@@ -40,7 +43,8 @@ exports.seed = function(knex) {
             bank_reference:"Hokkaido Bank, 123-568-11-67",
             emergency_contact_person:"Sazuka Ue",
             emergency_contact_phone_number:"015-323-4448",
-            email:"asasasa112233@gmail.com"
+            email:"asasasa112233@gmail.com",
+            floor:2
           },
           {
             first_name:"Hiroki",
@@ -50,7 +54,8 @@ exports.seed = function(knex) {
             bank_reference:"Hokuriku Bank, 010-033-01-97",
             emergency_contact_person:"Natsume Satoshi",
             emergency_contact_phone_number:"076-272-1811",
-            email:"hnatsumehironatsu@ezweb.ne.jp"
+            email:"hnatsumehironatsu@ezweb.ne.jp",
+            floor:1
           }
       ]);
     });
