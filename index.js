@@ -118,12 +118,14 @@ app.post("/login", async (req, res) => {
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
+      user: user,
     });
   } catch (err) {
     res.json({
       boolean: false,
       first_name: "User not found",
       message: `${err}`,
+      user: user,
     });
   }
 });
