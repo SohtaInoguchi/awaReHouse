@@ -7,8 +7,10 @@ import Homepage from "./Homepage";
 import NewCustomer from "./NewCustomer";
 import Success from "./Success";
 import Subscription from "./Subscription";
+import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
+import ExtraCharge from "./ExtraCharge";
 
 function App() {
   //for user
@@ -17,20 +19,22 @@ function App() {
   const [isLogin2, setIsLogin2] = useState(false);
   const [mode, setMode] = useState("homePage");
   const [user, setUser] = useState("guest");
-  const [newCustomer, setNewCustomer] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [email, setEmail] = useState("");
-  // const socket = io();
+  // email for provider
+  const [email2, setEmail2] = useState("");
+  // const [user_provider, setUser_provider] = useState("");
 
   //Axios
   useEffect(() => {
+    console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [email]);
-
+  }, [setItems]);
+  
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -60,16 +64,31 @@ function App() {
           success={success}
           chatMessages={chatMessages}
           setChatMessages={setChatMessages}
+          setMode={setMode}
+          mode={mode}
           items={items}
+          email={email}
         />
       ) : mode === "userLogin" && !isLogin ? (
-        <Login setIsLogin={setIsLogin} setUser={setUser} setEmail={setEmail} />
+        <Login
+          setIsLogin={setIsLogin}
+          setUser={setUser}
+          setEmail={setEmail}
+          mode="user"
+        />
       ) : mode === "providerLogin" && isLogin2 ? (
-        <div>Welcome Provider </div>
+        <Providerpage user={user} />
       ) : mode === "providerLogin" && !isLogin2 ? (
-        <div>Provider Login Page</div>
+        <Login
+          setIsLogin={setIsLogin2}
+          setUser={setUser}
+          setEmail={setEmail2}
+          mode="provider"
+        />
       ) : mode === "registration" ? (
-        <NewCustomer />
+        <NewCustomer setMode={setMode} />
+      ) : mode === "extraCharge" ? (
+        <ExtraCharge user={user} items={items} />
       ) : (
         <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
       )}

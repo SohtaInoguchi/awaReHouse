@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 
-export default function Chat({ chatMessages, setChatMessages }) {
-  const inputRef = React.createRef();
-  //   const [chatMessages, setChatMessage] = useState([]);
+export default function Chat() {
+
+  const [chatMessages, setChatMessages] = useState([]);
+
+
+
+
   const [receivedMessage, setReceivedMessage] = useState([]);
-  const [aaa, setAAA] = useState([]);
+
   const [socket, setSocket] = useState();
 
   useEffect(() => {
@@ -35,25 +39,15 @@ export default function Chat({ chatMessages, setChatMessages }) {
     setChatMessages(temp);
 
     // send message
-    // socket.on("connection", () => {
     socket.emit("send-message", chat.value);
-    // })
 
     // receive response
     socket.on("send-back-message", (res) => {
       console.log("user chat res", res);
-
-      // setChatMessages(temp);
-
       const temp2 = [...receivedMessage];
       temp2.push(res);
 
       setReceivedMessage(temp2);
-
-      // socket.disconnect("send-back-message");
-      // console.log("user disconect after receive");
-      // const socketIo = io();
-      // setSocket(socketIo);
     });
 
     chat.value = "";
@@ -81,9 +75,7 @@ export default function Chat({ chatMessages, setChatMessages }) {
   return (
     <>
       <br />
-      {/* <div>{chatMessages}</div>
-      <div>{receivedMessage}</div> */}
-      {/* <input ref={inputRef} type="text" placeholder="Enter message" /> */}
+
       <input id="chat" type="text" placeholder="Enter message" />
       <button
         id="faq"
@@ -106,7 +98,7 @@ export default function Chat({ chatMessages, setChatMessages }) {
       >
         Where can I check items I store?
       </button>
-      {/* <div>{chatMessages}</div> */}
+
       <div id="sent-message">
         {chatMessages.map((message, idx) => (
           <div key={idx}>{message}</div>

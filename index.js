@@ -4,15 +4,12 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const db = require("./server/db");
-
+const bcrypt = require("bcrypt");
 const app = express();
 
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.API_KEY);
-// app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/build"));
@@ -22,13 +19,6 @@ const server = app
   .use(cors())
   .use(express.static(__dirname + "/build"))
   .listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
-
-// ----------SOCKET IO SERVER---------
-// const server = express()
-//   .use(cors())
-//   .use(express.static(__dirname + "/build"))
-//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
-// ----------SOCKET IO SERVER---------
 
 const socketIO = require("socket.io");
 
@@ -40,7 +30,7 @@ io.on("connection", (socket) => {
   socket.on("send-message", (text) => {
     console.log(`backend ${text}`);
     socket.broadcast.emit("send-back-message", text);
-    socket.on('disconnect', () => console.log('Client disconnected'));
+    socket.on("disconnect", () => console.log("Client disconnected"));
   });
 
   socket.on("bot-message", (req) => {
@@ -55,15 +45,8 @@ io.on("connection", (socket) => {
       text =
         "Please go to user page in the middle of the page, you can find it there :)";
     socket.emit("bot-send-back", text);
-    // socket.disconnect("bot-message");
   });
 });
-// socket.emit("send-back-message", "TADAAAAAAA");
-// socket.off("send-message", (text) => {
-//   socket.emit("send-back-message", "TADAAAAAAA");
-
-//   console.log(`backend ${text}`);
-// });
 
 //////////////////SOCKET IO /////////////////////////
 
@@ -73,39 +56,31 @@ app.get("/", (_, res) => {
 
 //Grabs all items
 app.post("/allItems", async (req, res) => {
-  const items = await db
-    .select("*")
-    .from("inventory")
-    .where("user_owner", req.body.email);
-  console.log(items);
-  res.send(items);
-});
-
-app.post("/test", (req, res) => {
-  const input = {
-    firstname: "Toni",
-    lastname: "Peña",
-    email: "toni@gmail.com",
-    password: "toniTheBest",
-  };
-
-  jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-    token && res.json({ token });
-  });
-});
-
-app.post("/post", authenticateToken, (req, res) => {
-  jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
-    if (err) res.sendStatus(403);
-    res.json({
-      message: "NOICE HEHEHEHEHEH",
-      data,
-    });
-  });
+  try {
+    const items = await db
+      .select("*")
+      .from("inventory")
+      .where("user_owner", req.body.email);
+    console.log(items);
+    res.send(items);
+  } catch {
+    res.send("No items found yet");
+  }
 });
 
 app.post("/login", async (req, res) => {
   try {
+    // for user
+    let user;
+    req.body.mode === "user"
+      ? (user = await db
+          .select("password", "first_name", "email")
+          .from("users")
+          .where("email", req.body.email))
+      : (user = await db
+          .select("password", "first_name", "email")
+          .from("providers")
+          .where("email", req.body.email));
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -114,66 +89,92 @@ app.post("/login", async (req, res) => {
     };
 
     // please comment out this line yet
-    // jwt.sign({ user: input }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-    //   token && res.json({ token });
-    // });
+    try {
+      const token = await jwt.sign(
+        { user: input },
+        process.env.ACCESS_TOKEN_SECRET
+      );
+    } catch (error) {
+      res.json({ from: "JWT sign", message: error });
+    }
 
-    const user = await db
-      .select("password", "first_name", "email")
-      .from("users")
-      .where("email", req.body.email)
-      .andWhere("first_name", req.body.first_name);
-
-    const boolean =
-      user.length >= 1 && input.password === user[0].password ? true : false;
+    const boolean = await bcrypt.compare(req.body.password, user[0].password);
+    try {
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+    } catch (error) {
+      res.send({ from: "cookie token", message: error });
+    }
 
     res.json({
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
     });
-  } catch {
-    res.json({ boolean: false, first_name: "User not found" });
+  } catch (err) {
+    res.json({
+      boolean: false,
+      first_name: "User not found",
+      message: `${err}`,
+    });
   }
 });
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-
+  const authHeader = req.headers.cookie.split(" ")[3];
+  console.log(`auth page`);
   console.log(authHeader);
   if (authHeader) {
-    const token = authHeader.split(" ")[1];
+    const token = authHeader.split("=")[1];
+    console.log(authHeader);
+    console.log(token);
     req.token = token;
     next();
-  }
-
-  res.sendStatus(403);
+  } else res.send(403);
 }
-
-app.get("/post", authenticateToken, (req, res) => {
-  res.send("hehehehcjodhcnae");
-});
 
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
 app.post("/create-checkout-session", async (req, res) => {
+  await console.table(req.body.name);
+  console.log("checkout page");
+  console.log(req.token);
+  console.log(req.body.name === "Storage fee");
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
   });
+  console.log(prices.data);
+
+  let mode;
+  let price;
+
+  req.body.name === "Storage fee"
+    ? (mode = "subscription")
+    : (mode = "payment");
+
+  const gotya = prices.data.filter((e) => e.product.name === req.body.name);
+  price = gotya[0].id;
+
+  console.log(req.body);
+
+  const temp = prices.data.filter((e) => e.product.name === req.body.name);
+  console.log(temp.id);
   const session = await stripe.checkout.sessions.create({
     billing_address_collection: "auto",
     line_items: [
       {
-        price: prices.data[0].id,
+        // price: "price_1KU0vXJv2BSK7V9OJLfULWxJ",
+        price: price,
         // For metered billing, do not pass quantity
         quantity: 1,
       },
     ],
-    mode: "subscription",
+    // mode: "payment",
+    mode: mode,
     success_url: `${YOUR_DOMAIN}/?success=true`,
-
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
@@ -247,4 +248,115 @@ app.post(
   }
 );
 
-/////////////////STRIPE API////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+
+// app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+
+// // io.on("connection", (socket) => {
+// //   // console.log(`backend id:${socket.id}`);
+// //   socket.on("send-message", (input) => {
+// //     console.log(input);
+// //   });
+// //   socket.emit("receive-message", "MESSAGE RECEIVED");
+// // });
+
+app.get("/users", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("users");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.get("/providers", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("providers");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const postData = req.body;
+  const salt = await bcrypt.genSalt();
+  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+  const user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password: encryptedPassword,
+    adress: req.body.adress,
+    email: req.body.email,
+    picture_file: req.body.picture_file,
+  };
+  try {
+    console.log("from here");
+    console.log(user);
+    await db("users").insert(user);
+    res.status(201).send("YEP users");
+  } catch (err) {
+    console.log("Backend server does not work - users");
+    console.error(err);
+  }
+});
+
+app.get("/inventory", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("inventory");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+// app.post("/users", async (req,res)=>{
+//   const postData = req.body
+//   try{
+//     console.log(req.body)
+//     await db("users").insert(postData)
+//   try {
+//     console.log("from here");
+//     console.log(user);
+//     await db("users").insert(user);
+//     res.status(201).send("YEP users");
+//   } catch (err) {
+//     console.log("Backend server does not work - users");
+//     console.error(err);
+//   }
+// });
+
+app.post("/providers", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("providers").insert(postData);
+    res.status(201).send("YEP providers");
+  } catch {
+    console.log("Backend server does not work - providers");
+  }
+});
+
+app.get("/users/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("users")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.post("/inventory", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("inventory").insert(postData);
+    res.status(201).send("YEP inventory");
+  } catch {
+    console.log("Backend server does not work - inventory");
+  }
+});
