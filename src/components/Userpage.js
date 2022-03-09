@@ -14,6 +14,9 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
+  setItems,
+  setListOfGoods,
+  listOfGoods
 }) {
   function retrieveData() {
     setMode("extraCharge");
@@ -101,6 +104,10 @@ function Userpage({
       });
   };
 
+  const updateItemList = () => {
+    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+  }
+
   const submit2 = (e) => {
     setDescription1("");
     setDescription2("");
@@ -109,6 +116,7 @@ function Userpage({
     e.preventDefault();
     setBoxOrderReceived(true);
     sendBoxRequest();
+    updateItemList();
   };
 
   return (
@@ -119,7 +127,7 @@ function Userpage({
       <br></br>
       Welcome back {user},<br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
-      <ol>
+      {listOfGoods === true ? <ol>
         List of goods currently stored at awaReHouse locations:
         {items.map((item) => {
           return (
@@ -139,7 +147,7 @@ function Userpage({
             </ul>
           );
         })}
-      </ol>
+      </ol> : <></>}
       <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
         Add Storage Items
       </button>

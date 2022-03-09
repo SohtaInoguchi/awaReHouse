@@ -28,13 +28,19 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   // const [user_provider, setUser_provider] = useState("");
+  const [listOfGoods, setListOfGoods] = useState("");
 
   //Axios
   useEffect(() => {
     console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [setItems]);
-  
+    // <<<<<<< HEAD
+    //     console.log("items", items);
+    //   }, [email]);
+    // =======
+  }, []);
+  // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
+
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -68,6 +74,9 @@ function App() {
           mode={mode}
           items={items}
           email={email}
+          setItems={setItems}
+          setListOfGoods={setListOfGoods}
+          listOfGoods={listOfGoods}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login
