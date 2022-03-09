@@ -75,13 +75,13 @@ app.post("/login", async (req, res) => {
       let user;
       req.body.mode === "user"
         ? (user = await db
-            .select("Password", "First_name", "Email")
+            .select("password", "first_name", "email")
             .from("users")
-            .where("Email", req.body.email))
+            .where("mail", req.body.email))
         : (user = await db
-            .select("Password", "First_name", "Email")
+            .select("password", "first_name", "email")
             .from("providers")
-            .where("Email", req.body.email));
+            .where("mail", req.body.email));
 
       const input = {
         firstname: req.body.first_name,
