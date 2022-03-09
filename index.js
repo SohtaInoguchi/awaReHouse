@@ -81,7 +81,6 @@ app.post("/login", async (req, res) => {
           .select("password", "first_name", "email")
           .from("providers")
           .where("email", req.body.email));
-
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -100,10 +99,13 @@ app.post("/login", async (req, res) => {
     }
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-
-    res.cookie("token", token, {
-      httpOnly: true,
-    });
+    try {
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+    } catch (error) {
+      res.send({ from: "cookie token", message: error });
+    }
 
     res.json({
       boolean,
