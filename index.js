@@ -82,9 +82,6 @@ app.post("/login", async (req, res) => {
           .from("providers")
           .where("email", req.body.email));
 
-    console.log("user is here");
-    console.log(req.body);
-    console.log(`login backend`);
     const input = {
       firstname: req.body.first_name,
       lastname: req.body.last_name,
@@ -93,32 +90,16 @@ app.post("/login", async (req, res) => {
     };
 
     // please comment out this line yet
-    const token = await jwt.sign(
-      { user: input },
-      process.env.ACCESS_TOKEN_SECRET
-    );
-    console.log(`token is below`);
-    console.log(token);
+    try {
+      const token = await jwt.sign(
+        { user: input },
+        process.env.ACCESS_TOKEN_SECRET
+      );
+    } catch (error) {
+      res.json({ from: "JWT sign", message: error });
+    }
 
-    // const user = await db
-    //   .select("password", "first_name", "email")
-    //   .from("users")
-    //   .where("email", req.body.email)
-    //   .andWhere("first_name", req.body.first_name);
-
-    // const boolean =
-    // user.length >= 1 && input.password === user[0].password ? true : false;
-    // ? true
-    // : false;
-    console.log("here");
-    console.log(user);
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    console.log(req.body.password);
-    console.log(user[0].password);
-    console.log(await bcrypt.compare(req.body.password, user[0].password));
-
-    console.log(`is it working?`);
-    console.log(boolean);
 
     res.cookie("token", token, {
       httpOnly: true,
