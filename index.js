@@ -72,44 +72,44 @@ app.post("/login", async (req, res) => {
   try {
     // for user
     let user;
-    try {
-      req.body.mode === "user"
-        ? (user = await db
-            .select("password", "first_name", "email")
-            .from("users")
-            .where("email", req.body.email))
-        : (user = await db
-            .select("password", "first_name", "email")
-            .from("providers")
-            .where("email", req.body.email));
+    // try {
+    req.body.mode === "user"
+      ? (user = await db
+          .select("password", "first_name", "email")
+          .from("users")
+          .where("email", req.body.email))
+      : (user = await db
+          .select("password", "first_name", "email")
+          .from("providers")
+          .where("email", req.body.email));
 
-      const input = {
-        firstname: req.body.first_name,
-        lastname: req.body.last_name,
-        email: req.body.email,
-        password: req.body.password,
-      };
-    } catch (error) {
-      res.send({ message: error, from: "db side" });
-    }
+    const input = {
+      firstname: req.body.first_name,
+      lastname: req.body.last_name,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    // } catch (error) {
+    // res.send({ message: error, from: "db side" });
+    // }
 
-    try {
-      const token = await jwt.sign(
-        { user: input },
-        process.env.ACCESS_TOKEN_SECRET
-      );
-    } catch (error) {
-      res.json({ from: "JWT sign", message: error });
-    }
+    // try {
+    const token = await jwt.sign(
+      { user: input },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    // } catch (error) {
+    // // res.json({ from: "JWT sign", message: error });
+    // }
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    try {
-      res.cookie("token", token, {
-        httpOnly: true,
-      });
-    } catch (error) {
-      res.send({ from: "cookie token", message: error });
-    }
+    // try {
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+    // } catch (error) {
+    // res.send({ from: "cookie token", message: error });
+    // }
 
     res.json({
       boolean,
