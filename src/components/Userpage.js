@@ -14,6 +14,7 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
+  setItems
 }) {
   function retrieveData() {
     setMode("extraCharge");
@@ -101,6 +102,10 @@ function Userpage({
       });
   };
 
+  const updateItemList = () => {
+    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+  }
+
   const submit2 = (e) => {
     setDescription1("");
     setDescription2("");
@@ -109,6 +114,7 @@ function Userpage({
     e.preventDefault();
     setBoxOrderReceived(true);
     sendBoxRequest();
+    updateItemList();
   };
 
   return (

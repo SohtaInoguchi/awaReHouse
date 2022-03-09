@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Homepage({ setMode, setNewCustomer }) {
+export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
   return (
     <div>
       <div className="homepageContainer">
@@ -37,7 +37,11 @@ export default function Homepage({ setMode, setNewCustomer }) {
           <div>
           <br></br>
             Want to become a user? <br></br>
-            <p className="signup" style={{cursor:"pointer"}} onClick={() => setMode("registration")}>SIGN UP</p>
+            <p className="signup" style={{cursor:"pointer"}} onClick={
+              () => { 
+                setMode("registration")
+              updateItemList();
+            }}>SIGN UP</p>
           </div>
         </div>
         <div className="homeProvider">

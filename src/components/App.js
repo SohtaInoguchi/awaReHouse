@@ -33,8 +33,13 @@ function App() {
   useEffect(() => {
     console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, [setItems]);
-  
+    // <<<<<<< HEAD
+    //     console.log("items", items);
+    //   }, [email]);
+    // =======
+  }, []);
+  // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
+
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -68,6 +73,7 @@ function App() {
           mode={mode}
           items={items}
           email={email}
+          setItems={setItems}
         />
       ) : mode === "userLogin" && !isLogin ? (
         <Login
