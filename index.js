@@ -90,42 +90,37 @@ app.post("/login", async (req, res) => {
         password: req.body.password,
       };
     } catch (error) {
-      // res.send({ message: error, from: "db side" });
-      console.error(error);
+      res.send({ message: error, from: "db side" });
     }
-    console.log("----- here ----");
-    console.log(user);
-    // please comment out this line yet
-    // try {
-    //   const token = await jwt.sign(
-    //     { user: input },
-    //     process.env.ACCESS_TOKEN_SECRET
-    //   );
-    // } catch (error) {
-    //   res.json({ from: "JWT sign", message: error });
-    // }
+
+    try {
+      const token = await jwt.sign(
+        { user: input },
+        process.env.ACCESS_TOKEN_SECRET
+      );
+    } catch (error) {
+      res.json({ from: "JWT sign", message: error });
+    }
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
-    // try {
-    //   res.cookie("token", token, {
-    //     httpOnly: true,
-    //   });
-    // } catch (error) {
-    //   res.send({ from: "cookie token", message: error });
-    // }
+    try {
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+    } catch (error) {
+      res.send({ from: "cookie token", message: error });
+    }
 
     res.json({
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
-      user: user,
     });
   } catch (err) {
     res.json({
       boolean: false,
       first_name: "User not found",
       message: `${err}`,
-      user: user,
     });
   }
 });
