@@ -212,6 +212,9 @@ body {
 #send-icon {
   width: 2rem;
   height: 2rem;
+  border-radius: 9999px;
+  background-color: rgb(11, 81, 114);
+  color: rgb(255, 255, 255);
 }
 
 #send-section-wrapper {

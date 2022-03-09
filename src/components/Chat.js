@@ -25,9 +25,11 @@ export default function Chat() {
     if (socket == null) return;
     socket.on("send-back-message", (res) => {
       console.log("user chat res", res);
+      const receivedMessageObj = {receiveOrSent: "received", message: res};
       // const temp2 = [...receivedMessage];
       const temp2 = [...chatMessages];
-      temp2.push(res);
+      // temp2.push(res);
+      temp2.push(receivedMessageObj);
       // setReceivedMessage(temp2);
       setChatMessages(temp2);
     });
@@ -40,8 +42,10 @@ export default function Chat() {
     socket.on("bot-send-back", (res) => {
       console.log("user chat res", res);
       // const temp2 = [...receivedMessage];
+      const receivedMessageObj = {receiveOrSent: "received", message: res};
       const temp2 = [...chatMessages];
-      temp2.push(res);
+      // temp2.push(res);
+      temp2.push(receivedMessageObj);
       // setReceivedMessage(temp2);
       setChatMessages(temp2);
     });
@@ -50,49 +54,25 @@ export default function Chat() {
 
   const sendMessage = () => {
     const chat = document.getElementById("chat");
-
     let temp = [...chatMessages];
-    temp.push(chat.value);
+    const sentMessageObj = {receiveOrSent: "sent", message: chat.value};
+    // temp.push(chat.value);
+    temp.push(sentMessageObj);
     setChatMessages(temp);
-
-    // send message
-    socket.emit("send-message", chat.value);
-
-    // receive response
-    // socket.on("send-back-message", (res) => {
-      // console.log("user chat res", res);
-      // const temp2 = [...receivedMessage];
-      // temp2.push(res);
-
-      // setReceivedMessage(temp2);
-    // });
-
+    // socket.emit("send-message", chat.value);
+    socket.emit("send-message", sentMessageObj.message);
     chat.value = "";
   };
 
   function chatbot(e) {
     const faq = e.target.value;
-    // const botSocket = io();
-
     let temp = [...chatMessages];
-    temp.push(faq);
+    const sentMessageObj = {receiveOrSent: "sent", message: faq};
+    // temp.push(faq);
+    temp.push(sentMessageObj);
     setChatMessages(temp);
     console.log(faq);
-    // botSocket.emit("bot-message", faq);
-    // botSocket.on("bot-send-back", (res) => {
     socket.emit("bot-message", faq);
-    // socket.on("bot-send-back", (res) => {
-      // console.log(res);
-      // temp.push(res);
-      // setChatMessages(temp);
-      // const temp2 = [...receivedMessage];
-      // const temp2 = [...chatMessages];
-      // temp2.push(res);
-
-      // setReceivedMessage(temp2);
-    //   setChatMessages(temp2);
-    //   botSocket.disconnect("bot-message");
-    // });
   }
 
   const toggleChatOpen = () => {
@@ -128,14 +108,17 @@ export default function Chat() {
                 Where can I check items I store?
               </button>
 
+              {/* {chatMessages.map((message, idx) => (
+                <div key={idx} className="messages">{message}</div> */}
               {chatMessages.map((message, idx) => (
-                <div key={idx} className="messages">{message}</div>
+                <div key={idx} className="messages">{message.message}</div>
               ))}
               <div id="send-section-wrapper">
                 <input id="chat" type="text" placeholder="Enter message" />
                 <SendComponent 
-                icon={<AiOutlineSend id="send-icon"/>} 
-                onClick={sendMessage}
+                icon={<AiOutlineSend 
+                  id="send-icon"
+                  onClick={sendMessage}/>} 
                 />
               </div>
           </div>
@@ -150,36 +133,12 @@ export default function Chat() {
 
   const check = (e) => {
     e.preventDefault();
-    console.log("chat opened", isChatOpened);
+    console.log("chat opened", chatMessages);
   }
 
   return (
     <>
-
-      {/* <input id="chat" type="text" placeholder="Enter message" />
-      <button
-        id="faq"
-        value="Where can I check the seasonal retrieval / store period?"
-        onClick={chatbot}
-      >
-        Where can I check the seasonal retrieval / store period?
-      </button>
-
-      <button
-        id="faq"
-        value="What do I need to do to get items out of seasonal period?"
-        onClick={chatbot}
-      >
-        What do I need to do to get items out of seasonal period?
-      </button>
-      <button
-        id="faq"
-        value="Where can I check items I store?"
-        onClick={chatbot}
-      >
-        Where can I check items I store?
-      </button> */}
-      {/* <button onClick={(e) => check(e)}>Button to Check state</button> */}
+      <button onClick={(e) => check(e)}>Button to Check state</button>
 
       {
       isChatOpened ? 
@@ -193,28 +152,16 @@ export default function Chat() {
       className="chat-icons"
       /> }/>
       }
-
-      {/* <div id="chat-box">
-        {chatMessages.map((message, idx) => (
-          <div key={idx} className="messages">{message}</div>
-        ))}
-      </div> */}
-      {/* <div id="received-message">
-        {receivedMessage.map((message, index) => (
-          <p key={index}>{message}</p>
-        ))}
-      </div> */}
-      {/* <button onClick={sendMessage}>Send messege</button> */}
     </>
   );
 }
 
+// Icon components
 function OpenChatComponent({ icon }) {
   return <div className="chat-icons" >{icon}</div>;
 }
 
 function CloseChatComponent({ icon }) {
-  // return <div className="chat-icons">{icon}</div>;
   return <div className="chat-icons">{icon}</div>;
 }
 
