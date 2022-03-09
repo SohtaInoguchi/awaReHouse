@@ -71,17 +71,17 @@ app.post("/allItems", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     // for user
+    let user;
     try {
-      let user;
       req.body.mode === "user"
         ? (user = await db
             .select("password", "first_name", "email")
             .from("users")
-            .where("mail", req.body.email))
+            .where("email", req.body.email))
         : (user = await db
             .select("password", "first_name", "email")
             .from("providers")
-            .where("mail", req.body.email));
+            .where("email", req.body.email));
 
       const input = {
         firstname: req.body.first_name,
@@ -91,6 +91,7 @@ app.post("/login", async (req, res) => {
       };
     } catch (error) {
       res.send({ message: error, from: "db side" });
+      // console.error(error);
     }
 
     // please comment out this line yet
@@ -119,7 +120,7 @@ app.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.json({
-      boolean,
+      boolean: false,
       first_name: "User not found",
       message: `${err}`,
     });
