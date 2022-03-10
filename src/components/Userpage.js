@@ -128,7 +128,7 @@ const randomValue = Math.floor(Math.random()*max);
         declared_content_one: description1,
         declared_content_two: description2,
         declared_content_three: description3,
-        storage_location: storagePlaces[randomValue],
+        storage_location: `${storagePlaces[randomValue].adress}`,
         weight_in_kg: "3.41",
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
