@@ -4,6 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import { OneFiftyStripe } from "./OneFiftyStripe";
 
 function Userpage({
   user,
@@ -247,6 +248,7 @@ function Userpage({
             The boxes will be sent to your registered address: {address}
             <br></br>
             <input
+            //HERE IS WHERE YOU THEN CALL a func in extra charge.  Which then makes the post
               type="submit"
               value="Submit"
               style={{ cursor: "pointer" }}
@@ -267,6 +269,8 @@ function Userpage({
       {boxOrderReceived === true ? (
         <h4>
           {" "}
+          {/* HERE IS WHERE YOU ADD STRIPE */}
+          <OneFiftyStripe/>
           Thank you, your order is on its way. You can submit another request or
           click on "Go Back" to exit this section
         </h4>

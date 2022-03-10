@@ -11,6 +11,7 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+import { OneFiftyStripe } from "./OneFiftyStripe";
 
 function App() {
   //for user

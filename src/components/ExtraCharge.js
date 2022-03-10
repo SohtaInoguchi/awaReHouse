@@ -64,7 +64,9 @@ export default function ExtraCharge({ user, items }) {
         {isSelected ? <div>You selected {selectedDateString}</div> : <div>Date not selected</div>}
 
         <h2>It will cost you</h2>
+        //HERE IS WHERE you want to set it up
       <h2>JPY15000</h2>
+      
       <form action="/create-checkout-session" method="POST">
         <input type="hidden" name="name" value="Extra retrieval" />
         <button id="checkout-and-portal-button" type="submit">
