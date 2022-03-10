@@ -4,7 +4,6 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import e from "cors";
 
 function Userpage({
   user,
@@ -15,7 +14,7 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
-  setItems
+  setItems,
 }) {
   function retrieveData() {
     setMode("extraCharge");
@@ -34,7 +33,7 @@ function Userpage({
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
   const [boxOrderReceived, setBoxOrderReceived] = useState(false);
-  const [displayTable, setDisplayTable] = useState (false);
+  const [displayTable, setDisplayTable] = useState(false);
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
 
@@ -72,7 +71,7 @@ function Userpage({
     } else {
       setIsHeavy(false);
     }
-  }
+  };
 
   const toggleIsFragile = () => {
     if (isFragile === false) {
@@ -80,7 +79,7 @@ function Userpage({
     } else {
       setIsFragile(false);
     }
-  }
+  };
 
   useEffect(() => {
     retrieveAddress();
@@ -115,7 +114,7 @@ function Userpage({
         expected_retrieval_season: "autumn",
         user_owner: email,
         fragile: isFragile,
-        heavy: isHeavy
+        heavy: isHeavy,
         // send heavy and fragile boolean
       })
       .then(() => {
@@ -128,7 +127,7 @@ function Userpage({
 
   const updateItemList = () => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }
+  };
 
   const submit2 = (e) => {
     setDescription1("");
@@ -141,10 +140,10 @@ function Userpage({
     updateItemList();
   };
 
-  const retrieveList=()=>{
+  const retrieveList = () => {
     updateItemList();
-    setDisplayTable(!displayTable)
-  }
+    setDisplayTable(!displayTable);
+  };
 
   return (
     <div>
@@ -157,27 +156,31 @@ function Userpage({
       <br></br>
       <button onClick={retrieveList}>LIST OF STORED GOODS</button>
       <br></br>
-      {displayTable === true ? <ol>
-        List of goods currently stored at awaReHouse locations:
-        {items.map((item) => {
-          return (
-            <ul key={item.box_id}>
-              <li>{item.declared_content_one}</li>
+      {displayTable === true ? (
+        <ol>
+          List of goods currently stored at awaReHouse locations:
+          {items.map((item) => {
+            return (
+              <ul key={item.box_id}>
+                <li>{item.declared_content_one}</li>
 
-              {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two}</li>
-              ) : (
-                <></>
-              )}
-              {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three}</li>
-              ) : (
-                <></>
-              )}
-            </ul>
-          );
-        })}
-      </ol> : <></>}
+                {item.declared_content_two !== "" ? (
+                  <li>{item.declared_content_two}</li>
+                ) : (
+                  <></>
+                )}
+                {item.declared_content_three !== "" ? (
+                  <li>{item.declared_content_three}</li>
+                ) : (
+                  <></>
+                )}
+              </ul>
+            );
+          })}
+        </ol>
+      ) : (
+        <></>
+      )}
       <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
         Add Storage Items
       </button>
@@ -255,10 +258,18 @@ function Userpage({
                 value={description1}
                 onChange={createDescription1}
               />
-              <p style={{display: 'inline'}}>Check if goods are heavy</p>
-              <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/>
-              <p style={{display: 'inline'}}>Check if goods are fragile</p>
-              <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
+              <p style={{ display: "inline" }}>Check if goods are heavy</p>
+              <input
+                type="checkbox"
+                className="isHeavy"
+                onChange={toggleIsHeavy}
+              />
+              <p style={{ display: "inline" }}>Check if goods are fragile</p>
+              <input
+                type="checkbox"
+                className="isFragile"
+                onChange={toggleIsFragile}
+              />
               <br></br>
               Goods description (optional):
               <input

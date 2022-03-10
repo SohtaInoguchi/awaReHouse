@@ -1,12 +1,13 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Success({ sessionId, message }) {
+  let navigate = useNavigate();
   return (
     <div>
       <section>
         <div className="product Box-root">
           <div className="description Box-root">
-            <h3>Subscription to starter plan successful!</h3>
+            <h3>Thanks for using awaReHouse</h3>
             <br />
             <h3>{message}</h3>
           </div>
@@ -20,6 +21,7 @@ export default function Success({ sessionId, message }) {
           />
         </form>
       </section>
+      <button onClick={() => navigate("/user")}>Go back to user page</button>
     </div>
   );
 }

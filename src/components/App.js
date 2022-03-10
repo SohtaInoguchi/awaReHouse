@@ -90,6 +90,8 @@ function App() {
             />
           }
         />
+        <Route path="/provider" element={<Providerpage user={user} />} />
+
         <Route
           path="/login/user"
           element={
@@ -124,6 +126,7 @@ function App() {
             />
           }
         />
+        <Route path="success" element={<Success message={message} />} />
       </Routes>
     </Router>
     // <div>

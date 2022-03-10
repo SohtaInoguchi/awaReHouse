@@ -30,7 +30,9 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
                 setIsLogin(res.data.boolean);
                 setUser(res.data.first_name);
                 setEmail(res.data.email);
-                if (res.data.boolean) navigate("/user");
+                if (res.data.boolean && mode === "user") navigate("/user");
+                else if (res.data.boolean && mode === "provider")
+                  navigate("/provider");
               });
           }}
         >
