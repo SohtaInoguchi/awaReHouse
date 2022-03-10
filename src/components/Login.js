@@ -22,6 +22,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
                 mode,
               })
               .then((res) => {
+                console.log(res);
                 setIsLogin(res.data.boolean);
                 setUser(res.data.first_name);
                 setEmail(res.data.email);
