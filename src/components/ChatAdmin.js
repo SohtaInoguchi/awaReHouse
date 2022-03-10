@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
@@ -11,6 +11,12 @@ export default function Chat() {
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [socket, setSocket] = useState();
   const [isChatOpened, setIsChatOpened] = useState(false);
+  const lastMessageRef = useRef();
+  const setRef = useCallback(node => {
+    if (node){
+      node.scrollIntoView({ smooth:true })
+    }
+  }, []);
 
   // open socket io connection
   useEffect(() => {
@@ -62,6 +68,7 @@ export default function Chat() {
     // socket.emit("send-message", chat.value);
     socket.emit("send-message", sentMessageObj.message);
     chat.value = "";
+    scrollToBottom();
   };
 
   
@@ -80,8 +87,12 @@ export default function Chat() {
                 <div key={idx} className="messages">{message}</div> */}
                 
               <div className="message-wrapper">
-                {chatMessages.map((message, idx) => (
-                  <div key={idx} 
+                {chatMessages.map((message, idx) => {
+                  const isLastMessage = chatMessages.length === idx;
+                return (
+                  <div 
+                  ref={isLastMessage ? setRef : null}
+                  key={idx} 
                   className={message.receiveOrSent === "botMessageSent" ? 
                   "bot-message-sent" : 
                   message.receiveOrSent === "botMessageReceived" ? 
@@ -90,7 +101,7 @@ export default function Chat() {
                   "sent-messages" : "messages"}>
                     {message.message}
                   </div>
-                ))}
+                )})}
                 <div id="send-section-wrapper">
                   <input id="chat" type="text" placeholder="Enter message" />
                   <SendComponent 
@@ -112,8 +123,8 @@ export default function Chat() {
 
   const scrollToBottom = () => {
     const chatBox = document.getElementById('chat-box');
-    chatBox.scrollTop = chatBox.scrollHeight;
-
+    // chatBox.scrollTop = chatBox.scrollHeight;
+    chatBox.scrollIntoView({block: "end"});
     console.log(chatBox);
   }
 
