@@ -119,7 +119,7 @@ useEffect(()=>{
   possibleStoragelocations()
 },[])
 
-const max = storagePlaces.length-1;
+const max = storagePlaces.length;
 const randomValue = Math.floor(Math.random()*max);
 
   const sendBoxRequest = () => {
