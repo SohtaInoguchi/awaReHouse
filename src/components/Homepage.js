@@ -72,7 +72,6 @@ export default function Homepage({
                   className="signup"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    updateItemList();
                     navigate("/signup/user");
                   }}
                 >

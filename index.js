@@ -50,12 +50,8 @@ io.on("connection", (socket) => {
 
 //////////////////SOCKET IO /////////////////////////
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
-
 //Grabs all items
-app.post("/allItems", async (req, res) => {
+app.post("/allItems", authenticateToken, async (req, res) => {
   try {
     const items = await db
       .select("*")
