@@ -83,7 +83,7 @@ function App() {
           mode="user"
         />
       ) : mode === "providerLogin" && isLogin2 ? (
-        <Providerpage user={user} />
+        <Providerpage user={user} items={items} />
       ) : mode === "providerLogin" && !isLogin2 ? (
         <Login
           setIsLogin={setIsLogin2}
