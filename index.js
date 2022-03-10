@@ -50,10 +50,6 @@ io.on("connection", (socket) => {
 
 //////////////////SOCKET IO /////////////////////////
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
-
 //Grabs all items
 app.post("/allItems", async (req, res) => {
   try {
@@ -85,7 +81,6 @@ app.post("/login", async (req, res) => {
 
     const input = {
       firstname: req.body.first_name,
-      lastname: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     };

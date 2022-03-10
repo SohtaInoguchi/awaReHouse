@@ -32,6 +32,8 @@ export default function Homepage({
       ) : (
         <div>
           {" "}
+          <div className="toni">Toni</div>
+          <div className="bg-red-500 text-yellow-300">jeje</div>
           <div className="homepageContainer">
             <div className="containerHomeLeft">
               <img
@@ -72,7 +74,6 @@ export default function Homepage({
                   className="signup"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    updateItemList();
                     navigate("/signup/user");
                   }}
                 >
