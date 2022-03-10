@@ -35,17 +35,18 @@ function Providerpage({ user, email2 }) {
     }
   }
 
+  useEffect(()=>{
+    retrieveProviderAddress()
+  },[])
+
   const retrieveProviderItems = (req,res) => {
     axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
   }
 
 
   useEffect(()=>{
-    retrieveProviderAddress()
-    console.log(providerAddress)
     retrieveProviderItems()
-    console.log(providerItems)
-  },[])
+  },[displayProviderTable])
 
   
 
@@ -63,7 +64,7 @@ function Providerpage({ user, email2 }) {
         {providerItems.map((item, idx) => {
           return (
             <ul key={idx}>
-              <li key={`${idx}d`}> Box {item.box_id}, with a recorded weight of {item.weight_in_kg}kg, is currently stored on floor A. expected to be retrieved in {item.expected_retrieval_season}.</li>
+              <li key={`${idx}d`}> Box: {item.box_id} Weight: {item.weight_in_kg}kg Storage location: floor 1 Should be retrieved in {item.expected_retrieval_season}.</li>
 
               {item.fragile === true ? (
                 <li key={`${idx}e`}> Box {item.box_id} is recorded as "fragile" </li>
