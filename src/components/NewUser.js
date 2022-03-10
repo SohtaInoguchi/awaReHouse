@@ -5,15 +5,11 @@ import Compress from "react-image-file-resizer";
 
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
-  const [providerFirstName, setProviderFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [providerLastName, setProviderLastName] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [providerPassword, setProviderPassword] = useState("");
   const [userAddress, setUserAddress] = useState("");
-  const [providerAddress, setProviderAddress] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [providerEmail, setProviderEmail] = useState("");
+
   const [picValues, setPicValues] = useState({
     imagePreviewUrl: "",
     picFile: null,
@@ -22,10 +18,7 @@ export default function NewUser({ setMode }) {
     imagePreviewUrl: "",
     picFile: null,
   });
-  const [providerBankReference, setProviderBankReference] = useState("");
-  const [providerEmergencyContact, setProviderEmergencyContact] = useState("");
-  const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
-    useState("");
+
   const [registrationDone, setRegistrationDone] = useState(false);
 
   const createFirstName = (e) => {
@@ -64,22 +57,6 @@ export default function NewUser({ setMode }) {
     );
   };
 
-  const pictureStorageHandler = (e) => {
-    const file = e.target.files[0];
-    const output = Compress.imageFileResizer(
-      file,
-      480,
-      480,
-      "JPEG",
-      70,
-      0,
-      (uri) => {
-        setProviderPicValues(uri);
-      },
-      "base64"
-    );
-  };
-
   const sendUser = () => {
     axios
       .post("/users", {
@@ -98,36 +75,9 @@ export default function NewUser({ setMode }) {
       });
   };
 
-  const sendProvider = () => {
-    axios
-      .post("/providers", {
-        first_name: providerFirstName,
-        last_name: providerLastName,
-        password: providerPassword,
-        adress: providerAddress,
-        email: providerEmail,
-        bank_reference: providerBankReference,
-        emergency_contact_person: providerEmergencyContact,
-        emergency_contact_phone_number: providerEmergencyContactPhone,
-        picture_file: providerPicValues,
-      })
-      .then(() => {
-        console.log("Your database has been updated!");
-      })
-      .catch(function (error) {
-        console.log("NOPE! Provider Data NOT sent");
-      });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     sendUser();
-    setRegistrationDone(true);
-  };
-
-  const handleProviderSubmit = (e) => {
-    e.preventDefault();
-    sendProvider();
     setRegistrationDone(true);
   };
 

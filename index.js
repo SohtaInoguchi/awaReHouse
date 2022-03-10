@@ -242,18 +242,6 @@ app.post(
   }
 );
 
-/////////////////STRIPE API/////////////////////////////
-
-// app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
-
-// // io.on("connection", (socket) => {
-// //   // console.log(`backend id:${socket.id}`);
-// //   socket.on("send-message", (input) => {
-// //     console.log(input);
-// //   });
-// //   socket.emit("receive-message", "MESSAGE RECEIVED");
-// // });
-
 app.get("/users", async (req, res) => {
   try {
     const allData = await db.select("*").from("users");
@@ -273,7 +261,6 @@ app.get("/providers", async (req, res) => {
 });
 
 app.post("/users", async (req, res) => {
-  const postData = req.body;
   const salt = await bcrypt.genSalt();
   const encryptedPassword = await bcrypt.hash(req.body.password, salt);
   const user = {
@@ -304,30 +291,28 @@ app.get("/inventory", async (req, res) => {
   }
 });
 
-// app.post("/users", async (req,res)=>{
-//   const postData = req.body
-//   try{
-//     console.log(req.body)
-//     await db("users").insert(postData)
-//   try {
-//     console.log("from here");
-//     console.log(user);
-//     await db("users").insert(user);
-//     res.status(201).send("YEP users");
-//   } catch (err) {
-//     console.log("Backend server does not work - users");
-//     console.error(err);
-//   }
-// });
-
 app.post("/providers", async (req, res) => {
-  const postData = req.body;
+  const salt = await bcrypt.genSalt();
+  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+  const user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password: encryptedPassword,
+    adress: req.body.adress,
+    email: req.body.email,
+    bank_reference: req.body.bank_reference,
+    emergency_contact_person: req.body.emergency_contact_person,
+    emergency_contact_phone_number: req.body.emergency_contact_phone_number,
+    picture_file: req.body.picture_file,
+  };
   try {
-    console.log(req.body);
-    await db("providers").insert(postData);
-    res.status(201).send("YEP providers");
-  } catch {
-    console.log("Backend server does not work - providers");
+    console.log("from here");
+    console.log(user);
+    await db("providers").insert(user);
+    res.status(201).send("YEP users");
+  } catch (err) {
+    console.log("Backend server does not work - users");
+    console.error(err);
   }
 });
 

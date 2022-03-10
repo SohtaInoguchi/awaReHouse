@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
 
 export default function NerCustomer({ setMode }) {
-  const [userFirstName, setUserFirstName] = useState("");
   const [providerFirstName, setProviderFirstName] = useState("");
-  const [userLastName, setUserLastName] = useState("");
   const [providerLastName, setProviderLastName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
   const [providerPassword, setProviderPassword] = useState("");
-  const [userAddress, setUserAddress] = useState("");
   const [providerAddress, setProviderAddress] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [providerEmail, setProviderEmail] = useState("");
-  const [picValues, setPicValues] = useState({
-    imagePreviewUrl: "",
-    picFile: null,
-  });
   const [providerPicValues, setProviderPicValues] = useState({
     imagePreviewUrl: "",
     picFile: null,
@@ -28,40 +19,20 @@ export default function NerCustomer({ setMode }) {
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
 
-  const createFirstName = (e) => {
-    setUserFirstName(e.target.value);
-  };
-
   const createProviderFirstName = (e) => {
     setProviderFirstName(e.target.value);
-  };
-
-  const createLastName = (e) => {
-    setUserLastName(e.target.value);
   };
 
   const createProviderLastName = (e) => {
     setProviderLastName(e.target.value);
   };
 
-  const createPassword = (e) => {
-    setUserPassword(e.target.value);
-  };
-
   const createProviderPassword = (e) => {
     setProviderPassword(e.target.value);
   };
 
-  const createAddress = (e) => {
-    setUserAddress(e.target.value);
-  };
-
   const createProviderAddress = (e) => {
     setProviderAddress(e.target.value);
-  };
-
-  const createEmail = (e) => {
-    setUserEmail(e.target.value);
   };
 
   const createProviderEmail = (e) => {
@@ -80,22 +51,6 @@ export default function NerCustomer({ setMode }) {
     setProviderEmergencyContactPhone(e.target.value);
   };
 
-  const pictureHandler = (e) => {
-    const file = e.target.files[0];
-    const output = Compress.imageFileResizer(
-      file,
-      480,
-      480,
-      "JPEG",
-      70,
-      0,
-      (uri) => {
-        setPicValues(uri);
-      },
-      "base64"
-    );
-  };
-
   const pictureStorageHandler = (e) => {
     const file = e.target.files[0];
     const output = Compress.imageFileResizer(
@@ -110,24 +65,6 @@ export default function NerCustomer({ setMode }) {
       },
       "base64"
     );
-  };
-
-  const sendUser = () => {
-    axios
-      .post("/users", {
-        first_name: userFirstName,
-        last_name: userLastName,
-        password: userPassword,
-        adress: userAddress,
-        email: userEmail,
-        picture_file: picValues,
-      })
-      .then(() => {
-        console.log("Your database has been updated!");
-      })
-      .catch(function (error) {
-        console.log("NOPE! User Data NOT sent");
-      });
   };
 
   const sendProvider = () => {
