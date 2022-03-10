@@ -6,12 +6,12 @@ import Login from "./Login";
 import Homepage from "./Homepage";
 import NewUser from "./NewUser";
 import NewProvider from "./NewProvider";
-import Success from "./Success";
 import Subscription from "./Subscription";
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,7 +19,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import Cancel from "./Cancel";
+
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -111,8 +111,7 @@ function App() {
             />
           }
         />
-        <Route path="/?success=true" element={<Success message={message} />} />
-        <Route path="/?canceled=true" element={<Cancel />} />
+
         <Route
           path="extra-charge"
           element={<ExtraCharge user={user} items={items} />}

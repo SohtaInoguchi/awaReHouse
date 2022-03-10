@@ -152,7 +152,7 @@ function Userpage({
 
   const submit2 = (e) => {
     e.preventDefault();
-    updateItemList()
+    updateItemList();
     setDescription1("");
     setDescription2("");
     setDescription3("");
@@ -167,39 +167,59 @@ function Userpage({
 
   return (
     <div>
-      Welcome back {user},<br></br>
+      Welcome back {user}
+      <br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <br></br>
-      <button onClick={()=>{
-        updateItemList();
-        setDisplayTable(true);
-        }}>LIST OF STORED GOODS</button>
+      <button
+        onClick={() => {
+          updateItemList();
+          setDisplayTable(true);
+        }}
+      >
+        LIST OF STORED GOODS
+      </button>
       <br></br>
-      {displayTable === true ? <ol>
-        List of goods currently stored at awaReHouse locations:
-        {items.map((item) => {
-          return (
-            <ul>
-              <li>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
+      {displayTable === true ? (
+        <ol>
+          List of goods currently stored at awaReHouse locations:
+          {items.map((item) => {
+            return (
+              <ul>
+                <li>
+                  {item.declared_content_one} in box number {item.box_id}{" "}
+                  {item.fragile === true ? `(fragile)` : ``}{" "}
+                  {item.heavy === true ? `(heavy)` : ``}
+                </li>
 
-              {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two} in box number {item.box_id} </li>
-              ) : (
-                <></>
-              )}
-              {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three} in box number {item.box_id}</li>
-              ) : (
-                <></>
-              )}
-            </ul>
-          );
-        })}
-      </ol> : <></>}
-      <button style={{ cursor: "pointer" }} onClick={() => {
-      setAddItem(true);
-      setDisplayTable(false);
-      }}>
+                {item.declared_content_two !== "" ? (
+                  <li>
+                    {item.declared_content_two} in box number {item.box_id}{" "}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {item.declared_content_three !== "" ? (
+                  <li>
+                    {item.declared_content_three} in box number {item.box_id}
+                  </li>
+                ) : (
+                  <></>
+                )}
+              </ul>
+            );
+          })}
+        </ol>
+      ) : (
+        <></>
+      )}
+      <button
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setAddItem(true);
+          setDisplayTable(false);
+        }}
+      >
         Add Storage Items
       </button>
       {addItem === true ? (
@@ -335,10 +355,7 @@ function Userpage({
       )}
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
       {boxOrderReceived === true ? (
-        <h4>
-          {" "}
-          Thank you, you should receive the box within 5 days.
-        </h4>
+        <h4> Thank you, you should receive the box within 5 days.</h4>
       ) : (
         <div></div>
       )}
