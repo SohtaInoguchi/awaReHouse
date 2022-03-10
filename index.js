@@ -68,6 +68,19 @@ app.post("/allItems", async (req, res) => {
   }
 });
 
+// // retrieve all goods stored at a single place
+// app.post("/providerItems", async (req, res) => {
+//   try {
+//     const items = await db
+//       .select("*")
+//       .from("inventory")
+//       .where("storage_location", req.body.adress);
+//     res.send(items);
+//   } catch {
+//     res.send("No items found yet");
+//   }
+// });
+
 app.post("/login", async (req, res) => {
   try {
     // for user
@@ -212,6 +225,32 @@ app.get("/users/:email", async (req, res) => {
     res.json(userAddress);
   } catch {
     console.log("Error in retrieving address");
+  }
+});
+
+app.get("/providers/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("providers")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving provider address");
+  }
+});
+
+//grab items at single location
+app.post("/providerItems", async (req, res) => {
+  try {
+    const items = await db
+      .select("*")
+      .from("inventory")
+      .where("storage_location", req.body.providerAddress);
+    res.send(items);
+  } catch {
+    res.send("No items found yet");
   }
 });
 

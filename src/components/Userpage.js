@@ -177,18 +177,18 @@ function Userpage({
       <br></br>
       {displayTable === true ? <ol>
         List of goods currently stored at awaReHouse locations:
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <ul>
-              <li>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
+            <ul key={index}>
+              <li key={`${index}a`}>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
 
               {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two} in box number {item.box_id} </li>
+                <li key={`${index}b`}>{item.declared_content_two} in box number {item.box_id} </li>
               ) : (
                 <></>
               )}
               {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three} in box number {item.box_id}</li>
+                <li key={`${index}c`}>{item.declared_content_three} in box number {item.box_id}</li>
               ) : (
                 <></>
               )}
