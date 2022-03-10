@@ -85,7 +85,6 @@ app.post("/login", async (req, res) => {
 
     const input = {
       firstname: req.body.first_name,
-      lastname: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     };
