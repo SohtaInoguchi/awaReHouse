@@ -90,8 +90,6 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-
-
     const token = await jwt.sign(
       { user: input },
       process.env.ACCESS_TOKEN_SECRET
@@ -102,7 +100,6 @@ app.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
     });
-
 
     res.json({
       boolean,

@@ -4,14 +4,21 @@ import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
-import NewCustomer from "./NewCustomer";
+import NewUser from "./NewUser";
+import NewProvider from "./NewProvider";
 import Success from "./Success";
 import Subscription from "./Subscription";
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -28,6 +35,7 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   // const [user_provider, setUser_provider] = useState("");
+  // let navigate = useNavigate();
 
   //Axios
   useEffect(() => {
@@ -60,6 +68,9 @@ function App() {
 
   return (
     <Router>
+      <button>
+        <Link to="/">To go back home</Link>
+      </button>
       <Routes>
         <Route path="/" element={<Homepage setMode={setMode} />} />
         <Route
@@ -101,6 +112,9 @@ function App() {
             />
           }
         />
+
+        <Route path="signup/user" element={<NewUser />} />
+        <Route path="signup/provider" element={<NewProvider />} />
       </Routes>
     </Router>
     // <div>

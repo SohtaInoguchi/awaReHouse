@@ -45,10 +45,11 @@ export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
             <p
               className="signup"
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                setMode("registration");
-                updateItemList();
-              }}
+              // onClick={() => {
+              //   setMode("registration");
+              //   updateItemList();
+              // }}
+              onClick={() => navigate("/signup/user")}
             >
               SIGN UP
             </p>
@@ -74,7 +75,7 @@ export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
             <p
               className="signup"
               style={{ cursor: "pointer" }}
-              onClick={() => setMode("registration")}
+              onClick={() => navigate("/signup/provider")}
             >
               SIGN UP
             </p>
