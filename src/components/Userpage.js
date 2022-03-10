@@ -4,6 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import e from "cors";
 
 function Userpage({
   user,
@@ -33,6 +34,8 @@ function Userpage({
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
   const [boxOrderReceived, setBoxOrderReceived] = useState(false);
+  const [isHeavy, setIsHeavy] = useState(false);
+  const [isFragile, setIsFragile] = useState(false);
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -60,6 +63,23 @@ function Userpage({
         console.log("NOPE! Address data not retrieved");
       });
   };
+
+  // for toggling isHeavy/fragile
+  const toggleIsHeavy = () => {
+    if (isHeavy === false) {
+      setIsHeavy(true);
+    } else {
+      setIsHeavy(false);
+    }
+  }
+
+  const toggleIsFragile = () => {
+    if (isFragile === false) {
+      setIsFragile(true);
+    } else {
+      setIsFragile(false);
+    }
+  }
 
   useEffect(() => {
     retrieveAddress();
@@ -93,6 +113,9 @@ function Userpage({
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
         user_owner: email,
+        fragile: isFragile,
+        heavy: isHeavy
+        // send heavy and fragile boolean
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -223,6 +246,10 @@ function Userpage({
                 value={description1}
                 onChange={createDescription1}
               />
+              <p style={{display: 'inline'}}>Check if goods are heavy</p>
+              <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/>
+              <p style={{display: 'inline'}}>Check if goods are fragile</p>
+              <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
               <br></br>
               Goods description (optional):
               <input
