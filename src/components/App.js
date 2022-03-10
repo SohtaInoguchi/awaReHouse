@@ -127,8 +127,8 @@ function App() {
             />
           }
         />
-        <Route path="success" element={<Success message={message} />} />
-        <Route path="cancel" element={<Cancel />} />
+        <Route path="/success" element={<Success message={message} />} />
+        <Route path="/cancel" element={<Cancel />} />
         <Route
           path="extra-charge"
           element={<ExtraCharge user={user} items={items} />}
