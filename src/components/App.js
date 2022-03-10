@@ -1,3 +1,4 @@
+import "../style.css";
 import "../input.css";
 import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
@@ -6,13 +7,15 @@ import Login from "./Login";
 import Homepage from "./Homepage";
 import NewUser from "./NewUser";
 import NewProvider from "./NewProvider";
-import Success from "./Success";
 import Subscription from "./Subscription";
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+<<<<<<< HEAD
 import { OneFiftyStripe } from "./OneFiftyStripe";
+=======
+>>>>>>> dbc1298a61222aefdbfbaecb23f9e9e712594c53
 
 import {
   BrowserRouter as Router,
@@ -21,7 +24,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import Cancel from "./Cancel";
+
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -77,7 +80,7 @@ function App() {
             />
           }
         />
-        <Route path="/provider" element={<Providerpage user={user} />} />
+        <Route path="/provider" element={<Providerpage user={user} email2={email2} />} />
 
         <Route
           path="/login/user"
@@ -113,8 +116,7 @@ function App() {
             />
           }
         />
-        <Route path="/?success=true" element={<Success message={message} />} />
-        <Route path="/?canceled=true" element={<Cancel />} />
+
         <Route
           path="extra-charge"
           element={<ExtraCharge user={user} items={items} />}

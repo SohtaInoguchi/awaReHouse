@@ -154,7 +154,7 @@ function Userpage({
 
   const submit2 = (e) => {
     e.preventDefault();
-    updateItemList()
+    updateItemList();
     setDescription1("");
     setDescription2("");
     setDescription3("");
@@ -169,28 +169,33 @@ function Userpage({
 
   return (
     <div>
-      Welcome back {user},<br></br>
+      Welcome back {user}
+      <br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <br></br>
-      <button onClick={()=>{
-        updateItemList();
-        setDisplayTable(true);
-        }}>LIST OF STORED GOODS</button>
+      <button
+        onClick={() => {
+          updateItemList();
+          setDisplayTable(true);
+        }}
+      >
+        LIST OF STORED GOODS
+      </button>
       <br></br>
       {displayTable === true ? <ol>
         List of goods currently stored at awaReHouse locations:
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <ul>
-              <li>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
+            <ul key={index}>
+              <li key={`${index}a`}>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
 
               {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two} in box number {item.box_id} </li>
+                <li key={`${index}b`}>{item.declared_content_two} in box number {item.box_id} </li>
               ) : (
                 <></>
               )}
               {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three} in box number {item.box_id}</li>
+                <li key={`${index}c`}>{item.declared_content_three} in box number {item.box_id}</li>
               ) : (
                 <></>
               )}

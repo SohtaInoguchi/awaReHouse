@@ -50,10 +50,6 @@ io.on("connection", (socket) => {
 
 //////////////////SOCKET IO /////////////////////////
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
-
 //Grabs all items
 app.post("/allItems", async (req, res) => {
   try {
@@ -67,6 +63,19 @@ app.post("/allItems", async (req, res) => {
     res.send("No items found yet");
   }
 });
+
+// // retrieve all goods stored at a single place
+// app.post("/providerItems", async (req, res) => {
+//   try {
+//     const items = await db
+//       .select("*")
+//       .from("inventory")
+//       .where("storage_location", req.body.adress);
+//     res.send(items);
+//   } catch {
+//     res.send("No items found yet");
+//   }
+// });
 
 app.post("/login", async (req, res) => {
   try {
@@ -85,7 +94,6 @@ app.post("/login", async (req, res) => {
 
     const input = {
       firstname: req.body.first_name,
-      lastname: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     };
@@ -212,6 +220,32 @@ app.get("/users/:email", async (req, res) => {
     res.json(userAddress);
   } catch {
     console.log("Error in retrieving address");
+  }
+});
+
+app.get("/providers/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("providers")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving provider address");
+  }
+});
+
+//grab items at single location
+app.post("/providerItems", async (req, res) => {
+  try {
+    const items = await db
+      .select("*")
+      .from("inventory")
+      .where("storage_location", req.body.providerAddress);
+    res.send(items);
+  } catch {
+    res.send("No items found yet");
   }
 });
 
