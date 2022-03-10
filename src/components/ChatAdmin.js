@@ -3,8 +3,6 @@ import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function Chat() {
@@ -143,8 +141,6 @@ export default function Chat() {
 
   return (
     <>
-      <Button variant="primary">Button #1</Button>
-      <button onClick={(e) => check(e)}>Button to Check state</button>
 
       {
       isChatOpened ? 
