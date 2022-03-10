@@ -25,10 +25,12 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
                 mode,
               })
               .then((res) => {
+                console.log("nan naya");
                 console.log(res.data);
                 setIsLogin(res.data.boolean);
                 setUser(res.data.first_name);
                 setEmail(res.data.email);
+                if (res.data.boolean) navigate("/user");
               });
           }}
         >
