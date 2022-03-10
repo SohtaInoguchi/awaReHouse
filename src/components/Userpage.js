@@ -37,6 +37,7 @@ function Userpage({
   const [displayTable, setDisplayTable] = useState (false);
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
+  const [storagePlaces, setStoragePlaces] = useState("");
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -103,13 +104,31 @@ function Userpage({
     setBoxOrderReceived(false);
   };
 
+  const possibleStoragelocations = async() => {
+        await axios
+        .get("/providers")
+        .then((res) => {
+          setStoragePlaces(res.data);
+        })
+        .catch(function (error) {
+          console.log("NOPE! Address data not retrieved");
+        });
+  }
+
+useEffect(()=>{
+  possibleStoragelocations()
+},[])
+
+const max = storagePlaces.length-1;
+const randomValue = Math.floor(Math.random()*max);
+
   const sendBoxRequest = () => {
     axios
       .post("/inventory", {
         declared_content_one: description1,
         declared_content_two: description2,
         declared_content_three: description3,
-        storage_location: "Ho Hinomikomachi, Hakusan, Ishikawa, 920-2153",
+        storage_location: storagePlaces[randomValue],
         weight_in_kg: "3.41",
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
@@ -184,7 +203,7 @@ function Userpage({
       {addItem === true ? (
         <div className="containerNewItem">
           <div className="newUser">
-            PLEASE SELECT ONE SUITABLE BOX FOR YOUR GOODS
+            PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
             <br></br>
             <br></br>
             <img
@@ -194,7 +213,7 @@ function Userpage({
             />
             <br></br>
             <br></br>
-            Box Type A (27cm x 38cm x 29cm):
+            Box Type A (27cm x 38cm x 29cm) - Maximum weight = 7.5 kg:
             <input
               type="radio"
               name="boxType"
@@ -203,7 +222,7 @@ function Userpage({
               onChange={handleChange}
             />
             <br></br>
-            Box Type B (32cm x 46cm x 29cm):
+            Box Type B (32cm x 46cm x 29cm) - Maximum weight = 10.5 kg:
             <input
               type="radio"
               name="boxType"
@@ -212,7 +231,7 @@ function Userpage({
               onChange={handleChange}
             />
             <br></br>
-            Box Type C (40cm x 60cm x 40cm):
+            Box Type C (40cm x 60cm x 40cm) - Maximum weight = 24 kg:
             <input
               type="radio"
               name="boxType"
@@ -220,7 +239,7 @@ function Userpage({
               onChange={handleChange}
             />
             <br></br>
-            Box Type D (175cm x 30cm x 15cm):
+            Box Type D (175cm x 30cm x 15cm) - Maximum weight = 20 kg:
             <input
               type="radio"
               name="boxType"
@@ -255,11 +274,7 @@ function Userpage({
                 value={description1}
                 onChange={createDescription1}
               />
-              <p style={{display: 'inline'}}>Check if goods are heavy</p>
-              <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/>
-              <p style={{display: 'inline'}}>Check if goods are fragile</p>
-              <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
-              <br></br>
+                            <br></br>
               Goods description (optional):
               <input
                 type="text"
@@ -278,8 +293,12 @@ function Userpage({
                 onChange={createDescription3}
               />
               <br></br>
+              <p style={{display: 'inline'}}>Check if box weighs more than 15 kg</p>
+              <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/><br></br>
+              <p style={{display: 'inline'}}>Check if goods to be stored are fragile</p>
+              <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
+              <br></br>
             </label>
-            <br></br>
             The boxes will be sent to your registered address: {address}
             <br></br>
             <input

@@ -350,7 +350,7 @@ app.get("/users/:email", async (req, res) => {
 app.post("/inventory", async (req, res) => {
   const postData = req.body;
   try {
-    console.log(req.body);
+    console.log("353: ",req.body);
     await db("inventory").insert(postData);
     res.status(201).send("YEP inventory");
   } catch {
