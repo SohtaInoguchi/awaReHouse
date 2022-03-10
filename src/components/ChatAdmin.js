@@ -110,9 +110,16 @@ export default function Chat() {
           </>
   }
 
+  const scrollToBottom = () => {
+    const chatBox = document.getElementById('chat-box');
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    console.log(chatBox);
+  }
+
   const check = (e) => {
     e.preventDefault();
-    console.log("chat opened", chatMessages);
+    scrollToBottom();
   }
 
   return (
