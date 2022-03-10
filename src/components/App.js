@@ -11,7 +11,7 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -59,46 +59,90 @@ function App() {
   }, [sessionId]);
 
   return (
-    <div>
-      {mode === "homePage" ? (
-        <Homepage setMode={setMode} />
-      ) : mode === "userLogin" && isLogin ? (
-        <Userpage
-          user={user}
-          message={message}
-          success={success}
-          chatMessages={chatMessages}
-          setChatMessages={setChatMessages}
-          setMode={setMode}
-          mode={mode}
-          items={items}
-          email={email}
-          setItems={setItems}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage setMode={setMode} />} />
+        <Route
+          path="/user"
+          element={
+            <Userpage
+              user={user}
+              message={message}
+              success={success}
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+              setMode={setMode}
+              mode={mode}
+              items={items}
+              email={email}
+              setItems={setItems}
+            />
+          }
         />
-      ) : mode === "userLogin" && !isLogin ? (
-        <Login
-          setIsLogin={setIsLogin}
-          setUser={setUser}
-          setEmail={setEmail}
-          mode="user"
+        <Route
+          path="/login/user"
+          element={
+            <Login
+              setIsLogin={setIsLogin}
+              setUser={setUser}
+              setEmail={setEmail}
+              mode="user"
+            />
+          }
         />
-      ) : mode === "providerLogin" && isLogin2 ? (
-        <Providerpage user={user} />
-      ) : mode === "providerLogin" && !isLogin2 ? (
-        <Login
-          setIsLogin={setIsLogin2}
-          setUser={setUser}
-          setEmail={setEmail2}
-          mode="provider"
+        <Route
+          path="/login/provider"
+          element={
+            <Login
+              setIsLogin={setIsLogin2}
+              setUser={setUser}
+              setEmail={setEmail2}
+              mode="provider"
+            />
+          }
         />
-      ) : mode === "registration" ? (
-        <NewCustomer setMode={setMode} />
-      ) : mode === "extraCharge" ? (
-        <ExtraCharge user={user} items={items} />
-      ) : (
-        <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
-      )}
-    </div>
+      </Routes>
+    </Router>
+    // <div>
+    //   {mode === "homePage" ? (
+    //     <Homepage setMode={setMode} />
+    //   ) : mode === "userLogin" && isLogin ? (
+    //     <Userpage
+    //       user={user}
+    //       message={message}
+    //       success={success}
+    //       chatMessages={chatMessages}
+    //       setChatMessages={setChatMessages}
+    //       setMode={setMode}
+    //       mode={mode}
+    //       items={items}
+    //       email={email}
+    //       setItems={setItems}
+    //     />
+    //   ) : mode === "userLogin" && !isLogin ? (
+    //     <Login
+    //       setIsLogin={setIsLogin}
+    //       setUser={setUser}
+    //       setEmail={setEmail}
+    //       mode="user"
+    //     />
+    //   ) : mode === "providerLogin" && isLogin2 ? (
+    //     <Providerpage user={user} />
+    //   ) : mode === "providerLogin" && !isLogin2 ? (
+    //     <Login
+    //       setIsLogin={setIsLogin2}
+    //       setUser={setUser}
+    //       setEmail={setEmail2}
+    //       mode="provider"
+    //     />
+    //   ) : mode === "registration" ? (
+    //     <NewCustomer setMode={setMode} />
+    //   ) : mode === "extraCharge" ? (
+    //     <ExtraCharge user={user} items={items} />
+    //   ) : (
+    //     <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
+    //   )}
+    // </div>
   );
 }
 

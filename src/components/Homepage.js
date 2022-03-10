@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
+  let navigate = useNavigate();
   return (
     <div>
       <div className="homepageContainer">
@@ -29,28 +31,39 @@ export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
       </div>
       <div className="homeButtons">
         <div className="homeUser">
-          <button className="loginButton" 
-          style={{cursor:"pointer"}}
-          onClick={() => setMode("userLogin")}>
+          <button
+            className="loginButton"
+            style={{ cursor: "pointer" }}
+            // onClick={() => setMode("userLogin")}
+            onClick={() => navigate("/login/user")}
+          >
             User LOGIN
           </button>
           <div>
-          <br></br>
+            <br></br>
             Want to become a user? <br></br>
-            <p className="signup" style={{cursor:"pointer"}} onClick={
-              () => { 
-                setMode("registration")
-              updateItemList();
-            }}>SIGN UP</p>
+            <p
+              className="signup"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setMode("registration");
+                updateItemList();
+              }}
+            >
+              SIGN UP
+            </p>
           </div>
         </div>
         <div className="homeProvider">
           <button
             className="loginButton"
-            style={{cursor:"pointer"}}
+            style={{ cursor: "pointer" }}
+            // onClick={() => {
+            //   console.log("provider login page");
+            //   setMode("providerLogin");
+            // }}
             onClick={() => {
-              console.log("provider login page");
-              setMode("providerLogin");
+              navigate("/login/provider");
             }}
           >
             Provider LOGIN
@@ -58,10 +71,18 @@ export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
           <div>
             <br></br>
             Want to become a provider? <br></br>
-            <p className="signup" style={{cursor:"pointer"}} onClick={() => setMode("registration")}>SIGN UP</p>
+            <p
+              className="signup"
+              style={{ cursor: "pointer" }}
+              onClick={() => setMode("registration")}
+            >
+              SIGN UP
+            </p>
           </div>
         </div>
-        <h1 className="admin" onClick={() => setMode("admin")}>Admin</h1>
+        <h1 className="admin" onClick={() => setMode("admin")}>
+          Admin
+        </h1>
       </div>
     </div>
   );
