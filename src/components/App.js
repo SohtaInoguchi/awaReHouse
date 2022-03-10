@@ -12,10 +12,8 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
-<<<<<<< HEAD
 import { OneFiftyStripe } from "./OneFiftyStripe";
 
-=======
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,7 +22,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Cancel from "./Cancel";
->>>>>>> 9b0100d4a60c8781a636c37457a6eba165a79847
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
