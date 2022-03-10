@@ -183,7 +183,7 @@ function Userpage({
       {displayTable === true ? (
         <ol>
           List of goods currently stored at awaReHouse locations:
-          {items.map((item) => {
+          {items.map((item, idx) => {
             return (
               <ul>
                 <li>

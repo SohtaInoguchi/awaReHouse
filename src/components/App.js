@@ -1,3 +1,4 @@
+import "../style.css";
 import "../input.css";
 import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
