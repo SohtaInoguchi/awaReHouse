@@ -38,6 +38,7 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const [resetTable, setResetTable] = useState("");
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -135,7 +136,6 @@ const randomValue = Math.floor(Math.random()*max);
         user_owner: email,
         fragile: isFragile,
         heavy: isHeavy
-        // send heavy and fragile boolean
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -150,20 +150,22 @@ const randomValue = Math.floor(Math.random()*max);
   }
 
   const submit2 = (e) => {
+    e.preventDefault();
     setDescription1("");
     setDescription2("");
     setDescription3("");
+    updateItemList()
     setConfirmation(false);
-    e.preventDefault();
     setBoxOrderReceived(true);
+    setAddItem(false);
+    setTryAgain(false);
     sendBoxRequest();
-    updateItemList();
   };
 
-  const retrieveList=()=>{
-    updateItemList();
-    setDisplayTable(!displayTable)
-  }
+
+  // useEffect(()=>{
+
+  // },[])
 
   return (
     <div>
@@ -174,7 +176,10 @@ const randomValue = Math.floor(Math.random()*max);
       Welcome back {user},<br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <br></br>
-      <button onClick={retrieveList}>LIST OF STORED GOODS</button>
+      <button onClick={()=>{
+        updateItemList();
+        setDisplayTable(true);
+        }}>LIST OF STORED GOODS</button>
       <br></br>
       {displayTable === true ? <ol>
         List of goods currently stored at awaReHouse locations:
@@ -197,7 +202,11 @@ const randomValue = Math.floor(Math.random()*max);
           );
         })}
       </ol> : <></>}
-      <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
+      <button style={{ cursor: "pointer" }} onClick={() => {
+      setAddItem(true);
+      setDisplayTable(false);
+
+      }}>
         Add Storage Items
       </button>
       {addItem === true ? (
@@ -322,8 +331,7 @@ const randomValue = Math.floor(Math.random()*max);
       {boxOrderReceived === true ? (
         <h4>
           {" "}
-          Thank you, your order is on its way. You can submit another request or
-          click on "Go Back" to exit this section
+          Thank you, you should receive the box within 5 days.
         </h4>
       ) : (
         <div></div>
