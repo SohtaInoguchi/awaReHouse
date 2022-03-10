@@ -146,13 +146,17 @@ body {
 
 
 /* ------------Chat popup------------- */
+#outer-wrapper {
+  max-width: 40%;
+}
 
 #chat-box {
   background-color: rgb(212, 203, 203);
-  max-width: 40%;
+  border: solid 2px rgb(5, 4, 4);
+  border-radius: 10px;
+  /* max-width: 40%; */
   min-height: 300px;
   max-height: 20rem;
-  border: solid 5px red;
   margin: 10px 10px;
   overflow: scroll;
 }
@@ -229,12 +233,13 @@ body {
 #send-section-wrapper {
   display: flex;
   margin: auto auto;
-  /* position: absolute; */
-  /* top: 270px; */
 }
 
 #chat {
   flex-grow: 2;
+  margin: -5px 1px -3px 10px;
+  border: solid 0px;
+  border-radius: 12px
 }
 
 .send-button {

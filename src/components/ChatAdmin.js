@@ -82,6 +82,7 @@ export default function Chat() {
 
   const renderChatBox = () => {
     return <>
+          <div id="outer-wrapper">
           <div id="chat-box">
               {/* {chatMessages.map((message, idx) => (
                 <div key={idx} className="messages">{message}</div> */}
@@ -102,15 +103,20 @@ export default function Chat() {
                     {message.message}
                   </div>
                 )})}
-                <div id="send-section-wrapper">
-                  <input id="chat" type="text" placeholder="Enter message" />
+              </div>
+          </div>
+            <div id="send-section-wrapper">
+                  <input 
+                  id="chat" 
+                  type="text" 
+                  placeholder="Enter message"
+                  autoFocus />
                   <SendComponent 
                   icon={<AiOutlineSend 
                     id="send-icon"
                     onClick={sendMessage}/>} 
                   />
-                </div>
-              </div>
+            </div>
           </div>
           <CloseChatComponent 
           icon={<AiFillCloseCircle 

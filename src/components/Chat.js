@@ -90,6 +90,7 @@ export default function Chat() {
 
   const renderChatBox = () => {
     return <>
+          <div id="outer-wrapper">
           <div id="chat-box">
               <button
                 id="faq"
@@ -132,6 +133,8 @@ export default function Chat() {
                     {message.message}
                   </div>
                 )})}
+              </div>
+              </div>
                 <div id="send-section-wrapper">
                   <input id="chat" type="text" placeholder="Enter message" />
                   <SendComponent 
@@ -139,8 +142,7 @@ export default function Chat() {
                     id="send-icon"
                     onClick={sendMessage}/>} 
                   />
-                </div>
-              </div>
+            </div>
           </div>
           <CloseChatComponent 
           icon={<AiFillCloseCircle 
