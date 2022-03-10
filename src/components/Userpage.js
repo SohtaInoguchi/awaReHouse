@@ -151,21 +151,18 @@ const randomValue = Math.floor(Math.random()*max);
 
   const submit2 = (e) => {
     e.preventDefault();
+    updateItemList()
     setDescription1("");
     setDescription2("");
     setDescription3("");
-    updateItemList()
     setConfirmation(false);
     setBoxOrderReceived(true);
     setAddItem(false);
     setTryAgain(false);
+    setIsFragile(false);
+    setIsHeavy(false);
     sendBoxRequest();
   };
-
-
-  // useEffect(()=>{
-
-  // },[])
 
   return (
     <div>
@@ -185,16 +182,16 @@ const randomValue = Math.floor(Math.random()*max);
         List of goods currently stored at awaReHouse locations:
         {items.map((item) => {
           return (
-            <ul key={item.box_id}>
-              <li>{item.declared_content_one}</li>
+            <ul>
+              <li>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
 
               {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two}</li>
+                <li>{item.declared_content_two} in box number {item.box_id} </li>
               ) : (
                 <></>
               )}
               {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three}</li>
+                <li>{item.declared_content_three} in box number {item.box_id}</li>
               ) : (
                 <></>
               )}
@@ -205,7 +202,6 @@ const randomValue = Math.floor(Math.random()*max);
       <button style={{ cursor: "pointer" }} onClick={() => {
       setAddItem(true);
       setDisplayTable(false);
-
       }}>
         Add Storage Items
       </button>
