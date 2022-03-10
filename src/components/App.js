@@ -115,6 +115,15 @@ function App() {
 
         <Route path="signup/user" element={<NewUser />} />
         <Route path="signup/provider" element={<NewProvider />} />
+        <Route
+          path="admin"
+          element={
+            <Admin
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+          }
+        />
       </Routes>
     </Router>
     // <div>

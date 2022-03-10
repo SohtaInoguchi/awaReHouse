@@ -81,7 +81,7 @@ export default function Homepage({ setMode, setNewCustomer, updateItemList }) {
             </p>
           </div>
         </div>
-        <h1 className="admin" onClick={() => setMode("admin")}>
+        <h1 className="admin" onClick={() => navigate("admin")}>
           Admin
         </h1>
       </div>
