@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
@@ -11,7 +11,7 @@ export default function Chat() {
   const [receivedMessage, setReceivedMessage] = useState([]);
   const [socket, setSocket] = useState();
   const [isChatOpened, setIsChatOpened] = useState(false);
-  const lastMessageRef = useRef();
+  
   const setRef = useCallback(node => {
     if (node){
       node.scrollIntoView({ smooth:true })
@@ -88,7 +88,7 @@ export default function Chat() {
                 
               <div className="message-wrapper">
                 {chatMessages.map((message, idx) => {
-                  const isLastMessage = chatMessages.length === idx;
+                  const isLastMessage = chatMessages.length - 1 === idx;
                 return (
                   <div 
                   ref={isLastMessage ? setRef : null}
