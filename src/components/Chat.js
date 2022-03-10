@@ -42,7 +42,7 @@ export default function Chat() {
     socket.on("bot-send-back", (res) => {
       console.log("user chat res", res);
       // const temp2 = [...receivedMessage];
-      const receivedMessageObj = {receiveOrSent: "botMessage", message: res};
+      const receivedMessageObj = {receiveOrSent: "botMessageReceived", message: res};
       const temp2 = [...chatMessages];
       // temp2.push(res);
       temp2.push(receivedMessageObj);
@@ -67,7 +67,7 @@ export default function Chat() {
   function chatbot(e) {
     const faq = e.target.value;
     let temp = [...chatMessages];
-    const sentMessageObj = {receiveOrSent: "botMessage", message: faq};
+    const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
     // temp.push(faq);
     temp.push(sentMessageObj);
     setChatMessages(temp);
@@ -110,19 +110,27 @@ export default function Chat() {
 
               {/* {chatMessages.map((message, idx) => (
                 <div key={idx} className="messages">{message}</div> */}
-              {chatMessages.map((message, idx) => (
-                <div key={idx} 
-                  className={message.receiveOrSent === "botMessage" ? "bot-message" : "messages"}>
-                  {message.message}
+                
+              <div className="message-wrapper">
+                {chatMessages.map((message, idx) => (
+                  <div key={idx} 
+                  className={message.receiveOrSent === "botMessageSent" ? 
+                  "bot-message-sent" : 
+                  message.receiveOrSent === "botMessageReceived" ? 
+                  "bot-message-received" :
+                  message.receiveOrSent === "sent" ?
+                  "sent-messages" : "messages"}>
+                    {message.message}
+                  </div>
+                ))}
+                <div id="send-section-wrapper">
+                  <input id="chat" type="text" placeholder="Enter message" />
+                  <SendComponent 
+                  icon={<AiOutlineSend 
+                    id="send-icon"
+                    onClick={sendMessage}/>} 
+                  />
                 </div>
-              ))}
-              <div id="send-section-wrapper">
-                <input id="chat" type="text" placeholder="Enter message" />
-                <SendComponent 
-                icon={<AiOutlineSend 
-                  id="send-icon"
-                  onClick={sendMessage}/>} 
-                />
               </div>
           </div>
           <CloseChatComponent 
