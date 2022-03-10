@@ -35,45 +35,29 @@ function App() {
   const [email, setEmail] = useState("");
   // email for provider
   const [email2, setEmail2] = useState("");
-  // const [user_provider, setUser_provider] = useState("");
-  // let navigate = useNavigate();
 
   //Axios
   useEffect(() => {
     console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    // <<<<<<< HEAD
-    //     console.log("items", items);
-    //   }, [email]);
-    // =======
   }, []);
-  // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      setSuccess(true);
-      setMessage("Thank you for your purchase");
-      setSessionId(query.get("session_id"));
-    }
-
-    if (query.get("canceled")) {
-      setSuccess(false);
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, [sessionId]);
 
   return (
     <Router>
-      <button>
+      <button onClick={() => setMessage("")}>
         <Link to="/">To go back home</Link>
       </button>
       <Routes>
-        <Route path="/" element={<Homepage setMode={setMode} />} />
+        <Route
+          path="/"
+          element={
+            <Homepage
+              setMode={setMode}
+              message={message}
+              setMessage={setMessage}
+            />
+          }
+        />
         <Route
           path="/user"
           element={
@@ -127,8 +111,8 @@ function App() {
             />
           }
         />
-        <Route path="/success" element={<Success message={message} />} />
-        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/?success=true" element={<Success message={message} />} />
+        <Route path="/?canceled=true" element={<Cancel />} />
         <Route
           path="extra-charge"
           element={<ExtraCharge user={user} items={items} />}

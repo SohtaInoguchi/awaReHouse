@@ -14,10 +14,6 @@ export default function NewUser({ setMode }) {
     imagePreviewUrl: "",
     picFile: null,
   });
-  const [providerPicValues, setProviderPicValues] = useState({
-    imagePreviewUrl: "",
-    picFile: null,
-  });
 
   const [registrationDone, setRegistrationDone] = useState(false);
 
