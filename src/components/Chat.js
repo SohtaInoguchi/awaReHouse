@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
+import { Accordion } from "react-bootstrap";
 
 
 export default function Chat() {
@@ -71,12 +72,12 @@ export default function Chat() {
 
   function chatbot(e) {
     const faq = e.target.value;
-    let temp = [...chatMessages];
-    const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
+    // let temp = [...chatMessages];
+    // const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
     // temp.push(faq);
-    temp.push(sentMessageObj);
-    setChatMessages(temp);
-    console.log(faq);
+    // temp.push(sentMessageObj);
+    // setChatMessages(temp);
+    // console.log(faq);
     socket.emit("bot-message", faq);
   }
 
@@ -92,27 +93,34 @@ export default function Chat() {
     return <>
           <div id="outer-wrapper">
           <div id="chat-box">
+          <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="1">
+          <Accordion.Header >FAQ</Accordion.Header>
+          <Accordion.Body>
               <button
                 id="faq"
                 value="Where can I check the seasonal retrieval / store period?"
                 onClick={chatbot}
-              >
+                >
                 Where can I check the seasonal retrieval / store period?
               </button>
               <button
                 id="faq"
                 value="What do I need to do to get items out of seasonal period?"
                 onClick={chatbot}
-              >
+                >
                 What do I need to do to get items out of seasonal period?
               </button>
               <button
                 id="faq"
                 value="Where can I check items I store?"
                 onClick={chatbot}
-              >
+                >
                 Where can I check items I store?
               </button>
+              </Accordion.Body>
+              </Accordion.Item>    
+              </Accordion>      
 
               {/* {chatMessages.map((message, idx) => (
                 <div key={idx} className="messages">{message}</div> */}

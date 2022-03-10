@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Response from "./Response";
 
+
 export default function Homepage({
   setMode,
   setNewCustomer,
