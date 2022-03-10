@@ -151,45 +151,58 @@ function Userpage({
   };
 
   const submit2 = (e) => {
+    e.preventDefault();
+    updateItemList();
     setDescription1("");
     setDescription2("");
     setDescription3("");
     setConfirmation(false);
-    e.preventDefault();
     setBoxOrderReceived(true);
+    setAddItem(false);
+    setTryAgain(false);
+    setIsFragile(false);
+    setIsHeavy(false);
     sendBoxRequest();
-    updateItemList();
-  };
-
-  const retrieveList = () => {
-    updateItemList();
-    setDisplayTable(!displayTable);
   };
 
   return (
     <div>
-      <br></br>
       Welcome back {user}
       <br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <br></br>
-      <button onClick={retrieveList}>LIST OF STORED GOODS</button>
+      <button
+        onClick={() => {
+          updateItemList();
+          setDisplayTable(true);
+        }}
+      >
+        LIST OF STORED GOODS
+      </button>
       <br></br>
       {displayTable === true ? (
         <ol>
           List of goods currently stored at awaReHouse locations:
           {items.map((item) => {
             return (
-              <ul key={item.box_id}>
-                <li>{item.declared_content_one}</li>
+              <ul>
+                <li>
+                  {item.declared_content_one} in box number {item.box_id}{" "}
+                  {item.fragile === true ? `(fragile)` : ``}{" "}
+                  {item.heavy === true ? `(heavy)` : ``}
+                </li>
 
                 {item.declared_content_two !== "" ? (
-                  <li>{item.declared_content_two}</li>
+                  <li>
+                    {item.declared_content_two} in box number {item.box_id}{" "}
+                  </li>
                 ) : (
                   <></>
                 )}
                 {item.declared_content_three !== "" ? (
-                  <li>{item.declared_content_three}</li>
+                  <li>
+                    {item.declared_content_three} in box number {item.box_id}
+                  </li>
                 ) : (
                   <></>
                 )}
@@ -200,7 +213,13 @@ function Userpage({
       ) : (
         <></>
       )}
-      <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
+      <button
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setAddItem(true);
+          setDisplayTable(false);
+        }}
+      >
         Add Storage Items
       </button>
       {addItem === true ? (
@@ -336,11 +355,7 @@ function Userpage({
       )}
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
       {boxOrderReceived === true ? (
-        <h4>
-          {" "}
-          Thank you, your order is on its way. You can submit another request or
-          click on "Go Back" to exit this section
-        </h4>
+        <h4> Thank you, you should receive the box within 5 days.</h4>
       ) : (
         <div></div>
       )}
