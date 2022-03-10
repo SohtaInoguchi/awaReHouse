@@ -179,7 +179,8 @@ body {
   padding: 5px 5px;
   background-color: rgb(255, 255, 255);
   border-radius: 0.5rem;
-  border: 2px rgb(209, 19, 19) solid;
+  border: 0px;
+  /* border: 2px rgb(209, 19, 19) solid; */
   margin-left: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -201,7 +202,8 @@ body {
   /* position: absolute; */
   /* justify-content: center; */
   /* align-items: center; */
-  border: 2px rgb(32, 19, 209) solid;
+  /* border: 2px rgb(32, 19, 209) solid; */
+  border: 0px;
   word-break: break-all;
 }
 
@@ -209,25 +211,27 @@ body {
   /* position: absolute; */
   width: auto;
   background-color: rgb(255, 255, 255);
+  padding: 5px 5px;
   /* margin: 10px 10px; */
   margin-left: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 0.5rem;
-  border: 2px rgb(209, 19, 19) solid;
+  border: 0px;
 }
 
 .bot-message-received {
   /* position: absolute; */
   width: auto;
   background-color: rgb(255, 255, 255);
+  padding: 5px 5px;
   /* margin: 10px 10px; */
   /* margin-left: 0px; */
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 100px;  
   border-radius: 0.5rem;
-  border: 2px rgb(209, 19, 19) solid;
+  border: 0px;
 }
 
 #send-section-wrapper {
