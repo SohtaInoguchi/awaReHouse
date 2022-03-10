@@ -346,3 +346,116 @@ app.post(
     response.send();
   }
 );
+
+// /////////////////STRIPE API/////////////////////////////
+
+// // app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
+
+// // // io.on("connection", (socket) => {
+// // //   // console.log(`backend id:${socket.id}`);
+// // //   socket.on("send-message", (input) => {
+// // //     console.log(input);
+// // //   });
+// // //   socket.emit("receive-message", "MESSAGE RECEIVED");
+// // // });
+
+// app.get("/users", async (req, res) => {
+//   try {
+//     const allData = await db.select("*").from("users");
+//     res.json(allData);
+//   } catch {
+//     console.error(err.message);
+//   }
+// });
+
+// app.get("/providers", async (req, res) => {
+//   try {
+//     const allData = await db.select("*").from("providers");
+//     res.json(allData);
+//   } catch {
+//     console.error(err.message);
+//   }
+// });
+
+// app.post("/users", async (req, res) => {
+//   const postData = req.body;
+//   const salt = await bcrypt.genSalt();
+//   const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+//   const user = {
+//     first_name: req.body.first_name,
+//     last_name: req.body.last_name,
+//     password: encryptedPassword,
+//     adress: req.body.adress,
+//     email: req.body.email,
+//     picture_file: req.body.picture_file,
+//   };
+//   try {
+//     console.log("from here");
+//     console.log(user);
+//     await db("users").insert(user);
+//     res.status(201).send("YEP users");
+//   } catch (err) {
+//     console.log("Backend server does not work - users");
+//     console.error(err);
+//   }
+// });
+
+// app.get("/inventory", async (req, res) => {
+//   try {
+//     const allData = await db.select("*").from("inventory");
+//     res.json(allData);
+//   } catch {
+//     console.error(err.message);
+//   }
+// });
+
+// // app.post("/users", async (req,res)=>{
+// //   const postData = req.body
+// //   try{
+// //     console.log(req.body)
+// //     await db("users").insert(postData)
+// //   try {
+// //     console.log("from here");
+// //     console.log(user);
+// //     await db("users").insert(user);
+// //     res.status(201).send("YEP users");
+// //   } catch (err) {
+// //     console.log("Backend server does not work - users");
+// //     console.error(err);
+// //   }
+// // });
+
+// app.post("/providers", async (req, res) => {
+//   const postData = req.body;
+//   try {
+//     console.log(req.body);
+//     await db("providers").insert(postData);
+//     res.status(201).send("YEP providers");
+//   } catch {
+//     console.log("Backend server does not work - providers");
+//   }
+// });
+
+// app.get("/users/:email", async (req, res) => {
+//   try {
+//     const { email } = req.params;
+//     const userAddress = await db
+//       .select("adress")
+//       .from("users")
+//       .where({ email });
+//     res.json(userAddress);
+//   } catch {
+//     console.log("Error in retrieving address");
+//   }
+// });
+
+// app.post("/inventory", async (req, res) => {
+//   const postData = req.body;
+//   try {
+//     console.log("353: ",req.body);
+//     await db("inventory").insert(postData);
+//     res.status(201).send("YEP inventory");
+//   } catch {
+//     console.log("Backend server does not work - inventory");
+//   }
+// });
