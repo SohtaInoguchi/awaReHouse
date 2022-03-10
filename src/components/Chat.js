@@ -161,14 +161,13 @@ export default function Chat() {
           </>
   }
 
-  const check = (e) => {
-    e.preventDefault();
-    console.log("chat opened", chatMessages);
-  }
+  // const check = (e) => {
+  //   e.preventDefault();
+  //   console.log("chat opened", chatMessages);
+  // }
 
   return (
     <>
-      <button onClick={(e) => check(e)}>Button to Check state</button>
 
       {
       isChatOpened ? 
