@@ -167,10 +167,6 @@ function Userpage({
 
   return (
     <div>
-      <button style={{ cursor: "pointer" }} onClick={() => setMode("homePage")}>
-        Back to homepage
-      </button>
-      <br></br>
       Welcome back {user},<br></br>
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
       <br></br>
