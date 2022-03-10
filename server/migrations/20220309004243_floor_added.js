@@ -7,6 +7,6 @@ exports.up = function(knex) {
   
   exports.down = function(knex) {
     return knex.schema.alterTable("providers", table=>{
-        table.dropColumn("floor")
+        table.dropColumn("floor");
     })
   };
