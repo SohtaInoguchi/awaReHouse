@@ -4,7 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import e from "cors";
+import { useNavigate } from "react-router-dom";
 
 function Userpage({
   user,
@@ -15,7 +15,7 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
-  setItems
+  setItems,
 }) {
   function retrieveData() {
     setMode("extraCharge");
@@ -34,10 +34,11 @@ function Userpage({
   const [description2, setDescription2] = useState("");
   const [description3, setDescription3] = useState("");
   const [boxOrderReceived, setBoxOrderReceived] = useState(false);
-  const [displayTable, setDisplayTable] = useState (false);
+  const [displayTable, setDisplayTable] = useState(false);
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const navigate = useNavigate();
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -73,7 +74,7 @@ function Userpage({
     } else {
       setIsHeavy(false);
     }
-  }
+  };
 
   const toggleIsFragile = () => {
     if (isFragile === false) {
@@ -81,7 +82,7 @@ function Userpage({
     } else {
       setIsFragile(false);
     }
-  }
+  };
 
   useEffect(() => {
     retrieveAddress();
@@ -104,23 +105,23 @@ function Userpage({
     setBoxOrderReceived(false);
   };
 
-  const possibleStoragelocations = async() => {
-        await axios
-        .get("/providers")
-        .then((res) => {
-          setStoragePlaces(res.data);
-        })
-        .catch(function (error) {
-          console.log("NOPE! Address data not retrieved");
-        });
-  }
+  const possibleStoragelocations = async () => {
+    await axios
+      .get("/providers")
+      .then((res) => {
+        setStoragePlaces(res.data);
+      })
+      .catch(function (error) {
+        console.log("NOPE! Address data not retrieved");
+      });
+  };
 
-useEffect(()=>{
-  possibleStoragelocations()
-},[])
+  useEffect(() => {
+    possibleStoragelocations();
+  }, []);
 
-const max = storagePlaces.length;
-const randomValue = Math.floor(Math.random()*max);
+  const max = storagePlaces.length;
+  const randomValue = Math.floor(Math.random() * max);
 
   const sendBoxRequest = () => {
     axios
@@ -134,7 +135,7 @@ const randomValue = Math.floor(Math.random()*max);
         expected_retrieval_season: "autumn",
         user_owner: email,
         fragile: isFragile,
-        heavy: isHeavy
+        heavy: isHeavy,
         // send heavy and fragile boolean
       })
       .then(() => {
@@ -147,7 +148,7 @@ const randomValue = Math.floor(Math.random()*max);
 
   const updateItemList = () => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }
+  };
 
   const submit2 = (e) => {
     setDescription1("");
@@ -160,10 +161,10 @@ const randomValue = Math.floor(Math.random()*max);
     updateItemList();
   };
 
-  const retrieveList=()=>{
+  const retrieveList = () => {
     updateItemList();
-    setDisplayTable(!displayTable)
-  }
+    setDisplayTable(!displayTable);
+  };
 
   return (
     <div>
@@ -176,27 +177,31 @@ const randomValue = Math.floor(Math.random()*max);
       <br></br>
       <button onClick={retrieveList}>LIST OF STORED GOODS</button>
       <br></br>
-      {displayTable === true ? <ol>
-        List of goods currently stored at awaReHouse locations:
-        {items.map((item) => {
-          return (
-            <ul key={item.box_id}>
-              <li>{item.declared_content_one}</li>
+      {displayTable === true ? (
+        <ol>
+          List of goods currently stored at awaReHouse locations:
+          {items.map((item) => {
+            return (
+              <ul key={item.box_id}>
+                <li>{item.declared_content_one}</li>
 
-              {item.declared_content_two !== "" ? (
-                <li>{item.declared_content_two}</li>
-              ) : (
-                <></>
-              )}
-              {item.declared_content_three !== "" ? (
-                <li>{item.declared_content_three}</li>
-              ) : (
-                <></>
-              )}
-            </ul>
-          );
-        })}
-      </ol> : <></>}
+                {item.declared_content_two !== "" ? (
+                  <li>{item.declared_content_two}</li>
+                ) : (
+                  <></>
+                )}
+                {item.declared_content_three !== "" ? (
+                  <li>{item.declared_content_three}</li>
+                ) : (
+                  <></>
+                )}
+              </ul>
+            );
+          })}
+        </ol>
+      ) : (
+        <></>
+      )}
       <button style={{ cursor: "pointer" }} onClick={() => setAddItem(true)}>
         Add Storage Items
       </button>
@@ -274,7 +279,7 @@ const randomValue = Math.floor(Math.random()*max);
                 value={description1}
                 onChange={createDescription1}
               />
-                            <br></br>
+              <br></br>
               Goods description (optional):
               <input
                 type="text"
@@ -293,10 +298,23 @@ const randomValue = Math.floor(Math.random()*max);
                 onChange={createDescription3}
               />
               <br></br>
-              <p style={{display: 'inline'}}>Check if box weighs more than 15 kg</p>
-              <input type="checkbox" className="isHeavy" onChange={toggleIsHeavy}/><br></br>
-              <p style={{display: 'inline'}}>Check if goods to be stored are fragile</p>
-              <input type="checkbox" className="isFragile" onChange={toggleIsFragile}/>
+              <p style={{ display: "inline" }}>
+                Check if box weighs more than 15 kg
+              </p>
+              <input
+                type="checkbox"
+                className="isHeavy"
+                onChange={toggleIsHeavy}
+              />
+              <br></br>
+              <p style={{ display: "inline" }}>
+                Check if goods to be stored are fragile
+              </p>
+              <input
+                type="checkbox"
+                className="isFragile"
+                onChange={toggleIsFragile}
+              />
               <br></br>
             </label>
             The boxes will be sent to your registered address: {address}
@@ -329,7 +347,8 @@ const randomValue = Math.floor(Math.random()*max);
         <div></div>
       )}
       {success === true ? <Success message={message} /> : <Subscription />}
-      <button onClick={retrieveData}>Retrieval</button>
+      {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
+      <button onClick={() => navigate("/extra-charge")}>Extra Retrieval</button>
       <button onClick={storeOnClick}>Storage</button>
       <br />
       <br />
