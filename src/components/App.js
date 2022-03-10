@@ -76,7 +76,7 @@ function App() {
             />
           }
         />
-        <Route path="/provider" element={<Providerpage user={user} />} />
+        <Route path="/provider" element={<Providerpage user={user} email2={email2} />} />
 
         <Route
           path="/login/user"

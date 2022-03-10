@@ -180,46 +180,31 @@ function Userpage({
         LIST OF STORED GOODS
       </button>
       <br></br>
-      {displayTable === true ? (
-        <ol>
-          List of goods currently stored at awaReHouse locations:
-          {items.map((item, idx) => {
-            return (
-              <ul>
-                <li>
-                  {item.declared_content_one} in box number {item.box_id}{" "}
-                  {item.fragile === true ? `(fragile)` : ``}{" "}
-                  {item.heavy === true ? `(heavy)` : ``}
-                </li>
+      {displayTable === true ? <ol>
+        List of goods currently stored at awaReHouse locations:
+        {items.map((item, index) => {
+          return (
+            <ul key={index}>
+              <li key={`${index}a`}>{item.declared_content_one} in box number {item.box_id} {item.fragile === true ? `(fragile)`: ``} {item.heavy === true ? `(heavy)`: ``}</li>
 
-                {item.declared_content_two !== "" ? (
-                  <li>
-                    {item.declared_content_two} in box number {item.box_id}{" "}
-                  </li>
-                ) : (
-                  <></>
-                )}
-                {item.declared_content_three !== "" ? (
-                  <li>
-                    {item.declared_content_three} in box number {item.box_id}
-                  </li>
-                ) : (
-                  <></>
-                )}
-              </ul>
-            );
-          })}
-        </ol>
-      ) : (
-        <></>
-      )}
-      <button
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          setAddItem(true);
-          setDisplayTable(false);
-        }}
-      >
+              {item.declared_content_two !== "" ? (
+                <li key={`${index}b`}>{item.declared_content_two} in box number {item.box_id} </li>
+              ) : (
+                <></>
+              )}
+              {item.declared_content_three !== "" ? (
+                <li key={`${index}c`}>{item.declared_content_three} in box number {item.box_id}</li>
+              ) : (
+                <></>
+              )}
+            </ul>
+          );
+        })}
+      </ol> : <></>}
+      <button style={{ cursor: "pointer" }} onClick={() => {
+      setAddItem(true);
+      setDisplayTable(false);
+      }}>
         Add Storage Items
       </button>
       {addItem === true ? (
