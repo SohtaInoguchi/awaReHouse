@@ -169,7 +169,6 @@ body {
 
 .messages {
   width: min-content;
-  max-width: fit-content;
   background-color: rgb(255, 255, 255);
   border-radius: 0.5rem;
   border: 2px rgb(209, 19, 19) solid;
@@ -177,6 +176,7 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   /* margin-right: 0px; */
+  /* word-wrap: break-word; */
 }
 
 .sent-messages {
