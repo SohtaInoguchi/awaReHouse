@@ -19,6 +19,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+import Cancel from "./Cancel";
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -127,6 +128,11 @@ function App() {
           }
         />
         <Route path="success" element={<Success message={message} />} />
+        <Route path="cancel" element={<Cancel />} />
+        <Route
+          path="extra-charge"
+          element={<ExtraCharge user={user} items={items} />}
+        />
       </Routes>
     </Router>
     // <div>

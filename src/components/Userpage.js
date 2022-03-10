@@ -4,7 +4,7 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import e from "cors";
+import { useNavigate } from "react-router-dom";
 
 function Userpage({
   user,
@@ -38,6 +38,7 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const navigate = useNavigate();
 
   const createDescription1 = (e) => {
     setDescription1(e.target.value);
@@ -346,7 +347,8 @@ function Userpage({
         <div></div>
       )}
       {success === true ? <Success message={message} /> : <Subscription />}
-      <button onClick={retrieveData}>Retrieval</button>
+      {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
+      <button onClick={() => navigate("/extra-charge")}>Extra Retrieval</button>
       <button onClick={storeOnClick}>Storage</button>
       <br />
       <br />
