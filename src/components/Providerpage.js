@@ -5,7 +5,7 @@ import Chat from "./Chat";
 import axios from "axios";
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
-const data = [{name: 'September 2020', uv: 400, pv: 2400}, {name: 'October 2020', uv: 600, pv: 1200}, {name: 'November 2020', uv: 200, pv: 1800}, {name: 'December 2020', uv: 900, pv: 1700}];
+const data = [{name: 'September 2020', uv: 400}, {name: 'October 2020', uv: 600}, {name: 'November 2020', uv: 200}, {name: 'December 2020', uv: 900, pv: 1700}];
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -92,7 +92,7 @@ function Providerpage({ user, email2 }) {
     <Legend width={100} wrapperStyle={{ top: 40, left: 75, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
     <Bar dataKey="uv" fill="#094aed" barSize={50} />
-    <Bar dataKey="pv" fill="#094aed" barSize={50} />
+    <Bar dataKey="pv" fill="#12c5e0" barSize={50} />
   </BarChart>
       <h4>Your amount of money made: </h4>
       <h4>You will make 12900 yen this month</h4>
