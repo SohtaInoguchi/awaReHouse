@@ -12,6 +12,8 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import {
   BrowserRouter as Router,
