@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
+import { Button, Form } from "react-bootstrap";
 
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
@@ -79,86 +80,84 @@ export default function NewUser({ setMode }) {
 
   if (registrationDone === false) {
     return (
-      <div className="flex flex-row border-8 justify-center   ">
-        <div className="border-2 flex flex-col items-end w-fit">
-          <img
-            className="flex  w-28 h-28 rounded-lg"
-            src={require("../pictures/LOGO.png")}
-            alt="aware house logo"
-          />
-          {/* <h5 className="w-auto flex-wrap break-words ">
-            Welcome to The awaReHouse User Area
-          </h5> */}
-        </div>
-        <div className=" bg-white rounded-lg shadow-lg">
-          <form className="flex justify-center flex-col">
-            <br></br>
-            <label className="flex flex-col text-center justify-center items-center">
-              <h3>Sign up</h3>
-              <input
-                className="flex rounded-sm bg-gray-200 "
+      <div className="containerNewRegistration">
+        <div className="newUser text-gray-600">
+          SIGNUP AS A STORAGE USER
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Control
                 type="text"
                 name="firstname"
-                placeholder="Your first name"
+                placeholder="First name"
                 value={userFirstName}
                 onChange={createFirstName}
+                required
+                className="my-3"
               />
-              <br></br>
-              <input
-                className="flex  rounded-sm bg-gray-200"
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
                 type="text"
                 name="lastname"
-                placeholder="Your last name"
+                placeholder="Last name"
                 value={userLastName}
                 onChange={createLastName}
+                required
+                className="my-3"
               />
-              <br></br>
-              <input
-                className="flex  rounded-sm bg-gray-200"
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
                 type="password"
                 name="password"
-                placeholder="Your created password"
+                placeholder="Password"
                 value={userPassword}
                 onChange={createPassword}
+                required
+                className="my-3"
               />
-              <br></br>
-              <input
-                className="flex  rounded-sm bg-gray-200"
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
                 type="text"
                 name="address"
-                placeholder="Your address"
+                placeholder="Address"
                 value={userAddress}
                 onChange={createAddress}
+                required
+                className="my-3"
               />
-              <br></br>
-              <input
-                className="flex justify-border rounded-sm bg-gray-200"
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
                 type="text"
                 name="email"
-                placeholder="Your email"
+                placeholder="Email"
                 value={userEmail}
                 onChange={createEmail}
+                required
+                className="my-3"
               />
-              <br></br>
-              Identification image:
-              <input
-                className="flex justify-center rounded-md text-center "
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
                 type="file"
                 name="file"
                 onChange={pictureHandler}
+                // required
+                className="my-3"
               />
-              <br></br>
-            </label>
-            <br></br>
+            </Form.Group>
 
-            <input
-              className=" shadow-lg border-2 text-center bg-blue-300 hover:bg-blue-400 rounded-lg mx-5 my-2 px-7 py-2 "
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={handleSubmit}
-            />
-          </form>
+            <Button variant="light" type="submit">
+              Submit
+            </Button>
+          </Form>
         </div>
       </div>
     );
