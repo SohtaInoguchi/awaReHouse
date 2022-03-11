@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
+import { Button, Form } from "react-bootstrap";
+
 
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
@@ -80,70 +82,87 @@ export default function NewUser({ setMode }) {
   if (registrationDone === false) {
     return (
       <div className="containerNewRegistration">
-        <div className="newUser">
-          REGISTER AS A STORAGE USER
-          <form>
-            <br></br>
-            <label>
-              First Name:
-              <input
-                type="text"
-                name="firstname"
-                placeholder="Your first name"
-                value={userFirstName}
-                onChange={createFirstName}
-              />
-              <br></br>
-              Last Name:
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Your last name"
-                value={userLastName}
-                onChange={createLastName}
-              />
-              <br></br>
-              Password:
-              <input
-                type="password"
-                name="password"
-                placeholder="Your created password"
-                value={userPassword}
-                onChange={createPassword}
-              />
-              <br></br>
-              Address:
-              <input
-                type="text"
-                name="address"
-                placeholder="Your address"
-                value={userAddress}
-                onChange={createAddress}
-              />
-              <br></br>
-              Email:
-              <input
-                type="text"
-                name="email"
-                placeholder="Your email"
-                value={userEmail}
-                onChange={createEmail}
-              />
-              <br></br>
-              Identification proof:
-              <input type="file" name="file" onChange={pictureHandler} />
-              <br></br>
-            </label>
-            <br></br>
-            <input
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={handleSubmit}
+        <div className="newUser text-gray-600">
+          SIGNUP AS A STORAGE USER
+          <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Control 
+              type="text"
+              name="firstname"
+              placeholder="First name"
+              value={userFirstName}
+              onChange={createFirstName}
+              required
+              className="my-3"
             />
-          </form>
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="lastname"
+              placeholder="Last name"
+              value={userLastName}
+              onChange={createLastName}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={userPassword}
+              onChange={createPassword}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="address"
+              placeholder="Address"
+              value={userAddress}
+              onChange={createAddress}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={userEmail}
+              onChange={createEmail}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="file" 
+              name="file" 
+              onChange={pictureHandler} 
+              // required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Button
+            variant="light"
+            type="submit"
+            >
+              Submit
+            </Button>
+          </Form>
         </div>
-        <br></br>
       </div>
     );
   }
