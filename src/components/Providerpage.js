@@ -48,21 +48,20 @@ function Providerpage({ user, email2 }) {
 
   const renderListOfStorage = () => {
     return (
-      <Card style={{ width: '18rem'}}>
-        <Card.Img variant="top" src="../pictures/plain-shipping-boxes-packhelp-kva.jpeg"/>
+      <Card className="m-10 max-w-sm">
+      <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
         <Card.Body>
-          <Card.Title>Stored box</Card.Title>
-          <Card.Text>
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
               </Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body >
               {providerItems.map((item, idx) => {
                 return (
-                  <ul key={idx}>
-                    <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
+                  <>
+                  {/* <ul key={idx}> */}
+                    <li key={`${idx}d`} className="mx-0"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
 
                     {item.fragile === true ? (
                       <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
@@ -74,14 +73,13 @@ function Providerpage({ user, email2 }) {
                       ) : (
                         <></>
                         )}
-                  </ul>
+                  {/* </ul> */}
+                  </>
                 );
               })}
-
               </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        </Card.Text>
       </Card.Body>
     </Card>
     );
