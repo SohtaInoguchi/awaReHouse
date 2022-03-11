@@ -82,22 +82,23 @@ export default function NewUser({ setMode }) {
   if (registrationDone === false) {
     return (
       <div className="containerNewRegistration">
-        <div className="newUser">
+        <div className="newUser text-gray-600">
           SIGNUP AS A STORAGE USER
           {/* <form> */}
-          <Form>
+          <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Control 
               type="text"
               name="firstname"
-              placeholder="Your first name"
+              placeholder="First name"
               value={userFirstName}
               onChange={createFirstName}
+              required
               className="my-3"
             />
             </Form.Group>
 
-            <br></br>
+            {/* <br></br>
             <label>
               First Name:
               <input
@@ -106,8 +107,21 @@ export default function NewUser({ setMode }) {
                 placeholder="Your first name"
                 value={userFirstName}
                 onChange={createFirstName}
-              />
-              <br></br>
+              /> */}
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="lastname"
+              placeholder="Last name"
+              value={userLastName}
+              onChange={createLastName}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            {/* <br></br>
               Last Name:
               <input
                 type="text"
@@ -117,16 +131,42 @@ export default function NewUser({ setMode }) {
                 onChange={createLastName}
               />
               <br></br>
-              Password:
-              <input
+              Password: */}
+
+            <Form.Group>
+            <Form.Control 
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={userPassword}
+              onChange={createPassword}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+              {/* <input
                 type="password"
                 name="password"
                 placeholder="Your created password"
                 value={userPassword}
                 onChange={createPassword}
               />
-              <br></br>
-              Address:
+              <br></br> */}
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="address"
+              placeholder="Address"
+              value={userAddress}
+              onChange={createAddress}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+              {/* Address:
               <input
                 type="text"
                 name="address"
@@ -134,8 +174,20 @@ export default function NewUser({ setMode }) {
                 value={userAddress}
                 onChange={createAddress}
               />
-              <br></br>
-              Email:
+              <br></br> */}
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={userEmail}
+              onChange={createEmail}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+              {/* Email:
               <input
                 type="text"
                 name="email"
@@ -143,18 +195,38 @@ export default function NewUser({ setMode }) {
                 value={userEmail}
                 onChange={createEmail}
               />
-              <br></br>
-              Identification proof:
-              <input type="file" name="file" onChange={pictureHandler} />
-              <br></br>
-            </label>
-            <br></br>
-            <input
+              <br></br> */}
+            <Form.Group>
+            <Form.Control 
+              type="file" 
+              name="file" 
+              onChange={pictureHandler} 
+              // required
+              className="my-3"
+            />
+            </Form.Group>
+
+              {/* Identification proof:
+              <input 
+              type="file" 
+              name="file" 
+              onChange={pictureHandler} 
+              />
+              <br></br> */}
+            {/* </label> */}
+            {/* <br></br> */}
+            <Button
+            variant="light"
+            type="submit"
+            >
+              Submit
+            </Button>
+            {/* <input
               type="submit"
               value="Submit"
               style={{ cursor: "pointer" }}
               onClick={handleSubmit}
-            />
+            /> */}
             </Form>
           {/* </form> */}
         </div>
