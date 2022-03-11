@@ -64,6 +64,18 @@ app.post("/allItems", async (req, res) => {
   }
 });
 
+// app.post("/lastPayments", async (req, res) => {
+//   try {
+//     const payments = await db
+//       .select("*")
+//       .from("payments")
+//       .where("provider_email", req.body.email);
+//     res.send(payments);
+//   } catch {
+//     res.send("No payments found yet");
+//   }
+// });
+
 // // retrieve all goods stored at a single place
 // app.post("/providerItems", async (req, res) => {
 //   try {
@@ -98,6 +110,7 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
+    
     const token = await jwt.sign(
       { user: input },
       process.env.ACCESS_TOKEN_SECRET
@@ -227,6 +240,19 @@ app.get("/users/:email", async (req, res) => {
       .from("users")
       .where({ email });
     res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.get("/payments/:provider_email", async (req, res) => {
+  try {
+    const { provider_email } = req.params;
+    const previousPayments = await db
+      .select("*")
+      .from("payments")
+      .where({ provider_email });
+    res.json(previousPayments);
   } catch {
     console.log("Error in retrieving address");
   }

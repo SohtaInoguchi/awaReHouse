@@ -41,7 +41,6 @@ function App() {
 
   //Axios
   useEffect(() => {
-    console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, []);
 

@@ -27,7 +27,28 @@ function Providerpage({ user, email2 }) {
   const [providerItems, setProviderItems] = useState("");
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
+  const [retrievedPayments, setRetrievedPayments] = useState();
+  const [thisMonthObject, setThisMonthObject] = useState();
+
   
+  const retrievePayments = async (req,res) => {
+    try {
+      await axios.get(`/payments/${email2}`)
+      .then((res) => {
+        if (res.data.length<=12) {
+          setRetrievedPayments(res.data)
+        } else {
+          while (res.data.length>12){
+            res.data.shift()
+          }
+          setRetrievedPayments(res.data)
+        } 
+      })
+    } catch{
+        console.log("NOPE! Payments cannot be retrieved");
+    }
+  }
+ 
   const retrieveProviderAddress = async (req,res) => {
     try {
       await axios.get(`/providers/${email2}`)
@@ -42,6 +63,7 @@ function Providerpage({ user, email2 }) {
 
   useEffect(()=>{
     retrieveProviderAddress()
+    retrievePayments()
   },[])
   
   const retrieveProviderItems = (req,res) => {
@@ -52,7 +74,11 @@ function Providerpage({ user, email2 }) {
     retrieveProviderItems()
   },[displayProviderTable])
 
-  
+  const incomingPayment = (providerItems.length)*1077;
+  const latestObj = {covered_month:"This month", amount_jpy: incomingPayment};
+  console.log(latestObj)
+
+
 
   return (
     <div>
