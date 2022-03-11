@@ -60,6 +60,7 @@ export default function Chat() {
 
   const sendMessage = () => {
     const chat = document.getElementById("chat");
+    if (chat.value.length < 1) return;
     let temp = [...chatMessages];
     const sentMessageObj = {receiveOrSent: "sent", message: chat.value};
     // temp.push(chat.value);
@@ -161,14 +162,8 @@ export default function Chat() {
           </>
   }
 
-  // const check = (e) => {
-  //   e.preventDefault();
-  //   console.log("chat opened", chatMessages);
-  // }
-
   return (
     <>
-
       {
       isChatOpened ? 
       renderChatBox()

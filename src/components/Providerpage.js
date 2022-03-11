@@ -52,15 +52,14 @@ function Providerpage({ user, email2 }) {
       <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
         <Card.Body>
           <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
+            <Accordion.Item eventKey="1">
               <Accordion.Header>
                 Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
               </Accordion.Header>
               <Accordion.Body >
               {providerItems.map((item, idx) => {
                 return (
-                  <>
-                  {/* <ul key={idx}> */}
+                  <div key={idx}>
                     <li key={`${idx}d`} className="mx-0"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
 
                     {item.fragile === true ? (
@@ -73,8 +72,7 @@ function Providerpage({ user, email2 }) {
                       ) : (
                         <></>
                         )}
-                  {/* </ul> */}
-                  </>
+                  </div>
                 );
               })}
               </Accordion.Body>
