@@ -3,9 +3,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-
-const data = [{name: 'September 2020', uv: 400}, {name: 'October 2020', uv: 600}, {name: 'November 2020', uv: 200}, {name: 'December 2020', uv: 900, pv: 1700}];
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend, LabelList } from 'recharts';
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -70,14 +68,23 @@ function Providerpage({ user, email2 }) {
     axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
   }
 
+  const incomingPayment = (providerItems.length)*1077;
+  const latestObj = {covered_month:"This month", amount_jpy: incomingPayment};
+
   useEffect(()=>{
     retrieveProviderItems()
   },[displayProviderTable])
-
-  const incomingPayment = (providerItems.length)*1077;
-  const latestObj = {covered_month:"This month", amount_jpy: incomingPayment};
-  console.log(latestObj)
-
+  
+  function CustomTooltip({ payload, label, active }) {
+    if (active) {
+      return (
+        <div>
+          <p className="label">{`${label} : JPY ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+    return null;
+  }
 
 
   return (
@@ -111,14 +118,14 @@ function Providerpage({ user, email2 }) {
         })}
       </ol> : <></>}
       <h4>Your next pay day is: {today}</h4>
-      <BarChart width={600} height={300} data={data}>
-    <XAxis dataKey="name" stroke="#000000" />
-    <YAxis />
-    <Tooltip wrapperStyle={{ width: 150, backgroundColor: '#ccc' }} />
-    <Legend width={100} wrapperStyle={{ top: 40, left: 75, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
-    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-    <Bar dataKey="uv" fill="#094aed" barSize={50} />
-    <Bar dataKey="pv" fill="#12c5e0" barSize={50} />
+      <BarChart width={600} height={300} data={retrievedPayments} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
+    <XAxis dataKey="covered_month" stroke="#000000" tick={{fontSize: 5}} />
+    <YAxis/>
+    <Tooltip content={<CustomTooltip />} wrapperStyle={{ background: "lightblue"}} />
+    {/* <Legend width={100} wrapperStyle={{ top: 40, left: 75, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} /> */}
+    {/* <CartesianGrid stroke="#ccc" strokeDasharray="5 2" /> */}
+    <Bar dataKey="amount_jpy" fill="#094aed" barSize={25}/>
+    <Bar dataKey="pv" fill="#12c5e0" barSize={25} />
   </BarChart>
       <h4>Your amount of money made: </h4>
       <h4>You will make 12900 yen this month</h4>
