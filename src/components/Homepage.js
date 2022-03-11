@@ -34,9 +34,9 @@ export default function Homepage({
       {message ? (
         <Response message={message} />
       ) : (
-        <div className="flex flex-wrap justify-center items-center">
+        <div className="flex flex-wrap justify-center items-center ">
           {" "}
-          <div className="homepageContainer flex justify-center items-center flex-wrap  ">
+          <div className="homepageContainer flex justify-center items-center flex-wrap ">
             <img
               className="top-0 w-20 h-20 rounded-3xl"
               src={require("../pictures/LOGO.png")}
@@ -80,13 +80,14 @@ export default function Homepage({
             </div>
             <div className="containerHomeRight"></div>
           </div>
-          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-auto  shadow-xl flex-wrap ">
+          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-full  flex-wrap  ">
             <img
-              className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl"
-              src={require("../pictures/homepage-img.jpeg")}
+              className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl opacity-80"
+              // src={require("../pictures/homepage-img.jpeg")}
+              src={require("../pictures/clean-house.jpeg")}
               alt=""
             />
-            <div className="flex flex-col justify-center items-center w-60 bg-white text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 ">
+            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
                 awaReHouse is the something makes your life better. So let's
@@ -100,6 +101,14 @@ export default function Homepage({
                 Learn more
               </p>
             </div>
+          </div>
+          <div
+            className="flex flex-col
+           justify-center items-center border-8 w-full mx-3 my-12 px-3 py-12 bg-gray-200 "
+          >
+            <h3 className="flex text-gray-500 font-serif text-6xl ">
+              More Space, More Life
+            </h3>
           </div>
           <LearnMore />
         </div>
