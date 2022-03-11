@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Response from "./Response";
 
-
 export default function Homepage({
   setMode,
   setNewCustomer,
@@ -33,21 +32,19 @@ export default function Homepage({
       ) : (
         <div>
           {" "}
-          <div className="toni">Toni</div>
-          <div className="bg-red-500 text-yellow-300">jeje</div>
-          <div className="homepageContainer">
-            <div className="containerHomeLeft">
-              <img
-                className="logo"
-                src={require("../pictures/LOGO.png")}
-                alt="logo awaReHouse"
-              />
-              <h1 className="welcomeMessage">
-                Welcome to <br></br> awaReHouse
-              </h1>
+          <div className="homepageContainer  flex justify-center items-center">
+            <img
+              className="top-0 w-20 h-20 rounded-3xl"
+              src={require("../pictures/LOGO.png")}
+              alt=""
+            />
+            <div className="flex ">
+              {/* justify-center items-center */}
+              <h1 className="welcomeMessage flex ">awaReHouse</h1>
             </div>
+
             <div className="containerHomeRight">
-              <img
+              {/* <img
                 className="homeImages"
                 src={require("../pictures/1.jpg")}
                 alt="moving boxes"
@@ -56,9 +53,19 @@ export default function Homepage({
                 className="homeImages"
                 src={require("../pictures/2.jpg")}
                 alt="storage place"
-              />
+              /> */}
             </div>
           </div>
+          <div
+            className="opacity-70 text-white bg-gray-600 rounded-xl text-center w-auto mx-2 my-20 px-2 py-20 cursor-pointer"
+            onClick={() => console.log("clicked")}
+          >
+            What is awaReHouse?
+          </div>
+          <div className="homepage-p">awaReHouse is the xxxxx</div>
+          <div className="opacity-50">Who is good for awaReHouse?</div>
+          <div className="opacity-50">what is provider?</div>
+          <div className="opacity-50">what is user need to do?</div>
           <div className="homeButtons">
             <div className="homeUser">
               <button

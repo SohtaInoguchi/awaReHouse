@@ -79,14 +79,24 @@ export default function NewUser({ setMode }) {
 
   if (registrationDone === false) {
     return (
-      <div className="containerNewRegistration">
-        <div className="newUser">
-          REGISTER AS A STORAGE USER
-          <form>
+      <div className="flex flex-row border-8 justify-center   ">
+        <div className="border-2 flex flex-col items-end w-fit">
+          <img
+            className="flex  w-28 h-28 rounded-lg"
+            src={require("../pictures/LOGO.png")}
+            alt="aware house logo"
+          />
+          {/* <h5 className="w-auto flex-wrap break-words ">
+            Welcome to The awaReHouse User Area
+          </h5> */}
+        </div>
+        <div className=" bg-white rounded-lg shadow-lg">
+          <form className="flex justify-center flex-col">
             <br></br>
-            <label>
-              First Name:
+            <label className="flex flex-col text-center justify-center items-center">
+              <h3>Sign up</h3>
               <input
+                className="flex rounded-sm bg-gray-200 "
                 type="text"
                 name="firstname"
                 placeholder="Your first name"
@@ -94,8 +104,8 @@ export default function NewUser({ setMode }) {
                 onChange={createFirstName}
               />
               <br></br>
-              Last Name:
               <input
+                className="flex  rounded-sm bg-gray-200"
                 type="text"
                 name="lastname"
                 placeholder="Your last name"
@@ -103,8 +113,8 @@ export default function NewUser({ setMode }) {
                 onChange={createLastName}
               />
               <br></br>
-              Password:
               <input
+                className="flex  rounded-sm bg-gray-200"
                 type="password"
                 name="password"
                 placeholder="Your created password"
@@ -112,8 +122,8 @@ export default function NewUser({ setMode }) {
                 onChange={createPassword}
               />
               <br></br>
-              Address:
               <input
+                className="flex  rounded-sm bg-gray-200"
                 type="text"
                 name="address"
                 placeholder="Your address"
@@ -121,8 +131,8 @@ export default function NewUser({ setMode }) {
                 onChange={createAddress}
               />
               <br></br>
-              Email:
               <input
+                className="flex justify-border rounded-sm bg-gray-200"
                 type="text"
                 name="email"
                 placeholder="Your email"
@@ -130,12 +140,19 @@ export default function NewUser({ setMode }) {
                 onChange={createEmail}
               />
               <br></br>
-              Identification proof:
-              <input type="file" name="file" onChange={pictureHandler} />
+              Identification image:
+              <input
+                className="flex justify-center rounded-md text-center "
+                type="file"
+                name="file"
+                onChange={pictureHandler}
+              />
               <br></br>
             </label>
             <br></br>
+
             <input
+              className=" shadow-lg border-2 text-center bg-blue-300 hover:bg-blue-400 rounded-lg mx-5 my-2 px-7 py-2 "
               type="submit"
               value="Submit"
               style={{ cursor: "pointer" }}
@@ -143,7 +160,6 @@ export default function NewUser({ setMode }) {
             />
           </form>
         </div>
-        <br></br>
       </div>
     );
   }

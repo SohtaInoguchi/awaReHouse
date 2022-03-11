@@ -6,5 +6,7 @@
   .toni {
     @apply bg-green-500 text-white flex justify-center;
   }
-
+  .homepage-p {
+    @apply text-green-600 scale-0;
+  }
 }
