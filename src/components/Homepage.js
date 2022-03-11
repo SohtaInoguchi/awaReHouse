@@ -34,78 +34,59 @@ export default function Homepage({
       {message ? (
         <Response message={message} />
       ) : (
-        <div>
+        <div className="flex flex-wrap justify-center items-center">
           {" "}
-          <div className="homepageContainer  flex justify-center items-center ">
+          <div className="homepageContainer flex justify-center items-center flex-wrap  ">
             <img
               className="top-0 w-20 h-20 rounded-3xl"
               src={require("../pictures/LOGO.png")}
               alt=""
             />
-            <div className="flex ">
-              <h1 className="welcomeMessage flex ">awaReHouse</h1>
-              <div className="flex justify-center items-center">
+
+            <h1 className="welcomeMessage flex flex-wrap">awaReHouse</h1>
+
+            <div className="flex flex-row flex-wrap ">
+              <div className="flex ">
+                <div className="flex justify-center items-center">
+                  <button
+                    className="login-button"
+                    onClick={() => navigate("/login/user")}
+                  >
+                    <Icon icon={<FaUser size="24" />} />
+                    User
+                  </button>
+                </div>
+
+                <div className="">
+                  <button
+                    className="login-button"
+                    onClick={() => {
+                      navigate("/login/provider");
+                    }}
+                  >
+                    <Icon icon={<FaUserTie size="24" />} />
+                    Provider
+                  </button>
+                </div>
+
                 <button
                   className="login-button"
-                  onClick={() => navigate("/login/user")}
+                  onClick={() => navigate("admin")}
                 >
-                  <Icon icon={<FaUser size="24" />} />
-                  User
+                  <Icon icon={<FaUserShield size="24" />} />
+                  Admin
                 </button>
-              </div>
-              <div>
-                Want to become a user?
-                <p
-                  className="signup"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    navigate("/signup/user");
-                  }}
-                >
-                  SIGN UP
-                </p>
-              </div>
-            </div>
-
-            <div className="homeProvider">
-              <button
-                className="login-button"
-                onClick={() => {
-                  navigate("/login/provider");
-                }}
-              >
-                <Icon icon={<FaUserTie size="24" />} />
-                Provider
-              </button>
-              <div>
-                Want to become a provider?
-                <p
-                  className="signup"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigate("/signup/provider")}
-                >
-                  SIGN UP
-                </p>
-              </div>
-            </div>
-            <div className="homeButtons">
-              <div className="login-button" onClick={() => navigate("admin")}>
-                <Icon icon={<FaUserShield size="24" />} />
-                Admin
               </div>
             </div>
             <div className="containerHomeRight"></div>
           </div>
-          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-auto border-8 shadow-xl ">
+          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-auto  shadow-xl flex-wrap ">
             <img
               className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl"
               src={require("../pictures/homepage-img.jpeg")}
               alt=""
             />
-            <div
-              className="flex flex-col justify-center items-center w-60 bg-white text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 "
-              onClick={() => console.log("clicked")}
-            >
+            <div className="flex flex-col justify-center items-center w-60 bg-white text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
                 awaReHouse is the something makes your life better. So let's

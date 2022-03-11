@@ -6,9 +6,7 @@
   .toni {
     @apply bg-green-500 text-white flex justify-center;
   }
-  .homepage-p {
-    @apply text-green-600 scale-0;
-  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
