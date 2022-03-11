@@ -119,13 +119,13 @@ function Providerpage({ user, email2 }) {
       </ol> : <></>}
       <h4>Your next pay day is: {today}</h4>
       <BarChart width={600} height={300} data={retrievedPayments} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
-    <XAxis dataKey="covered_month" stroke="#000000" tick={{fontSize: 5}} />
-    <YAxis/>
+    <XAxis dataKey="covered_month" stroke="#000000" tick={{fontSize: 0}} />
+    <YAxis tick={{fontSize: 12}}/>
     <Tooltip content={<CustomTooltip />} wrapperStyle={{ background: "lightblue"}} />
     {/* <Legend width={100} wrapperStyle={{ top: 40, left: 75, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} /> */}
     {/* <CartesianGrid stroke="#ccc" strokeDasharray="5 2" /> */}
-    <Bar dataKey="amount_jpy" fill="#094aed" barSize={25}/>
-    <Bar dataKey="pv" fill="#12c5e0" barSize={25} />
+    <Bar dataKey="amount_jpy" fill="#094aed" barSize={50}/>
+    <Bar dataKey="pv" fill="#12c5e0" barSize={50} />
   </BarChart>
       <h4>Your amount of money made: </h4>
       <h4>You will make 12900 yen this month</h4>
