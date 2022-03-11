@@ -57,7 +57,7 @@ app.post("/allItems", async (req, res) => {
       .select("*")
       .from("inventory")
       .where("user_owner", req.body.email);
-    console.log(items);
+    // console.log(items);
     res.send(items);
   } catch {
     res.send("No items found yet");
@@ -81,7 +81,8 @@ app.post("/login", async (req, res) => {
   try {
     // for user
     let user;
-
+    console.log("auth middleware");
+    console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
           .select("password", "first_name", "email")
@@ -100,7 +101,8 @@ app.post("/login", async (req, res) => {
 
     const token = await jwt.sign(
       { user: input },
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1s" }
     );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
@@ -133,7 +135,8 @@ function authenticateToken(req, res, next) {
     console.log(token);
     req.token = token;
     next();
-  } else res.send(403);
+  } else res.sendStatus(403);
+  // .json({ message: "YOU ARE NOT ALLOWED TO USE I THIS SHIT!!" });
 }
 
 app.get("/users", async (req, res) => {
@@ -165,6 +168,15 @@ app.post("/users", async (req, res) => {
     email: req.body.email,
     picture_file: req.body.picture_file,
   };
+
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
   try {
     console.log("from here");
     console.log(user);
@@ -199,6 +211,14 @@ app.post("/providers", async (req, res) => {
     emergency_contact_phone_number: req.body.emergency_contact_phone_number,
     picture_file: req.body.picture_file,
   };
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
   try {
     console.log("from here");
     console.log(user);

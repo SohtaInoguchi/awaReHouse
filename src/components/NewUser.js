@@ -4,7 +4,6 @@ import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form } from "react-bootstrap";
 
-
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
@@ -85,80 +84,77 @@ export default function NewUser({ setMode }) {
         <div className="newUser text-gray-600">
           SIGNUP AS A STORAGE USER
           <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Control 
-              type="text"
-              name="firstname"
-              placeholder="First name"
-              value={userFirstName}
-              onChange={createFirstName}
-              required
-              className="my-3"
-            />
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="firstname"
+                placeholder="First name"
+                value={userFirstName}
+                onChange={createFirstName}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="lastname"
-              placeholder="Last name"
-              value={userLastName}
-              onChange={createLastName}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="lastname"
+                placeholder="Last name"
+                value={userLastName}
+                onChange={createLastName}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={userPassword}
-              onChange={createPassword}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={userPassword}
+                onChange={createPassword}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={userAddress}
-              onChange={createAddress}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={userAddress}
+                onChange={createAddress}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={userEmail}
-              onChange={createEmail}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={userEmail}
+                onChange={createEmail}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="file" 
-              name="file" 
-              onChange={pictureHandler} 
-              // required
-              className="my-3"
-            />
+              <Form.Control
+                type="file"
+                name="file"
+                onChange={pictureHandler}
+                // required
+                className="my-3"
+              />
             </Form.Group>
 
-            <Button
-            variant="light"
-            type="submit"
-            >
+            <Button variant="light" type="submit">
               Submit
             </Button>
           </Form>
