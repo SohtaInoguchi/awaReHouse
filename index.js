@@ -154,6 +154,15 @@ app.get("/providers", async (req, res) => {
   }
 });
 
+app.get("/payments", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("payments");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
 app.post("/users", async (req, res) => {
   const salt = await bcrypt.genSalt();
   const encryptedPassword = await bcrypt.hash(req.body.password, salt);
