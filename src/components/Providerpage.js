@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import { Badge, Accordion } from "react-bootstrap";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -45,45 +46,53 @@ function Providerpage({ user, email2 }) {
     axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
   }
 
+  const renderListOfStorage = () => {
+    return <ol>
+    Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
+    {providerItems.map((item, idx) => {
+      return (
+        <ul key={idx}>
+          <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
+
+          {item.fragile === true ? (
+            <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
+          ) : (
+            <></>
+          )}
+          {item.heavy === true ? (
+            <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
+          ) : (
+            <></>
+          )}
+        </ul>
+      );
+    })}
+  </ol>
+  }
+
   useEffect(()=>{
     retrieveProviderItems()
   },[displayProviderTable])
 
-  
 
   return (
-    <div>
-      <h1>Welcome {user}</h1>
+    <div id="provider-page-wrapper">
+      <Badge bg="light" id="provider">
+        Welcome {user}
+      </Badge>
       <h3>Next visit will be 02/02/22</h3>
       <br></br>
       <button onClick={()=>{
         setDisplayProviderTable(!displayProviderTable);
         }}>LIST OF STORED BOXES</button>
       <br></br>
-      {displayProviderTable === true ? <ol>
-        Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
-        {providerItems.map((item, idx) => {
-          return (
-            <ul key={idx}>
-              <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
-
-              {item.fragile === true ? (
-                <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
-              ) : (
-                <></>
-              )}
-              {item.heavy === true ? (
-                <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
-              ) : (
-                <></>
-              )}
-            </ul>
-          );
-        })}
-      </ol> : <></>}
+      {displayProviderTable === true ? 
+      renderListOfStorage() : 
+      <></>}
+      
       <h4>Your next pay day is: {today}</h4>
-      <h4>Your amount of money made: </h4>
-      <h4>You will make 12900 yen this month</h4>
+      {/* <h4>Your amount of money made: </h4>
+      <h4>You will make 12900 yen this month</h4> */}
       <button>Add more storage capacity</button>
 
       <br />
