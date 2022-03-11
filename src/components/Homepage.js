@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import Response from "./Response";
-import { FaUserTie, FaUser } from "react-icons/fa";
+import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
+
 import Icon from "./Icon";
+import LearnMore from "./LearnMore";
 export default function Homepage({
   setMode,
   setNewCustomer,
@@ -34,14 +36,13 @@ export default function Homepage({
       ) : (
         <div>
           {" "}
-          <div className="homepageContainer  flex justify-center items-center">
+          <div className="homepageContainer  flex justify-center items-center ">
             <img
               className="top-0 w-20 h-20 rounded-3xl"
               src={require("../pictures/LOGO.png")}
               alt=""
             />
             <div className="flex ">
-              {/* justify-center items-center */}
               <h1 className="welcomeMessage flex ">awaReHouse</h1>
               <div className="flex justify-center items-center">
                 <button
@@ -87,21 +88,15 @@ export default function Homepage({
                 </p>
               </div>
             </div>
-
-            <div className="containerHomeRight">
-              {/* <img
-                className="homeImages"
-                src={require("../pictures/1.jpg")}
-                alt="moving boxes"
-              />
-              <img
-                className="homeImages"
-                src={require("../pictures/2.jpg")}
-                alt="storage place"
-              /> */}
+            <div className="homeButtons">
+              <div className="login-button" onClick={() => navigate("admin")}>
+                <Icon icon={<FaUserShield size="24" />} />
+                Admin
+              </div>
             </div>
+            <div className="containerHomeRight"></div>
           </div>
-          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-auto ">
+          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-auto border-8 shadow-xl ">
             <img
               className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl"
               src={require("../pictures/homepage-img.jpeg")}
@@ -125,11 +120,7 @@ export default function Homepage({
               </p>
             </div>
           </div>
-          <div className="homeButtons">
-            <h1 className="admin" onClick={() => navigate("admin")}>
-              Admin
-            </h1>
-          </div>
+          <LearnMore />
         </div>
       )}
     </div>
