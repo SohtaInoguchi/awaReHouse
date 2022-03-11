@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
+import { Button, Form, InputGroup } from "react-bootstrap";
 
 export default function NerCustomer({ setMode }) {
   const [providerFirstName, setProviderFirstName] = useState("");
@@ -18,6 +19,7 @@ export default function NerCustomer({ setMode }) {
   const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const createProviderFirstName = (e) => {
     setProviderFirstName(e.target.value);
@@ -89,103 +91,133 @@ export default function NerCustomer({ setMode }) {
   };
 
   const handleProviderSubmit = (e) => {
-    e.preventDefault();
-    sendProvider();
-    setRegistrationDone(true);
+      sendProvider();
+      setRegistrationDone(true);
   };
 
   if (registrationDone === false) {
     return (
       <div className="containerNewRegistration">
-        <div className="newProvider">
-          REGISTER AS A STORAGE PROVIDER
-          <form>
-            <br></br>
-            <label>
-              First Name:
-              <input
+        <div className="newProvider text-slate-900 m-5">
+          SIGNUP AS A PROVIDER
+          <Form
+          onSubmit={handleProviderSubmit}>
+
+            <Form.Group 
+            >
+              <Form.Control 
                 type="text"
-                name="firstname"
-                placeholder="Your first name"
+                name="firstname"            
+                placeholder="Enter first name"
                 value={providerFirstName}
                 onChange={createProviderFirstName}
+                required
+                className="my-3"
               />
-              <br></br>
-              Last Name:
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Your last name"
-                value={providerLastName}
-                onChange={createProviderLastName}
-              />
-              <br></br>
-              Password:
-              <input
-                type="password"
-                name="password"
-                placeholder="Your created password"
-                value={providerPassword}
-                onChange={createProviderPassword}
-              />
-              <br></br>
-              Address:
-              <input
-                type="text"
-                name="address"
-                placeholder="Your address"
-                value={providerAddress}
-                onChange={createProviderAddress}
-              />
-              <br></br>
-              Email:
-              <input
-                type="text"
-                name="email"
-                placeholder="Your email"
-                value={providerEmail}
-                onChange={createProviderEmail}
-              />
-              <br></br>
-              Banking Reference:
-              <input
-                type="text"
-                name="bankreference"
-                placeholder="Your banking reference"
-                value={providerBankReference}
-                onChange={createProviderBankReference}
-              />
-              <br></br>
-              Emergency Contact Person:
-              <input
-                type="text"
-                name="emergencycontact"
-                placeholder="Emergency contact"
-                value={providerEmergencyContact}
-                onChange={createProviderEmergencyContact}
-              />
-              <br></br>
-              Emergency Contact Phone:
-              <input
-                type="text"
-                name="emergencycontactphone"
-                placeholder="Emergency contact phone"
-                value={providerEmergencyContactPhone}
-                onChange={createProviderEmergencyContactPhone}
-              />
-              <br></br>
-              Storage place picture:
-              <input type="file" name="file" onChange={pictureStorageHandler} />
-              <br></br>
-            </label>
-            <br></br>
-            <input
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={handleProviderSubmit}
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="lastname"            
+              placeholder="Last name"
+              value={providerLastName}
+              onChange={createProviderLastName}
+              required
+              className="my-3"
             />
-          </form>
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={providerPassword}
+              onChange={createProviderPassword}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="address"
+              placeholder="Address"
+              value={providerAddress}
+              onChange={createProviderAddress}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={providerEmail}
+              onChange={createProviderEmail}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="bankreference"
+              placeholder="Banking reference"
+              value={providerBankReference}
+              onChange={createProviderBankReference}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="emergencycontact"
+              placeholder="Emergency contact name"
+              value={providerEmergencyContact}
+              onChange={createProviderEmergencyContact}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+
+            <Form.Group>
+            <Form.Control 
+              type="text"
+              name="emergencycontactphone"
+              placeholder="Emergency contact phone"
+              value={providerEmergencyContactPhone}
+              onChange={createProviderEmergencyContactPhone}
+              required
+              className="my-3"
+            />
+            </Form.Group>
+
+            <Form.Group>
+            <Form.Control 
+                type="file" 
+                name="file" 
+                onChange={pictureStorageHandler} 
+                className="my-3"
+                // required
+                />
+            </Form.Group>
+
+            <Button 
+            variant="light" 
+            type="submit"
+            // onClick={handleProviderSubmit}
+            >Submit
+            </Button>
+          </Form>
         </div>
       </div>
     );
@@ -196,7 +228,7 @@ export default function NerCustomer({ setMode }) {
         <div>
           THANK YOU FOR YOUR REGISTRATION
           <br></br>
-          <button onClick={() => setMode("homePage")}>Back to homepage</button>
+          <button type="button" onClick={() => setMode("homePage")}>Back to homepage</button>
         </div>
       </div>
     );
