@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import { Badge, Accordion } from "react-bootstrap";
+import { Badge, Accordion, Card } from "react-bootstrap";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -47,27 +47,44 @@ function Providerpage({ user, email2 }) {
   }
 
   const renderListOfStorage = () => {
-    return <ol>
-    Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
-    {providerItems.map((item, idx) => {
-      return (
-        <ul key={idx}>
-          <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
+    return (
+      <Card style={{ width: '18rem'}}>
+        <Card.Img variant="top" src="../pictures/plain-shipping-boxes-packhelp-kva.jpeg"/>
+        <Card.Body>
+          <Card.Title>Stored box</Card.Title>
+          <Card.Text>
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
+              </Accordion.Header>
+              <Accordion.Body>
+              {providerItems.map((item, idx) => {
+                return (
+                  <ul key={idx}>
+                    <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
 
-          {item.fragile === true ? (
-            <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
-          ) : (
-            <></>
-          )}
-          {item.heavy === true ? (
-            <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
-          ) : (
-            <></>
-          )}
-        </ul>
-      );
-    })}
-  </ol>
+                    {item.fragile === true ? (
+                      <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
+                      ) : (
+                        <></>
+                        )}
+                    {item.heavy === true ? (
+                      <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
+                      ) : (
+                        <></>
+                        )}
+                  </ul>
+                );
+              })}
+
+              </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        </Card.Text>
+      </Card.Body>
+    </Card>
+    );
   }
 
   useEffect(()=>{
