@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
+import { Button, Form } from "react-bootstrap";
+
 
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
@@ -81,8 +83,20 @@ export default function NewUser({ setMode }) {
     return (
       <div className="containerNewRegistration">
         <div className="newUser">
-          REGISTER AS A STORAGE USER
-          <form>
+          SIGNUP AS A STORAGE USER
+          {/* <form> */}
+          <Form>
+          <Form.Group>
+            <Form.Control 
+              type="text"
+              name="firstname"
+              placeholder="Your first name"
+              value={userFirstName}
+              onChange={createFirstName}
+              className="my-3"
+            />
+            </Form.Group>
+
             <br></br>
             <label>
               First Name:
@@ -141,7 +155,8 @@ export default function NewUser({ setMode }) {
               style={{ cursor: "pointer" }}
               onClick={handleSubmit}
             />
-          </form>
+            </Form>
+          {/* </form> */}
         </div>
         <br></br>
       </div>
