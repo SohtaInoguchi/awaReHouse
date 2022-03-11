@@ -91,17 +91,8 @@ export default function NerCustomer({ setMode }) {
   };
 
   const handleProviderSubmit = (e) => {
-    // const form = e.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   console.log("not validated");
-    // //   e.preventDefault();
-    // //   e.stopPropagation();
-    // } else {
       sendProvider();
       setRegistrationDone(true);
-    //   setValidated(true);
-    //   console.log("validated")
-    // } 
   };
 
   if (registrationDone === false) {
@@ -109,14 +100,10 @@ export default function NerCustomer({ setMode }) {
       <div className="containerNewRegistration">
         <div className="newProvider text-slate-900 m-5">
           SIGNUP AS A PROVIDER
-          {/* <form> */}
           <Form
-          // noValidate 
-          // validated={validated} 
           onSubmit={handleProviderSubmit}>
 
             <Form.Group 
-            // controlId="validationCustom01"
             >
               <Form.Control 
                 type="text"
