@@ -84,7 +84,6 @@ export default function NewUser({ setMode }) {
       <div className="containerNewRegistration">
         <div className="newUser text-gray-600">
           SIGNUP AS A STORAGE USER
-          {/* <form> */}
           <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Control 
@@ -98,17 +97,6 @@ export default function NewUser({ setMode }) {
             />
             </Form.Group>
 
-            {/* <br></br>
-            <label>
-              First Name:
-              <input
-                type="text"
-                name="firstname"
-                placeholder="Your first name"
-                value={userFirstName}
-                onChange={createFirstName}
-              /> */}
-
             <Form.Group>
             <Form.Control 
               type="text"
@@ -120,18 +108,6 @@ export default function NewUser({ setMode }) {
               className="my-3"
             />
             </Form.Group>
-
-            {/* <br></br>
-              Last Name:
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Your last name"
-                value={userLastName}
-                onChange={createLastName}
-              />
-              <br></br>
-              Password: */}
 
             <Form.Group>
             <Form.Control 
@@ -145,15 +121,6 @@ export default function NewUser({ setMode }) {
             />
             </Form.Group>
 
-              {/* <input
-                type="password"
-                name="password"
-                placeholder="Your created password"
-                value={userPassword}
-                onChange={createPassword}
-              />
-              <br></br> */}
-
             <Form.Group>
             <Form.Control 
               type="text"
@@ -166,15 +133,6 @@ export default function NewUser({ setMode }) {
             />
             </Form.Group>
 
-              {/* Address:
-              <input
-                type="text"
-                name="address"
-                placeholder="Your address"
-                value={userAddress}
-                onChange={createAddress}
-              />
-              <br></br> */}
             <Form.Group>
             <Form.Control 
               type="text"
@@ -187,15 +145,6 @@ export default function NewUser({ setMode }) {
             />
             </Form.Group>
 
-              {/* Email:
-              <input
-                type="text"
-                name="email"
-                placeholder="Your email"
-                value={userEmail}
-                onChange={createEmail}
-              />
-              <br></br> */}
             <Form.Group>
             <Form.Control 
               type="file" 
@@ -206,31 +155,14 @@ export default function NewUser({ setMode }) {
             />
             </Form.Group>
 
-              {/* Identification proof:
-              <input 
-              type="file" 
-              name="file" 
-              onChange={pictureHandler} 
-              />
-              <br></br> */}
-            {/* </label> */}
-            {/* <br></br> */}
             <Button
             variant="light"
             type="submit"
             >
               Submit
             </Button>
-            {/* <input
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={handleSubmit}
-            /> */}
-            </Form>
-          {/* </form> */}
+          </Form>
         </div>
-        <br></br>
       </div>
     );
   }
