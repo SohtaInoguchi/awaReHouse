@@ -117,6 +117,10 @@ body {
   justify-content: center;
 }
 
+.labels {
+  margin: 12px auto;
+}
+
 .newUser {
   padding: 2%;
   margin-right: 5%;

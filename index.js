@@ -247,7 +247,7 @@ app.get("/providers/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const userAddress = await db
-      .select("adress")
+      .select("*")
       .from("providers")
       .where({ email });
     res.json(userAddress);

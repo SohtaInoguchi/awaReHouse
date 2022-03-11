@@ -23,12 +23,14 @@ function Providerpage({ user, email2 }) {
   const [displayProviderTable, setDisplayProviderTable] = useState(false);
   const [providerItems, setProviderItems] = useState("");
   const [providerAddress, setProviderAddress] = useState("");
+  const [storageFloor, setStorageFloor] = useState("");
   
   const retrieveProviderAddress = async (req,res) => {
     try {
       await axios.get(`/providers/${email2}`)
       .then((res) => {
         setProviderAddress(res.data[0].adress);
+        setStorageFloor(res.data[0].floor)
       })
     } catch{
         console.log("NOPE! Provider address data not retrieved");
@@ -38,11 +40,10 @@ function Providerpage({ user, email2 }) {
   useEffect(()=>{
     retrieveProviderAddress()
   },[])
-
+  
   const retrieveProviderItems = (req,res) => {
     axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
   }
-
 
   useEffect(()=>{
     retrieveProviderItems()
@@ -64,15 +65,15 @@ function Providerpage({ user, email2 }) {
         {providerItems.map((item, idx) => {
           return (
             <ul key={idx}>
-              <li key={`${idx}d`}> Box: {item.box_id} Weight: {item.weight_in_kg}kg Storage location: floor 1 Should be retrieved in {item.expected_retrieval_season}.</li>
+              <li key={`${idx}d`}> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
 
               {item.fragile === true ? (
-                <li key={`${idx}e`}> Box {item.box_id} is recorded as "fragile" </li>
+                <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
               ) : (
                 <></>
               )}
               {item.heavy === true ? (
-                <li key={`${idx}e`}> Box {item.box_id} is recorded as "heavy" </li>
+                <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
               ) : (
                 <></>
               )}
