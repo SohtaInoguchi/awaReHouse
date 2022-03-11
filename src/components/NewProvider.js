@@ -207,6 +207,7 @@ export default function NerCustomer({ setMode }) {
                 name="file" 
                 onChange={pictureStorageHandler} 
                 className="my-3"
+                // required
                 />
             </Form.Group>
 
