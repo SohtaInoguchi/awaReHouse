@@ -12,10 +12,8 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
-<<<<<<< HEAD
-import { OneFiftyStripe } from "./OneFiftyStripe";
-=======
->>>>>>> dbc1298a61222aefdbfbaecb23f9e9e712594c53
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import {
   BrowserRouter as Router,
