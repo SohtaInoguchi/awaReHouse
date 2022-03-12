@@ -152,6 +152,11 @@ body {
 /* ------------Chat popup------------- */
 #outer-wrapper {
   max-width: 40%;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
+  /* position: absolute; */
 }
 
 #chat-box {
@@ -169,6 +174,10 @@ body {
   width: 4rem;
   height: 4rem;
   margin: 10px 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
   /* position: absolute; */
 }
 
@@ -267,4 +276,47 @@ body {
   background-color: rgb(11, 81, 114);
   color: rgb(255, 255, 255);
   /* flex-grow: 1; */
+}
+
+
+/* ---------PROVIDER PAGE */
+#provider-page-wrapper {
+  position: relative;
+}
+
+#badge-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 25px;
+  align-items: center;
+}
+
+#provider-info {
+  text-align: start;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+#box-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.box-detail {
+  list-style: none;
+}
+
+.hide {
+  display: none;
+  /* visibility: collapse; */
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.show {
+  display: contents;
+  /* visibility: visible; */
+  opacity: 1;
+  transition: all 0.6s ease;
 }
