@@ -46,7 +46,7 @@ function Providerpage({ user, email2 }) {
   
   const renderListOfStorage = () => {
     return (
-      <>
+      <section id="box-list">
       {
         providerItems.map((item, idx) => {
           return (
@@ -54,7 +54,7 @@ function Providerpage({ user, email2 }) {
               <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
               <Card.Body>
                 <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="1">
                     <Accordion.Header>
                     Click to see the detail of box {item.box_id}
                     </Accordion.Header>
@@ -73,7 +73,7 @@ function Providerpage({ user, email2 }) {
           )
         })
       }
-      </>
+      </section>
     );
 
     // return (
@@ -131,7 +131,8 @@ function Providerpage({ user, email2 }) {
   return (
     <div id="provider-page-wrapper">
       <aside id="badge-wrapper">
-      <h3>Next visit will be 02/02/22</h3>
+      <div id="visitor-date">Next stuff visit will be 02/02/22</div>
+      {/* <Badge bg="light" id="provider">Next stuff visit will be 02/02/22</Badge> */}
         <Badge bg="light" id="provider">
           <ul id="provider-info">
             <li>Welcome {user}</li>

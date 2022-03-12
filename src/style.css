@@ -282,10 +282,30 @@ body {
   align-items: center;
 }
 
+#visitor-date {
+  color: white;
+  /* background-color: brown; */
+  height: 50px;
+  background-image: linear-gradient(
+    to left,
+    rgb(175, 228, 252),
+    rgb(112, 186, 221),
+    rgb(45, 124, 160),
+    rgb(11, 81, 114)
+  );
+  border-radius: 10px;
+}
+
 #provider-info {
   text-align: start;
   padding-left: 0px;
   margin-bottom: 0px;
+}
+
+#box-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 .box-detail {
