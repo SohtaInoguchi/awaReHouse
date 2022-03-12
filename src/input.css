@@ -7,6 +7,14 @@
     @apply bg-green-500 text-white flex justify-center;
   }
 
+  #provider {
+    @apply bg-gray-50 text-cyan-600 text-xl;
+  }
+
+  #provider-visitor-date {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-11;
+  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
@@ -14,4 +22,5 @@
   .learn-more-e {
     @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
+
 }
