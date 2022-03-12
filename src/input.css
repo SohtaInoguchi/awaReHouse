@@ -16,12 +16,7 @@
   }
 }
 
-.chart {
-  width: 500px;
-  height: 500px;
-}
-
-.chartContainer {
-  width: 100%;
-  height: 100%;
+.chart{
+  max-width: 50%;
+  margin:0 auto;
 }

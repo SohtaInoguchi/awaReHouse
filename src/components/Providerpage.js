@@ -3,6 +3,10 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import { VictoryBar,
+  VictoryChart,
+  VictoryTooltip,
+  VictoryAxis } from 'victory';
 
 
 let today = new Date();
@@ -25,20 +29,36 @@ function Providerpage({ user, email2 }) {
   const [providerItems, setProviderItems] = useState("");
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
-  const [retrievedPayments, setRetrievedPayments] = useState();
-
+  const [chartData, setChartData] = useState();
+  const [chartVisible, setChartVisible] = useState(false);
   
   const retrievePayments = async (req,res) => {
     try {
       await axios.get(`/payments/${email2}`)
       .then((res) => {
         if (res.data.length<=12) {
-          setRetrievedPayments(res.data)
+          let final = [];
+          res.data.forEach((e)=>{
+          let obj = {};
+          obj["x"]=e["covered_month"].slice(0,3);
+          obj["y"]=e["amount_jpy"];
+          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
+          final.push(obj)
+        })
+          setChartData(final)
         } else {
           while (res.data.length>12){
             res.data.shift()
           }
-          setRetrievedPayments(res.data)
+          let final = [];
+          res.data.forEach((e)=>{
+          let obj = {};
+          obj["x"]=e["covered_month"].slice(0,3);
+          obj["y"]=e["amount_jpy"];
+          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
+          final.push(obj)
+          setChartData(final)
+          })
         } 
       })
     } catch{
@@ -67,15 +87,14 @@ function Providerpage({ user, email2 }) {
     axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
   }
 
-  const incomingPayment = (providerItems.length)*1077;
-  const latestObj = {covered_month:"This month", amount_jpy: incomingPayment};
-
   useEffect(()=>{
     retrieveProviderItems()
   },[displayProviderTable])
+
+ useEffect(()=>{
+setChartVisible(true)
+ },[chartData])
   
-
-
   return (
     <div>
       <h1>Welcome {user}</h1>
@@ -99,17 +118,96 @@ function Providerpage({ user, email2 }) {
               )}
               {item.heavy === true ? (
                 <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
-              ) : (
-                <></>
-              )}
+                ) : (
+                  <></>
+                  )}
             </ul>
           );
         })}
       </ol> : <></>}
       <h4>Your next pay day is: {today}</h4>
-
-     
-
+        { chartVisible === false ? <></> :
+      <div className="chart">
+      <VictoryChart
+        responsive={false}
+        animate={{
+          duration: 500,
+          onLoad: { duration: 200 }
+        }}
+        domainPadding={{ x: 20 }}
+      >
+        <VictoryAxis  
+        animate={{
+          duration: 500,
+          onLoad: { duration: 200 }
+        }}
+        style={{ data: { fill: "#000000" } }} 
+        />
+        <VictoryAxis 
+        dependentAxis  
+        animate={{
+          duration: 500,
+          onLoad: { duration: 200 }
+        }}
+        style={{ data: { fill: "#000000" } }}
+        />
+        <VictoryBar
+        animate={{
+          duration: 500,
+          onLoad: { duration: 200 }
+        }}
+          barRatio={1}
+          cornerRadius={0}
+          style={{ data: { fill: "#2035d4" } }}
+          alignment="middle"
+          // events={[{
+          //   target: "data",
+          //   eventHandlers: {
+          //     onClick: () => {
+          //       return [
+          //         {
+          //           target: "data",
+          //           mutation: (props) => {
+          //             const fill = props.style && props.style.fill;
+          //             return fill === "black" ? null : { style: { fill: "black"} };
+          //           }
+          //         }
+          //       ];
+          //     }
+          //   }
+          // }]}
+          labelComponent={<VictoryTooltip/>}
+          data={chartData}
+          events={[{
+            target: "data",
+            eventHandlers: {
+              onMouseOver: () => {
+                return [
+                  {
+                    target: "data",
+                    mutation: () => ({style: {fill: "gold", width: 30}})
+                  }, {
+                    target: "labels",
+                    mutation: () => ({ active: true })
+                  }
+                ];
+              },
+              onMouseOut: () => {
+                return [
+                  {
+                    target: "data",
+                    mutation: () => {}
+                  }, {
+                    target: "labels",
+                    mutation: () => ({ active: false })
+                  }
+                ];
+              }
+            }
+          }]}
+        />
+      </VictoryChart>
+      </div>}
       <h4>Your amount of money made: </h4>
       <h4>You will make 12900 yen this month</h4>
       <button>Add more storage capacity</button>
