@@ -28,8 +28,10 @@ function Providerpage({ user, email2 }) {
   
   const retrieveProviderAddress = async (req,res) => {
     try {
+      console.log("In retrieveProviderAddress")
       await axios.get(`/providers/${email2}`)
       .then((res) => {
+        // setProviderAddress(res.data[0].adress);
         setProviderAddress(res.data[0].adress);
         setStorageFloor(res.data[0].floor)
       })
@@ -38,14 +40,13 @@ function Providerpage({ user, email2 }) {
     }
   }
 
-  useEffect(()=>{
-    retrieveProviderAddress()
-  },[])
   
   const retrieveProviderItems = (req,res) => {
-    axios.post("/providerItems", { providerAddress }).then((res) => setProviderItems(res.data));
+    console.log("provider address in retrieveItem func", providerAddress);
+    axios.post("/providerItems", { address: providerAddress }).then((res) => setProviderItems(res.data));
+    console.log("In retrieveProv func end");
   }
-
+  
   const renderListOfStorage = () => {
     return (
       <Card className="m-10 max-w-sm">
@@ -82,10 +83,20 @@ function Providerpage({ user, email2 }) {
     </Card>
     );
   }
-
+  
+  
   useEffect(()=>{
-    retrieveProviderItems()
-  },[displayProviderTable])
+    retrieveProviderAddress()
+    // retrieveProviderItems();
+  }, [])
+
+  useEffect(() => {
+    retrieveProviderItems();
+  }, [providerAddress])
+
+  // useEffect(()=>{
+  //   retrieveProviderItems()
+  // },[displayProviderTable])
 
 
   return (
@@ -100,13 +111,15 @@ function Providerpage({ user, email2 }) {
       </aside>
       <h3>Next visit will be 02/02/22</h3>
       <br></br>
-      <button onClick={()=>{
+      {/* <button onClick={()=>{
         setDisplayProviderTable(!displayProviderTable);
-        }}>LIST OF STORED BOXES</button>
+        }}>LIST OF STORED BOXES</button> */}
+      <h2>LIST OF STORED BOXES</h2>
       <br></br>
-      {displayProviderTable === true ? 
+      {/* {displayProviderTable === true ? 
       renderListOfStorage() : 
-      <></>}
+      <></>} */}
+      {providerItems ? renderListOfStorage() : <></>}
       
       {/* <h4>Your next pay day is: {today}</h4> */}
       {/* <h4>Your amount of money made: </h4>
