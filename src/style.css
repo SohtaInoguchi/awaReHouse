@@ -268,3 +268,60 @@ body {
   color: rgb(255, 255, 255);
   /* flex-grow: 1; */
 }
+
+
+/* ---------PROVIDER PAGE */
+#provider-page-wrapper {
+  position: relative;
+}
+
+#badge-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 25px;
+  align-items: center;
+}
+
+#visitor-date {
+  color: white;
+  /* background-color: brown; */
+  height: 50px;
+  background-image: linear-gradient(
+    to left,
+    rgb(175, 228, 252),
+    rgb(112, 186, 221),
+    rgb(45, 124, 160),
+    rgb(11, 81, 114)
+  );
+  border-radius: 10px;
+}
+
+#provider-info {
+  text-align: start;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+#box-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.box-detail {
+  list-style: none;
+}
+
+.hide {
+  display: none;
+  /* visibility: collapse; */
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.show {
+  display: contents;
+  /* visibility: visible; */
+  opacity: 1;
+  transition: all 0.6s ease;
+}
