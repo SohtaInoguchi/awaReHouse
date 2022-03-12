@@ -166,8 +166,9 @@ export default function Chat() {
 
   return (
     <>
-    <div className={isChatOpened ? "show" : "hide"}>{renderChatBox()}</div>
-      {/* {
+    {/* <div className={isChatOpened ? "show" : "hide"}>{renderChatBox()}</div>
+    <button onClick={(e) => toggleChatOpen(e)}>Toggle</button> */}
+      {
       isChatOpened ? 
       renderChatBox()
       // <CloseChatComponent icon={<AiFillCloseCircle size="50"/>}/>
@@ -178,8 +179,7 @@ export default function Chat() {
       onClick={toggleChatOpen}
       className="chat-icons"
       /> }/>
-      } */}
-      <button onClick={(e) => toggleChatOpen(e)}>Toggle</button>
+      }
     </>
   );
 }

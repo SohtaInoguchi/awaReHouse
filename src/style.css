@@ -275,6 +275,17 @@ body {
   position: relative;
 }
 
+#badge-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+#provider-info {
+  text-align: start;
+  padding-left: 0px;
+}
+
 .hide {
   display: none;
   /* visibility: collapse; */

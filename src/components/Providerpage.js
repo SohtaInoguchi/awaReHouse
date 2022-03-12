@@ -90,9 +90,14 @@ function Providerpage({ user, email2 }) {
 
   return (
     <div id="provider-page-wrapper">
-      <Badge bg="light" id="provider">
-        Welcome {user}
-      </Badge>
+      <aside id="badge-wrapper">
+        <Badge bg="light" id="provider">
+          <ul id="provider-info">
+            <li>Welcome {user}</li>
+            <li>Your next pay day is: {today}</li>
+          </ul>
+        </Badge>
+      </aside>
       <h3>Next visit will be 02/02/22</h3>
       <br></br>
       <button onClick={()=>{
@@ -103,7 +108,7 @@ function Providerpage({ user, email2 }) {
       renderListOfStorage() : 
       <></>}
       
-      <h4>Your next pay day is: {today}</h4>
+      {/* <h4>Your next pay day is: {today}</h4> */}
       {/* <h4>Your amount of money made: </h4>
       <h4>You will make 12900 yen this month</h4> */}
       <button>Add more storage capacity</button>
