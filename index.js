@@ -259,13 +259,11 @@ app.get("/providers/:email", async (req, res) => {
 //grab items at single location
 app.post("/providerItems", async (req, res) => {
   const { address } = req.body;
-  console.log("req body!!!", address);
   try {
     const items = await db
     .select("*")
     .from("inventory")
     .where("storage_location", address);    
-    console.log("in provider item endpoint items", items);
     res.send(items);
   } catch {
     res.send("No items found yet");

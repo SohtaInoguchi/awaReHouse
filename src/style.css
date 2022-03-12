@@ -277,13 +277,19 @@ body {
 
 #badge-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-right: 25px;
+  align-items: center;
 }
 
 #provider-info {
   text-align: start;
   padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+.box-detail {
+  list-style: none;
 }
 
 .hide {

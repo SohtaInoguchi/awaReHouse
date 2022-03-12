@@ -21,7 +21,7 @@ if (dd > 21) {
 
 function Providerpage({ user, email2 }) {
 
-  const [displayProviderTable, setDisplayProviderTable] = useState(false);
+  // const [displayProviderTable, setDisplayProviderTable] = useState(false);
   const [providerItems, setProviderItems] = useState("");
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
@@ -55,21 +55,23 @@ function Providerpage({ user, email2 }) {
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="1">
               <Accordion.Header>
-                Here is a detailed list of the {providerItems.length} box(es) currently stored at {providerAddress}:
+                Click to see the detail of box 
+                {/* {providerItems.length} box(es) currently stored at {providerAddress}: */}
               </Accordion.Header>
               <Accordion.Body >
               {providerItems.map((item, idx) => {
                 return (
                   <div key={idx}>
-                    <li key={`${idx}d`} className="mx-0"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
+                    <li key={idx} className="box-detail">Location: {providerAddress}</li>
+                    <li key={`${idx}d`} className="mx-0 box-detail"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
 
                     {item.fragile === true ? (
-                      <li key={`${idx}e`}> Box {item.box_id} is recorded as fragile. </li>
+                      <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as fragile. </li>
                       ) : (
                         <></>
                         )}
                     {item.heavy === true ? (
-                      <li key={`${idx}e`}> Box {item.box_id} is recorded as heavy. </li>
+                      <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as heavy. </li>
                       ) : (
                         <></>
                         )}
@@ -94,39 +96,23 @@ function Providerpage({ user, email2 }) {
     retrieveProviderItems();
   }, [providerAddress])
 
-  // useEffect(()=>{
-  //   retrieveProviderItems()
-  // },[displayProviderTable])
-
-
   return (
     <div id="provider-page-wrapper">
       <aside id="badge-wrapper">
+      <h3>Next visit will be 02/02/22</h3>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
             <li>Welcome {user}</li>
             <li>Your next pay day is: {today}</li>
+            <li>Number of box: {providerItems.length}</li>
+            <li>Next payment amount: ¥{1077 * providerItems.length}</li>
           </ul>
         </Badge>
       </aside>
-      <h3>Next visit will be 02/02/22</h3>
-      <br></br>
-      {/* <button onClick={()=>{
-        setDisplayProviderTable(!displayProviderTable);
-        }}>LIST OF STORED BOXES</button> */}
       <h2>LIST OF STORED BOXES</h2>
-      <br></br>
-      {/* {displayProviderTable === true ? 
-      renderListOfStorage() : 
-      <></>} */}
       {providerItems ? renderListOfStorage() : <></>}
       
-      {/* <h4>Your next pay day is: {today}</h4> */}
-      {/* <h4>Your amount of money made: </h4>
-      <h4>You will make 12900 yen this month</h4> */}
       <button>Add more storage capacity</button>
-
-      <br />
       <button
         onClick={(e) => {
           window.confirm("Are you sure about to quit the provider?");
