@@ -14,4 +14,10 @@
   .learn-more-e {
     @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
+  .boxes-after {
+    @apply transition-all duration-700 bg-gray-200 opacity-100;
+  }
+  .boxes-before {
+    @apply transition-all duration-700 opacity-0;
+  }
 }
