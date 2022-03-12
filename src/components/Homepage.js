@@ -87,7 +87,7 @@ export default function Homepage({
               src={require("../pictures/clean-house.jpeg")}
               alt=""
             />
-            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 ">
+            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
                 awaReHouse is the something makes your life better. So let's
@@ -95,7 +95,7 @@ export default function Homepage({
                 doesn't it?
               </p>
               <p
-                className="rounded-3xl bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400"
+                className="rounded-3xl text-blue-600 bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400 hover:text-blue-700 cursor-pointer"
                 onClick={() => navigate("/learn")}
               >
                 Learn more
