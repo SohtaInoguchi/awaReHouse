@@ -154,13 +154,13 @@ export default function Chat() {
                     onClick={sendMessage}/>} 
                   />
             </div>
-          </div>
           <CloseChatComponent 
           icon={<AiFillCloseCircle 
-          size="50" 
-          onClick={toggleChatOpen}
-          className="chat-icons"
-          />}/>
+            size="50" 
+            onClick={toggleChatOpen}
+            className="chat-icons"
+            />}/>
+          </div>
           </>
   }
 
