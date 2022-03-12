@@ -22,13 +22,12 @@ if (dd > 21) {
 function Providerpage({ user, email2 }) {
 
   // const [displayProviderTable, setDisplayProviderTable] = useState(false);
-  const [providerItems, setProviderItems] = useState("");
+  const [providerItems, setProviderItems] = useState([]);
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
   
   const retrieveProviderAddress = async (req,res) => {
     try {
-      console.log("In retrieveProviderAddress")
       await axios.get(`/providers/${email2}`)
       .then((res) => {
         // setProviderAddress(res.data[0].adress);
@@ -42,50 +41,83 @@ function Providerpage({ user, email2 }) {
 
   
   const retrieveProviderItems = (req,res) => {
-    console.log("provider address in retrieveItem func", providerAddress);
     axios.post("/providerItems", { address: providerAddress }).then((res) => setProviderItems(res.data));
-    console.log("In retrieveProv func end");
   }
   
   const renderListOfStorage = () => {
     return (
-      <Card className="m-10 max-w-sm">
-      <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
-        <Card.Body>
-          <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>
-                Click to see the detail of box 
-                {/* {providerItems.length} box(es) currently stored at {providerAddress}: */}
-              </Accordion.Header>
-              <Accordion.Body >
-              {providerItems.map((item, idx) => {
-                return (
-                  <div key={idx}>
-                    <li key={idx} className="box-detail">Location: {providerAddress}</li>
-                    <li key={`${idx}d`} className="mx-0 box-detail"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
-
-                    {item.fragile === true ? (
-                      <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as fragile. </li>
-                      ) : (
-                        <></>
-                        )}
-                    {item.heavy === true ? (
-                      <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as heavy. </li>
-                      ) : (
-                        <></>
-                        )}
-                  </div>
-                );
-              })}
-              </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </Card.Body>
-    </Card>
+      <>
+      {
+        providerItems.map((item, idx) => {
+          return (
+            <Card className="m-10 max-w-sm">
+              <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
+              <Card.Body>
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>
+                    Click to see the detail of box {item.box_id}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <div key={idx}>
+                        <li key={idx} className="box-detail">Location: {providerAddress}</li>
+                        <li key={`${idx}d`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
+                        <li key={idx} className="mx-0 box-detail">Floor: {storageFloor}</li>
+                        <li key={idx} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </Card.Body>
+            </Card>
+          )
+        })
+      }
+      </>
     );
+
+    // return (
+    //   <Card className="m-10 max-w-sm">
+    //   <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
+    //     <Card.Body>
+    //       <Accordion defaultActiveKey="0">
+    //         <Accordion.Item eventKey="1">
+    //           <Accordion.Header>
+    //             Click to see the detail of box 
+    //             {/* {providerItems.length} box(es) currently stored at {providerAddress}: */}
+    //           </Accordion.Header>
+    //           <Accordion.Body >
+    //           {providerItems.map((item, idx) => {
+    //             return (
+    //               <div key={idx}>
+    //                 <li key={idx} className="box-detail">Location: {providerAddress}</li>
+    //                 <li key={`${idx}d`} className="mx-0 box-detail"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
+
+    //                 {item.fragile === true ? (
+    //                   <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as fragile. </li>
+    //                   ) : (
+    //                     <></>
+    //                     )}
+    //                 {item.heavy === true ? (
+    //                   <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as heavy. </li>
+    //                   ) : (
+    //                     <></>
+    //                     )}
+    //               </div>
+    //             );
+    //           })}
+    //           </Accordion.Body>
+    //       </Accordion.Item>
+    //     </Accordion>
+    //   </Card.Body>
+    // </Card>
+    // );
   }
   
+  const checkItems = (e) => {
+    e.preventDefault();
+    console.log(providerItems);
+  }
   
   useEffect(()=>{
     retrieveProviderAddress()
@@ -110,6 +142,7 @@ function Providerpage({ user, email2 }) {
         </Badge>
       </aside>
       <h2>LIST OF STORED BOXES</h2>
+      <button onClick={checkItems}>Check Items</button>
       {providerItems ? renderListOfStorage() : <></>}
       
       <button>Add more storage capacity</button>
