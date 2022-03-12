@@ -8,8 +8,11 @@
   }
 
   #provider {
-    /* @apply bg-gray-50 text-cyan-600 text-xl absolute top-0 right-5; */
     @apply bg-gray-50 text-cyan-600 text-xl;
+  }
+
+  #provider-visitor-date {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-11;
   }
 
   .login-button {

@@ -76,42 +76,6 @@ function Providerpage({ user, email2 }) {
       </section>
     );
 
-    // return (
-    //   <Card className="m-10 max-w-sm">
-    //   <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
-    //     <Card.Body>
-    //       <Accordion defaultActiveKey="0">
-    //         <Accordion.Item eventKey="1">
-    //           <Accordion.Header>
-    //             Click to see the detail of box 
-    //             {/* {providerItems.length} box(es) currently stored at {providerAddress}: */}
-    //           </Accordion.Header>
-    //           <Accordion.Body >
-    //           {providerItems.map((item, idx) => {
-    //             return (
-    //               <div key={idx}>
-    //                 <li key={idx} className="box-detail">Location: {providerAddress}</li>
-    //                 <li key={`${idx}d`} className="mx-0 box-detail"> Box: {item.box_id} - Weight: {item.weight_in_kg}kg - Floor: {storageFloor} - Should be retrieved in {item.expected_retrieval_season}.</li>
-
-    //                 {item.fragile === true ? (
-    //                   <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as fragile. </li>
-    //                   ) : (
-    //                     <></>
-    //                     )}
-    //                 {item.heavy === true ? (
-    //                   <li key={`${idx}e`} className="box-detail"> Box {item.box_id} is recorded as heavy. </li>
-    //                   ) : (
-    //                     <></>
-    //                     )}
-    //               </div>
-    //             );
-    //           })}
-    //           </Accordion.Body>
-    //       </Accordion.Item>
-    //     </Accordion>
-    //   </Card.Body>
-    // </Card>
-    // );
   }
   
   const checkItems = (e) => {
@@ -131,8 +95,7 @@ function Providerpage({ user, email2 }) {
   return (
     <div id="provider-page-wrapper">
       <aside id="badge-wrapper">
-      <div id="visitor-date">Next stuff visit will be 02/02/22</div>
-      {/* <Badge bg="light" id="provider">Next stuff visit will be 02/02/22</Badge> */}
+      <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
             <li>Welcome {user}</li>
@@ -142,8 +105,8 @@ function Providerpage({ user, email2 }) {
           </ul>
         </Badge>
       </aside>
-      <h2>LIST OF STORED BOXES</h2>
-      <button onClick={checkItems}>Check Items</button>
+      <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
+      {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
       
       <button>Add more storage capacity</button>
