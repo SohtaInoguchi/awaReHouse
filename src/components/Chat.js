@@ -82,7 +82,9 @@ export default function Chat() {
     socket.emit("bot-message", faq);
   }
 
-  const toggleChatOpen = () => {
+  const toggleChatOpen = (e) => {
+    e.preventDefault();
+    console.log("toggling")
     if(!isChatOpened) {
       setIsChatOpened(true);
     } else {
@@ -164,7 +166,8 @@ export default function Chat() {
 
   return (
     <>
-      {
+    <div className={isChatOpened ? "show" : "hide"}>{renderChatBox()}</div>
+      {/* {
       isChatOpened ? 
       renderChatBox()
       // <CloseChatComponent icon={<AiFillCloseCircle size="50"/>}/>
@@ -175,7 +178,8 @@ export default function Chat() {
       onClick={toggleChatOpen}
       className="chat-icons"
       /> }/>
-      }
+      } */}
+      <button onClick={(e) => toggleChatOpen(e)}>Toggle</button>
     </>
   );
 }
