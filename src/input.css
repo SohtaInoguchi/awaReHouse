@@ -15,3 +15,13 @@
     @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
 }
+
+.chart {
+  width: 500px;
+  height: 500px;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+}
