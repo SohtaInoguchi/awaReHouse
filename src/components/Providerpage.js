@@ -142,7 +142,22 @@ setChartVisible(true)
   }, [providerAddress])
 
   return (
-    <div>
+    <div id="provider-page-wrapper">
+      <aside id="badge-wrapper">
+      <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
+        <Badge bg="light" id="provider">
+          <ul id="provider-info">
+            <li>Welcome {user}</li>
+            <li>Your next pay day is: {today}</li>
+            <li>Number of box: {providerItems.length}</li>
+            <li>Next payment amount: ¥{1077 * providerItems.length}</li>
+          </ul>
+        </Badge>
+      </aside>
+      <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
+      {/* <button onClick={checkItems}>Check Items</button> */}
+      {providerItems ? renderListOfStorage() : <></>}
+      <div>
         { chartVisible === false ? <></> :
         <div className="chart">
         <VictoryChart
@@ -177,22 +192,6 @@ setChartVisible(true)
             cornerRadius={0}
             style={{ data: { fill: "#2035d4" } }}
             alignment="middle"
-            // events={[{
-            //   target: "data",
-            //   eventHandlers: {
-            //     onClick: () => {
-            //       return [
-            //         {
-            //           target: "data",
-            //           mutation: (props) => {
-            //             const fill = props.style && props.style.fill;
-            //             return fill === "black" ? null : { style: { fill: "black"} };
-            //           }
-            //         }
-            //       ];
-            //     }
-            //   }
-            // }]}
             labelComponent={<VictoryTooltip/>}
             data={chartData}
             events={[{
@@ -225,22 +224,6 @@ setChartVisible(true)
           />
         </VictoryChart>
         </div>}      
-    <div id="provider-page-wrapper">
-      <aside id="badge-wrapper">
-      <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
-        <Badge bg="light" id="provider">
-          <ul id="provider-info">
-            <li>Welcome {user}</li>
-            <li>Your next pay day is: {today}</li>
-            <li>Number of box: {providerItems.length}</li>
-            <li>Next payment amount: ¥{1077 * providerItems.length}</li>
-          </ul>
-        </Badge>
-      </aside>
-      <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
-      {/* <button onClick={checkItems}>Check Items</button> */}
-      {providerItems ? renderListOfStorage() : <></>}
-      
       <button>Add more storage capacity</button>
       <button
         onClick={(e) => {
