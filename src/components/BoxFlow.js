@@ -19,35 +19,35 @@ export const BoxFlow = ({  user,
     email,
     setItems,}) => {
 
-    const [addItem, setAddItem] = useState(false);
-    const [typeBox, setTypeBox] = useState(null);
+    const [addItemFlow, setAddItemFlow] = useState(false);
+    const [typeBoxFlow, setTypeBoxFlow] = useState(null);
     const [address, setAddress] = useState("");
-    const [confirmation, setConfirmation] = useState(false);
+    const [confirmationFlow, setConfirmationFlow] = useState(false);
     const [tryAgain, setTryAgain] = useState(false);
-    const [description1, setDescription1] = useState("");
-    const [description2, setDescription2] = useState("");
-    const [description3, setDescription3] = useState("");
-    const [boxOrderReceived, setBoxOrderReceived] = useState(false);
+    const [description1Flow, setDescription1Flow] = useState("");
+    const [description2Flow, setDescription2Flow] = useState("");
+    const [description3Flow, setDescription3Flow] = useState("");
+    const [boxOrderReceivedFlow, setBoxOrderReceivedFlow] = useState(false);
     const [displayTable, setDisplayTable] = useState(false);
-    const [isHeavy, setIsHeavy] = useState(false);
-    const [isFragile, setIsFragile] = useState(false);
-    const [storagePlaces, setStoragePlaces] = useState("");
+    const [isHeavyFlow, setIsHeavyFlow] = useState(false);
+    const [isFragileFlow, setIsFragileFlow] = useState(false);
+    const [storagePlacesFlow, setStoragePlacesFlow] = useState("");
     const navigate = useNavigate();
   
     const createDescription1 = (e) => {
-      setDescription1(e.target.value);
+      setDescription1Flow(e.target.value);
     };
   
     const createDescription2 = (e) => {
-      setDescription2(e.target.value);
+      setDescription2Flow(e.target.value);
     };
   
     const createDescription3 = (e) => {
-      setDescription3(e.target.value);
+      setDescription3Flow(e.target.value);
     };
   
     const handleChange = (e) => {
-      setTypeBox(e.target.value);
+      setTypeBoxFlow(e.target.value);
     };
   
     const retrieveAddress = async () => {
@@ -63,47 +63,47 @@ export const BoxFlow = ({  user,
   
     // for toggling isHeavy/fragile
     const toggleIsHeavy = () => {
-      if (isHeavy === false) {
-        setIsHeavy(true);
+      if (isHeavyFlow === false) {
+        setIsHeavyFlow(true);
       } else {
-        setIsHeavy(false);
+        setIsHeavyFlow(false);
       }
     };
   
     const toggleIsFragile = () => {
-      if (isFragile === false) {
-        setIsFragile(true);
+      if (isFragileFlow === false) {
+        setIsFragileFlow(true);
       } else {
-        setIsFragile(false);
+        setIsFragileFlow(false);
       }
     };
   
     useEffect(() => {
       retrieveAddress();
-    }, [setAddItem]);
+    }, [setAddItemFlow]);
   
     const submit1 = () => {
-      if (typeBox === null) {
+      if (typeBoxFlow === null) {
         setTryAgain(true);
       }
-      if (typeBox !== null) {
-        setConfirmation(true);
+      if (typeBoxFlow !== null) {
+        setConfirmationFlow(true);
       }
     };
   
     const cancel = () => {
-      setAddItem(false);
+      setAddItemFlow(false);
       setTryAgain(false);
-      setTypeBox(null);
-      setConfirmation(false);
-      setBoxOrderReceived(false);
+      setTypeBoxFlow(null);
+      setConfirmationFlow(false);
+      setBoxOrderReceivedFlow(false);
     };
   
     const possibleStoragelocations = async () => {
       await axios
         .get("/providers")
         .then((res) => {
-          setStoragePlaces(res.data);
+          setStoragePlacesFlow(res.data);
         })
         .catch(function (error) {
           console.log("NOPE! Address data not retrieved");
@@ -114,22 +114,22 @@ export const BoxFlow = ({  user,
       possibleStoragelocations();
     }, []);
   
-    const max = storagePlaces.length;
+    const max = storagePlacesFlow.length;
     const randomValue = Math.floor(Math.random() * max);
   
     const sendBoxRequest = () => {
       axios
         .post("/inventory", {
-          declared_content_one: description1,
-          declared_content_two: description2,
-          declared_content_three: description3,
-          storage_location: `${storagePlaces[randomValue].adress}`,
+          declared_content_one: description1Flow,
+          declared_content_two: description2Flow,
+          declared_content_three: description3Flow,
+          storage_location: `${storagePlacesFlow[randomValue].adress}`,
           weight_in_kg: "3.41",
           declared_as_fragile: false,
           expected_retrieval_season: "autumn",
           user_owner: email,
-          fragile: isFragile,
-          heavy: isHeavy,
+          fragile: isFragileFlow,
+          heavy: isHeavyFlow,
           // send heavy and fragile boolean
         })
         .then(() => {
@@ -147,15 +147,15 @@ export const BoxFlow = ({  user,
     const submit2 = (e) => {
       e.preventDefault();
       updateItemList();
-      setDescription1("");
-      setDescription2("");
-      setDescription3("");
-      setConfirmation(false);
-      setBoxOrderReceived(true);
-      setAddItem(false);
+      setDescription1Flow("");
+      setDescription2Flow("");
+      setDescription3Flow("");
+      setConfirmationFlow(false);
+      setBoxOrderReceivedFlow(true);
+      setAddItemFlow(false);
       setTryAgain(false);
-      setIsFragile(false);
-      setIsHeavy(false);
+      setIsFragileFlow(false);
+      setIsHeavyFlow(false);
       sendBoxRequest();
     };
 
@@ -163,12 +163,12 @@ export const BoxFlow = ({  user,
   return (
     <div>
       <button style={{ cursor: "pointer" }} onClick={() => {
-      setAddItem(true);
+      setAddItemFlow(true);
       setDisplayTable(false);
       }}>
         Extra Storage
       </button>
-        {addItem === true ? (
+        {addItemFlow === true ? (
         <div className="containerNewItem">
           <div className="newUser">
             PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
@@ -225,11 +225,11 @@ export const BoxFlow = ({  user,
       ) : (
         <div></div>
       )}
-      {confirmation === true ? (
+      {confirmationFlow === true ? (
         <div>
           <form>
             <br></br>
-            You selected a type {typeBox} box. Please provde a brief description
+            You selected a type {typeBoxFlow} box. Please provde a brief description
             of the goods you want to store (e.g. Snowboard, summer clothes,
             barbecue set...)
             <br></br>
@@ -239,7 +239,7 @@ export const BoxFlow = ({  user,
                 type="text"
                 name="description1"
                 placeholder="Goods description"
-                value={description1}
+                value={description1Flow}
                 onChange={createDescription1}
               />
               <br></br>
@@ -248,7 +248,7 @@ export const BoxFlow = ({  user,
                 type="text"
                 name="description2"
                 placeholder="Goods description"
-                value={description2}
+                value={description2Flow}
                 onChange={createDescription2}
               />
               <br></br>
@@ -257,7 +257,7 @@ export const BoxFlow = ({  user,
                 type="text"
                 name="description3"
                 placeholder="Goods description"
-                value={description3}
+                value={description3Flow}
                 onChange={createDescription3}
               />
               <br></br>
@@ -290,7 +290,7 @@ export const BoxFlow = ({  user,
             />
           </form>
           <button
-            onClick={() => setConfirmation(false)}
+            onClick={() => setConfirmationFlow(false)}
             style={{ cursor: "pointer" }}
           >
             Cancel
@@ -300,7 +300,7 @@ export const BoxFlow = ({  user,
         <div></div>
       )}
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
-      {boxOrderReceived === true ? (
+      {boxOrderReceivedFlow === true ? (
         <h4>
           <OneFiftyStripe/>
         </h4>
