@@ -3,6 +3,11 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import { VictoryBar,
+  VictoryChart,
+  VictoryTooltip,
+  VictoryAxis } from 'victory';
+
 import { Badge, Accordion, Card } from "react-bootstrap";
 
 let today = new Date();
@@ -25,7 +30,43 @@ function Providerpage({ user, email2 }) {
   const [providerItems, setProviderItems] = useState([]);
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
+  const [chartData, setChartData] = useState();
+  const [chartVisible, setChartVisible] = useState(false);
   
+  const retrievePayments = async (req,res) => {
+    try {
+      await axios.get(`/payments/${email2}`)
+      .then((res) => {
+        if (res.data.length<=12) {
+          let final = [];
+          res.data.forEach((e)=>{
+          let obj = {};
+          obj["x"]=e["covered_month"].slice(0,3);
+          obj["y"]=e["amount_jpy"];
+          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
+          final.push(obj)
+        })
+          setChartData(final)
+        } else {
+          while (res.data.length>12){
+            res.data.shift()
+          }
+          let final = [];
+          res.data.forEach((e)=>{
+          let obj = {};
+          obj["x"]=e["covered_month"].slice(0,3);
+          obj["y"]=e["amount_jpy"];
+          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
+          final.push(obj)
+          setChartData(final)
+          })
+        } 
+      })
+    } catch{
+        console.log("NOPE! Payments cannot be retrieved");
+    }
+  }
+ 
   const retrieveProviderAddress = async (req,res) => {
     try {
       await axios.get(`/providers/${email2}`)
@@ -39,6 +80,10 @@ function Providerpage({ user, email2 }) {
     }
   }
 
+  useEffect(()=>{
+    retrieveProviderAddress()
+    retrievePayments()
+  },[])
   
   const retrieveProviderItems = (req,res) => {
     axios.post("/providerItems", { address: providerAddress }).then((res) => setProviderItems(res.data));
@@ -88,7 +133,11 @@ function Providerpage({ user, email2 }) {
     // retrieveProviderItems();
   }, [])
 
-  useEffect(() => {
+ useEffect(()=>{
+setChartVisible(true)
+ },[chartData])
+  
+      useEffect(() => {
     retrieveProviderItems();
   }, [providerAddress])
 
@@ -108,7 +157,73 @@ function Providerpage({ user, email2 }) {
       <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
       {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
-      
+      <div>
+        { chartVisible === false ? <></> :
+        <div className="chart">
+        <VictoryChart
+          responsive={false}
+          animate={{
+            duration: 500,
+            onLoad: { duration: 200 }
+          }}
+          domainPadding={{ x: 20 }}
+        >
+          <VictoryAxis  
+          animate={{
+            duration: 500,
+            onLoad: { duration: 200 }
+          }}
+          style={{ data: { fill: "#000000" } }} 
+          />
+          <VictoryAxis 
+          dependentAxis  
+          animate={{
+            duration: 500,
+            onLoad: { duration: 200 }
+          }}
+          style={{ data: { fill: "#000000" } }}
+          />
+          <VictoryBar
+          animate={{
+            duration: 500,
+            onLoad: { duration: 200 }
+          }}
+            barRatio={1}
+            cornerRadius={0}
+            style={{ data: { fill: "#2035d4" } }}
+            alignment="middle"
+            labelComponent={<VictoryTooltip/>}
+            data={chartData}
+            events={[{
+              target: "data",
+              eventHandlers: {
+                onMouseOver: () => {
+                  return [
+                    {
+                      target: "data",
+                      mutation: () => ({style: {fill: "gold", width: 30}})
+                    }, {
+                      target: "labels",
+                      mutation: () => ({ active: true })
+                    }
+                  ];
+                },
+                onMouseOut: () => {
+                  return [
+                    {
+                      target: "data",
+                      mutation: () => {}
+                    }, {
+                      target: "labels",
+                      mutation: () => ({ active: false })
+                    }
+                  ];
+                }
+              }
+            }]}
+          />
+        </VictoryChart>
+        </div>}      
       <button>Add more storage capacity</button>
       <button
         onClick={(e) => {
@@ -119,6 +234,7 @@ function Providerpage({ user, email2 }) {
       </button>
       <br />
       <Chat />
+    </div>
     </div>
   );
 }

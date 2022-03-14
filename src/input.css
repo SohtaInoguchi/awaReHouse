@@ -22,5 +22,9 @@
   .learn-more-e {
     @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
+}
 
+.chart{
+  max-width: 50%;
+  margin:0 auto;
 }
