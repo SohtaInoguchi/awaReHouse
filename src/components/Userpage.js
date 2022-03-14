@@ -107,9 +107,9 @@ function Userpage({
   };
 
   function signOut() {
-    window.localStorage.removeItem("firstName");
-    window.localStorage.removeItem("email");
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("firstName_user");
+    window.localStorage.removeItem("email_user");
+    window.localStorage.removeItem("token_user");
     navigate("/");
   }
 

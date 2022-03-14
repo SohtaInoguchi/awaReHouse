@@ -51,10 +51,15 @@ export default function Homepage({
                   <button
                     className="login-button"
                     onClick={() => {
-                      console.log(window.localStorage.getItem("firstName"));
-                      if (window.localStorage.getItem("firstName"))
+                      console.log(
+                        window.localStorage.getItem("firstName_user")
+                      );
+                      if (window.localStorage.getItem("firstName_user")) {
+                        window.localStorage.removeItem("firstName_provider");
+                        window.localStorage.removeItem("email_provider");
+                        window.localStorage.removeItem("token_provider");
                         navigate("/user");
-                      else navigate("/login/user");
+                      } else navigate("/login/user");
                     }}
                   >
                     <Icon icon={<FaUser size="24" />} />
@@ -66,9 +71,15 @@ export default function Homepage({
                   <button
                     className="login-button"
                     onClick={() => {
-                      if (window.localStorage.getItem("firstName"))
+                      console.log(
+                        window.localStorage.getItem("firstName_provider")
+                      );
+                      if (window.localStorage.getItem("firstName_provider")) {
+                        window.localStorage.removeItem("firstName_user");
+                        window.localStorage.removeItem("email_user");
+                        window.localStorage.removeItem("token_user");
                         navigate("/provider");
-                      else navigate("/login/provider");
+                      } else navigate("/login/provider");
                     }}
                   >
                     <Icon icon={<FaUserTie size="24" />} />

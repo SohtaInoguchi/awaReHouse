@@ -17,11 +17,20 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
         setUser(res.data.first_name);
         setEmail(res.data.email);
         console.log(res.data);
-        if (res.data.boolean && mode === "user") navigate("/user");
-        else if (res.data.boolean && mode === "provider") navigate("/provider");
-        window.localStorage.setItem("token", res.data.token);
-        window.localStorage.setItem("firstName", res.data.first_name);
-        window.localStorage.setItem("email", res.data.email);
+        if (res.data.boolean && mode === "user") {
+          window.localStorage.setItem("token_user", res.data.token);
+          window.localStorage.setItem("firstName_user", res.data.first_name);
+          window.localStorage.setItem("email_user", res.data.email);
+          navigate("/user");
+        } else if (res.data.boolean && mode === "provider") {
+          window.localStorage.setItem("token_provider", res.data.token);
+          window.localStorage.setItem(
+            "firstName_provider",
+            res.data.first_name
+          );
+          window.localStorage.setItem("email_provider", res.data.email);
+          navigate("/provider");
+        }
       });
   }
   return (
