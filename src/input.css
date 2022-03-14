@@ -25,9 +25,8 @@
     @apply transition-all duration-700 opacity-0;
   }
 }
-}
 
-.chart{
+.chart {
   max-width: 50%;
-  margin:0 auto;
+  margin: 0 auto;
 }
