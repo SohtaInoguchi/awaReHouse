@@ -142,6 +142,11 @@ body {
 /* ------------Chat popup------------- */
 #outer-wrapper {
   max-width: 40%;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
+  /* position: absolute; */
 }
 
 #chat-box {
@@ -159,6 +164,10 @@ body {
   width: 4rem;
   height: 4rem;
   margin: 10px 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
   /* position: absolute; */
 }
 
@@ -269,20 +278,6 @@ body {
   justify-content: space-between;
   margin-right: 25px;
   align-items: center;
-}
-
-#visitor-date {
-  color: white;
-  /* background-color: brown; */
-  height: 50px;
-  background-image: linear-gradient(
-    to left,
-    rgb(175, 228, 252),
-    rgb(112, 186, 221),
-    rgb(45, 124, 160),
-    rgb(11, 81, 114)
-  );
-  border-radius: 10px;
 }
 
 #provider-info {

@@ -4,8 +4,11 @@
 
 @layer components {
   #provider {
-    /* @apply bg-gray-50 text-cyan-600 text-xl absolute top-0 right-5; */
     @apply bg-gray-50 text-cyan-600 text-xl;
+  }
+
+  #provider-visitor-date {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-11;
   }
 
   .login-button {
@@ -21,4 +24,10 @@
   .boxes-before {
     @apply transition-all duration-700 opacity-0;
   }
+}
+}
+
+.chart{
+  max-width: 50%;
+  margin:0 auto;
 }
