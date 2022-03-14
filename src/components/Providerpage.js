@@ -12,6 +12,8 @@ import { VictoryBar,
 } from 'victory';
 import DatePicker from "react-datepicker";
 import { Badge, Accordion, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Badge, Accordion, Card, Button } from "react-bootstrap";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -28,7 +30,6 @@ if (dd > 21) {
 }
 
 function Providerpage({ user, email2 }) {
-
   // const [displayProviderTable, setDisplayProviderTable] = useState(false);
   const [providerItems, setProviderItems] = useState([]);
   const [providerAddress, setProviderAddress] = useState("");
@@ -67,8 +68,8 @@ function Providerpage({ user, email2 }) {
         setBoxNumberNull(false)
           setChartData(final)
         } else {
-          while (res.data.length>12){
-            res.data.shift()
+          while (res.data.length > 12) {
+            res.data.shift();
           }
           let final = [];
           res.data.forEach((e)=>{
@@ -86,35 +87,42 @@ function Providerpage({ user, email2 }) {
     } catch{
         console.log("NOPE! Payments cannot be retrieved");
     }
-  }
- 
-  const retrieveProviderAddress = async (req,res) => {
+  };
+
+  const retrieveProviderAddress = async (req, res) => {
     try {
-      await axios.get(`/providers/${email2}`)
-      .then((res) => {
+      await axios.get(`/providers/${email2}`).then((res) => {
         // setProviderAddress(res.data[0].adress);
         setProviderAddress(res.data[0].adress);
-        setStorageFloor(res.data[0].floor)
-      })
-    } catch{
-        console.log("NOPE! Provider address data not retrieved");
+        setStorageFloor(res.data[0].floor);
+      });
+    } catch {
+      console.log("NOPE! Provider address data not retrieved");
     }
+  };
+
+  useEffect(() => {
+    retrieveProviderAddress();
+    retrievePayments();
+  }, []);
+
+  const retrieveProviderItems = (req, res) => {
+    axios
+      .post("/providerItems", { address: providerAddress })
+      .then((res) => setProviderItems(res.data));
+  };
+
+  function signOut() {
+    window.localStorage.removeItem("firstName_provider");
+    window.localStorage.removeItem("email_provider");
+    window.localStorage.removeItem("token_provider");
+    navigate("/");
   }
 
-  useEffect(()=>{
-    retrieveProviderAddress()
-    retrievePayments()
-  },[])
-  
-  const retrieveProviderItems = (req,res) => {
-    axios.post("/providerItems", { address: providerAddress }).then((res) => setProviderItems(res.data));
-  }
-  
   const renderListOfStorage = () => {
     return (
       <section id="box-list">
-      {
-        providerItems.map((item, idx) => {
+        {providerItems.map((item, idx) => {
           return (
             <Card className="m-10 max-w-sm">
               <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
@@ -141,18 +149,17 @@ function Providerpage({ user, email2 }) {
       }
       </section>
     );
+  };
 
-  }
-  
   const checkItems = (e) => {
     e.preventDefault();
     console.log(providerItems);
-  }
-  
-  useEffect(()=>{
-    retrieveProviderAddress()
+  };
+
+  useEffect(() => {
+    retrieveProviderAddress();
     // retrieveProviderItems();
-  }, [])
+  }, []);
 
  useEffect(()=>{
     setChartVisible(true)
@@ -160,7 +167,7 @@ function Providerpage({ user, email2 }) {
   
       useEffect(() => {
     retrieveProviderItems();
-  }, [providerAddress])
+  }, [providerAddress]);
 
   const createLocation = (e) => {
     setLocation(e.target.value);
@@ -191,7 +198,9 @@ const submitHandler = (e) => {
   return (
     <div id="provider-page-wrapper">
       <aside id="badge-wrapper">
-      <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
+        <Badge bg="light" id="provider-visitor-date">
+          Next stuff visit will be 02/02/22
+        </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
             <li>Welcome {user}</li>
@@ -201,20 +210,22 @@ const submitHandler = (e) => {
           </ul>
         </Badge>
       </aside>
-      <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
+      <Badge bg="light" id="provider-visitor-date">
+        LIST OF STORED BOXES
+      </Badge>
       {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
         { chartVisible === true && boxNumberNull === false ? 
-        <div className="chart">
-        <VictoryChart
-          responsive={false}
-          animate={{
-            duration: 500,
-            onLoad: { duration: 200 }
-          }}
-          domainPadding={{ x: 20 }}
-        >
+          <div className="chart">
+            <VictoryChart
+              responsive={false}
+              animate={{
+                duration: 500,
+                onLoad: { duration: 200 },
+              }}
+              domainPadding={{ x: 20 }}
+            >  
           <VictoryLabel text="Your monthly income over the past 12 months" x={225} y={30} textAnchor="middle" style={[
         { fill: "#000000", fontSize: 15 },
       ]}/>

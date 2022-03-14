@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .toni {
-    @apply bg-green-500 text-white flex justify-center;
-  }
-
   #provider {
     @apply bg-gray-50 text-cyan-600 text-xl;
   }
@@ -22,9 +18,15 @@
   .learn-more-e {
     @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
+  .boxes-after {
+    @apply transition-all duration-700 bg-gray-200 opacity-100;
+  }
+  .boxes-before {
+    @apply transition-all duration-700 opacity-0;
+  }
 }
 
-.chart{
+.chart {
   max-width: 50%;
   margin:0 auto;
   background-color: rgb(155, 210, 255);
