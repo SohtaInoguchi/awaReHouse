@@ -6,7 +6,10 @@ import axios from "axios";
 import { VictoryBar,
   VictoryChart,
   VictoryTooltip,
-  VictoryAxis } from 'victory';
+  VictoryAxis, 
+  VictoryLabel,
+  Rect,
+} from 'victory';
 
 import { Badge, Accordion, Card } from "react-bootstrap";
 
@@ -31,13 +34,17 @@ function Providerpage({ user, email2 }) {
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
   const [chartData, setChartData] = useState();
-  const [chartVisible, setChartVisible] = useState(false);
+  const [chartVisible, setChartVisible] = useState();
+  const [boxNumberNull, setBoxNumberNull] = useState();
   
   const retrievePayments = async (req,res) => {
     try {
       await axios.get(`/payments/${email2}`)
       .then((res) => {
-        if (res.data.length<=12) {
+        if (res.data.length===0){
+          setChartVisible(false)
+          setBoxNumberNull(true)
+        } else if (res.data.length<=12) {
           let final = [];
           res.data.forEach((e)=>{
           let obj = {};
@@ -46,6 +53,8 @@ function Providerpage({ user, email2 }) {
           obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
           final.push(obj)
         })
+        setChartVisible(true)  
+        setBoxNumberNull(false)
           setChartData(final)
         } else {
           while (res.data.length>12){
@@ -58,6 +67,8 @@ function Providerpage({ user, email2 }) {
           obj["y"]=e["amount_jpy"];
           obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
           final.push(obj)
+          setBoxNumberNull(false)
+          setChartVisible(true)  
           setChartData(final)
           })
         } 
@@ -71,7 +82,6 @@ function Providerpage({ user, email2 }) {
     try {
       await axios.get(`/providers/${email2}`)
       .then((res) => {
-        // setProviderAddress(res.data[0].adress);
         setProviderAddress(res.data[0].adress);
         setStorageFloor(res.data[0].floor)
       })
@@ -104,11 +114,11 @@ function Providerpage({ user, email2 }) {
                     Click to see the detail of box {item.box_id}
                     </Accordion.Header>
                     <Accordion.Body>
-                      <div key={idx}>
-                        <li key={idx} className="box-detail">Location: {providerAddress}</li>
-                        <li key={`${idx}d`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
-                        <li key={idx} className="mx-0 box-detail">Floor: {storageFloor}</li>
-                        <li key={idx} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
+                      <div key={`${idx}x`}>
+                        <li key={`${idx}a`} className="box-detail">Location: {providerAddress}</li>
+                        <li key={`${idx}b`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
+                        <li key={`${idx}c`} className="mx-0 box-detail">Floor: {storageFloor}</li>
+                        <li key={`${idx}d`} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -127,14 +137,13 @@ function Providerpage({ user, email2 }) {
     e.preventDefault();
     console.log(providerItems);
   }
-  
+
   useEffect(()=>{
     retrieveProviderAddress()
-    // retrieveProviderItems();
   }, [])
 
  useEffect(()=>{
-setChartVisible(true)
+    setChartVisible(true)
  },[chartData])
   
       useEffect(() => {
@@ -158,7 +167,7 @@ setChartVisible(true)
       {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
-        { chartVisible === false ? <></> :
+        { chartVisible === true && boxNumberNull === false ? 
         <div className="chart">
         <VictoryChart
           responsive={false}
@@ -168,10 +177,13 @@ setChartVisible(true)
           }}
           domainPadding={{ x: 20 }}
         >
+          <VictoryLabel text="Your monthly income over the past 12 months" x={225} y={30} textAnchor="middle" style={[
+        { fill: "#000000", fontSize: 15 },
+      ]}/>
           <VictoryAxis  
           animate={{
             duration: 500,
-            onLoad: { duration: 200 }
+            onLoad: { duration: 250 }
           }}
           style={{ data: { fill: "#000000" } }} 
           />
@@ -179,7 +191,7 @@ setChartVisible(true)
           dependentAxis  
           animate={{
             duration: 500,
-            onLoad: { duration: 200 }
+            onLoad: { duration: 250 }
           }}
           style={{ data: { fill: "#000000" } }}
           />
@@ -223,7 +235,7 @@ setChartVisible(true)
             }]}
           />
         </VictoryChart>
-        </div>}      
+        </div> : <h4 className="noHistory">You do not have yet any payment history <br></br></h4>}      
       <button>Add more storage capacity</button>
       <button
         onClick={(e) => {
