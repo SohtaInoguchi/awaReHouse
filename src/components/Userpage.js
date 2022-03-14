@@ -177,7 +177,9 @@ function Userpage({
       <button
         onClick={() => {
           updateItemList();
-          setDisplayTable(true);
+          setDisplayTable(!displayTable);
+          setAddItem(false);
+          setBoxOrderReceived(false);
         }}
       >
         LIST OF STORED GOODS
@@ -206,6 +208,8 @@ function Userpage({
       </ol> : <></>}
       <button style={{ cursor: "pointer" }} onClick={() => {
       setAddItem(true);
+      setDisplayTable(false);
+      setBoxOrderReceived(false);
       }}>
         Add Storage Items
       </button>
@@ -367,3 +371,4 @@ function Userpage({
 }
 
 export default Userpage;
+  

@@ -57,12 +57,24 @@ app.post("/allItems", async (req, res) => {
       .select("*")
       .from("inventory")
       .where("user_owner", req.body.email);
-    console.log(items);
+    // console.log(items);
     res.send(items);
   } catch {
     res.send("No items found yet");
   }
 });
+
+// app.post("/lastPayments", async (req, res) => {
+//   try {
+//     const payments = await db
+//       .select("*")
+//       .from("payments")
+//       .where("provider_email", req.body.email);
+//     res.send(payments);
+//   } catch {
+//     res.send("No payments found yet");
+//   }
+// });
 
 // // retrieve all goods stored at a single place
 // app.post("/providerItems", async (req, res) => {
@@ -81,7 +93,8 @@ app.post("/login", async (req, res) => {
   try {
     // for user
     let user;
-
+    console.log("auth middleware");
+    console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
           .select("password", "first_name", "email")
@@ -98,9 +111,11 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
+    
     const token = await jwt.sign(
       { user: input },
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1s" }
     );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
@@ -133,7 +148,8 @@ function authenticateToken(req, res, next) {
     console.log(token);
     req.token = token;
     next();
-  } else res.send(403);
+  } else res.sendStatus(403);
+  // .json({ message: "YOU ARE NOT ALLOWED TO USE I THIS SHIT!!" });
 }
 
 app.get("/users", async (req, res) => {
@@ -154,6 +170,15 @@ app.get("/providers", async (req, res) => {
   }
 });
 
+app.get("/payments", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("payments");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
 app.post("/users", async (req, res) => {
   const salt = await bcrypt.genSalt();
   const encryptedPassword = await bcrypt.hash(req.body.password, salt);
@@ -165,6 +190,21 @@ app.post("/users", async (req, res) => {
     email: req.body.email,
     picture_file: req.body.picture_file,
   };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
   try {
     console.log("from here");
     console.log(user);
@@ -199,6 +239,21 @@ app.post("/providers", async (req, res) => {
     emergency_contact_phone_number: req.body.emergency_contact_phone_number,
     picture_file: req.body.picture_file,
   };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
   try {
     console.log("from here");
     console.log(user);
@@ -223,11 +278,24 @@ app.get("/users/:email", async (req, res) => {
   }
 });
 
+app.get("/payments/:provider_email", async (req, res) => {
+  try {
+    const { provider_email } = req.params;
+    const previousPayments = await db
+      .select("*")
+      .from("payments")
+      .where({ provider_email });
+    res.json(previousPayments);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
 app.get("/providers/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const userAddress = await db
-      .select("adress")
+      .select("*")
       .from("providers")
       .where({ email });
     res.json(userAddress);
@@ -238,11 +306,12 @@ app.get("/providers/:email", async (req, res) => {
 
 //grab items at single location
 app.post("/providerItems", async (req, res) => {
+  const { address } = req.body;
   try {
     const items = await db
-      .select("*")
-      .from("inventory")
-      .where("storage_location", req.body.providerAddress);
+    .select("*")
+    .from("inventory")
+    .where("storage_location", address);    
     res.send(items);
   } catch {
     res.send("No items found yet");

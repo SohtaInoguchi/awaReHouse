@@ -12,8 +12,7 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   BrowserRouter as Router,
@@ -22,6 +21,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+import LearnMore from "./LearnMore";
 
 function App() {
   //for user
@@ -41,7 +41,6 @@ function App() {
 
   //Axios
   useEffect(() => {
-    console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, []);
 
@@ -78,7 +77,10 @@ function App() {
             />
           }
         />
-        <Route path="/provider" element={<Providerpage user={user} email2={email2} />} />
+        <Route
+          path="/provider"
+          element={<Providerpage user={user} email2={email2} />}
+        />
 
         <Route
           path="/login/user"
@@ -119,6 +121,7 @@ function App() {
           path="extra-charge"
           element={<ExtraCharge user={user} items={items} />}
         />
+        <Route path="learn" element={<LearnMore />} />
       </Routes>
     </Router>
     // <div>
