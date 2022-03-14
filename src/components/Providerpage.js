@@ -10,7 +10,7 @@ import { VictoryBar,
   VictoryLabel,
   Rect,
 } from 'victory';
-
+import DatePicker from "react-datepicker";
 import { Badge, Accordion, Card } from "react-bootstrap";
 
 let today = new Date();
@@ -36,6 +36,15 @@ function Providerpage({ user, email2 }) {
   const [chartData, setChartData] = useState();
   const [chartVisible, setChartVisible] = useState();
   const [boxNumberNull, setBoxNumberNull] = useState();
+  const [moreStorage, setMoreStorage] = useState(false);
+  const [location, setLocation] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [floorAddition, setFloorAddition] = useState("");
+  const [available, setAvailable] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState();
+  const [isSelected, setIsSelected] = useState(false);
+  
   
   const retrievePayments = async (req,res) => {
     try {
@@ -82,6 +91,7 @@ function Providerpage({ user, email2 }) {
     try {
       await axios.get(`/providers/${email2}`)
       .then((res) => {
+        // setProviderAddress(res.data[0].adress);
         setProviderAddress(res.data[0].adress);
         setStorageFloor(res.data[0].floor)
       })
@@ -137,9 +147,10 @@ function Providerpage({ user, email2 }) {
     e.preventDefault();
     console.log(providerItems);
   }
-
+  
   useEffect(()=>{
     retrieveProviderAddress()
+    // retrieveProviderItems();
   }, [])
 
  useEffect(()=>{
@@ -149,6 +160,29 @@ function Providerpage({ user, email2 }) {
       useEffect(() => {
     retrieveProviderItems();
   }, [providerAddress])
+
+  const createLocation = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const createCapacity = (e) => {
+    setCapacity(e.target.value);
+  };
+
+  const createFloorAddition = (e) => {
+    setFloorAddition(e.target.value);
+  };
+
+  const handleDateSelect = (date) => {
+    setStartDate(date);
+    setSelectedDate(date);
+    setIsSelected(true);
+}
+
+const submitHandler = (e) => {
+  e.preventDefault()
+  console.log(location, capacity, available, floorAddition, selectedDate, isSelected)
+}
 
   return (
     <div id="provider-page-wrapper">
@@ -235,8 +269,65 @@ function Providerpage({ user, email2 }) {
             }]}
           />
         </VictoryChart>
-        </div> : <h4 className="noHistory">You do not have yet any payment history <br></br></h4>}      
-      <button>Add more storage capacity</button>
+        </div> : <>You do not have yet any payment history <br></br></>}      
+      <button onClick={()=>{setMoreStorage(!moreStorage)}}>Add more storage capacity</button>
+      {moreStorage === false ? <></> : <div className="formMoreStorage">
+      <form >
+            <br></br>
+            Please give us some details about the additional storage capacity you plan to bring online
+            <br></br>
+            <label >
+              Where is this new storage capacity located?
+              <input
+                type="text"
+                name="location"
+                placeholder="address of storage"
+                value={location}
+                onChange={createLocation}
+              />
+              <br></br>
+              What is the storage capacity offered (in m3)?
+              <input
+                type="text"
+                name="capacity"
+                placeholder="volume offered"
+                value={capacity}
+                onChange={createCapacity}
+              />
+              <br></br>
+              On which floor is this new storage capacity located?
+              <input
+                type="text"
+                name="floor"
+                placeholder="storage floor"
+                value={floorAddition}
+                onChange={createFloorAddition}
+              />
+              <br></br>
+              <p style={{ display: "inline" }}>
+                Check if this new storage facility is already available
+              </p>
+              <input
+                type="checkbox"
+                className="isAvailable"
+                onChange={()=>setAvailable(!available)}
+              />
+              <br></br>
+              If the storage facility is not yet available, when do you expect it to become available (please select a date below)?
+              <DatePicker 
+            selected={startDate} 
+            onSelect={date => handleDateSelect(date)} 
+            />
+              <br></br>
+            </label>
+            <input
+              type="submit"
+              value="Submit"
+              style={{ cursor: "pointer" }}
+              onClick={submitHandler}
+            />
+          </form>
+        </div>}
       <button
         onClick={(e) => {
           window.confirm("Are you sure about to quit the provider?");
