@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Accordion, Button } from "react-bootstrap";
+import { Accordion, Button, Form } from "react-bootstrap";
 
 function Userpage({
   user,
@@ -106,6 +106,13 @@ function Userpage({
     setBoxOrderReceived(false);
   };
 
+  function signOut() {
+    window.localStorage.removeItem("firstName");
+    window.localStorage.removeItem("email");
+    window.localStorage.removeItem("token");
+    navigate("/");
+  }
+
   const possibleStoragelocations = async () => {
     await axios
       .get("/providers")
@@ -168,10 +175,20 @@ function Userpage({
 
   return (
     <div>
-      Welcome back {user}
-      <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
+      <div className="flex justify-between">
+        <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center">
+          Welcome back {window.localStorage.getItem("firstName")}
+        </p>
+        <Button className="flex mx-5 " onClick={signOut}>
+          Sign Out
+        </Button>
+      </div>
+      <h3 className="text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
+        NEXT RETRIEVAL PERIOD: April 22nd - May 10th
+      </h3>
       <div className="flex flex-row justify-between  border-8  ">
-        <div className="flex flex-col justify-center items-center max-w-lg mx-5 px-5 border-8 ">
+        {/* if I remove flex, looks better on boostrap */}
+        <div className=" max-w-lg mx-5 px-5 border-8 ">
           <Button
             className="max-w-lg"
             onClick={() => {
@@ -213,47 +230,71 @@ function Userpage({
             </Accordion.Item>
           </Accordion>
           <Accordion>
-            <Accordion.Item>
+            <Accordion.Item className="">
               <Accordion.Header>PLEASE SELECT THE SIZE OF BOX</Accordion.Header>
               <Accordion.Body>
-                <p>Box Type A</p>
-                <input
-                  type="radio"
-                  name="boxType"
-                  value="A (27cm x 38cm x 29cm)"
-                  id="A"
-                  onChange={handleChange}
-                />
-                <p>Box Type B</p>
-                <input
-                  type="radio"
-                  name="boxType"
-                  value="B (32cm x 46cm x 29cm)"
-                  id="B"
-                  onChange={handleChange}
-                />
-                <p>Box Type C </p>
-                <input
-                  type="radio"
-                  name="boxType"
-                  value="C (40cm x 60cm x 40cm)"
-                  onChange={handleChange}
-                />
-                <p>Box Type D</p>
-                <input
-                  type="radio"
-                  name="boxType"
-                  value="D (175cm x 30cm x 15cm)"
-                  onChange={handleChange}
-                />
-                <br />
-                <Button>Submit</Button>
-                <Button>Go Back</Button>
+                <div className="flex justify-center items-center">
+                  <img
+                    className=""
+                    src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
+                    style={{ height: 200 }}
+                  />
+                </div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option1"
+                      value="A (27cm x 38cm x 29cm)"
+                      onChange={handleChange}
+                    />{" "}
+                    Type A
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option2"
+                      value="B (32cm x 46cm x 29cm)"
+                      onChange={handleChange}
+                    />{" "}
+                    Type B
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option3"
+                      value="C (40cm x 60cm x 40cm)"
+                      onChange={handleChange}
+                    />{" "}
+                    Type C
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option4"
+                      value="D (175cm x 30cm x 15cm)"
+                      onChange={handleChange}
+                    />{" "}
+                    Type D
+                  </label>
+                </div>
+                <div className="flex justify-center items-center">
+                  <Button onClick={() => setConfirmation(true)}>
+                    Add Item
+                  </Button>
+                  <Button onClick={() => setConfirmation(false)}>
+                    Go Back
+                  </Button>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
 
-          <div id="items" className="containerNewItem boxes-before  max-w-lg">
+          {/* <div id="items" className="containerNewItem boxes-before  max-w-lg">
             <div className="newUser flex flex-col items-center justify-center">
               PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
               <img
@@ -304,7 +345,7 @@ function Userpage({
                 Go back
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* <div className="flex justify-end items-end border-emerald-700 border-8"> */}
@@ -371,19 +412,67 @@ function Userpage({
         {/* </div> */}
       </div>
       {confirmation === true ? (
-        <div>
-          <form>
+        <div className="flex justify-center items-center">
+          <Form className="bg-gray-200 text-blue-600 rounded-3xl ">
             <br></br>
             You selected a type {typeBox} box. Please provde a brief description
             of the goods you want to store (e.g. Snowboard, summer clothes,
             barbecue set...)
             <br></br>
+            <Form.Group className="w-96">
+              <Form.Control
+                type="text"
+                name="description1"
+                placeholder="Goods description (required)"
+                required
+                value={description1}
+                onChange={createDescription1}
+              />
+            </Form.Group>
+            <Form.Group className="w-96">
+              <Form.Control
+                type="text"
+                name="description2"
+                placeholder="Goods description (optional)"
+                value={description2}
+                onChange={createDescription2}
+              />
+            </Form.Group>
+            <Form.Group className="w-96">
+              <Form.Control
+                type="text"
+                name="description3"
+                placeholder="Goods description (optional)"
+                value={description3}
+                onChange={createDescription3}
+              />
+            </Form.Group>
+            {/* Fragile and heavy flag  */}
+            {/* <Form.Group className="w-96">
+              <Form.Control
+                type="text"
+                name="description3"
+                placeholder="Goods description (optional)"
+                value={description3}
+                onChange={createDescription3}
+              />
+            </Form.Group>
+            <Form.Group className="w-96">
+              <Form.Control
+                type="text"
+                name="description3"
+                placeholder="Goods description (optional)"
+                value={description3}
+                onChange={createDescription3}
+              />
+            </Form.Group> */}
             <label>
               Goods description (required):
               <input
                 type="text"
                 name="description1"
                 placeholder="Goods description"
+                required
                 value={description1}
                 onChange={createDescription1}
               />
@@ -433,7 +522,7 @@ function Userpage({
               style={{ cursor: "pointer" }}
               onClick={submit2}
             />
-          </form>
+          </Form>
           <Button
             onClick={() => setConfirmation(false)}
             style={{ cursor: "pointer" }}

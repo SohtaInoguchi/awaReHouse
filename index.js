@@ -102,7 +102,7 @@ app.post("/login", async (req, res) => {
     const token = await jwt.sign(
       { user: input },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1s" }
+      { expiresIn: "1h" }
     );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
@@ -115,6 +115,7 @@ app.post("/login", async (req, res) => {
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
+      token,
     });
   } catch (err) {
     res.json({

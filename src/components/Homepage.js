@@ -50,7 +50,12 @@ export default function Homepage({
                 <div className="flex justify-center items-center">
                   <button
                     className="login-button"
-                    onClick={() => navigate("/login/user")}
+                    onClick={() => {
+                      console.log(window.localStorage.getItem("firstName"));
+                      if (window.localStorage.getItem("firstName"))
+                        navigate("/user");
+                      else navigate("/login/user");
+                    }}
                   >
                     <Icon icon={<FaUser size="24" />} />
                     User
@@ -61,7 +66,9 @@ export default function Homepage({
                   <button
                     className="login-button"
                     onClick={() => {
-                      navigate("/login/provider");
+                      if (window.localStorage.getItem("firstName"))
+                        navigate("/provider");
+                      else navigate("/login/provider");
                     }}
                   >
                     <Icon icon={<FaUserTie size="24" />} />

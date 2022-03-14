@@ -16,8 +16,12 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
         setIsLogin(res.data.boolean);
         setUser(res.data.first_name);
         setEmail(res.data.email);
+        console.log(res.data);
         if (res.data.boolean && mode === "user") navigate("/user");
         else if (res.data.boolean && mode === "provider") navigate("/provider");
+        window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("firstName", res.data.first_name);
+        window.localStorage.setItem("email", res.data.email);
       });
   }
   return (
