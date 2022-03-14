@@ -7,6 +7,7 @@ import axios from "axios";
 import { OneFiftyStripe } from "./OneFiftyStripe";
 import e from "cors";
 import { useNavigate } from "react-router-dom";
+import { BoxFlow } from "./BoxFlow";
 import { Accordion, Button, Form } from "react-bootstrap";
 
 function Userpage({
@@ -546,23 +547,12 @@ function Userpage({
       )}
       {success === true ? <Success message={message} /> : <Subscription />}
       {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
-<<<<<<< HEAD
-      <button onClick={() => navigate("/extra-charge")}>Extra Retrieval</button>
-            
-            
-            <button style={{ cursor: "pointer" }} onClick={() => {
-      }}>
-        <BoxFlow/>
-      </button>
-      
-=======
       <Button className="mx-3" onClick={() => navigate("/extra-charge")}>
         Extra Retrieval
       </Button>
       <Button className="mx-3" onClick={storeOnClick}>
-        Storage
+      <BoxFlow/>
       </Button>
->>>>>>> 3ab27b1a20d99e2bdef40fb845889b4874510173
       <br />
       <br />
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
