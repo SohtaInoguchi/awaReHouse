@@ -7,8 +7,8 @@ import { VictoryBar,
   VictoryChart,
   VictoryTooltip,
   VictoryAxis } from "victory";
-
-import { Badge, Accordion, Card } from "react-bootstrap";
+import { Badge, Accordion, Card, Modal } from "react-bootstrap";
+import MyVerticallyCenteredModal from "./StopProviderModal";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -32,6 +32,7 @@ function Providerpage({ user, email2 }) {
   const [storageFloor, setStorageFloor] = useState("");
   const [chartData, setChartData] = useState();
   const [chartVisible, setChartVisible] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   
   const retrievePayments = async (req,res) => {
     try {
@@ -125,12 +126,11 @@ function Providerpage({ user, email2 }) {
   
   const check = (e) => {
     e.preventDefault();
-    console.log(providerItems);
+    // console.log("show", show);
   }
   
   useEffect(()=>{
     retrieveProviderAddress()
-    // retrieveProviderItems();
   }, [])
 
  useEffect(()=>{
@@ -231,9 +231,16 @@ setChartVisible(true)
           window.confirm("Are you sure about to quit the provider?");
         }}
       > */}
-      <button onClick={check}>
+      <button onClick={check}>Check</button>
+      <button onClick={() => setModalShow(true)}>
         Stop being a provider
       </button>
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        >
+      </MyVerticallyCenteredModal>
+
       <br />
       <Chat />
     </div>
