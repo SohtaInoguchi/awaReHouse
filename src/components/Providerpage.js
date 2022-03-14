@@ -44,6 +44,7 @@ function Providerpage({ user, email2 }) {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState();
   const [isSelected, setIsSelected] = useState(false);
+  const [thanksMessage, setThanksMessage] = useState(false);
   
   
   const retrievePayments = async (req,res) => {
@@ -180,8 +181,11 @@ function Providerpage({ user, email2 }) {
 }
 
 const submitHandler = (e) => {
-  e.preventDefault()
-  console.log(location, capacity, available, floorAddition, selectedDate, isSelected)
+  e.preventDefault();
+  setMoreStorage(false);
+  setThanksMessage(true);
+  setTimeout(()=>{setThanksMessage(false)},5000);
+  console.log(location, capacity, available, floorAddition, selectedDate)
 }
 
   return (
@@ -276,12 +280,13 @@ const submitHandler = (e) => {
             <br></br>
             Please give us some details about the additional storage capacity you plan to bring online
             <br></br>
+            <br></br>
             <label >
               Where is this new storage capacity located?
               <input
                 type="text"
                 name="location"
-                placeholder="address of storage"
+                placeholder="storage address"
                 value={location}
                 onChange={createLocation}
               />
@@ -290,7 +295,7 @@ const submitHandler = (e) => {
               <input
                 type="text"
                 name="capacity"
-                placeholder="volume offered"
+                placeholder="storage capacity"
                 value={capacity}
                 onChange={createCapacity}
               />
@@ -318,16 +323,20 @@ const submitHandler = (e) => {
             selected={startDate} 
             onSelect={date => handleDateSelect(date)} 
             />
-              <br></br>
             </label>
+            <br></br>
+            <br></br>
             <input
               type="submit"
               value="Submit"
               style={{ cursor: "pointer" }}
               onClick={submitHandler}
             />
+            <br></br>
+            <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
           </form>
         </div>}
+        {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
       <button
         onClick={(e) => {
           window.confirm("Are you sure about to quit the provider?");
