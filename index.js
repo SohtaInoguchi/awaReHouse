@@ -50,10 +50,6 @@ io.on("connection", (socket) => {
 
 //////////////////SOCKET IO /////////////////////////
 
-app.get("/", (_, res) => {
-  res.send("hehehehe");
-});
-
 //Grabs all items
 app.post("/allItems", async (req, res) => {
   try {
@@ -61,18 +57,44 @@ app.post("/allItems", async (req, res) => {
       .select("*")
       .from("inventory")
       .where("user_owner", req.body.email);
-    console.log(items);
+    // console.log(items);
     res.send(items);
   } catch {
     res.send("No items found yet");
   }
 });
 
+// app.post("/lastPayments", async (req, res) => {
+//   try {
+//     const payments = await db
+//       .select("*")
+//       .from("payments")
+//       .where("provider_email", req.body.email);
+//     res.send(payments);
+//   } catch {
+//     res.send("No payments found yet");
+//   }
+// });
+
+// // retrieve all goods stored at a single place
+// app.post("/providerItems", async (req, res) => {
+//   try {
+//     const items = await db
+//       .select("*")
+//       .from("inventory")
+//       .where("storage_location", req.body.adress);
+//     res.send(items);
+//   } catch {
+//     res.send("No items found yet");
+//   }
+// });
+
 app.post("/login", async (req, res) => {
   try {
     // for user
     let user;
-
+    console.log("auth middleware");
+    console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
           .select("password", "first_name", "email")
@@ -85,16 +107,15 @@ app.post("/login", async (req, res) => {
 
     const input = {
       firstname: req.body.first_name,
-      lastname: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     };
 
-
-
+    
     const token = await jwt.sign(
       { user: input },
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" }
     );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
@@ -103,11 +124,11 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-
     res.json({
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
+      token,
     });
   } catch (err) {
     res.json({
@@ -128,9 +149,191 @@ function authenticateToken(req, res, next) {
     console.log(token);
     req.token = token;
     next();
-  } else res.send(403);
+  } else res.sendStatus(403);
+  // .json({ message: "YOU ARE NOT ALLOWED TO USE I THIS SHIT!!" });
 }
 
+app.get("/users", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("users");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.get("/providers", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("providers");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.get("/payments", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("payments");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const salt = await bcrypt.genSalt();
+  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+  const user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password: encryptedPassword,
+    adress: req.body.adress,
+    email: req.body.email,
+    picture_file: req.body.picture_file,
+  };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
+  try {
+    console.log("from here");
+    console.log(user);
+    await db("users").insert(user);
+    res.status(201).send("YEP users");
+  } catch (err) {
+    console.log("Backend server does not work - users");
+    console.error(err);
+  }
+});
+
+app.get("/inventory", async (req, res) => {
+  try {
+    const allData = await db.select("*").from("inventory");
+    res.json(allData);
+  } catch {
+    console.error(err.message);
+  }
+});
+
+app.post("/providers", async (req, res) => {
+  const salt = await bcrypt.genSalt();
+  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+  const user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    password: encryptedPassword,
+    adress: req.body.adress,
+    email: req.body.email,
+    bank_reference: req.body.bank_reference,
+    emergency_contact_person: req.body.emergency_contact_person,
+    emergency_contact_phone_number: req.body.emergency_contact_phone_number,
+    picture_file: req.body.picture_file,
+  };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const token = await jwt.sign(
+    { user: input },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1s" }
+  );
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
+  try {
+    console.log("from here");
+    console.log(user);
+    await db("providers").insert(user);
+    res.status(201).send("YEP users");
+  } catch (err) {
+    console.log("Backend server does not work - users");
+    console.error(err);
+  }
+});
+
+app.get("/users/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db
+      .select("adress")
+      .from("users")
+      .where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.get("/payments/:provider_email", async (req, res) => {
+  try {
+    const { provider_email } = req.params;
+    const previousPayments = await db
+      .select("*")
+      .from("payments")
+      .where({ provider_email });
+    res.json(previousPayments);
+  } catch {
+    console.log("Error in retrieving address");
+  }
+});
+
+app.get("/providers/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const userAddress = await db.select("*").from("providers").where({ email });
+    res.json(userAddress);
+  } catch {
+    console.log("Error in retrieving provider address");
+  }
+});
+
+//grab items at single location
+app.post("/providerItems", async (req, res) => {
+  const { address } = req.body;
+  try {
+    const items = await db
+      .select("*")
+      .from("inventory")
+      .where("storage_location", address);
+    res.send(items);
+  } catch {
+    res.send("No items found yet");
+  }
+});
+
+app.post("/inventory", async (req, res) => {
+  const postData = req.body;
+  try {
+    console.log(req.body);
+    await db("inventory").insert(postData);
+    res.status(201).send("YEP inventory");
+  } catch {
+    console.log("Backend server does not work - inventory");
+  }
+});
+
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
+/////////////////STRIPE API/////////////////////////////
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 
@@ -171,7 +374,7 @@ app.post("/create-checkout-session", async (req, res) => {
     ],
     // mode: "payment",
     mode: mode,
-    success_url: `${YOUR_DOMAIN}/?success=true`,
+    success_url: `${YOUR_DOMAIN}?success=true`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 
@@ -244,116 +447,3 @@ app.post(
     response.send();
   }
 );
-
-/////////////////STRIPE API/////////////////////////////
-
-// app.listen(PORT, () => console.log(`It is really HOOOOT on ${PORT}!!!`));
-
-// // io.on("connection", (socket) => {
-// //   // console.log(`backend id:${socket.id}`);
-// //   socket.on("send-message", (input) => {
-// //     console.log(input);
-// //   });
-// //   socket.emit("receive-message", "MESSAGE RECEIVED");
-// // });
-
-app.get("/users", async (req, res) => {
-  try {
-    const allData = await db.select("*").from("users");
-    res.json(allData);
-  } catch {
-    console.error(err.message);
-  }
-});
-
-app.get("/providers", async (req, res) => {
-  try {
-    const allData = await db.select("*").from("providers");
-    res.json(allData);
-  } catch {
-    console.error(err.message);
-  }
-});
-
-app.post("/users", async (req, res) => {
-  const postData = req.body;
-  const salt = await bcrypt.genSalt();
-  const encryptedPassword = await bcrypt.hash(req.body.password, salt);
-  const user = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    password: encryptedPassword,
-    adress: req.body.adress,
-    email: req.body.email,
-    picture_file: req.body.picture_file,
-  };
-  try {
-    console.log("from here");
-    console.log(user);
-    await db("users").insert(user);
-    res.status(201).send("YEP users");
-  } catch (err) {
-    console.log("Backend server does not work - users");
-    console.error(err);
-  }
-});
-
-app.get("/inventory", async (req, res) => {
-  try {
-    const allData = await db.select("*").from("inventory");
-    res.json(allData);
-  } catch {
-    console.error(err.message);
-  }
-});
-
-// app.post("/users", async (req,res)=>{
-//   const postData = req.body
-//   try{
-//     console.log(req.body)
-//     await db("users").insert(postData)
-//   try {
-//     console.log("from here");
-//     console.log(user);
-//     await db("users").insert(user);
-//     res.status(201).send("YEP users");
-//   } catch (err) {
-//     console.log("Backend server does not work - users");
-//     console.error(err);
-//   }
-// });
-
-app.post("/providers", async (req, res) => {
-  const postData = req.body;
-  try {
-    console.log(req.body);
-    await db("providers").insert(postData);
-    res.status(201).send("YEP providers");
-  } catch {
-    console.log("Backend server does not work - providers");
-  }
-});
-
-app.get("/users/:email", async (req, res) => {
-  try {
-    const { email } = req.params;
-    const userAddress = await db
-      .select("adress")
-      .from("users")
-      .where({ email });
-    res.json(userAddress);
-  } catch {
-    console.log("Error in retrieving address");
-  }
-});
-
-app.post("/inventory", async (req, res) => {
-  const postData = req.body;
-  try {
-    console.log(req.body);
-    await db("inventory").insert(postData);
-    res.status(201).send("YEP inventory");
-  } catch {
-    console.log("Backend server does not work - inventory");
-  }
-});

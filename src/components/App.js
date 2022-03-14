@@ -1,16 +1,27 @@
+import "../style.css";
 import "../input.css";
 import { io } from "socket.io-client";
 import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
-import NewCustomer from "./NewCustomer";
-import Success from "./Success";
+import NewUser from "./NewUser";
+import NewProvider from "./NewProvider";
 import Subscription from "./Subscription";
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import LearnMore from "./LearnMore";
 
 function App() {
   //for user
@@ -27,78 +38,132 @@ function App() {
   const [email, setEmail] = useState("");
   // email for provider
   const [email2, setEmail2] = useState("");
-  // const [user_provider, setUser_provider] = useState("");
 
   //Axios
   useEffect(() => {
-    console.log("useEffect was called");
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    // <<<<<<< HEAD
-    //     console.log("items", items);
-    //   }, [email]);
-    // =======
   }, []);
-  // >>>>>>> bb6ee0b6edece91d22122ec70820e5209b11d6bb
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      setSuccess(true);
-      setMessage("Thank you for your purchase");
-      setSessionId(query.get("session_id"));
-    }
-
-    if (query.get("canceled")) {
-      setSuccess(false);
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, [sessionId]);
 
   return (
-    <div>
-      {mode === "homePage" ? (
-        <Homepage setMode={setMode} />
-      ) : mode === "userLogin" && isLogin ? (
-        <Userpage
-          user={user}
-          message={message}
-          success={success}
-          chatMessages={chatMessages}
-          setChatMessages={setChatMessages}
-          setMode={setMode}
-          mode={mode}
-          items={items}
-          email={email}
-          setItems={setItems}
+    <Router>
+      <button onClick={() => setMessage("")}>
+        <Link to="/">To go back home</Link>
+      </button>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Homepage
+              setMode={setMode}
+              message={message}
+              setMessage={setMessage}
+            />
+          }
         />
-      ) : mode === "userLogin" && !isLogin ? (
-        <Login
-          setIsLogin={setIsLogin}
-          setUser={setUser}
-          setEmail={setEmail}
-          mode="user"
+        <Route
+          path="/user"
+          element={
+            <Userpage
+              user={user}
+              message={message}
+              success={success}
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+              setMode={setMode}
+              mode={mode}
+              items={items}
+              email={email}
+              setItems={setItems}
+            />
+          }
         />
-      ) : mode === "providerLogin" && isLogin2 ? (
-        <Providerpage user={user} />
-      ) : mode === "providerLogin" && !isLogin2 ? (
-        <Login
-          setIsLogin={setIsLogin2}
-          setUser={setUser}
-          setEmail={setEmail2}
-          mode="provider"
+        <Route
+          path="/provider"
+          element={<Providerpage user={user} email2={email2} />}
         />
-      ) : mode === "registration" ? (
-        <NewCustomer setMode={setMode} />
-      ) : mode === "extraCharge" ? (
-        <ExtraCharge user={user} items={items} />
-      ) : (
-        <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
-      )}
-    </div>
+
+        <Route
+          path="/login/user"
+          element={
+            <Login
+              setIsLogin={setIsLogin}
+              setUser={setUser}
+              setEmail={setEmail}
+              mode="user"
+            />
+          }
+        />
+        <Route
+          path="/login/provider"
+          element={
+            <Login
+              setIsLogin={setIsLogin2}
+              setUser={setUser}
+              setEmail={setEmail2}
+              mode="provider"
+            />
+          }
+        />
+
+        <Route path="signup/user" element={<NewUser />} />
+        <Route path="signup/provider" element={<NewProvider />} />
+        <Route
+          path="admin"
+          element={
+            <Admin
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+          }
+        />
+
+        <Route
+          path="extra-charge"
+          element={<ExtraCharge user={user} items={items} />}
+        />
+        <Route path="learn" element={<LearnMore />} />
+      </Routes>
+    </Router>
+    // <div>
+    //   {mode === "homePage" ? (
+    //     <Homepage setMode={setMode} />
+    //   ) : mode === "userLogin" && isLogin ? (
+    //     <Userpage
+    //       user={user}
+    //       message={message}
+    //       success={success}
+    //       chatMessages={chatMessages}
+    //       setChatMessages={setChatMessages}
+    //       setMode={setMode}
+    //       mode={mode}
+    //       items={items}
+    //       email={email}
+    //       setItems={setItems}
+    //     />
+    //   ) : mode === "userLogin" && !isLogin ? (
+    //     <Login
+    //       setIsLogin={setIsLogin}
+    //       setUser={setUser}
+    //       setEmail={setEmail}
+    //       mode="user"
+    //     />
+    //   ) : mode === "providerLogin" && isLogin2 ? (
+    //     <Providerpage user={user} />
+    //   ) : mode === "providerLogin" && !isLogin2 ? (
+    //     <Login
+    //       setIsLogin={setIsLogin2}
+    //       setUser={setUser}
+    //       setEmail={setEmail2}
+    //       mode="provider"
+    //     />
+    //   ) : mode === "registration" ? (
+    //     <NewCustomer setMode={setMode} />
+    //   ) : mode === "extraCharge" ? (
+    //     <ExtraCharge user={user} items={items} />
+    //   ) : (
+    //     <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
+    //   )}
+    // </div>
   );
 }
 
