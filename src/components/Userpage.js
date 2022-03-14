@@ -177,7 +177,7 @@ function Userpage({
     <div>
       <div className="flex justify-between">
         <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center">
-          Welcome back {window.localStorage.getItem("firstName")}
+          Welcome back {window.localStorage.getItem("firstName_user")}
         </p>
         <Button className="flex mx-5 " onClick={signOut}>
           Sign Out
