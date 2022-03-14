@@ -51,7 +51,17 @@ export default function Homepage({
                 <div className="flex justify-center items-center">
                   <button
                     className="login-button"
-                    onClick={() => navigate("/login/user")}
+                    onClick={() => {
+                      console.log(
+                        window.localStorage.getItem("firstName_user")
+                      );
+                      if (window.localStorage.getItem("firstName_user")) {
+                        window.localStorage.removeItem("firstName_provider");
+                        window.localStorage.removeItem("email_provider");
+                        window.localStorage.removeItem("token_provider");
+                        navigate("/user");
+                      } else navigate("/login/user");
+                    }}
                   >
                     <Icon icon={<FaUser size="24" />} />
                     User
@@ -62,7 +72,15 @@ export default function Homepage({
                   <button
                     className="login-button"
                     onClick={() => {
-                      navigate("/login/provider");
+                      console.log(
+                        window.localStorage.getItem("firstName_provider")
+                      );
+                      if (window.localStorage.getItem("firstName_provider")) {
+                        window.localStorage.removeItem("firstName_user");
+                        window.localStorage.removeItem("email_user");
+                        window.localStorage.removeItem("token_user");
+                        navigate("/provider");
+                      } else navigate("/login/provider");
                     }}
                   >
                     <Icon icon={<FaUserTie size="24" />} />
@@ -88,7 +106,7 @@ export default function Homepage({
               src={require("../pictures/clean-house.jpeg")}
               alt=""
             />
-            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center cursor-pointer rounded-tr-3xl rounded-br-3xl border-2 ">
+            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
                 awaReHouse is the something makes your life better. So let's
@@ -96,7 +114,7 @@ export default function Homepage({
                 doesn't it?
               </p>
               <p
-                className="rounded-3xl bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400"
+                className="rounded-3xl text-blue-600 bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400 hover:text-blue-700 cursor-pointer"
                 onClick={() => navigate("/learn")}
               >
                 Learn more

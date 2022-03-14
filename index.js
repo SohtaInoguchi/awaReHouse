@@ -115,7 +115,7 @@ app.post("/login", async (req, res) => {
     const token = await jwt.sign(
       { user: input },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1s" }
+      { expiresIn: "1h" }
     );
 
     const boolean = await bcrypt.compare(req.body.password, user[0].password);
@@ -128,6 +128,7 @@ app.post("/login", async (req, res) => {
       boolean,
       first_name: user[0].first_name,
       email: user[0].email,
+      token,
     });
   } catch (err) {
     res.json({
@@ -294,10 +295,7 @@ app.get("/payments/:provider_email", async (req, res) => {
 app.get("/providers/:email", async (req, res) => {
   try {
     const { email } = req.params;
-    const userAddress = await db
-      .select("*")
-      .from("providers")
-      .where({ email });
+    const userAddress = await db.select("*").from("providers").where({ email });
     res.json(userAddress);
   } catch {
     console.log("Error in retrieving provider address");
@@ -309,9 +307,9 @@ app.post("/providerItems", async (req, res) => {
   const { address } = req.body;
   try {
     const items = await db
-    .select("*")
-    .from("inventory")
-    .where("storage_location", address);    
+      .select("*")
+      .from("inventory")
+      .where("storage_location", address);
     res.send(items);
   } catch {
     res.send("No items found yet");
