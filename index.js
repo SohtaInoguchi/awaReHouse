@@ -211,6 +211,13 @@ app.post("/providers", async (req, res) => {
     emergency_contact_phone_number: req.body.emergency_contact_phone_number,
     picture_file: req.body.picture_file,
   };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
   const token = await jwt.sign(
     { user: input },
     process.env.ACCESS_TOKEN_SECRET,
@@ -246,10 +253,7 @@ app.get("/users/:email", async (req, res) => {
 app.get("/providers/:email", async (req, res) => {
   try {
     const { email } = req.params;
-    const userAddress = await db
-      .select("*")
-      .from("providers")
-      .where({ email });
+    const userAddress = await db.select("*").from("providers").where({ email });
     res.json(userAddress);
   } catch {
     console.log("Error in retrieving provider address");
@@ -261,9 +265,9 @@ app.post("/providerItems", async (req, res) => {
   const { address } = req.body;
   try {
     const items = await db
-    .select("*")
-    .from("inventory")
-    .where("storage_location", address);    
+      .select("*")
+      .from("inventory")
+      .where("storage_location", address);
     res.send(items);
   } catch {
     res.send("No items found yet");

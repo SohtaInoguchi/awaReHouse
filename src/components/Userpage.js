@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Accordion, Button } from "react-bootstrap";
 
 function Userpage({
   user,
@@ -192,9 +192,69 @@ function Userpage({
           >
             Add Storage Items
           </Button>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>SIZE REFERENCE</Accordion.Header>
+              <Accordion.Body>
+                <p>
+                  Type A : 27cm x 38cm x 29cm <br /> Max weight = 7.5 kg
+                </p>
+                <p>
+                  Type B : 32cm x 46cm x 29cm <br /> Max weight = 10.5 kg
+                </p>
+                <p>
+                  Type C : 40cm x 60cm x 40cm <br /> Max weight = 24 kg
+                </p>
+                <p>
+                  {" "}
+                  Type D : 175cm x 30cm x 15cm <br /> Max weight = 20 kg{" "}
+                </p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>PLEASE SELECT THE SIZE OF BOX</Accordion.Header>
+              <Accordion.Body>
+                <p>Box Type A</p>
+                <input
+                  type="radio"
+                  name="boxType"
+                  value="A (27cm x 38cm x 29cm)"
+                  id="A"
+                  onChange={handleChange}
+                />
+                <p>Box Type B</p>
+                <input
+                  type="radio"
+                  name="boxType"
+                  value="B (32cm x 46cm x 29cm)"
+                  id="B"
+                  onChange={handleChange}
+                />
+                <p>Box Type C </p>
+                <input
+                  type="radio"
+                  name="boxType"
+                  value="C (40cm x 60cm x 40cm)"
+                  onChange={handleChange}
+                />
+                <p>Box Type D</p>
+                <input
+                  type="radio"
+                  name="boxType"
+                  value="D (175cm x 30cm x 15cm)"
+                  onChange={handleChange}
+                />
+                <br />
+                <Button>Submit</Button>
+                <Button>Go Back</Button>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
 
-          <div id="items" className="containerNewItem boxes-before max-w-lg">
-            <div className="newUser flex items-start justify-start">
+          <div id="items" className="containerNewItem boxes-before  max-w-lg">
+            <div className="newUser flex flex-col items-center justify-center">
               PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
               <img
                 className="boxPicture"
