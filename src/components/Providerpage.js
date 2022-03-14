@@ -6,7 +6,7 @@ import axios from "axios";
 import { VictoryBar,
   VictoryChart,
   VictoryTooltip,
-  VictoryAxis } from 'victory';
+  VictoryAxis } from "victory";
 
 import { Badge, Accordion, Card } from "react-bootstrap";
 
@@ -95,25 +95,25 @@ function Providerpage({ user, email2 }) {
       {
         providerItems.map((item, idx) => {
           return (
-            <Card className="m-10 max-w-sm">
-              <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
-              <Card.Body>
-                <Accordion defaultActiveKey="0">
-                  <Accordion.Item eventKey="1">
-                    <Accordion.Header>
+            <Card key={item.box_id} className="m-10 max-w-sm">
+              <Card.Img key={item.box_id} variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
+                <Card.Body key={`${item.box_id}e`}>
+                  <Accordion key={`${item.box_id}h`} defaultActiveKey="0">
+                   <Accordion.Item key={item.box_id} eventKey="1">
+                    <Accordion.Header key={item.box_id}>
                     Click to see the detail of box {item.box_id}
                     </Accordion.Header>
-                    <Accordion.Body>
-                      <div key={idx}>
-                        <li key={idx} className="box-detail">Location: {providerAddress}</li>
-                        <li key={`${idx}d`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
-                        <li key={idx} className="mx-0 box-detail">Floor: {storageFloor}</li>
-                        <li key={idx} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
+                    <Accordion.Body key={`${item.box_id}f`}>
+                      <div key={item.box_id}>
+                        <li key={item.box_id} className="box-detail">Location: {providerAddress}</li>
+                        <li key={`${item.box_id}a`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
+                        <li key={`${item.box_id}b`} className="mx-0 box-detail">Floor: {storageFloor}</li>
+                        <li key={`${item.box_id}c`} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
                       </div>
                     </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
-              </Card.Body>
+                   </Accordion.Item>
+                  </Accordion>
+                </Card.Body>
             </Card>
           )
         })
@@ -123,9 +123,9 @@ function Providerpage({ user, email2 }) {
 
   }
   
-  const checkItems = (e) => {
+  const check = (e) => {
     e.preventDefault();
-    console.log(providerItems.length === 0);
+    console.log(providerItems);
   }
   
   useEffect(()=>{
@@ -155,9 +155,9 @@ setChartVisible(true)
         </Badge>
       </aside>
       <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
-      <button onClick={checkItems}>Check Items</button>
+      <button onClick={check}>Check Items</button>
       {/* {providerItems ? renderListOfStorage() : <>You don't have any box.</>} */}
-      {providerItems.length !== 0 ? renderListOfStorage() : <section className="text-2xl m-11 font-mono text-teal-800">You don't have any box.</section>}
+      {providerItems.length !== 0 ? renderListOfStorage() : <section className="text-2xl m-11 font-mono text-yellow-50">You don't have any box.</section>}
       <div>
         { chartVisible === false ? <></> :
         <div className="chart">
@@ -225,12 +225,13 @@ setChartVisible(true)
           />
         </VictoryChart>
         </div>}      
-      <button>Add more storage capacity</button>
-      <button
+      <button>Add more storage capacity</button><br/>
+      {/* <button
         onClick={(e) => {
           window.confirm("Are you sure about to quit the provider?");
         }}
-      >
+      > */}
+      <button onClick={check}>
         Stop being a provider
       </button>
       <br />
