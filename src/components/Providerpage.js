@@ -125,7 +125,7 @@ function Providerpage({ user, email2 }) {
   
   const checkItems = (e) => {
     e.preventDefault();
-    console.log(providerItems);
+    console.log(providerItems.length === 0);
   }
   
   useEffect(()=>{
@@ -155,8 +155,9 @@ setChartVisible(true)
         </Badge>
       </aside>
       <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
-      {/* <button onClick={checkItems}>Check Items</button> */}
-      {providerItems ? renderListOfStorage() : <></>}
+      <button onClick={checkItems}>Check Items</button>
+      {/* {providerItems ? renderListOfStorage() : <>You don't have any box.</>} */}
+      {providerItems.length !== 0 ? renderListOfStorage() : <section className="text-2xl m-11 font-mono text-teal-800">You don't have any box.</section>}
       <div>
         { chartVisible === false ? <></> :
         <div className="chart">
