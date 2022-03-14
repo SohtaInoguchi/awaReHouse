@@ -9,6 +9,7 @@ import { VictoryBar,
   VictoryAxis } from "victory";
 import { Badge, Accordion, Card, Modal, Button } from "react-bootstrap";
 import MyVerticallyCenteredModal from "./StopProviderModal";
+import { useNavigate } from "react-router-dom";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -25,7 +26,6 @@ if (dd > 21) {
 }
 
 function Providerpage({ user, email2 }) {
-
   // const [displayProviderTable, setDisplayProviderTable] = useState(false);
   const [providerItems, setProviderItems] = useState([]);
   const [providerAddress, setProviderAddress] = useState("");
@@ -34,67 +34,82 @@ function Providerpage({ user, email2 }) {
   const [chartVisible, setChartVisible] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   
-  const retrievePayments = async (req,res) => {
+  const navigate = useNavigate();
+  const retrievePayments = async (req, res) => {
     try {
-      await axios.get(`/payments/${email2}`)
-      .then((res) => {
-        if (res.data.length<=12) {
+      await axios.get(`/payments/${email2}`).then((res) => {
+        if (res.data.length <= 12) {
           let final = [];
-          res.data.forEach((e)=>{
-          let obj = {};
-          obj["x"]=e["covered_month"].slice(0,3);
-          obj["y"]=e["amount_jpy"];
-          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
-          final.push(obj)
-        })
-          setChartData(final)
+          res.data.forEach((e) => {
+            let obj = {};
+            obj["x"] = e["covered_month"].slice(0, 3);
+            obj["y"] = e["amount_jpy"];
+            obj["label"] = `JPY ${String(e.amount_jpy).slice(
+              0,
+              String(e.amount_jpy).length - 3
+            )},${String(e.amount_jpy).slice(-3)}`;
+            final.push(obj);
+          });
+          setChartData(final);
         } else {
-          while (res.data.length>12){
-            res.data.shift()
+          while (res.data.length > 12) {
+            res.data.shift();
           }
           let final = [];
-          res.data.forEach((e)=>{
-          let obj = {};
-          obj["x"]=e["covered_month"].slice(0,3);
-          obj["y"]=e["amount_jpy"];
-          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
-          final.push(obj)
-          setChartData(final)
-          })
-        } 
-      })
-    } catch{
-        console.log("NOPE! Payments cannot be retrieved");
+          res.data.forEach((e) => {
+            let obj = {};
+            obj["x"] = e["covered_month"].slice(0, 3);
+            obj["y"] = e["amount_jpy"];
+            obj["label"] = `JPY ${String(e.amount_jpy).slice(
+              0,
+              String(e.amount_jpy).length - 3
+            )},${String(e.amount_jpy).slice(-3)}`;
+            final.push(obj);
+            setChartData(final);
+          });
+        }
+      });
+    } catch {
+      console.log("NOPE! Payments cannot be retrieved");
     }
-  }
- 
-  const retrieveProviderAddress = async (req,res) => {
+  };
+
+  const retrieveProviderAddress = async (req, res) => {
     try {
-      await axios.get(`/providers/${email2}`)
-      .then((res) => {
+      await axios.get(`/providers/${email2}`).then((res) => {
         // setProviderAddress(res.data[0].adress);
         setProviderAddress(res.data[0].adress);
-        setStorageFloor(res.data[0].floor)
-      })
-    } catch{
-        console.log("NOPE! Provider address data not retrieved");
+        setStorageFloor(res.data[0].floor);
+      });
+    } catch {
+      console.log("NOPE! Provider address data not retrieved");
     }
+  };
+
+  useEffect(() => {
+    retrieveProviderAddress();
+    retrievePayments();
+  }, []);
+
+  const retrieveProviderItems = (req, res) => {
+    axios
+      .post("/providerItems", { address: providerAddress })
+      .then((res) => setProviderItems(res.data));
+  };
+
+  function signOut() {
+    window.localStorage.removeItem("firstName_provider");
+    window.localStorage.removeItem("email_provider");
+    window.localStorage.removeItem("token_provider");
+    navigate("/");
   }
 
-  useEffect(()=>{
-    retrieveProviderAddress()
-    retrievePayments()
-  },[])
-  
-  const retrieveProviderItems = (req,res) => {
-    axios.post("/providerItems", { address: providerAddress }).then((res) => setProviderItems(res.data));
-  }
-  
   const renderListOfStorage = () => {
     return (
       <section id="box-list">
-      {
-        providerItems.map((item, idx) => {
+          <Button onClick={signOut}>Sign Out</Button>
+
+        {providerItems.map((item, idx) => {
           return (
             <Card key={item.box_id} className="m-10 max-w-sm">
               <Card.Img key={item.box_id} variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
@@ -119,10 +134,10 @@ function Providerpage({ user, email2 }) {
           )
         })
       }
+
       </section>
     );
-
-  }
+  };
   
   const check = (e) => {
     e.preventDefault();
@@ -133,19 +148,21 @@ function Providerpage({ user, email2 }) {
     retrieveProviderAddress()
   }, [])
 
- useEffect(()=>{
-setChartVisible(true)
- },[chartData])
-  
-      useEffect(() => {
+  useEffect(() => {
+    setChartVisible(true);
+  }, [chartData]);
+
+  useEffect(() => {
     retrieveProviderItems();
-  }, [providerAddress])
+  }, [providerAddress]);
 
   return (
     // <div id="provider-page-wrapper">
     <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
       <aside id="badge-wrapper">
-      <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
+        <Badge bg="light" id="provider-visitor-date">
+          Next stuff visit will be 02/02/22
+        </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
             <li>Welcome {user}</li>
@@ -156,81 +173,85 @@ setChartVisible(true)
         </Badge>
       </aside>
       <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
-      {/* <button onClick={check}>Check Items</button> */}
       {providerItems.length !== 0 ? renderListOfStorage() : <section className="text-2xl m-11 font-mono text-yellow-50">You don't have any box.</section>}
+
       <div>
-        { chartVisible === false ? <></> :
-        <div className="chart">
-        <VictoryChart
-          responsive={false}
-          animate={{
-            duration: 500,
-            onLoad: { duration: 200 }
-          }}
-          domainPadding={{ x: 20 }}
-        >
-          <VictoryAxis  
-          animate={{
-            duration: 500,
-            onLoad: { duration: 200 }
-          }}
-          style={{ data: { fill: "#000000" } }} 
-          />
-          <VictoryAxis 
-          dependentAxis  
-          animate={{
-            duration: 500,
-            onLoad: { duration: 200 }
-          }}
-          style={{ data: { fill: "#000000" } }}
-          />
-          <VictoryBar
-          animate={{
-            duration: 500,
-            onLoad: { duration: 200 }
-          }}
-            barRatio={1}
-            cornerRadius={0}
-            style={{ data: { fill: "#2035d4" } }}
-            alignment="middle"
-            labelComponent={<VictoryTooltip/>}
-            data={chartData}
-            events={[{
-              target: "data",
-              eventHandlers: {
-                onMouseOver: () => {
-                  return [
-                    {
-                      target: "data",
-                      mutation: () => ({style: {fill: "gold", width: 30}})
-                    }, {
-                      target: "labels",
-                      mutation: () => ({ active: true })
-                    }
-                  ];
-                },
-                onMouseOut: () => {
-                  return [
-                    {
-                      target: "data",
-                      mutation: () => {}
-                    }, {
-                      target: "labels",
-                      mutation: () => ({ active: false })
-                    }
-                  ];
-                }
-              }
-            }]}
-          />
-        </VictoryChart>
-        </div>}      
+        {chartVisible === false ? (
+          <></>
+        ) : (
+          <div className="chart">
+            <VictoryChart
+              responsive={false}
+              animate={{
+                duration: 500,
+                onLoad: { duration: 200 },
+              }}
+              domainPadding={{ x: 20 }}
+            >
+              <VictoryAxis
+                animate={{
+                  duration: 500,
+                  onLoad: { duration: 200 },
+                }}
+                style={{ data: { fill: "#000000" } }}
+              />
+              <VictoryAxis
+                dependentAxis
+                animate={{
+                  duration: 500,
+                  onLoad: { duration: 200 },
+                }}
+                style={{ data: { fill: "#000000" } }}
+              />
+              <VictoryBar
+                animate={{
+                  duration: 500,
+                  onLoad: { duration: 200 },
+                }}
+                barRatio={1}
+                cornerRadius={0}
+                style={{ data: { fill: "#2035d4" } }}
+                alignment="middle"
+                labelComponent={<VictoryTooltip />}
+                data={chartData}
+                events={[
+                  {
+                    target: "data",
+                    eventHandlers: {
+                      onMouseOver: () => {
+                        return [
+                          {
+                            target: "data",
+                            mutation: () => ({
+                              style: { fill: "gold", width: 30 },
+                            }),
+                          },
+                          {
+                            target: "labels",
+                            mutation: () => ({ active: true }),
+                          },
+                        ];
+                      },
+                      onMouseOut: () => {
+                        return [
+                          {
+                            target: "data",
+                            mutation: () => {},
+                          },
+                          {
+                            target: "labels",
+                            mutation: () => ({ active: false }),
+                          },
+                        ];
+                      },
+                    },
+                  },
+                ]}
+              />
+            </VictoryChart>
+          </div>
+        )}
       <button>Add more storage capacity</button><br/>
-      {/* <button
-        onClick={(e) => {
-          window.confirm("Are you sure about to quit the provider?");
-        }}
-      > */}
       <Button variant="light" id="provider-stop-button" onClick={() => setModalShow(true)}>
         Stop being a provider
       </Button>
@@ -241,7 +262,7 @@ setChartVisible(true)
       </MyVerticallyCenteredModal>
       <br />
       <Chat />
-    </div>
+      </div>
     </div>
   );
 }
