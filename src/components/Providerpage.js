@@ -11,7 +11,6 @@ import { VictoryBar,
   Rect,
 } from 'victory';
 import DatePicker from "react-datepicker";
-import { Badge, Accordion, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Badge, Accordion, Card, Button } from "react-bootstrap";
 
