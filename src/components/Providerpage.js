@@ -6,7 +6,7 @@ import axios from "axios";
 import { VictoryBar,
   VictoryChart,
   VictoryTooltip,
-  VictoryAxis } from 'victory';
+  VictoryAxis } from "victory";
 
 import { Badge, Accordion, Card } from "react-bootstrap";
 
