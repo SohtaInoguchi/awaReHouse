@@ -281,7 +281,18 @@ body {
 
 /* ---------PROVIDER PAGE */
 #provider-page-wrapper {
-  position: relative;
+  /* position: relative; */
+  /* background-color: rgb(0, 255, 81); */
+}
+
+#provider-page-modal-show {
+  /* position: absolute; */
+  /* background-color: gray; */
+  opacity: 0.5;
+}
+
+#modal-show-background {
+  /* background-color:rgb(212, 203, 203); */
 }
 
 #badge-wrapper {

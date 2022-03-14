@@ -7,7 +7,7 @@ import { VictoryBar,
   VictoryChart,
   VictoryTooltip,
   VictoryAxis } from "victory";
-import { Badge, Accordion, Card, Modal } from "react-bootstrap";
+import { Badge, Accordion, Card, Modal, Button } from "react-bootstrap";
 import MyVerticallyCenteredModal from "./StopProviderModal";
 
 let today = new Date();
@@ -142,7 +142,8 @@ setChartVisible(true)
   }, [providerAddress])
 
   return (
-    <div id="provider-page-wrapper">
+    // <div id="provider-page-wrapper">
+    <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
       <aside id="badge-wrapper">
       <Badge bg="light" id="provider-visitor-date">Next stuff visit will be 02/02/22</Badge>
         <Badge bg="light" id="provider">
@@ -155,8 +156,7 @@ setChartVisible(true)
         </Badge>
       </aside>
       <Badge bg="light" id="provider-visitor-date">LIST OF STORED BOXES</Badge>
-      <button onClick={check}>Check Items</button>
-      {/* {providerItems ? renderListOfStorage() : <>You don't have any box.</>} */}
+      {/* <button onClick={check}>Check Items</button> */}
       {providerItems.length !== 0 ? renderListOfStorage() : <section className="text-2xl m-11 font-mono text-yellow-50">You don't have any box.</section>}
       <div>
         { chartVisible === false ? <></> :
@@ -231,16 +231,14 @@ setChartVisible(true)
           window.confirm("Are you sure about to quit the provider?");
         }}
       > */}
-      <button onClick={check}>Check</button>
-      <button onClick={() => setModalShow(true)}>
+      <Button variant="light" id="provider-stop-button" onClick={() => setModalShow(true)}>
         Stop being a provider
-      </button>
+      </Button>
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-        >
+        id="modal-show-background">
       </MyVerticallyCenteredModal>
-
       <br />
       <Chat />
     </div>
