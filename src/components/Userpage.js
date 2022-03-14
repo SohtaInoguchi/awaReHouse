@@ -7,6 +7,7 @@ import axios from "axios";
 import { OneFiftyStripe } from "./OneFiftyStripe";
 import e from "cors";
 import { useNavigate } from "react-router-dom";
+import { BoxFlow } from "./BoxFlow";
 
 function Userpage({
   user,
@@ -203,9 +204,8 @@ function Userpage({
           );
         })}
       </ol> : <></>}
-      {/* <button style={{ cursor: "pointer" }} onClick={() => {
+      <button style={{ cursor: "pointer" }} onClick={() => {
       setAddItem(true);
-      setDisplayTable(false);
       }}>
         Add Storage Items
       </button>
@@ -343,162 +343,22 @@ function Userpage({
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
       {boxOrderReceived === true ? (
         <h4>
-          <OneFiftyStripe/>
-          Thank you, you should receive the box within 5 days.
-        </h4>
-      ) : (
-        <div></div>
-      )}
-      {success === true ? <Success message={message} /> : <Subscription />} */}
-      {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
-      <button onClick={() => navigate("/extra-charge")}>Extra Retrieval</button>
-      <button style={{ cursor: "pointer" }} onClick={() => {
-      setAddItem(true);
-      setDisplayTable(false);
-      }}>
-        Storage
-      </button>
-      {addItem === true ? (
-        <div className="containerNewItem">
-          <div className="newUser">
-            PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
-            <br></br>
-            <br></br>
-            <img
-              className="boxPicture"
-              src={require("../pictures/corrugated-boxes.jpg")}
-              style={{ height: 200 }}
-            />
-            <br></br>
-            <br></br>
-            Box Type A (27cm x 38cm x 29cm) - Maximum weight = 7.5 kg:
-            <input
-              type="radio"
-              name="boxType"
-              value="A (27cm x 38cm x 29cm)"
-              id="A"
-              onChange={handleChange}
-            />
-            <br></br>
-            Box Type B (32cm x 46cm x 29cm) - Maximum weight = 10.5 kg:
-            <input
-              type="radio"
-              name="boxType"
-              value="B (32cm x 46cm x 29cm)"
-              id="B"
-              onChange={handleChange}
-            />
-            <br></br>
-            Box Type C (40cm x 60cm x 40cm) - Maximum weight = 24 kg:
-            <input
-              type="radio"
-              name="boxType"
-              value="C (40cm x 60cm x 40cm)"
-              onChange={handleChange}
-            />
-            <br></br>
-            Box Type D (175cm x 30cm x 15cm) - Maximum weight = 20 kg:
-            <input
-              type="radio"
-              name="boxType"
-              value="D (175cm x 30cm x 15cm)"
-              onChange={handleChange}
-            />
-            <br></br>
-            <br></br>
-            <input type="submit" value="Submit" onClick={submit1} />
-            <button style={{ cursor: "pointer" }} onClick={cancel}>
-              Go back
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
-      {confirmation === true ? (
-        <div>
-          <form>
-            <br></br>
-            You selected a type {typeBox} box. Please provde a brief description
-            of the goods you want to store (e.g. Snowboard, summer clothes,
-            barbecue set...)
-            <br></br>
-            <label>
-              Goods description (required):
-              <input
-                type="text"
-                name="description1"
-                placeholder="Goods description"
-                value={description1}
-                onChange={createDescription1}
-              />
-              <br></br>
-              Goods description (optional):
-              <input
-                type="text"
-                name="description2"
-                placeholder="Goods description"
-                value={description2}
-                onChange={createDescription2}
-              />
-              <br></br>
-              Goods description (optional):
-              <input
-                type="text"
-                name="description3"
-                placeholder="Goods description"
-                value={description3}
-                onChange={createDescription3}
-              />
-              <br></br>
-              <p style={{ display: "inline" }}>
-                Check if box weighs more than 15 kg
-              </p>
-              <input
-                type="checkbox"
-                className="isHeavy"
-                onChange={toggleIsHeavy}
-              />
-              <br></br>
-              <p style={{ display: "inline" }}>
-                Check if goods to be stored are fragile
-              </p>
-              <input
-                type="checkbox"
-                className="isFragile"
-                onChange={toggleIsFragile}
-              />
-              <br></br>
-            </label>
-            The boxes will be sent to your registered address: {address}
-            <br></br>
-            <input
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={submit2}
-            />
-          </form>
-          <button
-            onClick={() => setConfirmation(false)}
-            style={{ cursor: "pointer" }}
-          >
-            Cancel
-          </button>
-        </div>
-      ) : (
-        <div></div>
-      )}
-      {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
-      {boxOrderReceived === true ? (
-        <h4>
-          <OneFiftyStripe/>
+          {/* <OneFiftyStripe/> */}
           Thank you, you should receive the box within 5 days.
         </h4>
       ) : (
         <div></div>
       )}
       {success === true ? <Success message={message} /> : <Subscription />}
+      {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
+      <button onClick={() => navigate("/extra-charge")}>Extra Retrieval</button>
+            
+            
+            <button style={{ cursor: "pointer" }} onClick={() => {
+      }}>
+        <BoxFlow/>
+      </button>
+      
       <br />
       <br />
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />

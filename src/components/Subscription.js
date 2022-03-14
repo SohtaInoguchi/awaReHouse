@@ -13,7 +13,6 @@ export default function Subscription() {
       <form action="/create-checkout-session" method="POST">
         <input type="hidden" name="name" value="Storage fee" />
         <button id="checkout-and-portal-button" type="submit">
-          Checkout
         </button>
       </form>
     </section>
