@@ -169,6 +169,12 @@ app.post("/users", async (req, res) => {
     picture_file: req.body.picture_file,
   };
 
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
   const token = await jwt.sign(
     { user: input },
     process.env.ACCESS_TOKEN_SECRET,
@@ -211,6 +217,13 @@ app.post("/providers", async (req, res) => {
     emergency_contact_phone_number: req.body.emergency_contact_phone_number,
     picture_file: req.body.picture_file,
   };
+
+  const input = {
+    firstname: req.body.first_name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
   const token = await jwt.sign(
     { user: input },
     process.env.ACCESS_TOKEN_SECRET,
