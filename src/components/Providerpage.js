@@ -46,7 +46,8 @@ function Providerpage({ user, email2 }) {
   const [isSelected, setIsSelected] = useState(false);
   const [thanksMessage, setThanksMessage] = useState(false);
   
-  
+  const navigate = useNavigate();
+
   const retrievePayments = async (req,res) => {
     try {
       await axios.get(`/payments/${email2}`)
