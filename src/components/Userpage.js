@@ -170,7 +170,7 @@ function Userpage({
     <div>
       Welcome back {user}
       <h3>NEXT RETRIEVAL PERIOD: April 22nd - May 10th</h3>
-      <div className="flex flex-row justify-center items-center border-8  ">
+      <div className="flex flex-row justify-between  border-8  ">
         <div className="flex flex-col justify-center items-center max-w-lg mx-5 px-5 border-8 ">
           <Button
             className="max-w-lg"
@@ -194,18 +194,14 @@ function Userpage({
           </Button>
 
           <div id="items" className="containerNewItem boxes-before max-w-lg">
-            <div className="newUser">
+            <div className="newUser flex items-start justify-start">
               PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
-              <br></br>
-              <br></br>
               <img
                 className="boxPicture"
-                src={require("../pictures/corrugated-boxes.jpg")}
+                src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
                 style={{ height: 200 }}
               />
-              <br></br>
-              <br></br>
-              Box Type A (27cm x 38cm x 29cm) - Maximum weight = 7.5 kg:
+              <p>Box Type A (27cm x 38cm x 29cm) - Maximum weight = 7.5 kg:</p>
               <input
                 type="radio"
                 name="boxType"
@@ -213,8 +209,7 @@ function Userpage({
                 id="A"
                 onChange={handleChange}
               />
-              <br></br>
-              Box Type B (32cm x 46cm x 29cm) - Maximum weight = 10.5 kg:
+              <p>Box Type B (32cm x 46cm x 29cm) - Maximum weight = 10.5 kg:</p>
               <input
                 type="radio"
                 name="boxType"
@@ -222,24 +217,22 @@ function Userpage({
                 id="B"
                 onChange={handleChange}
               />
-              <br></br>
-              Box Type C (40cm x 60cm x 40cm) - Maximum weight = 24 kg:
+              <p>Box Type C (40cm x 60cm x 40cm) - Maximum weight = 24 kg:</p>
               <input
                 type="radio"
                 name="boxType"
                 value="C (40cm x 60cm x 40cm)"
                 onChange={handleChange}
               />
-              <br></br>
-              Box Type D (175cm x 30cm x 15cm) - Maximum weight = 20 kg:
+              <p>Box Type D (175cm x 30cm x 15cm) - Maximum weight = 20 kg:</p>
               <input
                 type="radio"
                 name="boxType"
                 value="D (175cm x 30cm x 15cm)"
                 onChange={handleChange}
               />
-              <br></br>
-              <br></br>
+              <br />
+              <br />
               <input type="submit" value="Submit" onClick={submit1} />
               <Button
                 onClick={() => {
@@ -254,7 +247,8 @@ function Userpage({
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center max-w-lg mx-5 px-5 border-8 ">
+        {/* <div className="flex justify-end items-end border-emerald-700 border-8"> */}
+        <div className="flex flex-col  max-w-lg mx-5 px-5 ">
           <Button
             className="max-w-lg"
             onClick={() => {
@@ -277,22 +271,19 @@ function Userpage({
           >
             {displayTable ? "CLOSE" : "DISPLAY"} STORED GOODS
           </Button>
-          {/* {displayTable === true ? ( */}
+
           <div
             id="boxes"
-            className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-3xl rounded-bl-3xl border-8 border-emerald-300  "
+            className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg"
           >
             Stored Items:
             {items.map((item, index) => {
               return (
                 <div
-                  className="bg-gray-100 text-blue-600 rounded-3xl max-w-md my-3 py-3 shadow-2xl border-8 border-emerald-700 "
+                  className="bg-gray-100 text-blue-600 rounded-3xl max-w-md mx-3 px-2 my-3 py-3 shadow-2xl "
                   key={index}
                 >
-                  <div
-                    className="shadow-lg border-8 border-red-500 "
-                    key={`${index}a`}
-                  >
+                  <div className="shadow-lg " key={`${index}a`}>
                     {item.declared_content_one} in box number {item.box_id}{" "}
                     {item.fragile === true ? `(fragile)` : ``}{" "}
                     {item.heavy === true ? `(heavy)` : ``}
@@ -317,10 +308,8 @@ function Userpage({
             })}
           </div>
         </div>
+        {/* </div> */}
       </div>
-      {/* ) : (
-        <div id="boxes" className="boxes-before"></div>
-      )} */}
       {confirmation === true ? (
         <div>
           <form>

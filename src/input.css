@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .toni {
-    @apply bg-green-500 text-white flex justify-center;
-  }
-
   #provider {
     /* @apply bg-gray-50 text-cyan-600 text-xl absolute top-0 right-5; */
     @apply bg-gray-50 text-cyan-600 text-xl;
