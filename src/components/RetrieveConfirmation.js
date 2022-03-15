@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 export default function RetrieveConfirmation(props) {
 
@@ -27,7 +27,16 @@ export default function RetrieveConfirmation(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => onHide(false)}>Go back</Button>
-          <Button onClick={handleYesClick}>Yes, I'm sure</Button>
+
+        <Form action="/create-checkout-session" method="POST">
+        <Form.Control type="hidden" name="name" value="Extra retrieval"/>
+
+        {/* <form action="/create-checkout-session" method="POST"> */}
+            {/* <input type="hidden" name="name" value="Extra retrieval" /> */}
+        {/* </form> */}
+        <Button id="checkout-and-portal-button" type="submit">Yes, I'm sure</Button>
+        </Form>
+
         </Modal.Footer>
       </Modal>
     );

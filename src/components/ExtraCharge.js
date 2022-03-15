@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
 import RetrieveConfirmation from './RetrieveConfirmation';
 
 
@@ -58,7 +58,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
     <>
       <h1>{user}</h1>
         <h1>Which items to take / store?</h1>
-        <button onClick={check}>Check</button>
+        {/* <button onClick={check}>Check</button> */}
         {items.map((item) => {
           return (
             <ul key={item.box_id}>
@@ -97,13 +97,13 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         {/* <h2>It will cost you</h2>
       <h2>¥15000</h2> */}
       
-      <form action="/create-checkout-session" method="POST">
+      {/* <form action="/create-checkout-session" method="POST">
         <input type="hidden" name="name" value="Extra retrieval" />
         <button id="checkout-and-portal-button" type="submit">
           Yes
         </button>
       </form>
-      <h3>No</h3>
+      <h3>No</h3> */}
     </>
   );
 }
