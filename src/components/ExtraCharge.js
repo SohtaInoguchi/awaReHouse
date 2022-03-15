@@ -13,15 +13,25 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedItems, setSelectedItem] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [localItems, setLocalItems] = useState([]);
 
 
   const retrieveItem = (e) => {
     const temp = [...selectedItems];
+    const tempForLocal = [...localItems];
+    tempForLocal.forEach(item => {
+      for (let key in item) {
+        if (item[key] === e.target.textContent) {
+          item[key] = "No Items added";
+          return null;
+        }
+      }
+    })
     if (e.target.textContent !== "No Items added") {
       temp.push(e.target.textContent);
     }
-    console.log(e.target.textContent);
     setSelectedItem(temp);
+    setLocalItems(tempForLocal);
   }
 
   const handleOnclickDate = () => {
@@ -59,17 +69,23 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       updateItemList();
     }, [])
 
+    useEffect(() => {
+      setLocalItems(items);
+    }, [items])
+
   return (
     <div>
       {/* <h1>{user}</h1> */}
       <p className='text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2'>{localStorage.firstName_user}</p>
-        <h1 className='ml-10 my-6 text-cyan-800 italic'>Which items to retrive?</h1>
-        {/* <button onClick={check}>Check</button> */}
-        {items.map((item) => {
+        <h1 className='my-6 text-cyan-800 italic bg-white'>Which items to retrive?</h1>
+
+        {localItems.map((item) => {
           return (
             <Badge bg='light' id='user-items'>
             <section key={item.box_id} className="text-left">
-              <li key={`${item.box_id}b`} className='user-items' onClick={(e) => retrieveItem(e)}>{item.declared_content_one}</li>
+              <li key={`${item.box_id}b`} className='user-items' onClick={retrieveItem}>
+                {item.declared_content_one}
+                </li>
               <li key={`${item.box_id}c`} className='user-items' onClick={retrieveItem}>
                 {item.declared_content_two
                   ? item.declared_content_two
@@ -84,6 +100,33 @@ export default function ExtraCharge({ user, items, email, setItems }) {
           </Badge>
           );
         })}
+
+
+        {/* <button onClick={check}>Check</button> */}
+        {/* ---------item mapping */}
+        {/* {items.map((item) => {
+          return (
+            <Badge bg='light' id='user-items'>
+            <section key={item.box_id} className="text-left">
+              <li key={`${item.box_id}b`} className='user-items' onClick={retrieveItem}>
+                {item.declared_content_one}
+                </li>
+              <li key={`${item.box_id}c`} className='user-items' onClick={retrieveItem}>
+                {item.declared_content_two
+                  ? item.declared_content_two
+                  : "No Items added"}
+              </li>
+              <li key={`${item.box_id}d`} className='user-items' onClick={retrieveItem}>
+                {item.declared_content_three
+                  ? item.declared_content_three
+                  : "No Items added"}
+              </li>
+            </section>
+          </Badge>
+          );
+        })} */}
+        {/* ---------item mapping end */}
+
         <section 
         className='flex 
         flex-wrap 
@@ -100,7 +143,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         })}
         </section>
         
-        <h2 className='ml-10 my-8 text-cyan-800 italic'>Select the date of retrieval</h2>
+        <h2 className='my-8 text-cyan-800 italic bg-white'>Select the date of retrieval</h2>
         <DatePicker 
             className='ml-10'
             selected={startDate} 

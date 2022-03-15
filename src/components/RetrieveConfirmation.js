@@ -19,7 +19,13 @@ export default function RetrieveConfirmation(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Are you sure you'd like to retrieve {selectedItems[0]}?</h4>
+          <h4>Are you sure you'd like to retrieve {selectedItems.map((item, idx) => {
+              return idx === selectedItems.length - 2 ? 
+              <span key={idx}>{item} and </span> : 
+              idx === selectedItems.length - 1 ? 
+              <span key={idx}>{item}</span> :
+              <span key={idx}>{item}, </span>
+          })}?</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
