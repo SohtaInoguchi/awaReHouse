@@ -247,11 +247,11 @@ function Providerpage({ user, email2 }) {
   return (
     // <div id="provider-page-wrapper">
     <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
-      <Button onClick={signOut}>SignOut</Button>
+      <Button className="SignOutButton" onClick={signOut}>Sign Out</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
-            <h5 className="incomingBoxes">Next staff visit will be 02/02/22</h5>
-            <h5>Number of incoming box(es): {pendingItems}</h5>
+           <h5 className="incomingBoxes">Number of incoming box(es): <h4 className="pendingItems">{pendingItems}</h4></h5>
+           <h5 className="incomingBoxes">Incoming day: <h5 className="incomingDate">March 22, 2022</h5></h5>
         </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
