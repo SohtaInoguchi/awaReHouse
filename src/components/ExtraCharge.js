@@ -101,41 +101,12 @@ export default function ExtraCharge({ user, items, email, setItems }) {
           );
         })}
 
-
-        {/* <button onClick={check}>Check</button> */}
-        {/* ---------item mapping */}
-        {/* {items.map((item) => {
-          return (
-            <Badge bg='light' id='user-items'>
-            <section key={item.box_id} className="text-left">
-              <li key={`${item.box_id}b`} className='user-items' onClick={retrieveItem}>
-                {item.declared_content_one}
-                </li>
-              <li key={`${item.box_id}c`} className='user-items' onClick={retrieveItem}>
-                {item.declared_content_two
-                  ? item.declared_content_two
-                  : "No Items added"}
-              </li>
-              <li key={`${item.box_id}d`} className='user-items' onClick={retrieveItem}>
-                {item.declared_content_three
-                  ? item.declared_content_three
-                  : "No Items added"}
-              </li>
-            </section>
-          </Badge>
-          );
-        })} */}
-        {/* ---------item mapping end */}
-
         <section 
         className='flex 
         flex-wrap 
         items-center m-10 text-sky-900 font-bold'>Selected item:
         {selectedItems.map((item, idx) => {
           return (
-              // <ListGroup className="w-fit m-2 text-yellow-500">
-              //   <ListGroup.Item key={idx}>{item}</ListGroup.Item>
-              // </ListGroup>
               <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
                 <li className='selected-items' key={idx}>{item}</li>
               </section>
@@ -160,18 +131,6 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         selectedItems={selectedItems}
         >
       </RetrieveConfirmation>
-
-
-        {/* <h2>It will cost you</h2>
-      <h2>¥15000</h2> */}
-      
-      {/* <form action="/create-checkout-session" method="POST">
-        <input type="hidden" name="name" value="Extra retrieval" />
-        <button id="checkout-and-portal-button" type="submit">
-          Yes
-        </button>
-      </form>
-      <h3>No</h3> */}
     </div>
   );
 }

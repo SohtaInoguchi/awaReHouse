@@ -36,10 +36,6 @@ export default function RetrieveConfirmation(props) {
 
         <Form action="/create-checkout-session" method="POST">
         <Form.Control type="hidden" name="name" value="Extra retrieval"/>
-
-        {/* <form action="/create-checkout-session" method="POST"> */}
-            {/* <input type="hidden" name="name" value="Extra retrieval" /> */}
-        {/* </form> */}
         <Button id="checkout-and-portal-button" type="submit">Yes, I'm sure</Button>
         </Form>
 
