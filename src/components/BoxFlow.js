@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 export const BoxFlow = ({  user,
     message,
     success,
+    addy,
     items,
     chatMessages,
     setChatMessages,
@@ -21,7 +22,7 @@ export const BoxFlow = ({  user,
 
     const [addItemFlow, setAddItemFlow] = useState(false);
     const [typeBoxFlow, setTypeBoxFlow] = useState(null);
-    const [address, setAddress] = useState("");
+    // const [address, setAddress] = useState("");
     const [confirmationFlow, setConfirmationFlow] = useState(false);
     const [tryAgain, setTryAgain] = useState(false);
     const [description1Flow, setDescription1Flow] = useState("");
@@ -50,16 +51,17 @@ export const BoxFlow = ({  user,
       setTypeBoxFlow(e.target.value);
     };
   
-    const retrieveAddress = async () => {
-      await axios
-        .get(`/users/${email}`)
-        .then((res) => {
-          setAddress(res.data[0].adress);
-        })
-        .catch(function (error) {
-          console.log("NOPE! Address data not retrieved");
-        });
-    };
+    // const retrieveAddress = async () => {
+    //   await axios
+    //     .get(`/users/${email}`)
+    //     .then((res) => {
+    //       console.log(`HERE IS RESULT ${res.data}`)
+    //       setAddress(res.data[0].adress);
+    //     })
+    //     .catch(function (error) {
+    //       console.log("NOPE! Address data not retrieved");
+    //     });
+    // };
   
     // for toggling isHeavy/fragile
     const toggleIsHeavy = () => {
@@ -78,9 +80,9 @@ export const BoxFlow = ({  user,
       }
     };
   
-    useEffect(() => {
-      retrieveAddress();
-    }, [setAddItemFlow]);
+    // useEffect(() => {
+    //   retrieveAddress();
+    // }, [setAddItemFlow]);
   
     const submit1 = () => {
       if (typeBoxFlow === null) {
@@ -237,6 +239,7 @@ export const BoxFlow = ({  user,
               Goods description (required):
               <input
                 type="text"
+                className='text-black'
                 name="description1"
                 placeholder="Goods description"
                 value={description1Flow}
@@ -246,6 +249,7 @@ export const BoxFlow = ({  user,
               Goods description (optional):
               <input
                 type="text"
+                className='text-black'
                 name="description2"
                 placeholder="Goods description"
                 value={description2Flow}
@@ -255,6 +259,7 @@ export const BoxFlow = ({  user,
               Goods description (optional):
               <input
                 type="text"
+                className='text-black'
                 name="description3"
                 placeholder="Goods description"
                 value={description3Flow}
@@ -280,7 +285,7 @@ export const BoxFlow = ({  user,
               />
               <br></br>
             </label>
-            The boxes will be sent to your registered address: {address}
+            <p>The boxes will be sent to your registered address: {addy}</p>
             <br></br>
             <input
               type="submit"

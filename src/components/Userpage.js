@@ -498,7 +498,7 @@ function Userpage({
         Extra Retrieval
       </Button>
       <Button className="mx-3" onClick={storeOnClick}>
-      <BoxFlow/>
+      <BoxFlow addy = {address}/>
       </Button>
       <br />
       <br />
