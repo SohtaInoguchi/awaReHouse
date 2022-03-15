@@ -13,7 +13,8 @@ import {
 } from "victory";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
-import { Badge, Accordion, Card, Button } from "react-bootstrap";
+import { Badge, Accordion, Card, Button, Modal } from "react-bootstrap";
+import StopProviderModal from "./StopProviderModal";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -47,6 +48,8 @@ function Providerpage({ user, email2 }) {
   const [isSelected, setIsSelected] = useState(false);
   const [thanksMessage, setThanksMessage] = useState(false);
   const [pendingItems, setPendingItems] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+
   
   const navigate = useNavigate();
 
@@ -236,7 +239,9 @@ function Providerpage({ user, email2 }) {
 console.log (providerItems, pendingItems)
 
   return (
-    <div id="provider-page-wrapper">
+    // <div id="provider-page-wrapper">
+    <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
+
       <Button onClick={signOut}>SignOut</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
@@ -408,14 +413,24 @@ console.log (providerItems, pendingItems)
           </form>
           </div>)}
         {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
-      <button
+
+        <Button variant="light" id="provider-stop-button" onClick={() => setModalShow(true)}>
+        Stop being a provider
+      </Button>
+      <StopProviderModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id="modal-show-background">
+      </StopProviderModal>
+
+      {/* <button
         onClick={(e) => {
           window.confirm("Are you sure about to quit the provider?");
         }}
       >
         Stop being a provider
       </button>
-      <br />
+      <br /> */}
       <Chat />
     </div>
     </div>
