@@ -244,8 +244,6 @@ function Providerpage({ user, email2 }) {
     )
   }
 
-console.log (providerItems, pendingItems)
-
   return (
     // <div id="provider-page-wrapper">
     <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
