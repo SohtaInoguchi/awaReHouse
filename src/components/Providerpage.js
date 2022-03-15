@@ -118,21 +118,13 @@ function Providerpage({ user, email2 }) {
       .post("/providerItems", { address: providerAddress })
       .then((res) => {
         let finalStored = [];
-        let finalPending = [];
-        if (res.data.length === 0){
-          setProviderItems([])
-          setPendingItems([])
-        } else {
           for (let i = 0; i <= res.data.length; i++){
             if (res.data[i]["pending"]===false){
               finalStored.push(res.data[i])
             } 
-            if (res.data[i]["pending"]===true){
-              finalPending.push(res.data[i])
-            }
             setProviderItems(finalStored)
-            setPendingItems(finalPending)
-          }
+            let pending = res.data.length-finalStored.length
+            setPendingItems(pending)
         }
       });
   };
@@ -233,17 +225,13 @@ function Providerpage({ user, email2 }) {
     navigate("/");
   }
 
-console.log (providerItems, pendingItems)
-
   return (
-    <div id="provider-page-wrapper">
-      <Button onClick={signOut}>SignOut</Button>
+    <div >
+      <Button className="SignOutButton" onClick={signOut}>Sign Out</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
-        <ul id="incomingBoxes">
-            <li>Next staff visit will be 02/02/22</li>
-            <li>Number of incoming box(es): {pendingItems.length}</li>
-            </ul>
+            <h5 className="incomingBoxes">Next staff visit will be 02/02/22</h5>
+            <h5>Number of incoming box(es): {pendingItems}</h5>
         </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">

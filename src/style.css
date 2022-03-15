@@ -269,14 +269,18 @@ body {
 }
 
 /* ---------PROVIDER PAGE */
-#provider-page-wrapper {
-  position: relative;
-}
 
 #badge-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-right: 25px;
+  margin-right: 2%;
+  align-items: center;
+}
+
+#incomingBoxes{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2%;
   align-items: center;
 }
 
@@ -308,4 +312,11 @@ body {
   /* visibility: visible; */
   opacity: 1;
   transition: all 0.6s ease;
+}
+
+.SignOutButton{
+margin-left: 88%;
+width: 100px;
+margin-right: 2%;
+margin-bottom: 2%;
 }
