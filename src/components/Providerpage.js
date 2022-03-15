@@ -122,21 +122,13 @@ function Providerpage({ user, email2 }) {
       .post("/providerItems", { address: providerAddress })
       .then((res) => {
         let finalStored = [];
-        let finalPending = [];
-        if (res.data.length === 0){
-          setProviderItems([])
-          setPendingItems([])
-        } else {
           for (let i = 0; i <= res.data.length; i++){
             if (res.data[i]["pending"]===false){
               finalStored.push(res.data[i])
             } 
-            if (res.data[i]["pending"]===true){
-              finalPending.push(res.data[i])
-            }
             setProviderItems(finalStored)
-            setPendingItems(finalPending)
-          }
+            let pending = res.data.length-finalStored.length
+            setPendingItems(pending)
         }
       });
   };
@@ -162,22 +154,22 @@ function Providerpage({ user, email2 }) {
                 <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>
-                      Click to see the detail of box {item.box_id}
+                      Click to see details for Box <h4 className="boxColor">{item.box_id}</h4>
                     </Accordion.Header>
                     <Accordion.Body>
                       <div key={`${idx}x`}>
                         <li key={`${idx}a`} className="box-detail">
-                          Location: {providerAddress}
+                          <div className="boxHighlight">Storage location:</div> {providerAddress}
                         </li>
                         <li key={`${idx}b`} className="mx-0 box-detail">
-                          Weight: {item.weight_in_kg}kg
+                        <div className="boxHighlight">Box weight:</div> {item.weight_in_kg}kg
                         </li>
                         <li key={`${idx}c`} className="mx-0 box-detail">
-                          Floor: {storageFloor}
+                        <div className="boxHighlight">Storage floor:</div> {storageFloor}
                         </li>
-                        <li key={`${idx}d`} className="mx-0 box-detail">
-                          Should be retrieved in{" "}
-                          {item.expected_retrieval_season}.
+                        <li key={`${idx}d`} className="mx-0 box-detail"><div className="boxHighlight">Expected retrieval period:</div>
+                          {" "}
+                          {item.expected_retrieval_season}
                         </li>
                       </div>
                     </Accordion.Body>
@@ -237,48 +229,49 @@ function Providerpage({ user, email2 }) {
     navigate("/");
   }
 
-  const check = (e) => {
-    e.preventDefault();
-    console.log("provider quit", isQuitProvider);
-  }
 
   const renderProviderQuitMessage = () => {
     return (
       <h2>
         <Badge bg="success">
-        You successfuly stopped being provider.
+        <h4>Your request has been registered. <br></br>We hope to welcome you back as a provider soon.</h4>
         </Badge>
       </h2>
     )
   }
 
-console.log (providerItems, pendingItems)
-
   return (
     // <div id="provider-page-wrapper">
     <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
-      <Button onClick={signOut}>SignOut</Button>
+      <Button className="SignOutButton" onClick={signOut}>Sign Out</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
-        <ul id="incomingBoxes">
-            <li>Next staff visit will be 02/02/22</li>
-            <li>Number of incoming box(es): {pendingItems.length}</li>
-            </ul>
+           <h5 className="incomingBoxes">Number of incoming box(es): <h4 className="pendingItems">{pendingItems}</h4></h5>
+           <h5 className="incomingBoxes">Incoming day: <h5 className="incomingDate">03/22/2022</h5></h5>
         </Badge>
         <Badge bg="light" id="provider">
-          <ul id="provider-info">
-            <li>Welcome back {user},</li>
-            <li>Your next pay day is: {today}</li>
-            <li>Next payment amount: ¥{1077 * providerItems.length}</li>
-            <li>Number of box(es) in storage: {providerItems.length}</li>
-          </ul>
+            <h5>Welcome back, <h4 className="providerName">{user}</h4></h5>
         </Badge>
       </aside>
-      <Badge bg="light" id="provider-visitor-date">
+{/* <<<<<<< HEAD */}
+      {/* <Badge bg="light" id="provider-visitor-date">
         LIST OF STORED BOXES
-      </Badge>
+      </Badge> */}
+{/* ======= */}
+      <div className="listBoxes"> <Badge bg="light" id="provider-visitor-date">
+        LIST OF STORED BOX(ES)
+        <h6>Number of box(es) in storage: <h5 className="storedBoxes">{providerItems.length}</h5></h6>
+      </Badge></div>
+{/* >>>>>>> 07c05ed3e2b23012e565d3d2d50e8aa0bd502b9a */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
+      <div className="listpayments"> <Badge bg="light" id="provider-visitor-date">
+        FINANCIAL INFORMATION
+      </Badge></div>
+      <div className="listpayments"> <Badge bg="light" id="provider-visitor-date">
+      <h6>Next payment date: <h5 className="financialHighlight">{today}</h5></h6>
+      <h6>Next payment amount: <h5 className="financialHighlight">¥{1077 * providerItems.length}</h5></h6>
+      </Badge></div>
         {chartVisible === true && boxNumberNull === false ? (
           <div className="chart">
             <VictoryChart
@@ -347,18 +340,18 @@ console.log (providerItems, pendingItems)
             }]}
           />
         </VictoryChart>
-        
           </div>
         ) : (
-          <>
+          <h4 className="noPayments">
             You do not have yet any payment history <br></br>
-          </>
+          </h4>
         )}
+        <div className="containerBottom">
         <button
           onClick={() => {
             setMoreStorage(!moreStorage);
           }}
-        >
+         className="btn-one">
           Add more storage capacity
         </button>
         {moreStorage === false ? (
@@ -366,13 +359,9 @@ console.log (providerItems, pendingItems)
         ) : (
           <div className="formMoreStorage">
             <form>
-              <br></br>
-              Please give us some details about the additional storage capacity
-              you plan to bring online
-              <br></br>
-              <br></br>
+              <h5 className="topFormtop">Please give us some details...</h5>
               <label>
-                Where is this new storage capacity located?
+                <h6 className="topForm">Where is this new storage capacity located?</h6>
                 <input
                   type="text"
                   name="location"
@@ -380,8 +369,7 @@ console.log (providerItems, pendingItems)
                   value={location}
                   onChange={createLocation}
                 />
-                <br></br>
-                What is the storage capacity offered (in m3)?
+                <h6  className="topForm">What is the storage capacity offered (in m3)?</h6>
                 <input
                   type="text"
                   name="capacity"
@@ -389,8 +377,7 @@ console.log (providerItems, pendingItems)
                   value={capacity}
                   onChange={createCapacity}
                 />
-                <br></br>
-                On which floor is this new storage capacity located?
+                <h6  className="topForm">On which floor is this new storage capacity located?</h6>
                 <input
                   type="text"
                   name="floor"
@@ -398,39 +385,27 @@ console.log (providerItems, pendingItems)
                   value={floorAddition}
                   onChange={createFloorAddition}
                 />
-                <br></br>
-                <p style={{ display: "inline" }}>
-                  Check if this new storage facility is already available
-                </p>
-                <input
-                  type="checkbox"
-                  className="isAvailable"
-                  onChange={() => setAvailable(!available)}
-                />
-                <br></br>
-                If the storage facility is not yet available, when do you expect
-                it to become available (please select a date below)?
+
+                <h6  className="topForm">Please indicate from when this additional capacity will be available</h6>
                 <DatePicker
                   selected={startDate}
                   onSelect={(date) => handleDateSelect(date)}
                 />
               </label>
               <br></br>
-              <br></br>
-              <input
-                type="submit"
-                value="Submit"
+              <button
+              className="btn-three"
                 style={{ cursor: "pointer" }}
                 onClick={submitHandler}
-              />
-              <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
+              >Submit</button>
+              <button className="btn-three" onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
           </form>
           </div>)}
-        {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
+        {thanksMessage === true ? <h4 className="thanksMessage">Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
 
-        <Button variant="light" id="provider-stop-button" onClick={() => setModalShow(true)}>
+        <button className="btn-two" onClick={() => setModalShow(true)}>
         Stop being a provider
-      </Button>
+      </button>
       {
       isQuitProvider ? 
       renderProviderQuitMessage() : 
@@ -442,6 +417,7 @@ console.log (providerItems, pendingItems)
         setIsQuitProvider={setIsQuitProvider}
         id="modal-show-background">
       </StopProviderModal>
+      </div>
       <Chat />
     </div>
     </div>
