@@ -124,46 +124,6 @@ function App() {
         <Route path="learn" element={<LearnMore />} />
       </Routes>
     </Router>
-    // <div>
-    //   {mode === "homePage" ? (
-    //     <Homepage setMode={setMode} />
-    //   ) : mode === "userLogin" && isLogin ? (
-    //     <Userpage
-    //       user={user}
-    //       message={message}
-    //       success={success}
-    //       chatMessages={chatMessages}
-    //       setChatMessages={setChatMessages}
-    //       setMode={setMode}
-    //       mode={mode}
-    //       items={items}
-    //       email={email}
-    //       setItems={setItems}
-    //     />
-    //   ) : mode === "userLogin" && !isLogin ? (
-    //     <Login
-    //       setIsLogin={setIsLogin}
-    //       setUser={setUser}
-    //       setEmail={setEmail}
-    //       mode="user"
-    //     />
-    //   ) : mode === "providerLogin" && isLogin2 ? (
-    //     <Providerpage user={user} />
-    //   ) : mode === "providerLogin" && !isLogin2 ? (
-    //     <Login
-    //       setIsLogin={setIsLogin2}
-    //       setUser={setUser}
-    //       setEmail={setEmail2}
-    //       mode="provider"
-    //     />
-    //   ) : mode === "registration" ? (
-    //     <NewCustomer setMode={setMode} />
-    //   ) : mode === "extraCharge" ? (
-    //     <ExtraCharge user={user} items={items} />
-    //   ) : (
-    //     <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
-    //   )}
-    // </div>
   );
 }
 
