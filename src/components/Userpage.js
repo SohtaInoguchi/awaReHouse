@@ -16,8 +16,9 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
-  setItems,
+  setItems
 }) {
+  
   function retrieveData() {
     setMode("extraCharge");
   }
@@ -39,6 +40,7 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+
   const navigate = useNavigate();
 
   const createDescription1 = (e) => {
@@ -144,7 +146,7 @@ function Userpage({
         user_owner: email,
         fragile: isFragile,
         heavy: isHeavy,
-        // send heavy and fragile boolean
+        pending: true,
       })
       .then(() => {
         console.log("Your database has been updated!");

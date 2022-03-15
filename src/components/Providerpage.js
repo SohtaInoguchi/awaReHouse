@@ -45,6 +45,7 @@ function Providerpage({ user, email2 }) {
   const [selectedDate, setSelectedDate] = useState();
   const [isSelected, setIsSelected] = useState(false);
   const [thanksMessage, setThanksMessage] = useState(false);
+  const [pendingItems, setPendingItems] = useState([]);
   
   const navigate = useNavigate();
 
@@ -109,7 +110,20 @@ function Providerpage({ user, email2 }) {
   const retrieveProviderItems = (req, res) => {
     axios
       .post("/providerItems", { address: providerAddress })
-      .then((res) => setProviderItems(res.data));
+      .then((res) => {
+        let finalStored = [];
+        let finalPending = [];
+        for (let i = 0; i <= res.data.length; i++){
+          if (res.data[i]["pending"]===false){
+            finalStored.push(res.data[i])
+          } 
+          if (res.data[i]["pending"]===true){
+            finalPending.push(res.data[i])
+          }
+          setProviderItems(finalStored)
+          setPendingItems(finalPending)
+        }
+      });
   };
 
   function signOut() {
@@ -151,14 +165,8 @@ function Providerpage({ user, email2 }) {
     );
   };
 
-  const checkItems = (e) => {
-    e.preventDefault();
-    console.log(providerItems);
-  };
-
   useEffect(() => {
     retrieveProviderAddress();
-    // retrieveProviderItems();
   }, []);
 
  useEffect(()=>{
@@ -195,18 +203,24 @@ const submitHandler = (e) => {
   console.log(location, capacity, available, floorAddition, selectedDate)
 }
 
+console.log(providerItems)
+console.log(pendingItems.length)
+
   return (
     <div id="provider-page-wrapper">
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
-          Next stuff visit will be 02/02/22
+        <ul id="incomingBoxes">
+            <li>Next staff visit will be 02/02/22</li>
+            <li>Number of incoming box(es): {pendingItems.length}</li>
+            </ul>
         </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
-            <li>Welcome {user}</li>
+            <li>Welcome back {user},</li>
             <li>Your next pay day is: {today}</li>
-            <li>Number of box: {providerItems.length}</li>
             <li>Next payment amount: ¥{1077 * providerItems.length}</li>
+            <li>Number of box(es) in storage: {providerItems.length}</li>
           </ul>
         </Badge>
       </aside>
