@@ -3,7 +3,15 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import { VictoryBar, VictoryChart, VictoryTooltip, VictoryAxis } from "victory";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryTooltip,
+  VictoryAxis,
+  VictoryLabel,
+  Rect,
+} from "victory";
+import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import { Badge, Accordion, Card, Button } from "react-bootstrap";
 
@@ -27,12 +35,27 @@ function Providerpage({ user, email2 }) {
   const [providerAddress, setProviderAddress] = useState("");
   const [storageFloor, setStorageFloor] = useState("");
   const [chartData, setChartData] = useState();
-  const [chartVisible, setChartVisible] = useState(false);
+  const [chartVisible, setChartVisible] = useState();
+  const [boxNumberNull, setBoxNumberNull] = useState();
+  const [moreStorage, setMoreStorage] = useState(false);
+  const [location, setLocation] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [floorAddition, setFloorAddition] = useState("");
+  const [available, setAvailable] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState();
+  const [isSelected, setIsSelected] = useState(false);
+  const [thanksMessage, setThanksMessage] = useState(false);
+
   const navigate = useNavigate();
+
   const retrievePayments = async (req, res) => {
     try {
       await axios.get(`/payments/${email2}`).then((res) => {
-        if (res.data.length <= 12) {
+        if (res.data.length === 0) {
+          setChartVisible(false);
+          setBoxNumberNull(true);
+        } else if (res.data.length <= 12) {
           let final = [];
           res.data.forEach((e) => {
             let obj = {};
@@ -44,6 +67,8 @@ function Providerpage({ user, email2 }) {
             )},${String(e.amount_jpy).slice(-3)}`;
             final.push(obj);
           });
+          setChartVisible(true);
+          setBoxNumberNull(false);
           setChartData(final);
         } else {
           while (res.data.length > 12) {
@@ -59,6 +84,8 @@ function Providerpage({ user, email2 }) {
               String(e.amount_jpy).length - 3
             )},${String(e.amount_jpy).slice(-3)}`;
             final.push(obj);
+            setBoxNumberNull(false);
+            setChartVisible(true);
             setChartData(final);
           });
         }
@@ -103,41 +130,38 @@ function Providerpage({ user, email2 }) {
       <section id="box-list">
         {providerItems.map((item, idx) => {
           return (
-            <div className="">
-              <Button onClick={signOut}>Sign Out</Button>
-              <Card className="m-10 max-w-sm">
-                <Card.Img
-                  variant="top"
-                  src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                />
-                <Card.Body>
-                  <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="1">
-                      <Accordion.Header>
-                        Click to see the detail of box {item.box_id}
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <div key={idx}>
-                          <li key={idx} className="box-detail">
-                            Location: {providerAddress}
-                          </li>
-                          <li key={`${idx}d`} className="mx-0 box-detail">
-                            Weight: {item.weight_in_kg}kg
-                          </li>
-                          <li key={idx} className="mx-0 box-detail">
-                            Floor: {storageFloor}
-                          </li>
-                          <li key={idx} className="mx-0 box-detail">
-                            Should be retrieved in{" "}
-                            {item.expected_retrieval_season}.
-                          </li>
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </Card.Body>
-              </Card>
-            </div>
+            <Card className="m-10 max-w-sm">
+              <Card.Img
+                variant="top"
+                src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
+              />
+              <Card.Body>
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>
+                      Click to see the detail of box {item.box_id}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <div key={`${idx}x`}>
+                        <li key={`${idx}a`} className="box-detail">
+                          Location: {providerAddress}
+                        </li>
+                        <li key={`${idx}b`} className="mx-0 box-detail">
+                          Weight: {item.weight_in_kg}kg
+                        </li>
+                        <li key={`${idx}c`} className="mx-0 box-detail">
+                          Floor: {storageFloor}
+                        </li>
+                        <li key={`${idx}d`} className="mx-0 box-detail">
+                          Should be retrieved in{" "}
+                          {item.expected_retrieval_season}.
+                        </li>
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </Card.Body>
+            </Card>
           );
         })}
       </section>
@@ -162,8 +186,43 @@ function Providerpage({ user, email2 }) {
     retrieveProviderItems();
   }, [providerAddress]);
 
+  const createLocation = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const createCapacity = (e) => {
+    setCapacity(e.target.value);
+  };
+
+  const createFloorAddition = (e) => {
+    setFloorAddition(e.target.value);
+  };
+
+  const handleDateSelect = (date) => {
+    setStartDate(date);
+    setSelectedDate(date);
+    setIsSelected(true);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setMoreStorage(false);
+    setThanksMessage(true);
+    setTimeout(() => {
+      setThanksMessage(false);
+    }, 5000);
+    console.log(location, capacity, available, floorAddition, selectedDate);
+  };
+  function signOut() {
+    window.localStorage.removeItem("firstName_provider");
+    window.localStorage.removeItem("email_provider");
+    window.localStorage.removeItem("token_provider");
+    navigate("/");
+  }
+
   return (
     <div id="provider-page-wrapper">
+      <Button onClick={signOut}>SignOut</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
           Next stuff visit will be 02/02/22
@@ -183,9 +242,7 @@ function Providerpage({ user, email2 }) {
       {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
-        {chartVisible === false ? (
-          <></>
-        ) : (
+        {chartVisible === true && boxNumberNull === false ? (
           <div className="chart">
             <VictoryChart
               responsive={false}
@@ -195,10 +252,17 @@ function Providerpage({ user, email2 }) {
               }}
               domainPadding={{ x: 20 }}
             >
+              <VictoryLabel
+                text="Your monthly income over the past 12 months"
+                x={225}
+                y={30}
+                textAnchor="middle"
+                style={[{ fill: "#000000", fontSize: 15 }]}
+              />
               <VictoryAxis
                 animate={{
                   duration: 500,
-                  onLoad: { duration: 200 },
+                  onLoad: { duration: 250 },
                 }}
                 style={{ data: { fill: "#000000" } }}
               />
@@ -206,7 +270,7 @@ function Providerpage({ user, email2 }) {
                 dependentAxis
                 animate={{
                   duration: 500,
-                  onLoad: { duration: 200 },
+                  onLoad: { duration: 250 },
                 }}
                 style={{ data: { fill: "#000000" } }}
               />
@@ -257,8 +321,99 @@ function Providerpage({ user, email2 }) {
               />
             </VictoryChart>
           </div>
+        ) : (
+          <>
+            You do not have yet any payment history <br></br>
+          </>
         )}
-        <button>Add more storage capacity</button>
+        <button
+          onClick={() => {
+            setMoreStorage(!moreStorage);
+          }}
+        >
+          Add more storage capacity
+        </button>
+        {moreStorage === false ? (
+          <></>
+        ) : (
+          <div className="formMoreStorage">
+            <form>
+              <br></br>
+              Please give us some details about the additional storage capacity
+              you plan to bring online
+              <br></br>
+              <br></br>
+              <label>
+                Where is this new storage capacity located?
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="storage address"
+                  value={location}
+                  onChange={createLocation}
+                />
+                <br></br>
+                What is the storage capacity offered (in m3)?
+                <input
+                  type="text"
+                  name="capacity"
+                  placeholder="storage capacity"
+                  value={capacity}
+                  onChange={createCapacity}
+                />
+                <br></br>
+                On which floor is this new storage capacity located?
+                <input
+                  type="text"
+                  name="floor"
+                  placeholder="storage floor"
+                  value={floorAddition}
+                  onChange={createFloorAddition}
+                />
+                <br></br>
+                <p style={{ display: "inline" }}>
+                  Check if this new storage facility is already available
+                </p>
+                <input
+                  type="checkbox"
+                  className="isAvailable"
+                  onChange={() => setAvailable(!available)}
+                />
+                <br></br>
+                If the storage facility is not yet available, when do you expect
+                it to become available (please select a date below)?
+                <DatePicker
+                  selected={startDate}
+                  onSelect={(date) => handleDateSelect(date)}
+                />
+              </label>
+              <br></br>
+              <br></br>
+              <input
+                type="submit"
+                value="Submit"
+                style={{ cursor: "pointer" }}
+                onClick={submitHandler}
+              />
+              <br></br>
+              <button
+                onClick={() => {
+                  setMoreStorage(!moreStorage);
+                }}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        )}
+        {thanksMessage === true ? (
+          <h4>
+            Thank you for your submission, our staff will keep in touch in the
+            coming days
+          </h4>
+        ) : (
+          <></>
+        )}
         <button
           onClick={(e) => {
             window.confirm("Are you sure about to quit the provider?");

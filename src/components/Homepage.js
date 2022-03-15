@@ -15,25 +15,28 @@ export default function Homepage({
   setMessage,
 }) {
   const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState("");
 
   // Check to see if this is a redirect back from Checkout
   const query = new URLSearchParams(window.location.search);
   useEffect(() => {
     if (query.get("success")) {
       setMessage("Order placed! You will receive an email confirmation.");
+      setIsSuccess(true);
     }
 
     if (query.get("canceled")) {
       setMessage(
         "Order canceled -- continue to shop around and checkout when you're ready."
       );
+      setIsSuccess(false);
     }
   }, [query]);
 
   return (
     <div>
       {message ? (
-        <Response message={message} />
+        <Response message={message} isSuccess={isSuccess} />
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
