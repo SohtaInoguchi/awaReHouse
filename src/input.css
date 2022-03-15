@@ -6,13 +6,21 @@
   #provider {
     @apply bg-gray-50 text-cyan-600 text-xl;
   }
-
+  
   #provider-visitor-date {
     @apply bg-gray-50 text-cyan-600 text-xl ml-11;
   }
-
+  
   #provider-stop-button {
     @apply bg-sky-700 hover:bg-sky-900 text-cyan-50  text-xl ml-11;
+  }
+  
+  #user-items {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-6 cursor-pointer;
+  }
+  
+  .user-items {
+    @apply  text-cyan-600 hover:text-cyan-900 text-xl ml-10;
   }
 
   .login-button {

@@ -3,11 +3,11 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 export default function RetrieveConfirmation(props) {
 
-    const { onHide, selectedItem } = props;
+    const { onHide, selectedItems } = props;
 
     const handleYesClick = () => {
         onHide(false);
-        console.log("selected item in modal", selectedItem)
+        console.log("selected item in modal", selectedItems)
     }
 
     return (
@@ -19,7 +19,7 @@ export default function RetrieveConfirmation(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Are you sure you'd like to retrieve {selectedItem}?</h4>
+          <h4>Are you sure you'd like to retrieve {selectedItems[0]}?</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
