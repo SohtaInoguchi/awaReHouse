@@ -34,5 +34,17 @@
 
 .chart {
   max-width: 50%;
-  margin: 0 auto;
+  margin:0 auto;
+  background-color: rgb(155, 210, 255);
+  padding-left: 2%;
+  border-radius: 2%;
 }
+
+.noHistory{
+  text-align: center;
+}
+
+.formMoreStorage{
+  background-color: rgb(83, 178, 255);
+}
+
