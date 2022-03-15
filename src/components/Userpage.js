@@ -4,7 +4,10 @@ import Subscription from "../components/Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
+import { OneFiftyStripe } from "./OneFiftyStripe";
+import e from "cors";
 import { useNavigate } from "react-router-dom";
+import { BoxFlow } from "./BoxFlow";
 import { Accordion, Button, Form } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
 import { GiShatteredGlass } from "react-icons/gi";
@@ -25,7 +28,7 @@ function Userpage({
   }
 
   const storeOnClick = () => {
-    console.log("store clicked");
+    console.log("store CLICKKK");
   };
 
   const [addItem, setAddItem] = useState(false);
@@ -549,18 +552,21 @@ function Userpage({
          <div></div>
        )} */}
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
-      {/* {boxOrderReceived === true ? (
-        <h4> Thank you, you should receive the box within 5 days.</h4>
+      {boxOrderReceived === true ? (
+        <h4>
+          {/* <OneFiftyStripe/> */}
+          Thank you, you should receive the box within 5 days.
+        </h4>
       ) : (
         <div></div>
-      )} */}
+      )} 
       {/* {success === true ? <Success message={message} /> : <Subscription />} */}
       {/* <button onClick={retrieveData}>Extra Retrieval</button> */}
       <Button className="mx-3" onClick={() => navigate("/extra-charge")}>
         Extra Retrieval
       </Button>
       <Button className="mx-3" onClick={storeOnClick}>
-        Storage
+      <BoxFlow addy = {address}/>
       </Button>
       <br />
       <br />

@@ -270,7 +270,11 @@ body {
 
 /* ---------PROVIDER PAGE */
 #provider-page-wrapper {
-  position: relative;
+  /* position: relative; */
+}
+
+#provider-page-modal-show {
+  opacity: 0.5;
 }
 
 #badge-wrapper {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { BoxFlow } from "./BoxFlow";
 import Response from "./Response";
 import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
 
