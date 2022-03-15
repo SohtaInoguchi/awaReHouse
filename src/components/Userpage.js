@@ -18,8 +18,9 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
-  setItems,
+  setItems
 }) {
+  
   function retrieveData() {
     setMode("extraCharge");
   }
@@ -147,7 +148,7 @@ function Userpage({
         user_owner: email,
         fragile: isFragile,
         heavy: isHeavy,
-        // send heavy and fragile boolean
+        pending: true,
       })
       .then(() => {
         console.log("Your database has been updated!");
