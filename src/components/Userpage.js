@@ -18,9 +18,8 @@ function Userpage({
   setChatMessages,
   setMode,
   email,
-  setItems
+  setItems,
 }) {
-  
   function retrieveData() {
     setMode("extraCharge");
   }
@@ -434,23 +433,91 @@ function Userpage({
                     key={index}
                   >
                     <div
-                      className="flex justify-center items-center mx-2 shadow-lg "
+                      className="flex justify-center items-center   "
                       key={`${index}a`}
                     >
-                      {item.declared_content_one} in box number {item.box_id}:
-                      {item.fragile === true ? (
-                        <Icon icon={<GiShatteredGlass size="24" />} />
+                      {item.pending ? (
+                        <div
+                          id="item"
+                          className=" flex flex-col justify-center items-center  bg-green-300 rounded-lg mx-2 my-2 px-2 py-2"
+                        >
+                          {/* {item && item.pending
+                          ? document
+                              .getElementById("item")
+                              .classList.add("bg-green-300")
+                          : ""} */}
+                          {item.declared_content_one} in box number{" "}
+                          {item.box_id}:
+                          {item.fragile === true ? (
+                            <Icon icon={<GiShatteredGlass size="24" />} />
+                          ) : (
+                            ``
+                          )}{" "}
+                          {item.heavy === true ? (
+                            <Icon icon={<FaWeightHanging size="24" />} />
+                          ) : (
+                            ``
+                          )}
+                          {item.declared_content_two !== "" ? (
+                            <div className="shadow-sm " key={`${index}b`}>
+                              {item.declared_content_two} in box number{" "}
+                              {item.box_id}{" "}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                          {item.declared_content_three !== "" ? (
+                            <div className="shadow-sm " key={`${index}c`}>
+                              {item.declared_content_three} in box number{" "}
+                              {item.box_id}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       ) : (
-                        ``
-                      )}{" "}
-                      {item.heavy === true ? (
-                        <Icon icon={<FaWeightHanging size="24" />} />
-                      ) : (
-                        ``
+                        <div
+                          id="item"
+                          className="flex flex-col justify-center items-center rounded-lg mx-2 my-2 px-2 py-2"
+                        >
+                          {/* {item && item.pending
+                          ? document
+                              .getElementById("item")
+                              .classList.add("bg-green-300")
+                          : ""} */}
+                          {item.declared_content_one} in box number{" "}
+                          {item.box_id}:
+                          {item.fragile === true ? (
+                            <Icon icon={<GiShatteredGlass size="24" />} />
+                          ) : (
+                            ``
+                          )}{" "}
+                          {item.heavy === true ? (
+                            <Icon icon={<FaWeightHanging size="24" />} />
+                          ) : (
+                            ``
+                          )}
+                          {item.declared_content_two !== "" ? (
+                            <div className="shadow-sm" key={`${index}b`}>
+                              {item.declared_content_two} in box number{" "}
+                              {item.box_id}{" "}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                          {item.declared_content_three !== "" ? (
+                            <div className="shadow-sm" key={`${index}c`}>
+                              {item.declared_content_three} in box number{" "}
+                              {item.box_id}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       )}
                     </div>
 
-                    {item.declared_content_two !== "" ? (
+                    {/* {item.declared_content_two !== "" ? (
                       <div className="shadow-lg " key={`${index}b`}>
                         {item.declared_content_two} in box number {item.box_id}{" "}
                       </div>
@@ -464,7 +531,7 @@ function Userpage({
                       </div>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                   </div>
                 );
               })}
