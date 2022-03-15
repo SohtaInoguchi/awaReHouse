@@ -313,3 +313,8 @@ body {
   opacity: 1;
   transition: all 0.6s ease;
 }
+
+/* -------EXTRA RETRIEVAL  */
+.selected-items {
+ list-style: none; 
+}

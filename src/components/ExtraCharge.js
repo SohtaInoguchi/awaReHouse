@@ -90,9 +90,12 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         items-center m-10 text-sky-900 font-bold'>Selected item:
         {selectedItems.map((item, idx) => {
           return (
-              <ListGroup className="w-fit m-2">
-                <ListGroup.Item className='text-sky-900' key={idx}>{item}</ListGroup.Item>
-              </ListGroup>
+              // <ListGroup className="w-fit m-2 text-yellow-500">
+              //   <ListGroup.Item key={idx}>{item}</ListGroup.Item>
+              // </ListGroup>
+              <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
+                <li className='selected-items' key={idx}>{item}</li>
+              </section>
             )
         })}
         </section>
