@@ -3,10 +3,11 @@ import { Modal, Button } from 'react-bootstrap';
 
 export default function StopProviderModal(props) {
 
-    const { onHide } = props;
+    const { onHide, setIsQuitProvider } = props;
 
     const handleYesClick = () => {
         console.log("Quit provider");
+        setIsQuitProvider(true);
         onHide(false);
     }
 
