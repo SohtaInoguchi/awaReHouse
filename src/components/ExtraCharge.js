@@ -62,8 +62,8 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   return (
     <div>
       {/* <h1>{user}</h1> */}
-      <h1 className='ml-10'>{localStorage.firstName_user}</h1>
-        <h1 className='ml-10'>Which items to take / store?</h1>
+      <p className='text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2'>{localStorage.firstName_user}</p>
+        <h1 className='ml-10 my-6 text-cyan-800 italic'>Which items to retrive?</h1>
         {/* <button onClick={check}>Check</button> */}
         {items.map((item) => {
           return (
@@ -97,17 +97,17 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         })}
         </section>
         
-        <h2 className='ml-10 my-8'>Select the date of retrieval</h2>
+        <h2 className='ml-10 my-8 text-cyan-800 italic'>Select the date of retrieval</h2>
         <DatePicker 
             className='ml-10'
             selected={startDate} 
             onSelect={date => handleDateSelect(date)} 
             minDate={addDays(new Date)} 
             />
-        <Button className='ml-10 my-8' onClick={handleOnclickDate}>Press to set retrieval date</Button>
-        {isSelected ? <div className='ml-10'>You selected {selectedDateString}</div> : <div className='ml-10'>Date not selected</div>}
-
-        <Button className='ml-10 my-8' onClick={() => setModalShow(true)}>Retrieve</Button>
+        {isSelected ? <div className='ml-10 italic'>You selected {selectedDateString}</div> : <div className='ml-10 italic'>Date not selected</div>}
+        <Button className='ml-10 my-2' id='date-set' onClick={handleOnclickDate}>Press to set retrieval date</Button>
+        <div></div>
+        <Button className='ml-10 my-8' id='retrieve' onClick={() => setModalShow(true)}>Retrieve</Button>
         <RetrieveConfirmation
         show={modalShow}
         onHide={setModalShow}

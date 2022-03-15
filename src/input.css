@@ -23,6 +23,14 @@
     @apply  text-cyan-600 hover:text-cyan-900 text-xl ml-10;
   }
 
+  #date-set {
+    @apply bg-white text-teal-600
+  }
+
+  #retrieve {
+    @apply bg-white text-teal-600
+  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
