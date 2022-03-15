@@ -2,6 +2,14 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 export default function StopProviderModal(props) {
+
+    const { onHide } = props;
+
+    const handleYesClick = () => {
+        console.log("Quit provider");
+        onHide(false);
+    }
+
     return (
       <Modal
         {...props}
@@ -18,8 +26,8 @@ export default function StopProviderModal(props) {
           <h4>Are you sure you'd like to stop being provider?</h4>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Go back</Button>
-          <Button onClick={props.onHide}>Yes, I'm sure</Button>
+          <Button onClick={() => onHide(false)}>Go back</Button>
+          <Button onClick={handleYesClick}>Yes, I'm sure</Button>
         </Modal.Footer>
       </Modal>
     );

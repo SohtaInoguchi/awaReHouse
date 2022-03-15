@@ -419,18 +419,9 @@ console.log (providerItems, pendingItems)
       </Button>
       <StopProviderModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={setModalShow}
         id="modal-show-background">
       </StopProviderModal>
-
-      {/* <button
-        onClick={(e) => {
-          window.confirm("Are you sure about to quit the provider?");
-        }}
-      >
-        Stop being a provider
-      </button>
-      <br /> */}
       <Chat />
     </div>
     </div>
