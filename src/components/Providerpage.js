@@ -113,15 +113,20 @@ function Providerpage({ user, email2 }) {
       .then((res) => {
         let finalStored = [];
         let finalPending = [];
-        for (let i = 0; i <= res.data.length; i++){
-          if (res.data[i]["pending"]===false){
-            finalStored.push(res.data[i])
-          } 
-          if (res.data[i]["pending"]===true){
-            finalPending.push(res.data[i])
+        if (res.data.length === 0){
+          setProviderItems([])
+          setPendingItems([])
+        } else {
+          for (let i = 0; i <= res.data.length; i++){
+            if (res.data[i]["pending"]===false){
+              finalStored.push(res.data[i])
+            } 
+            if (res.data[i]["pending"]===true){
+              finalPending.push(res.data[i])
+            }
+            setProviderItems(finalStored)
+            setPendingItems(finalPending)
           }
-          setProviderItems(finalStored)
-          setPendingItems(finalPending)
         }
       });
   };
@@ -203,8 +208,7 @@ const submitHandler = (e) => {
   console.log(location, capacity, available, floorAddition, selectedDate)
 }
 
-console.log(providerItems)
-console.log(pendingItems.length)
+console.log (providerItems, pendingItems)
 
   return (
     <div id="provider-page-wrapper">
@@ -303,11 +307,10 @@ console.log(pendingItems.length)
       {moreStorage === false ? <></> : <div className="formMoreStorage">
       <form >
             <br></br>
-            Please give us some details about the additional storage capacity you plan to bring online
-            <br></br>
-            <br></br>
+            <h6 className="titleForm">Please give us some details about the additional storage capacity you plan to bring online</h6>
+
             <label >
-              Where is this new storage capacity located?
+              <div className="formLabels">Where is this new storage capacity located?</div>
               <input
                 type="text"
                 name="location"
@@ -316,7 +319,8 @@ console.log(pendingItems.length)
                 onChange={createLocation}
               />
               <br></br>
-              What is the storage capacity offered (in m3)?
+              <br></br>
+              <div className="formLabels">What is the storage capacity offered (in m3)?</div>
               <input
                 type="text"
                 name="capacity"
@@ -324,8 +328,9 @@ console.log(pendingItems.length)
                 value={capacity}
                 onChange={createCapacity}
               />
+            <br></br>
               <br></br>
-              On which floor is this new storage capacity located?
+              <div className="formLabels">On which floor is this new storage capacity located?</div>
               <input
                 type="text"
                 name="floor"
@@ -333,6 +338,7 @@ console.log(pendingItems.length)
                 value={floorAddition}
                 onChange={createFloorAddition}
               />
+              <br></br>
               <br></br>
               <p style={{ display: "inline" }}>
                 Check if this new storage facility is already available
@@ -342,8 +348,9 @@ console.log(pendingItems.length)
                 className="isAvailable"
                 onChange={()=>setAvailable(!available)}
               />
+             <br></br>
               <br></br>
-              If the storage facility is not yet available, when do you expect it to become available (please select a date below)?
+              <div className="formLabels">If the storage facility is not yet available, when do you expect it to become available (please select a date)?</div>
               <DatePicker 
             selected={startDate} 
             onSelect={date => handleDateSelect(date)} 
@@ -357,7 +364,6 @@ console.log(pendingItems.length)
               style={{ cursor: "pointer" }}
               onClick={submitHandler}
             />
-            <br></br>
             <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
           </form>
         </div>}

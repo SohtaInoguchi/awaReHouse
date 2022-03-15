@@ -39,6 +39,17 @@
 }
 
 .formMoreStorage{
-  background-color: rgb(83, 178, 255);
+  max-width: 50%;
+  margin:0 auto;
+  background-color: rgb(155, 210, 255);
+  padding-left: 2%;
+  border-radius: 2%;
+  font-size:15px;
 }
+
+.isAvailable{
+  margin-left:2%
+}
+
+
 
