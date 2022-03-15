@@ -24,6 +24,12 @@
   .boxes-before {
     @apply transition-all duration-700 opacity-0;
   }
+
+  .heart-before {
+    @apply animate-bounce;
+  }
+  .heart-after {
+  }
 }
 
 .chart {

@@ -3,13 +3,14 @@ import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
-import { VictoryBar,
+import {
+  VictoryBar,
   VictoryChart,
   VictoryTooltip,
-  VictoryAxis, 
+  VictoryAxis,
   VictoryLabel,
   Rect,
-} from 'victory';
+} from "victory";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import { Badge, Accordion, Card, Button } from "react-bootstrap";
@@ -49,44 +50,49 @@ function Providerpage({ user, email2 }) {
   
   const navigate = useNavigate();
 
-  const retrievePayments = async (req,res) => {
+  const retrievePayments = async (req, res) => {
     try {
-      await axios.get(`/payments/${email2}`)
-      .then((res) => {
-        if (res.data.length===0){
-          setChartVisible(false)
-          setBoxNumberNull(true)
-        } else if (res.data.length<=12) {
+      await axios.get(`/payments/${email2}`).then((res) => {
+        if (res.data.length === 0) {
+          setChartVisible(false);
+          setBoxNumberNull(true);
+        } else if (res.data.length <= 12) {
           let final = [];
-          res.data.forEach((e)=>{
-          let obj = {};
-          obj["x"]=e["covered_month"].slice(0,3);
-          obj["y"]=e["amount_jpy"];
-          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
-          final.push(obj)
-        })
-        setChartVisible(true)  
-        setBoxNumberNull(false)
-          setChartData(final)
+          res.data.forEach((e) => {
+            let obj = {};
+            obj["x"] = e["covered_month"].slice(0, 3);
+            obj["y"] = e["amount_jpy"];
+            obj["label"] = `JPY ${String(e.amount_jpy).slice(
+              0,
+              String(e.amount_jpy).length - 3
+            )},${String(e.amount_jpy).slice(-3)}`;
+            final.push(obj);
+          });
+          setChartVisible(true);
+          setBoxNumberNull(false);
+          setChartData(final);
         } else {
           while (res.data.length > 12) {
             res.data.shift();
           }
           let final = [];
-          res.data.forEach((e)=>{
-          let obj = {};
-          obj["x"]=e["covered_month"].slice(0,3);
-          obj["y"]=e["amount_jpy"];
-          obj["label"]=`JPY ${String(e.amount_jpy).slice(0,(String(e.amount_jpy).length)-3)},${String(e.amount_jpy).slice(-3)}`;
-          final.push(obj)
-          setBoxNumberNull(false)
-          setChartVisible(true)  
-          setChartData(final)
-          })
-        } 
-      })
-    } catch{
-        console.log("NOPE! Payments cannot be retrieved");
+          res.data.forEach((e) => {
+            let obj = {};
+            obj["x"] = e["covered_month"].slice(0, 3);
+            obj["y"] = e["amount_jpy"];
+            obj["label"] = `JPY ${String(e.amount_jpy).slice(
+              0,
+              String(e.amount_jpy).length - 3
+            )},${String(e.amount_jpy).slice(-3)}`;
+            final.push(obj);
+            setBoxNumberNull(false);
+            setChartVisible(true);
+            setChartData(final);
+          });
+        }
+      });
+    } catch {
+      console.log("NOPE! Payments cannot be retrieved");
     }
   };
 
@@ -144,28 +150,39 @@ function Providerpage({ user, email2 }) {
         {providerItems.map((item, idx) => {
           return (
             <Card className="m-10 max-w-sm">
-              <Card.Img variant="top" src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}/>
+              <Card.Img
+                variant="top"
+                src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
+              />
               <Card.Body>
                 <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>
-                    Click to see the detail of box {item.box_id}
+                      Click to see the detail of box {item.box_id}
                     </Accordion.Header>
                     <Accordion.Body>
                       <div key={`${idx}x`}>
-                        <li key={`${idx}a`} className="box-detail">Location: {providerAddress}</li>
-                        <li key={`${idx}b`} className="mx-0 box-detail">Weight: {item.weight_in_kg}kg</li>
-                        <li key={`${idx}c`} className="mx-0 box-detail">Floor: {storageFloor}</li>
-                        <li key={`${idx}d`} className="mx-0 box-detail">Should be retrieved in {item.expected_retrieval_season}.</li>
+                        <li key={`${idx}a`} className="box-detail">
+                          Location: {providerAddress}
+                        </li>
+                        <li key={`${idx}b`} className="mx-0 box-detail">
+                          Weight: {item.weight_in_kg}kg
+                        </li>
+                        <li key={`${idx}c`} className="mx-0 box-detail">
+                          Floor: {storageFloor}
+                        </li>
+                        <li key={`${idx}d`} className="mx-0 box-detail">
+                          Should be retrieved in{" "}
+                          {item.expected_retrieval_season}.
+                        </li>
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
               </Card.Body>
             </Card>
-          )
-        })
-      }
+          );
+        })}
       </section>
     );
   };
@@ -174,11 +191,11 @@ function Providerpage({ user, email2 }) {
     retrieveProviderAddress();
   }, []);
 
- useEffect(()=>{
-    setChartVisible(true)
- },[chartData])
-  
-      useEffect(() => {
+  useEffect(() => {
+    setChartVisible(true);
+  }, [chartData]);
+
+  useEffect(() => {
     retrieveProviderItems();
   }, [providerAddress]);
 
@@ -198,20 +215,29 @@ function Providerpage({ user, email2 }) {
     setStartDate(date);
     setSelectedDate(date);
     setIsSelected(true);
-}
+  };
 
-const submitHandler = (e) => {
-  e.preventDefault();
-  setMoreStorage(false);
-  setThanksMessage(true);
-  setTimeout(()=>{setThanksMessage(false)},5000);
-  console.log(location, capacity, available, floorAddition, selectedDate)
-}
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setMoreStorage(false);
+    setThanksMessage(true);
+    setTimeout(() => {
+      setThanksMessage(false);
+    }, 5000);
+    console.log(location, capacity, available, floorAddition, selectedDate);
+  };
+  function signOut() {
+    window.localStorage.removeItem("firstName_provider");
+    window.localStorage.removeItem("email_provider");
+    window.localStorage.removeItem("token_provider");
+    navigate("/");
+  }
 
 console.log (providerItems, pendingItems)
 
   return (
     <div id="provider-page-wrapper">
+      <Button onClick={signOut}>SignOut</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
         <ul id="incomingBoxes">
@@ -234,7 +260,7 @@ console.log (providerItems, pendingItems)
       {/* <button onClick={checkItems}>Check Items</button> */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
-        { chartVisible === true && boxNumberNull === false ? 
+        {chartVisible === true && boxNumberNull === false ? (
           <div className="chart">
             <VictoryChart
               responsive={false}
@@ -302,71 +328,85 @@ console.log (providerItems, pendingItems)
             }]}
           />
         </VictoryChart>
-        </div> : <>You do not have yet any payment history <br></br></>}      
-      <button onClick={()=>{setMoreStorage(!moreStorage)}}>Add more storage capacity</button>
-      {moreStorage === false ? <></> : <div className="formMoreStorage">
-      <form >
-            <br></br>
-            <h6 className="titleForm">Please give us some details about the additional storage capacity you plan to bring online</h6>
-
-            <label >
-              <div className="formLabels">Where is this new storage capacity located?</div>
+        
+          </div>
+        ) : (
+          <>
+            You do not have yet any payment history <br></br>
+          </>
+        )}
+        <button
+          onClick={() => {
+            setMoreStorage(!moreStorage);
+          }}
+        >
+          Add more storage capacity
+        </button>
+        {moreStorage === false ? (
+          <></>
+        ) : (
+          <div className="formMoreStorage">
+            <form>
+              <br></br>
+              Please give us some details about the additional storage capacity
+              you plan to bring online
+              <br></br>
+              <br></br>
+              <label>
+                Where is this new storage capacity located?
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="storage address"
+                  value={location}
+                  onChange={createLocation}
+                />
+                <br></br>
+                What is the storage capacity offered (in m3)?
+                <input
+                  type="text"
+                  name="capacity"
+                  placeholder="storage capacity"
+                  value={capacity}
+                  onChange={createCapacity}
+                />
+                <br></br>
+                On which floor is this new storage capacity located?
+                <input
+                  type="text"
+                  name="floor"
+                  placeholder="storage floor"
+                  value={floorAddition}
+                  onChange={createFloorAddition}
+                />
+                <br></br>
+                <p style={{ display: "inline" }}>
+                  Check if this new storage facility is already available
+                </p>
+                <input
+                  type="checkbox"
+                  className="isAvailable"
+                  onChange={() => setAvailable(!available)}
+                />
+                <br></br>
+                If the storage facility is not yet available, when do you expect
+                it to become available (please select a date below)?
+                <DatePicker
+                  selected={startDate}
+                  onSelect={(date) => handleDateSelect(date)}
+                />
+              </label>
+              <br></br>
+              <br></br>
               <input
-                type="text"
-                name="location"
-                placeholder="storage address"
-                value={location}
-                onChange={createLocation}
+                type="submit"
+                value="Submit"
+                style={{ cursor: "pointer" }}
+                onClick={submitHandler}
               />
-              <br></br>
-              <br></br>
-              <div className="formLabels">What is the storage capacity offered (in m3)?</div>
-              <input
-                type="text"
-                name="capacity"
-                placeholder="storage capacity"
-                value={capacity}
-                onChange={createCapacity}
-              />
-            <br></br>
-              <br></br>
-              <div className="formLabels">On which floor is this new storage capacity located?</div>
-              <input
-                type="text"
-                name="floor"
-                placeholder="storage floor"
-                value={floorAddition}
-                onChange={createFloorAddition}
-              />
-              <br></br>
-              <br></br>
-              <p style={{ display: "inline" }}>
-                Check if this new storage facility is already available
-              </p>
-              <input
-                type="checkbox"
-                className="isAvailable"
-                onChange={()=>setAvailable(!available)}
-              />
-             <br></br>
-              <br></br>
-              <div className="formLabels">If the storage facility is not yet available, when do you expect it to become available (please select a date)?</div>
-              <DatePicker 
-            selected={startDate} 
-            onSelect={date => handleDateSelect(date)} 
-            />
-            </label>
-            <br></br>
-            <br></br>
-            <input
-              type="submit"
-              value="Submit"
-              style={{ cursor: "pointer" }}
-              onClick={submitHandler}
-            />
-            <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
+              <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
           </form>
-        </div>}
+          </div>)}
         {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
       <button
         onClick={(e) => {
