@@ -57,7 +57,7 @@ app.post("/allItems", async (req, res) => {
       .select("*")
       .from("inventory")
       .where("user_owner", req.body.email);
-    // console.log(items);
+    console.log("items", items);
     res.send(items);
   } catch {
     res.send("No items found yet");

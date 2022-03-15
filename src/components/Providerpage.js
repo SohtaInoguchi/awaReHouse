@@ -277,7 +277,6 @@ console.log (providerItems, pendingItems)
       <Badge bg="light" id="provider-visitor-date">
         LIST OF STORED BOXES
       </Badge>
-      <button onClick={check}>Check Items</button>
       {providerItems ? renderListOfStorage() : <></>}
       <div>
         {chartVisible === true && boxNumberNull === false ? (
