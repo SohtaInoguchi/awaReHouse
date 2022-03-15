@@ -46,7 +46,8 @@ function Providerpage({ user, email2 }) {
   const [selectedDate, setSelectedDate] = useState();
   const [isSelected, setIsSelected] = useState(false);
   const [thanksMessage, setThanksMessage] = useState(false);
-
+  const [pendingItems, setPendingItems] = useState([]);
+  
   const navigate = useNavigate();
 
   const retrievePayments = async (req, res) => {
@@ -115,7 +116,25 @@ function Providerpage({ user, email2 }) {
   const retrieveProviderItems = (req, res) => {
     axios
       .post("/providerItems", { address: providerAddress })
-      .then((res) => setProviderItems(res.data));
+      .then((res) => {
+        let finalStored = [];
+        let finalPending = [];
+        if (res.data.length === 0){
+          setProviderItems([])
+          setPendingItems([])
+        } else {
+          for (let i = 0; i <= res.data.length; i++){
+            if (res.data[i]["pending"]===false){
+              finalStored.push(res.data[i])
+            } 
+            if (res.data[i]["pending"]===true){
+              finalPending.push(res.data[i])
+            }
+            setProviderItems(finalStored)
+            setPendingItems(finalPending)
+          }
+        }
+      });
   };
 
   function signOut() {
@@ -168,14 +187,8 @@ function Providerpage({ user, email2 }) {
     );
   };
 
-  const checkItems = (e) => {
-    e.preventDefault();
-    console.log(providerItems);
-  };
-
   useEffect(() => {
     retrieveProviderAddress();
-    // retrieveProviderItems();
   }, []);
 
   useEffect(() => {
@@ -220,19 +233,24 @@ function Providerpage({ user, email2 }) {
     navigate("/");
   }
 
+console.log (providerItems, pendingItems)
+
   return (
     <div id="provider-page-wrapper">
       <Button onClick={signOut}>SignOut</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
-          Next stuff visit will be 02/02/22
+        <ul id="incomingBoxes">
+            <li>Next staff visit will be 02/02/22</li>
+            <li>Number of incoming box(es): {pendingItems.length}</li>
+            </ul>
         </Badge>
         <Badge bg="light" id="provider">
           <ul id="provider-info">
-            <li>Welcome {user}</li>
+            <li>Welcome back {user},</li>
             <li>Your next pay day is: {today}</li>
-            <li>Number of box: {providerItems.length}</li>
             <li>Next payment amount: ¥{1077 * providerItems.length}</li>
+            <li>Number of box(es) in storage: {providerItems.length}</li>
           </ul>
         </Badge>
       </aside>
@@ -251,75 +269,66 @@ function Providerpage({ user, email2 }) {
                 onLoad: { duration: 200 },
               }}
               domainPadding={{ x: 20 }}
-            >
-              <VictoryLabel
-                text="Your monthly income over the past 12 months"
-                x={225}
-                y={30}
-                textAnchor="middle"
-                style={[{ fill: "#000000", fontSize: 15 }]}
-              />
-              <VictoryAxis
-                animate={{
-                  duration: 500,
-                  onLoad: { duration: 250 },
-                }}
-                style={{ data: { fill: "#000000" } }}
-              />
-              <VictoryAxis
-                dependentAxis
-                animate={{
-                  duration: 500,
-                  onLoad: { duration: 250 },
-                }}
-                style={{ data: { fill: "#000000" } }}
-              />
-              <VictoryBar
-                animate={{
-                  duration: 500,
-                  onLoad: { duration: 200 },
-                }}
-                barRatio={1}
-                cornerRadius={0}
-                style={{ data: { fill: "#2035d4" } }}
-                alignment="middle"
-                labelComponent={<VictoryTooltip />}
-                data={chartData}
-                events={[
-                  {
-                    target: "data",
-                    eventHandlers: {
-                      onMouseOver: () => {
-                        return [
-                          {
-                            target: "data",
-                            mutation: () => ({
-                              style: { fill: "gold", width: 30 },
-                            }),
-                          },
-                          {
-                            target: "labels",
-                            mutation: () => ({ active: true }),
-                          },
-                        ];
-                      },
-                      onMouseOut: () => {
-                        return [
-                          {
-                            target: "data",
-                            mutation: () => {},
-                          },
-                          {
-                            target: "labels",
-                            mutation: () => ({ active: false }),
-                          },
-                        ];
-                      },
-                    },
-                  },
-                ]}
-              />
-            </VictoryChart>
+            >  
+          <VictoryLabel text="Your monthly income over the past 12 months" x={225} y={30} textAnchor="middle" style={[
+        { fill: "#000000", fontSize: 15 },
+      ]}/>
+          <VictoryAxis  
+          animate={{
+            duration: 500,
+            onLoad: { duration: 250 }
+          }}
+          style={{ data: { fill: "#000000" } }} 
+          />
+          <VictoryAxis 
+          dependentAxis  
+          animate={{
+            duration: 500,
+            onLoad: { duration: 250 }
+          }}
+          style={{ data: { fill: "#000000" } }}
+          />
+          <VictoryBar
+          animate={{
+            duration: 500,
+            onLoad: { duration: 200 }
+          }}
+            barRatio={1}
+            cornerRadius={0}
+            style={{ data: { fill: "#2035d4" } }}
+            alignment="middle"
+            labelComponent={<VictoryTooltip/>}
+            data={chartData}
+            events={[{
+              target: "data",
+              eventHandlers: {
+                onMouseOver: () => {
+                  return [
+                    {
+                      target: "data",
+                      mutation: () => ({style: {fill: "gold", width: 30}})
+                    }, {
+                      target: "labels",
+                      mutation: () => ({ active: true })
+                    }
+                  ];
+                },
+                onMouseOut: () => {
+                  return [
+                    {
+                      target: "data",
+                      mutation: () => {}
+                    }, {
+                      target: "labels",
+                      mutation: () => ({ active: false })
+                    }
+                  ];
+                }
+              }
+            }]}
+          />
+        </VictoryChart>
+        
           </div>
         ) : (
           <>
@@ -395,35 +404,20 @@ function Providerpage({ user, email2 }) {
                 style={{ cursor: "pointer" }}
                 onClick={submitHandler}
               />
-              <br></br>
-              <button
-                onClick={() => {
-                  setMoreStorage(!moreStorage);
-                }}
-              >
-                Cancel
-              </button>
-            </form>
-          </div>
-        )}
-        {thanksMessage === true ? (
-          <h4>
-            Thank you for your submission, our staff will keep in touch in the
-            coming days
-          </h4>
-        ) : (
-          <></>
-        )}
-        <button
-          onClick={(e) => {
-            window.confirm("Are you sure about to quit the provider?");
-          }}
-        >
-          Stop being a provider
-        </button>
-        <br />
-        <Chat />
-      </div>
+              <button onClick={()=>{setMoreStorage(!moreStorage)}}>Cancel</button>
+          </form>
+          </div>)}
+        {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
+      <button
+        onClick={(e) => {
+          window.confirm("Are you sure about to quit the provider?");
+        }}
+      >
+        Stop being a provider
+      </button>
+      <br />
+      <Chat />
+    </div>
     </div>
   );
 }
