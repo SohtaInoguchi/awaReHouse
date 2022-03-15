@@ -13,7 +13,8 @@ import {
 } from "victory";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
-import { Badge, Accordion, Card, Button } from "react-bootstrap";
+import { Badge, Accordion, Card, Button, Modal } from "react-bootstrap";
+import StopProviderModal from "./StopProviderModal";
 
 let today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
@@ -47,6 +48,9 @@ function Providerpage({ user, email2 }) {
   const [isSelected, setIsSelected] = useState(false);
   const [thanksMessage, setThanksMessage] = useState(false);
   const [pendingItems, setPendingItems] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [isQuitProvider, setIsQuitProvider] = useState(false);
+
   
   const navigate = useNavigate();
 
@@ -225,9 +229,27 @@ function Providerpage({ user, email2 }) {
     navigate("/");
   }
 
+  const check = (e) => {
+    e.preventDefault();
+    console.log("provider quit", isQuitProvider);
+  }
+
+  const renderProviderQuitMessage = () => {
+    return (
+      <h2>
+        <Badge bg="success">
+        You successfuly stopped being provider.
+        </Badge>
+      </h2>
+    )
+  }
+
+console.log (providerItems, pendingItems)
+
   return (
-    <div >
-      <Button className="SignOutButton" onClick={signOut}>Sign Out</Button>
+    // <div id="provider-page-wrapper">
+    <div id={modalShow ? "provider-page-modal-show" : "provider-page-wrapper"}>
+      <Button onClick={signOut}>SignOut</Button>
       <aside id="badge-wrapper">
         <Badge bg="light" id="provider-visitor-date">
             <h5 className="incomingBoxes">Next staff visit will be 02/02/22</h5>
@@ -245,7 +267,7 @@ function Providerpage({ user, email2 }) {
       <Badge bg="light" id="provider-visitor-date">
         LIST OF STORED BOXES
       </Badge>
-      {/* <button onClick={checkItems}>Check Items</button> */}
+      <button onClick={check}>Check Items</button>
       {providerItems ? renderListOfStorage() : <></>}
       <div>
         {chartVisible === true && boxNumberNull === false ? (
@@ -396,14 +418,21 @@ function Providerpage({ user, email2 }) {
           </form>
           </div>)}
         {thanksMessage === true ? <h4>Thank you for your submission, our staff will keep in touch in the coming days</h4> : <></>}
-      <button
-        onClick={(e) => {
-          window.confirm("Are you sure about to quit the provider?");
-        }}
-      >
+
+        <Button variant="light" id="provider-stop-button" onClick={() => setModalShow(true)}>
         Stop being a provider
-      </button>
-      <br />
+      </Button>
+      {
+      isQuitProvider ? 
+      renderProviderQuitMessage() : 
+      <></>
+      }
+      <StopProviderModal
+        show={modalShow}
+        onHide={setModalShow}
+        setIsQuitProvider={setIsQuitProvider}
+        id="modal-show-background">
+      </StopProviderModal>
       <Chat />
     </div>
     </div>

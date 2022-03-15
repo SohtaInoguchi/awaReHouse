@@ -11,6 +11,10 @@
     @apply bg-gray-50 text-cyan-600 text-xl ml-11;
   }
 
+  #provider-stop-button {
+    @apply bg-sky-700 hover:bg-sky-900 text-cyan-50  text-xl ml-11;
+  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
