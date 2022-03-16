@@ -234,7 +234,7 @@ function Providerpage({ user, email2 }) {
     return (
       <h2>
         <Badge bg="success">
-        <h4>Your request has been registered. <br></br>We hope to welcome you back as a provider soon.</h4>
+        <h4>Your request has been registered. <br></br>We hope to welcome you back soon as a provider.</h4>
         </Badge>
       </h2>
     )

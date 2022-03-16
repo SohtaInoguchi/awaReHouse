@@ -12,6 +12,7 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+import BoxFlow from "./BoxFlow";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -38,7 +39,7 @@ function App() {
   const [email, setEmail] = useState("");
   // email for provider
   const [email2, setEmail2] = useState("");
-
+  const [address, setAddress] = useState("");
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
@@ -79,6 +80,7 @@ function App() {
               items={items}
               email={email}
               setItems={setItems}
+              setAddress={setAddress}
             />
           }
         />
@@ -127,6 +129,7 @@ function App() {
           element={<ExtraCharge user={user} items={items} email={email} setItems={setItems}/>}
         />
         <Route path="learn" element={<LearnMore />} />
+        <Route path="extra-storage" element={<BoxFlow addy={address} />} />
       </Routes>
     </Router>
   );

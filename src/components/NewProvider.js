@@ -99,7 +99,7 @@ export default function NerCustomer({ setMode }) {
     return (
       <div className="containerNewRegistration">
         <div className="newProvider text-slate-900 m-5">
-          SIGNUP AS A PROVIDER
+          Register as a storage provider
           <Form
           onSubmit={handleProviderSubmit}>
 
@@ -202,6 +202,7 @@ export default function NerCustomer({ setMode }) {
             </Form.Group>
 
             <Form.Group>
+            <p>Please attach a copy of a valid identification document</p>
             <Form.Control 
                 type="file" 
                 name="file" 

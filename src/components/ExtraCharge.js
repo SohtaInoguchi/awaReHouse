@@ -121,7 +121,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         })}
         </section>
         
-        <h2 className='my-8 text-cyan-800 italic bg-white'>Select the date of retrieval</h2>
+        <h2 className='my-8 text-cyan-800 italic bg-white'>Select retrieval date</h2>
         <DatePicker 
             className='ml-10'
             selected={startDate} 
@@ -129,9 +129,9 @@ export default function ExtraCharge({ user, items, email, setItems }) {
             minDate={addDays(new Date)} 
             />
         {isSelected ? <div className='ml-10 italic'>You selected {selectedDateString}</div> : <div className='ml-10 italic'>Date not selected</div>}
-        <Button className='ml-10 my-2' id='date-set' onClick={handleOnclickDate}>Press to set retrieval date</Button>
+        <Button className='ml-10 my-2' id='date-set' onClick={handleOnclickDate}>Press to validate this date</Button>
         <div></div>
-        <Button className='ml-10 my-8' id='retrieve' onClick={() => setModalShow(true)}>Retrieve</Button>
+        <Button className='ml-10 my-8' id='retrieve' onClick={() => setModalShow(true)}>Retrieve order</Button>
         <RetrieveConfirmation
         show={modalShow}
         onHide={setModalShow}
