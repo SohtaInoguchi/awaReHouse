@@ -4,7 +4,7 @@ export default function Cancel() {
   const navigate = useNavigate();
   return (
     <div>
-      <p>Come back to awaReHouse whenever you want!</p>
+      <p>We hope to see you back in the near future!</p>
       <button onClick={() => navigate("/user")}>Go back to user page</button>
     </div>
   );

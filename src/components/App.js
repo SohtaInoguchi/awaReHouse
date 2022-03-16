@@ -45,6 +45,11 @@ function App() {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, []);
 
+  // Delete later
+  useEffect(() => {
+    console.log("items in App", items);
+  }, [items])
+
   return (
     <Router>
       <button onClick={() => setMessage("")}>
@@ -121,7 +126,7 @@ function App() {
 
         <Route
           path="extra-charge"
-          element={<ExtraCharge user={user} items={items} />}
+          element={<ExtraCharge user={user} items={items} email={email} setItems={setItems}/>}
         />
         <Route path="learn" element={<LearnMore />} />
         <Route path="extra-storage" element={<BoxFlow addy={address} />} />

@@ -24,11 +24,11 @@ export default function StopProviderModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Are you sure you'd like to stop being provider?</h4>
+          <h4>Are you sure you really want to stop being a storage provider?</h4>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => onHide(false)}>Go back</Button>
-          <Button onClick={handleYesClick}>Yes, I'm sure</Button>
+          <Button onClick={handleYesClick}>Yes, I am sure</Button>
         </Modal.Footer>
       </Modal>
     );

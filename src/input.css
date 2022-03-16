@@ -15,6 +15,22 @@
     @apply bg-sky-700 hover:bg-sky-900 text-cyan-50  text-xl ml-11;
   }
 
+  #user-items {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-6 cursor-pointer;
+  }
+
+  .user-items {
+    @apply text-cyan-600 hover:text-cyan-900 text-xl ml-10;
+  }
+
+  #date-set {
+    @apply bg-white text-teal-600;
+  }
+
+  #retrieve {
+    @apply bg-white text-teal-600;
+  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
@@ -41,7 +57,7 @@
 .chart {
   max-width: 50%;
   margin: 0 auto;
-  background-color: rgb(155, 210, 255);
+  background-color: rgb(255, 255, 255);
   padding-left: 2%;
   border-radius: 2%;
 }

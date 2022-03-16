@@ -199,7 +199,7 @@ function Userpage({
       </div>
 
       <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
-        NEXT RETRIEVAL PERIOD: April 22nd - May 10th
+        Next retrieval/storing period: April 22nd - May 10th
       </h3>
       <div className="flex flex-row justify-center items-start mx-3 my-3 px-3 py-3  ">
         {/* if I remove flex, looks better on boostrap */}
@@ -360,7 +360,7 @@ function Userpage({
               }, 1);
             }}
           >
-            {displayTable ? "CLOSE" : "DISPLAY"} STORED GOODS
+            {displayTable ? "CLOSE" : "DISPLAY"} Stored Items
           </Button>
 
           {displayTable ? (

@@ -4,20 +4,21 @@ export default function LearnMore() {
   return (
     <div className="flex flex-row justify-center ">
       <div className="learn-more-e ">
-        <h4 className="text-center my-3">Who is good for awaReHouse?</h4>
+        <h4 className="text-center my-3">Why using awaReHouse?</h4>
         <img
           className="flex align-end h-auto"
           src={require("../pictures/Tiny-house.jpeg")}
           alt=""
         />
         <p className="break-words mx-3 my-3 px-3 py-3">
-          awaReHouse is good for someone who is looking for extra space in
-          cheapest price in the market
+          <p>To store low-frequency usage items at low cost</p>
+          
+          <p>With awaReHouse, you do not have to choose between getting rid of items and enjoying a comfortable living space anymore</p>
         </p>
       </div>
       <div className="learn-more-e ">
         <h4 className="text-center my-3">
-          Why is awaReHouse consider to be good?
+          Looking for passive income?
         </h4>
         <img
           className="flex align-end h-auto"
@@ -25,17 +26,16 @@ export default function LearnMore() {
           alt="relaxing man"
         />
         <p className="break-words mx-3 my-3 px-3 py-3">
-          AwaReHouse is good because it helps you have more space. Remember More
-          Space, More Life
+        <p>Generate revenue by simply turning rooms into storage</p>
+          <p>With awaReHouse, you can create monthly revenues without effort, by simply offering available rooms you have in your property for storage</p>
         </p>
       </div>
       <div className="learn-more-e">
-        <h4 className="text-center my-3">Why is awaReHouse so cheap?</h4>
+        <h4 className="text-center my-3">Why so cheap?</h4>
         <img src={require("../pictures/reasonable-price.jpeg")} alt="" />
         <p className="break-words mx-3 my-3 px-3 py-3">
-          Japan is the extremely packed country except urban area. We store
-          items in sub-urban area. Therefore, it is cheaper than renting
-          container in Tokyo.
+        <p>Storage solutions in Japan are costly</p>
+        <p>By focusing on seasonal items, awaReHouse is able to offer the cheapest rate on the market, while your stored items remain fully available </p>
         </p>
       </div>
     </div>
