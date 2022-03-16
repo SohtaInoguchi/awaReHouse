@@ -40,14 +40,13 @@ export default function Homepage({
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
-          <div className="homepageContainer flex justify-center items-center flex-wrap ">
+          {/* <div className="homepageContainer flex justify-center items-center flex-wrap ">
             <img
-              className="top-0 w-20 h-20 rounded-3xl"
+              className="top-0 w-36 h-36 rounded-3xl"
+              //  w-20 h-20
               src={require("../pictures/LOGO.png")}
               alt=""
             />
-
-            <h1 className="welcomeMessage flex flex-wrap">awaReHouse</h1>
 
             <div className="flex flex-row flex-wrap ">
               <div className="flex ">
@@ -100,8 +99,7 @@ export default function Homepage({
                 </button>
               </div>
             </div>
-            <div className="containerHomeRight"></div>
-          </div>
+          </div> */}
           <div className="flex flex-row justify-center  text-white rounded-xl text-center w-full  flex-wrap  ">
             <img
               className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl opacity-80"
@@ -112,7 +110,9 @@ export default function Homepage({
             <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
-                awaReHouse is a service connecting private storage providers to storage seekers in Japan and is specifically designed for seasonal items
+                awaReHouse is a service connecting private storage providers to
+                storage seekers in Japan and is specifically designed for
+                seasonal items
               </p>
               <p
                 className="rounded-3xl text-blue-600 bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400 hover:text-blue-700 cursor-pointer"
@@ -131,6 +131,15 @@ export default function Homepage({
             </h3>
           </div>
           <LearnMore />
+          <div className="flex justify-center items-center bg-gray-600 w-full h-72">
+            <h6>privacy&policy|</h6>
+            <h6
+              className="w-12 cursor-pointer"
+              onClick={() => navigate("admin")}
+            >
+              Admin
+            </h6>
+          </div>
         </div>
       )}
     </div>
