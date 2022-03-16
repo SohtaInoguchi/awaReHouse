@@ -360,7 +360,7 @@ function Userpage({
               }, 1);
             }}
           >
-            {displayTable ? "CLOSE" : "DISPLAY"} Stored Items
+            {displayTable ? "" : "Display"} Stored Items
           </Button>
 
           {displayTable ? (
