@@ -66,6 +66,71 @@ exports.seed = function(knex) {
             fragile:true,
             heavy:false,
             pending:false
+          },
+          {
+            declared_content_one:"Summer tent",
+            declared_content_two:"Summer bench",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:19.40,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"cakelover012&3@softbank.co.jp",
+            fragile:false,
+            heavy:true,
+            pending:false
+          },
+          {
+            declared_content_one:"Ski set - parents",
+            declared_content_two:"Ski set - children",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:20.13,
+            declared_as_fragile:false,
+            expected_retrieval_season:"autumn",
+            user_owner:"cakelover012&3@softbank.co.jp",
+            fragile:false,
+            heavy:true,
+            pending:false
+          },
+          {
+            declared_content_one:"Set of glasses",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.04,
+            declared_as_fragile:true,
+            expected_retrieval_season:"spring",
+            user_owner:"cakelover012&3@softbank.co.jp",
+            fragile:true,
+            heavy:true,
+            pending:false
+          },
+          {
+            declared_content_one:"Video tapes",
+            declared_content_two:"CDs",
+            declared_content_three:"Radio tapes",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:4.34,
+            declared_as_fragile:false,
+            expected_retrieval_season:"summer",
+            user_owner:"cakelover012&3@softbank.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false
+          },
+          {
+            declared_content_one:"Summer clothes kids",
+            declared_content_two:"Pool toys kids",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:4.18,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"cakelover012&3@softbank.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false
           }
       ]);
     });
