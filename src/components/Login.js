@@ -7,7 +7,6 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   function sendLoginRequest() {
     axios
       .post("/login", {
-        first_name: document.getElementById("first_name").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
         mode,
@@ -53,7 +52,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
               required
             ></Form.Control>
           </Form.Group>
-          <Form.Group>
+          {/* <Form.Group>
             <Form.Control
               className="my-3"
               id="first_name"
@@ -61,7 +60,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
               placeholder="First Name"
               required
             ></Form.Control>
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group>
             <Form.Control
               className="my-3"
