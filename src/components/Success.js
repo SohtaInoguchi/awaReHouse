@@ -7,7 +7,7 @@ export default function Success({ sessionId, message }) {
       <section>
         <div className="product Box-root">
           <div className="description Box-root">
-            <h3>Thanks for using awaReHouse</h3>
+            <h3>Thank you for using awaReHouse</h3>
             <br />
             <h3>{message}</h3>
           </div>

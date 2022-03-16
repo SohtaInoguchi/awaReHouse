@@ -43,7 +43,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
             sendLoginRequest();
           }}
         >
-          Login as a {mode === "user" ? "User" : "Provider"}
+          {mode === "user" ? "User" : "Provider"} Login
           <Form.Group>
             <Form.Control
               className="my-3"
@@ -90,7 +90,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           </div>
         ) : (
           <div className="text-center pt-2">
-            Want to become a provider?
+            Want to become a storage provider?
             <p
               className="signup cursor-pointer hover:text-blue-600"
               onClick={() => navigate("/signup/provider")}

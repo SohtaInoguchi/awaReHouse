@@ -82,7 +82,7 @@ export default function NewUser({ setMode }) {
     return (
       <div className="containerNewRegistration">
         <div className="newUser text-gray-600">
-          SIGNUP AS A STORAGE USER
+          Register as a storage user
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Control
@@ -145,6 +145,7 @@ export default function NewUser({ setMode }) {
             </Form.Group>
 
             <Form.Group>
+              <p>Please attach a copy of a valid identification document</p>
               <Form.Control
                 type="file"
                 name="file"
