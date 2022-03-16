@@ -11,6 +11,26 @@
     @apply bg-gray-50 text-cyan-600 text-xl ml-11;
   }
 
+  #provider-stop-button {
+    @apply bg-sky-700 hover:bg-sky-900 text-cyan-50  text-xl ml-11;
+  }
+
+  #user-items {
+    @apply bg-gray-50 text-cyan-600 text-xl ml-6 cursor-pointer;
+  }
+
+  .user-items {
+    @apply text-cyan-600 hover:text-cyan-900 text-xl ml-10;
+  }
+
+  #date-set {
+    @apply bg-white text-teal-600;
+  }
+
+  #retrieve {
+    @apply bg-white text-teal-600;
+  }
+
   .login-button {
     @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
   }
@@ -24,9 +44,37 @@
   .boxes-before {
     @apply transition-all duration-700 opacity-0;
   }
+
+  .heart-before {
+    @apply animate-bounce;
+  }
+
+  .extra {
+    @apply flex flex-col text-center bg-gray-200 text-blue-600 mx-3  my-3  py-3 rounded-3xl shadow-lg transition-all hover:scale-105 duration-700;
+  }
 }
 
 .chart {
   max-width: 50%;
   margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  padding-left: 2%;
+  border-radius: 2%;
+}
+
+.noHistory {
+  text-align: center;
+}
+
+.formMoreStorage {
+  max-width: 50%;
+  margin: 0 auto;
+  background-color: rgb(155, 210, 255);
+  padding-left: 2%;
+  border-radius: 2%;
+  font-size: 15px;
+}
+
+.isAvailable {
+  margin-left: 2%;
 }

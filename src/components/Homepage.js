@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { BoxFlow } from "./BoxFlow";
 import Response from "./Response";
 import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
 
@@ -14,25 +15,28 @@ export default function Homepage({
   setMessage,
 }) {
   const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState("");
 
   // Check to see if this is a redirect back from Checkout
   const query = new URLSearchParams(window.location.search);
   useEffect(() => {
     if (query.get("success")) {
       setMessage("Order placed! You will receive an email confirmation.");
+      setIsSuccess(true);
     }
 
     if (query.get("canceled")) {
       setMessage(
         "Order canceled -- continue to shop around and checkout when you're ready."
       );
+      setIsSuccess(false);
     }
   }, [query]);
 
   return (
     <div>
       {message ? (
-        <Response message={message} />
+        <Response message={message} isSuccess={isSuccess} />
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
@@ -108,9 +112,7 @@ export default function Homepage({
             <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
-                awaReHouse is the something makes your life better. So let's
-                imagine you can make money without working. That sounds splendid
-                doesn't it?
+                awaReHouse is a service connecting private storage providers to storage seekers in Japan and is specifically designed for seasonal items
               </p>
               <p
                 className="rounded-3xl text-blue-600 bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400 hover:text-blue-700 cursor-pointer"

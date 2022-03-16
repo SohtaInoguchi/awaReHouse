@@ -12,6 +12,7 @@ import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
+import BoxFlow from "./BoxFlow";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -38,11 +39,16 @@ function App() {
   const [email, setEmail] = useState("");
   // email for provider
   const [email2, setEmail2] = useState("");
-
+  const [address, setAddress] = useState("");
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
   }, []);
+
+  // Delete later
+  useEffect(() => {
+    console.log("items in App", items);
+  }, [items])
 
   return (
     <Router>
@@ -74,6 +80,7 @@ function App() {
               items={items}
               email={email}
               setItems={setItems}
+              setAddress={setAddress}
             />
           }
         />
@@ -119,51 +126,12 @@ function App() {
 
         <Route
           path="extra-charge"
-          element={<ExtraCharge user={user} items={items} />}
+          element={<ExtraCharge user={user} items={items} email={email} setItems={setItems}/>}
         />
         <Route path="learn" element={<LearnMore />} />
+        <Route path="extra-storage" element={<BoxFlow addy={address} />} />
       </Routes>
     </Router>
-    // <div>
-    //   {mode === "homePage" ? (
-    //     <Homepage setMode={setMode} />
-    //   ) : mode === "userLogin" && isLogin ? (
-    //     <Userpage
-    //       user={user}
-    //       message={message}
-    //       success={success}
-    //       chatMessages={chatMessages}
-    //       setChatMessages={setChatMessages}
-    //       setMode={setMode}
-    //       mode={mode}
-    //       items={items}
-    //       email={email}
-    //       setItems={setItems}
-    //     />
-    //   ) : mode === "userLogin" && !isLogin ? (
-    //     <Login
-    //       setIsLogin={setIsLogin}
-    //       setUser={setUser}
-    //       setEmail={setEmail}
-    //       mode="user"
-    //     />
-    //   ) : mode === "providerLogin" && isLogin2 ? (
-    //     <Providerpage user={user} />
-    //   ) : mode === "providerLogin" && !isLogin2 ? (
-    //     <Login
-    //       setIsLogin={setIsLogin2}
-    //       setUser={setUser}
-    //       setEmail={setEmail2}
-    //       mode="provider"
-    //     />
-    //   ) : mode === "registration" ? (
-    //     <NewCustomer setMode={setMode} />
-    //   ) : mode === "extraCharge" ? (
-    //     <ExtraCharge user={user} items={items} />
-    //   ) : (
-    //     <Admin chatMessages={chatMessages} setChatMessages={setChatMessages} />
-    //   )}
-    // </div>
   );
 }
 
