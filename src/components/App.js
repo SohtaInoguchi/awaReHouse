@@ -1,19 +1,23 @@
 import "../style.css";
 import "../input.css";
-import { io } from "socket.io-client";
+
 import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
 import NewUser from "./NewUser";
 import NewProvider from "./NewProvider";
-import Subscription from "./Subscription";
+
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
 import ExtraCharge from "./ExtraCharge";
 import BoxFlow from "./BoxFlow";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
+
+import Icon from "./Icon";
 
 import {
   BrowserRouter as Router,
@@ -40,6 +44,7 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
@@ -51,10 +56,57 @@ function App() {
   }, [items]);
 
   return (
-    <Router>
-      <button className="px-3 py-3" onClick={() => setMessage("")}>
-        <Link to="/">Home</Link>
-      </button>
+    <div>
+      <div className="header flex flex-row flex-wrap justify-between  border-8 border-emerald-300">
+        <img
+          className="top-0 w-36 h-36 rounded-3xl cursor-pointer mx-3"
+          src={require("../pictures/LOGO.png")}
+          alt=""
+          onClick={() => navigate("/")}
+        />
+        <div className="flex flex-row flex-wrap justify-center items-center border-8 border-emerald-300">
+          <div className="flex ">
+            <div className="flex justify-center items-center">
+              <button
+                className="login-button"
+                onClick={() => {
+                  console.log(window.localStorage.getItem("firstName_user"));
+                  if (window.localStorage.getItem("firstName_user")) {
+                    window.localStorage.removeItem("firstName_provider");
+                    window.localStorage.removeItem("email_provider");
+                    window.localStorage.removeItem("token_provider");
+                    navigate("/user");
+                  } else navigate("/login/user");
+                }}
+              >
+                <Icon icon={<FaUser size="24" />} />
+                User
+              </button>
+            </div>
+
+            <div className="">
+              <button
+                className="login-button"
+                onClick={() => {
+                  console.log(
+                    window.localStorage.getItem("firstName_provider")
+                  );
+                  if (window.localStorage.getItem("firstName_provider")) {
+                    window.localStorage.removeItem("firstName_user");
+                    window.localStorage.removeItem("email_user");
+                    window.localStorage.removeItem("token_user");
+                    navigate("/provider");
+                  } else navigate("/login/provider");
+                }}
+              >
+                <Icon icon={<FaUserTie size="24" />} />
+                Provider
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Routes>
         <Route
           path="/"
@@ -138,7 +190,7 @@ function App() {
         <Route path="learn" element={<LearnMore />} />
         <Route path="extra-storage" element={<BoxFlow addy={address} />} />
       </Routes>
-    </Router>
+    </div>
   );
 }
 
