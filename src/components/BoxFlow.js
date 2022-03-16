@@ -173,7 +173,7 @@ export const BoxFlow = ({  user,
         {addItemFlow === true ? (
         <div className="containerNewItem">
           <div className="newUser">
-            PLEASE SELECT A SUITABLE BOX FOR YOUR GOODS
+            PLEASE SELECT A SUITABLE BOX FOR YOUR ITEMS
             <br></br>
             <br></br>
             <img
@@ -219,6 +219,7 @@ export const BoxFlow = ({  user,
             <br></br>
             <br></br>
             <input type="submit" value="Submit" onClick={submit1} />
+            <br></br>
             <button style={{ cursor: "pointer" }} onClick={cancel}>
               Go back
             </button>
@@ -231,12 +232,12 @@ export const BoxFlow = ({  user,
         <div>
           <form>
             <br></br>
-            You selected a type {typeBoxFlow} box. Please provde a brief description
-            of the goods you want to store (e.g. Snowboard, summer clothes,
+            You selected a type {typeBoxFlow} box. Please provide a brief description
+            of the items you want to store (e.g. Snowboard, summer clothes,
             barbecue set...)
             <br></br>
             <label>
-              Goods description (required):
+              Items description (required):
               <input
                 type="text"
                 className='text-black'
@@ -246,7 +247,7 @@ export const BoxFlow = ({  user,
                 onChange={createDescription1}
               />
               <br></br>
-              Goods description (optional):
+              Items description (optional):
               <input
                 type="text"
                 className='text-black'
@@ -256,7 +257,7 @@ export const BoxFlow = ({  user,
                 onChange={createDescription2}
               />
               <br></br>
-              Goods description (optional):
+              Items description (optional):
               <input
                 type="text"
                 className='text-black'
@@ -267,7 +268,7 @@ export const BoxFlow = ({  user,
               />
               <br></br>
               <p style={{ display: "inline" }}>
-                Check if box weighs more than 15 kg
+                Check if the box weighs more than 15 kg
               </p>
               <input
                 type="checkbox"
@@ -276,7 +277,7 @@ export const BoxFlow = ({  user,
               />
               <br></br>
               <p style={{ display: "inline" }}>
-                Check if goods to be stored are fragile
+                Check if the stored items are fragile
               </p>
               <input
                 type="checkbox"
@@ -285,7 +286,7 @@ export const BoxFlow = ({  user,
               />
               <br></br>
             </label>
-            <p>The boxes will be sent to your registered address: {addy}</p>
+            <p>The box will be sent to your registered address: {addy}</p>
             <br></br>
             <input
               type="submit"
@@ -312,9 +313,8 @@ export const BoxFlow = ({  user,
       ) : (
         <div></div>
       )}
-
-
       {success === true ? <Success message={message} /> : <Subscription />}
     </div>
+    
   )
 }

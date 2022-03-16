@@ -228,7 +228,7 @@ function Userpage({
               <Accordion>
                 <Accordion.Item className="">
                   <Accordion.Header>
-                    Please select the size of the box
+                    Please select a suitable box for your items
                   </Accordion.Header>
                   <Accordion.Body>
                     <div className="flex justify-center items-center">
@@ -318,14 +318,14 @@ function Userpage({
               id="confirmation-form"
               className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
             >
-              You selected a type {typeBox} box. Please provide a brief
+              You selected a type {typeBox} box. <br></br>Please provide a brief
               description of the items you want to store (e.g. Snowboard, summer
               clothes, barbecue set...)
               <Form.Group className="w-96">
                 <Form.Control
                   type="text"
                   name="description1"
-                  placeholder="Goods description (required)"
+                  placeholder="Items description (required)"
                   required
                   value={description1}
                   onChange={createDescription1}
@@ -335,7 +335,7 @@ function Userpage({
                 <Form.Control
                   type="text"
                   name="description2"
-                  placeholder="Goods description (optional)"
+                  placeholder="Items description (optional)"
                   value={description2}
                   onChange={createDescription2}
                 />
@@ -344,7 +344,7 @@ function Userpage({
                 <Form.Control
                   type="text"
                   name="description3"
-                  placeholder="Goods description (optional)"
+                  placeholder="Items description (optional)"
                   value={description3}
                   onChange={createDescription3}
                 />
