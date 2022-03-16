@@ -1,12 +1,12 @@
 body {
   background-image: linear-gradient(
     to right,
-    rgb(175, 228, 252),
-    rgb(112, 186, 221),
-    rgb(45, 124, 160),
+    rgb(11, 81, 114),
+    rgb(11, 81, 114),
+    rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .welcomeMessage {
