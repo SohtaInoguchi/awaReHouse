@@ -14,14 +14,18 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [selectedItems, setSelectedItem] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [localItems, setLocalItems] = useState([]);
-
+  const listRef = React.createRef();
+  const [removedKey, setRemovedKey] = useState();
+  const [index, setIndex] = useState();
 
   const retrieveItem = (e) => {
     const temp = [...selectedItems];
     const tempForLocal = [...localItems];
-    tempForLocal.forEach(item => {
+    tempForLocal.forEach((item, idx) => {
       for (let key in item) {
         if (item[key] === e.target.textContent) {
+          setRemovedKey(key);
+          setIndex(idx);
           item[key] = "No Items added";
           return null;
         }
@@ -53,17 +57,20 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       return newDate;
     }
 
-    const check = (e) => {
-      e.preventDefault();
-      console.log("items", items);
-      console.log("user", user);
-      console.log("email", email);
-    }
-
     const updateItemList = () => {
       // axios.post("/allItems", { email }).then((res) => setItems(res.data));
       axios.post("/allItems", { email: localStorage.email_user }).then((res) => setItems(res.data));
     };
+
+    const removeItem = (e) => {
+      const temp = [...selectedItems];
+      const index = temp.indexOf(listRef.current.textContent);
+      temp.splice(index, 1);
+      setSelectedItem(temp);
+      const tempTwo = [...localItems];
+      tempTwo[index][removedKey] = listRef.current.textContent;
+      setLocalItems(tempTwo);
+    }
   
     useEffect(() => {
       updateItemList();
@@ -78,7 +85,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       {/* <h1>{user}</h1> */}
       <p className='text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2'>{localStorage.firstName_user}</p>
         <h1 className='my-6 text-cyan-800 italic bg-white'>Which items to retrive?</h1>
-
+        <button onClick={() => console.log(index, removedKey, localItems, selectedItems)}>Check</button>
         {localItems.map((item) => {
           return (
             <Badge bg='light' id='user-items'>
@@ -107,8 +114,8 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         items-center m-10 text-sky-900 font-bold'>Selected item:
         {selectedItems.map((item, idx) => {
           return (
-              <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
-                <li className='selected-items' key={idx}>{item}</li>
+              <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4 flex">
+                <li className='selected-items' key={idx} ref={listRef}>{item}</li><span className='ml-1 cursor-pointer' onClick={(e) => removeItem(e)}>&#215;</span>
               </section>
             )
         })}
