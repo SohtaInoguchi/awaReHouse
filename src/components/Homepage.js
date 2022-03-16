@@ -19,6 +19,11 @@ export default function Homepage({
 
   // Check to see if this is a redirect back from Checkout
   const query = new URLSearchParams(window.location.search);
+
+  useEffect(() => {
+    window.scrollTo(0, 200);
+  }, []);
+
   useEffect(() => {
     if (query.get("success")) {
       setMessage("Order placed! You will receive an email confirmation.");
@@ -40,74 +45,13 @@ export default function Homepage({
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
-          {/* <div className="homepageContainer flex justify-center items-center flex-wrap ">
+          <div className="flex flex-row justify-center bg-white  text-blue-500 rounded-3xl text-center w-auto opacity-90 mt-12 flex-wrap">
             <img
-              className="top-0 w-36 h-36 rounded-3xl"
-              //  w-20 h-20
-              src={require("../pictures/LOGO.png")}
-              alt=""
-            />
-
-            <div className="flex flex-row flex-wrap ">
-              <div className="flex ">
-                <div className="flex justify-center items-center">
-                  <button
-                    className="login-button"
-                    onClick={() => {
-                      console.log(
-                        window.localStorage.getItem("firstName_user")
-                      );
-                      if (window.localStorage.getItem("firstName_user")) {
-                        window.localStorage.removeItem("firstName_provider");
-                        window.localStorage.removeItem("email_provider");
-                        window.localStorage.removeItem("token_provider");
-                        navigate("/user");
-                      } else navigate("/login/user");
-                    }}
-                  >
-                    <Icon icon={<FaUser size="24" />} />
-                    User
-                  </button>
-                </div>
-
-                <div className="">
-                  <button
-                    className="login-button"
-                    onClick={() => {
-                      console.log(
-                        window.localStorage.getItem("firstName_provider")
-                      );
-                      if (window.localStorage.getItem("firstName_provider")) {
-                        window.localStorage.removeItem("firstName_user");
-                        window.localStorage.removeItem("email_user");
-                        window.localStorage.removeItem("token_user");
-                        navigate("/provider");
-                      } else navigate("/login/provider");
-                    }}
-                  >
-                    <Icon icon={<FaUserTie size="24" />} />
-                    Provider
-                  </button>
-                </div>
-
-                <button
-                  className="login-button"
-                  onClick={() => navigate("admin")}
-                >
-                  <Icon icon={<FaUserShield size="24" />} />
-                  Admin
-                </button>
-              </div>
-            </div>
-          </div> */}
-          <div className="flex flex-row justify-center  text-white rounded-xl text-center w-full  flex-wrap  ">
-            <img
-              className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl opacity-80"
-              // src={require("../pictures/homepage-img.jpeg")}
+              className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl opacity-80 "
               src={require("../pictures/clean-house.jpeg")}
               alt=""
             />
-            <div className="flex flex-col justify-center items-center w-60 bg-gray-100 text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
+            <div className="flex flex-col justify-center items-center w-60  text-blue-500 text-center  rounded-tr-3xl rounded-br-3xl border-2 ">
               <h2>What is awaReHouse?</h2>
               <p className="break-words">
                 awaReHouse is a service connecting private storage providers to
@@ -115,7 +59,7 @@ export default function Homepage({
                 seasonal items
               </p>
               <p
-                className="rounded-3xl text-blue-600 bg-slate-300 px-2 py-2 mx-2 my-2 hover:bg-slate-400 hover:text-blue-700 cursor-pointer"
+                className="rounded-3xl text-blue-600 bg-slate-200 px-8 py-8 mx-8 my-8 hover:bg-slate-300 hover:text-blue-700 cursor-pointer"
                 onClick={() => navigate("/learn")}
               >
                 Learn more

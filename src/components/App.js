@@ -57,18 +57,21 @@ function App() {
 
   return (
     <div>
-      <div className="header flex flex-row flex-wrap justify-between  border-8 border-emerald-300">
+      <div className="header flex flex-row flex-wrap justify-between  ">
         <img
           className="top-0 w-36 h-36 rounded-3xl cursor-pointer mx-3"
           src={require("../pictures/LOGO.png")}
           alt=""
-          onClick={() => navigate("/")}
+          onClick={() => {
+            window.scrollTo(0, 200);
+            navigate("/");
+          }}
         />
-        <div className="flex flex-row flex-wrap justify-center items-center border-8 border-emerald-300">
+        <div className="flex flex-row flex-wrap justify-center items-center">
           <div className="flex ">
             <div className="flex justify-center items-center">
               <button
-                className="login-button"
+                className="login-button mx-8 my-8 px-8 py-8 text-xl"
                 onClick={() => {
                   console.log(window.localStorage.getItem("firstName_user"));
                   if (window.localStorage.getItem("firstName_user")) {
@@ -86,7 +89,7 @@ function App() {
 
             <div className="">
               <button
-                className="login-button"
+                className="login-button  mx-8 my-8 px-8 py-8 text-xl"
                 onClick={() => {
                   console.log(
                     window.localStorage.getItem("firstName_provider")
