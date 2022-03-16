@@ -198,7 +198,7 @@ export default function NerCustomer({ setMode }) {
             </Form.Group>
 
             <Form.Group>
-              <p className="bg-white rounded-sm mx-2 my-2 py-2 px-2">
+              <p className="bg-green-600 text-white rounded-md mx-2 my-2 py-2 px-2">
                 Please attach a copy of a valid identification document
               </p>
               <Form.Control

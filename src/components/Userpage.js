@@ -280,14 +280,14 @@ function Userpage({
             id="confirmation-form"
             className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 mx-3 my-3 "
           >
-            You selected a type {typeBox} box. Please provde a brief description
-            of the goods you want to store (e.g. Snowboard, summer clothes,
-            barbecue set...)
+            You selected a type {typeBox} box. <br />
+            Please provide a brief description of the items you want to store
+            (e.g. Snowboard, summer clothes, barbecue set...)
             <Form.Group className="w-96">
               <Form.Control
                 type="text"
                 name="description1"
-                placeholder="Goods description (required)"
+                placeholder="Item description (required)"
                 required
                 value={description1}
                 onChange={createDescription1}
@@ -297,7 +297,7 @@ function Userpage({
               <Form.Control
                 type="text"
                 name="description2"
-                placeholder="Goods description (optional)"
+                placeholder="Item description (optional)"
                 value={description2}
                 onChange={createDescription2}
               />
@@ -306,7 +306,7 @@ function Userpage({
               <Form.Control
                 type="text"
                 name="description3"
-                placeholder="Goods description (optional)"
+                placeholder="Item description (optional)"
                 value={description3}
                 onChange={createDescription3}
               />
@@ -512,31 +512,32 @@ function Userpage({
 
       <div className="flex flex-row justify-center items-center ">
         <div className=" extra ">
-          <h4 className="px-3">What is Extra Retrieval?</h4>
+          <h4 className="px-3">Need Extra Retrieval?</h4>
           <img
             className="max-w-96 max-h-96 "
             src={require("../pictures/extra-retrieve.jpeg")}
             alt=""
           />
           <h5 className="text-center mt-3 pt-3">
-            It is fetching the item you want on outside of season
+            Through extra retrieval, <br /> items can be removed from storage
+            anytime
           </h5>
           <Button
             className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-charge")}
           >
-            Go To Extra Retrieval
+            Order Extra Retrieval
           </Button>
         </div>
         <div className="extra ">
-          <h4 className="px-3"> What is Extra Storage?</h4>
+          <h4 className="px-3"> Need Extra Storage?</h4>
           <img
             className="max-w-96 max-h-96 "
             src={require("../pictures/extra-storage.jpeg")}
             alt=""
           />
           <h5 className="text-center mt-3 pt-3">
-            It is sending the item you want on outside of season
+            Through extra storage, <br /> items can be sent to storage anytime
           </h5>
           <Button
             className="mx-3 my-7 py-7 "

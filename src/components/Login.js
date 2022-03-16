@@ -37,7 +37,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
     <div className="flex justify-center items-center">
       <div className="homeUser flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
         <Form
-          className="text-center border-2 border-emerald-300"
+          className="text-center "
           onSubmit={(e) => {
             e.preventDefault();
             sendLoginRequest();
