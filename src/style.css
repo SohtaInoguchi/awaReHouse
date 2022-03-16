@@ -489,8 +489,8 @@ margin-top: 5%;
 
     ::-webkit-input-placeholder { /* Chrome */
       color: rgb(60, 29, 199); 
-text-align:center;
-width: 100px;
+      text-align:center;
+      width: 100px;
     height: 40px;
     padding: 10px;
     align-items: center;
