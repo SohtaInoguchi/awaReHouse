@@ -11,8 +11,11 @@ import { BoxFlow } from "./BoxFlow";
 import { Accordion, Button, Form } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
 import { GiShatteredGlass } from "react-icons/gi";
+import BoxSelection from "./BoxSelection";
+import ItemDescription from "./ItemDescription";
 
 import Icon from "./Icon";
+import StoredItems from "./StoredItems";
 function Userpage({
   user,
   message,
@@ -201,351 +204,71 @@ function Userpage({
       <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
-      <div className="flex flex-row justify-center items-start mx-3 my-3 px-3 py-3  ">
-        {/* if I remove flex, looks better on boostrap */}
-        {/* <div className="flex flex-row justify-start items-start mx-5 px-5  "> */}
-        <div className="flex flex-row  ">
-          {/* /// radio button /// */}
 
-          <div className=" rounded-3xl  w-96 ">
-            <Accordion>
-              <Accordion.Item className="">
-                <Accordion.Header>
-                  PLEASE SELECT THE SIZE OF BOX
-                </Accordion.Header>
-                <Accordion.Body>
-                  <div className="flex justify-center items-center">
-                    <img
-                      className=""
-                      src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                      style={{ height: 200 }}
-                    />
-                  </div>
-                  <div
-                    className="btn-group btn-group-toggle"
-                    data-toggle="buttons"
-                  >
-                    <label className="btn btn-secondary active">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option1"
-                        value="A (27cm x 38cm x 29cm : Max weight = 7.5 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type A
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option2"
-                        value="B (32cm x 46cm x 29cm : Max weight = 10.5 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type B
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option3"
-                        value="C (40cm x 60cm x 40cm : Max weight = 24 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type C
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option4"
-                        value="D (175cm x 30cm x 15cm : Max weight = 20 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type D
-                    </label>
-                  </div>
-                  <div className="flex justify-center items-center"></div>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </div>
-        </div>
+      {/* <div className="mx-3 my-3 px-3 py-3"> */}
+      <section id="box-select">
+        <div id="box-selection-wrapper">
+          <BoxSelection handleChange={handleChange}/>
+          <ItemDescription 
+          createDescription1={createDescription1}
+          createDescription2={createDescription2}
+          createDescription3={createDescription3}
+          toggleIsHeavy={toggleIsHeavy}
+          toggleIsFragile={toggleIsFragile}
+          submit2={submit2}
+          typeBox={typeBox}
+          description1={description1}
+          description2={description2}
+          description3={description3}
+          address={address} />
+        </div>    
 
-        <div className="flex justify-center w-3/6 items-center ">
-          <Form
-            action="/create-checkout-session"
-            method="POST"
-            id="confirmation-form"
-            className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 mx-3 my-3 "
-          >
-            You selected a type {typeBox} box. <br />
-            Please provide a brief description of the items you want to store
-            (e.g. Snowboard, summer clothes, barbecue set...)
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description1"
-                placeholder="Item description (required)"
-                required
-                value={description1}
-                onChange={createDescription1}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description2"
-                placeholder="Item description (optional)"
-                value={description2}
-                onChange={createDescription2}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description3"
-                placeholder="Item description (optional)"
-                value={description3}
-                onChange={createDescription3}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Check
-                type="checkbox"
-                label="Heavy"
-                onChange={toggleIsHeavy}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Check
-                type="checkbox"
-                label="Fragile"
-                onChange={toggleIsFragile}
-              />
-            </Form.Group>
-            <p>Sending address: {address}</p>
-            <Button onClick={submit2}>Update</Button>
-            <Button
-              id="submit-button"
-              className="mx-2"
-              name="name"
-              value="Storage fee"
-              type="submit"
-              disabled="true"
-            >
-              Checkout
-            </Button>
-          </Form>
-        </div>
-
-        <div className="flex flex-col  w-96 ">
-          <Button
-            className="max-w-lg"
-            onClick={() => {
-              updateItemList();
-              setDisplayTable(!displayTable);
-              setAddItem(false);
-              setBoxOrderReceived(false);
-
-              setTimeout(() => {
-                const boxes = document.getElementById("boxes");
-
-                console.log(document.getElementById("boxes"));
-                if (boxes && boxes.classList.contains("boxes-before")) {
-                  boxes.classList.remove("boxes-before");
-                  boxes.classList.add("boxes-after");
-                }
-              }, 1);
-            }}
-          >
-            {displayTable ? "" : "Display"} Stored Items
-          </Button>
-
-          {displayTable ? (
-            <div
-              id="boxes"
-              className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg"
-            >
-              Stored Items:
-              {items.map((item, index) => {
-                return (
-                  <div className=" text-blue-600 w-full " key={index}>
-                    <div
-                      className="flex justify-center items-center  "
-                      key={`${index}a`}
-                    >
-                      {item.pending ? (
-                        <div
-                          id="item"
-                          className=" flex flex-row justify-center items-center rounded-lg  my-2 "
-                        >
-                          <div className="flex min-h-100 max-h-100  bg-green-300 shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-
-                          {item.declared_content_two !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 bg-green-300  shadow-lg rounded-lg py-2  "
-                              key={`${index}b`}
-                            >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {item.declared_content_three !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 bg-green-300 shadow-lg rounded-lg py-2 ml-2"
-                              key={`${index}c`}
-                            >
-                              No.{item.box_id}:{item.declared_content_three}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ) : (
-                        <div
-                          id="item"
-                          className=" flex flex-row justify-center items-center rounded-lg  my-2 "
-                        >
-                          <div className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-
-                          {item.declared_content_two !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2  "
-                              key={`${index}b`}
-                            >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {item.declared_content_three !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 ml-2"
-                              key={`${index}c`}
-                            >
-                              No.{item.box_id}:{item.declared_content_three}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
+        <StoredItems 
+        updateItemList={updateItemList}
+        setDisplayTable={setDisplayTable}
+        setAddItem={setAddItem}
+        setBoxOrderReceived={setBoxOrderReceived}
+        items={items}
+        displayTable={displayTable}
+        />
+      </section>
 
       <div className="flex flex-row justify-center items-center ">
-        <div className=" extra ">
-          <h4 className="px-3">Need Extra Retrieval?</h4>
-          <img
+        {/* <div className=" extra "> */}
+          {/* <h4 className="px-3">Need Extra Retrieval?</h4> */}
+          {/* <img
             className="max-w-96 max-h-96 "
             src={require("../pictures/extra-retrieve.jpeg")}
             alt=""
-          />
-          <h5 className="text-center mt-3 pt-3">
+          /> */}
+          {/* <h5 className="text-center mt-3 pt-3">
             Through extra retrieval, <br /> items can be removed from storage
             anytime
-          </h5>
+          </h5> */}
           <Button
             className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-charge")}
           >
-            Order Extra Retrieval
+            Need to retrieve?
           </Button>
-        </div>
-        <div className="extra ">
-          <h4 className="px-3"> Need Extra Storage?</h4>
-          <img
+        {/* </div> */}
+        {/* <div className="extra "> */}
+          {/* <h4 className="px-3"> Need Extra Storage?</h4> */}
+          {/* <img
             className="max-w-96 max-h-96 "
             src={require("../pictures/extra-storage.jpeg")}
             alt=""
-          />
-          <h5 className="text-center mt-3 pt-3">
+          /> */}
+          {/* <h5 className="text-center mt-3 pt-3">
             Through extra storage, <br /> items can be sent to storage anytime
-          </h5>
+          </h5> */}
           <Button
             className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-storage")}
           >
-            Go To Extra Storage
+            Need Extra Storage?
           </Button>
-        </div>
+        {/* </div> */}
       </div>
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
