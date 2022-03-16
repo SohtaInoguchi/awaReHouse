@@ -6,7 +6,7 @@ export default function Subscription() {
       <div className="product">
         <div className="description">
           <h3>Subscription</h3>
-          <h5>JPY 1000 / month</h5>
+          <h5>¥ 1,000 / month</h5>
         </div>
       </div>
 

@@ -19,17 +19,17 @@ export default function RetrieveConfirmation(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Are you sure you'd like to retrieve {selectedItems.map((item, idx) => {
+          <h4>Please confirm you would like to retrieve {selectedItems.map((item, idx) => {
               return idx === selectedItems.length - 2 ? 
               <span key={idx}>{item} and </span> : 
               idx === selectedItems.length - 1 ? 
               <span key={idx}>{item}</span> :
               <span key={idx}>{item}, </span>
-          })}?</h4>
+          })}</h4>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <h2>It will cost you ¥15000</h2>
+        <h2>Additional cost: ¥ 15,000</h2>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => onHide(false)}>Go back</Button>

@@ -198,7 +198,7 @@ function Userpage({
         </Button>
       </div>
       <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
-        NEXT RETRIEVAL PERIOD: April 22nd - May 10th
+        Next retrieval/storing period: April 22nd - May 10th
       </h3>
       <div className="flex flex-row justify-between  ">
         {/* if I remove flex, looks better on boostrap */}
@@ -228,7 +228,7 @@ function Userpage({
               <Accordion>
                 <Accordion.Item className="">
                   <Accordion.Header>
-                    PLEASE SELECT THE SIZE OF BOX
+                    Please select the size of the box
                   </Accordion.Header>
                   <Accordion.Body>
                     <div className="flex justify-center items-center">
@@ -318,8 +318,8 @@ function Userpage({
               id="confirmation-form"
               className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
             >
-              You selected a type {typeBox} box. Please provde a brief
-              description of the goods you want to store (e.g. Snowboard, summer
+              You selected a type {typeBox} box. Please provide a brief
+              description of the items you want to store (e.g. Snowboard, summer
               clothes, barbecue set...)
               <Form.Group className="w-96">
                 <Form.Control
@@ -420,7 +420,7 @@ function Userpage({
               }, 1);
             }}
           >
-            {displayTable ? "CLOSE" : "DISPLAY"} STORED GOODS
+            {displayTable ? "CLOSE" : "DISPLAY"} Stored Items
           </Button>
 
           {displayTable ? (
