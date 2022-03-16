@@ -253,10 +253,16 @@ function Providerpage({ user, email2 }) {
             <h5>Welcome back, <h4 className="providerName">{user}</h4></h5>
         </Badge>
       </aside>
+{/* <<<<<<< HEAD */}
+      {/* <Badge bg="light" id="provider-visitor-date">
+        LIST OF STORED BOXES
+      </Badge> */}
+{/* ======= */}
       <div className="listBoxes"> <Badge bg="light" id="provider-visitor-date">
         LIST OF STORED BOX(ES)
         <h6>Number of box(es) in storage: <h5 className="storedBoxes">{providerItems.length}</h5></h6>
       </Badge></div>
+{/* >>>>>>> 07c05ed3e2b23012e565d3d2d50e8aa0bd502b9a */}
       {providerItems ? renderListOfStorage() : <></>}
       <div>
       <div className="listpayments"> <Badge bg="light" id="provider-visitor-date">

@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
+import { Button, Badge, ListGroup } from 'react-bootstrap';
+import RetrieveConfirmation from './RetrieveConfirmation';
 
 
-export default function ExtraCharge({ user, items }) {
+export default function ExtraCharge({ user, items, email, setItems }) {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState();
   const [selectedDateString, setSelectedDateString] = useState();
   const [isSelected, setIsSelected] = useState(false);
+  const [selectedItems, setSelectedItem] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [localItems, setLocalItems] = useState([]);
+
 
   const retrieveItem = (e) => {
-    console.log(e.target.textContent);
+    const temp = [...selectedItems];
+    const tempForLocal = [...localItems];
+    tempForLocal.forEach(item => {
+      for (let key in item) {
+        if (item[key] === e.target.textContent) {
+          item[key] = "No Items added";
+          return null;
+        }
+      }
+    })
+    if (e.target.textContent !== "No Items added") {
+      temp.push(e.target.textContent);
+    }
+    setSelectedItem(temp);
+    setLocalItems(tempForLocal);
   }
 
   const handleOnclickDate = () => {
@@ -32,48 +53,85 @@ export default function ExtraCharge({ user, items }) {
       return newDate;
     }
 
+    const check = (e) => {
+      e.preventDefault();
+      console.log("items", items);
+      console.log("user", user);
+      console.log("email", email);
+    }
+
+    const updateItemList = () => {
+      // axios.post("/allItems", { email }).then((res) => setItems(res.data));
+      axios.post("/allItems", { email: localStorage.email_user }).then((res) => setItems(res.data));
+    };
+  
+    useEffect(() => {
+      updateItemList();
+    }, [])
+
+    useEffect(() => {
+      setLocalItems(items);
+    }, [items])
 
   return (
-    <>
-      <h1>{user}</h1>
-        <h1>Which items to take / store?</h1>
-        {items.map((item) => {
+    <div>
+      {/* <h1>{user}</h1> */}
+      <p className='text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2'>{localStorage.firstName_user}</p>
+        <h1 className='my-6 text-cyan-800 italic bg-white'>Which items to retrive?</h1>
+
+        {localItems.map((item) => {
           return (
-            <ul key={item.box_id}>
-              <li onClick={(e) => retrieveItem(e)}>{item.declared_content_one}</li>
-              <li onClick={retrieveItem}>
+            <Badge bg='light' id='user-items'>
+            <section key={item.box_id} className="text-left">
+              <li key={`${item.box_id}b`} className='user-items' onClick={retrieveItem}>
+                {item.declared_content_one}
+                </li>
+              <li key={`${item.box_id}c`} className='user-items' onClick={retrieveItem}>
                 {item.declared_content_two
                   ? item.declared_content_two
                   : "No Items added"}
               </li>
-              <li onClick={retrieveItem}>
+              <li key={`${item.box_id}d`} className='user-items' onClick={retrieveItem}>
                 {item.declared_content_three
                   ? item.declared_content_three
                   : "No Items added"}
               </li>
-            </ul>
+            </section>
+          </Badge>
           );
         })}
-        <h2>Select the date of retrieval</h2>
+
+        <section 
+        className='flex 
+        flex-wrap 
+        items-center m-10 text-sky-900 font-bold'>Selected item:
+        {selectedItems.map((item, idx) => {
+          return (
+              <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
+                <li className='selected-items' key={idx}>{item}</li>
+              </section>
+            )
+        })}
+        </section>
+        
+        <h2 className='my-8 text-cyan-800 italic bg-white'>Select the date of retrieval</h2>
         <DatePicker 
+            className='ml-10'
             selected={startDate} 
             onSelect={date => handleDateSelect(date)} 
             minDate={addDays(new Date)} 
             />
-        <button onClick={handleOnclickDate}>Press to set retrieval date</button>
-        {isSelected ? <div>You selected {selectedDateString}</div> : <div>Date not selected</div>}
-
-        <h2>It will cost you</h2>
-      <h2>JPY15000</h2>
-      
-      <form action="/create-checkout-session" method="POST">
-        <input type="hidden" name="name" value="Extra retrieval" />
-        <button id="checkout-and-portal-button" type="submit">
-          Yes
-        </button>
-      </form>
-      <h3>No</h3>
-    </>
+        {isSelected ? <div className='ml-10 italic'>You selected {selectedDateString}</div> : <div className='ml-10 italic'>Date not selected</div>}
+        <Button className='ml-10 my-2' id='date-set' onClick={handleOnclickDate}>Press to set retrieval date</Button>
+        <div></div>
+        <Button className='ml-10 my-8' id='retrieve' onClick={() => setModalShow(true)}>Retrieve</Button>
+        <RetrieveConfirmation
+        show={modalShow}
+        onHide={setModalShow}
+        selectedItems={selectedItems}
+        >
+      </RetrieveConfirmation>
+    </div>
   );
 }
 
