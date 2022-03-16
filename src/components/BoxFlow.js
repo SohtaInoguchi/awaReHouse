@@ -153,7 +153,9 @@ export default function BoxFlow({ email, setItems, addy }) {
       <div className=" rounded-3xl mx-8">
         <Accordion>
           <Accordion.Item className="">
-            <Accordion.Header>PLEASE SELECT THE SIZE OF BOX</Accordion.Header>
+            <Accordion.Header>
+              PLEASE SELECT A SUITABLE BOX FOR YOUR ITEM
+            </Accordion.Header>
             <Accordion.Body>
               <div className="flex justify-center items-center">
                 <img
@@ -237,14 +239,14 @@ export default function BoxFlow({ email, setItems, addy }) {
           id="confirmation-form"
           className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
         >
-          You selected a type {typeBoxFlow} box. Please provde a brief
-          description of the goods you want to store (e.g. Snowboard, summer
-          clothes, barbecue set...)
+          You selected a type {typeBoxFlow} box.
+          <br /> Please provide a brief description of the items you want to
+          store (e.g. Snowboard, summer clothes, barbecue set...)
           <Form.Group className="w-96">
             <Form.Control
               type="text"
               name="description1"
-              placeholder="Goods description (required)"
+              placeholder="Item description (required)"
               required
               value={description1Flow}
               onChange={createDescription1}
@@ -254,7 +256,7 @@ export default function BoxFlow({ email, setItems, addy }) {
             <Form.Control
               type="text"
               name="description2"
-              placeholder="Goods description (optional)"
+              placeholder="Item description (optional)"
               value={description2Flow}
               onChange={createDescription2}
             />
@@ -263,7 +265,7 @@ export default function BoxFlow({ email, setItems, addy }) {
             <Form.Control
               type="text"
               name="description3"
-              placeholder="Goods description (optional)"
+              placeholder="Item description (optional)"
               value={description3Flow}
               onChange={createDescription3}
             />
