@@ -6,7 +6,7 @@ body {
     rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:'Georgia (serif)';
 }
 
 .welcomeMessage {
@@ -270,287 +270,161 @@ body {
 
 /* ---------PROVIDER PAGE */
 
-#badge-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 2%;
-  align-items: center;
+.page{
+  background: rgb(11, 81, 114);
 }
 
-#incomingBoxes {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 2%;
-  margin-right: 2%;
-  align-items: center;
+.topContainer{
+padding:2%;
+border-radius:15px;
+position: relative;
+margin: 20px;
+border-radius:15px;
+box-shadow: 
+  0 0 0 1px rgb(222, 237, 240);
 }
 
-#provider-info {
-  text-align: start;
-  padding-left: 0px;
-  margin-bottom: 0px;
+
+.innerTopContainer{
+display:flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-evenly;
 }
 
-#box-list {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-.box-detail {
-  list-style: none;
-}
-
-.hide {
-  display: none;
-  /* visibility: collapse; */
-  opacity: 0;
-  transition: all 0.6s ease;
-}
-
-.show {
-  display: contents;
-  /* visibility: visible; */
-  opacity: 1;
-  transition: all 0.6s ease;
-}
-
-/* -------EXTRA RETRIEVAL  */
-.selected-items {
-  list-style: none;
-}
-
-.SignOutButton {
-  margin-left: 90%;
-  width: 100px;
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-
-.incomingBoxes {
-  color: rgb(20, 145, 218);
-}
-
-.pendingItems {
-  color: rgb(41, 21, 223);
-}
-
-.incomingDate {
-  color: rgb(41, 21, 223);
-}
-
-.listBoxes {
-  margin-top: 2%;
-  text-align: center;
-}
-
-.listpayments {
-  margin-top: 2%;
-  margin-bottom: 2%;
-  text-align: center;
-}
-
-.providerName {
-  color: rgb(20, 145, 218);
-  font-style: italic;
-}
-
-.boxHighlight {
-  font-weight: bold;
-}
-
-.boxColor {
-  color: rgb(41, 21, 223);
-  margin-left: 2%;
-}
-
-.thanksMessage {
-  color: rgb(41, 21, 223);
-}
-
-.noPayments {
-  color: rgb(41, 21, 223);
-}
-
-.containerBottom {
-  display: flex;
-  align-items: center;
+.innerInner1{
+  display:flex;
+  flex-direction: column;
   justify-content: center;
+  color:rgb(222, 237, 240);
+  width: 300px;
+  padding: 50px;
+  margin: 20px;
+  border-radius:15px;
+}
+
+.financialHighlight{
+  font-size: 200%;
+  padding:5%
+}
+
+.innerInner2{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.chart {
+  min-width: 75%;
+  background-color: rgb(222, 237, 240);
+  padding-left: 2%;
+  border-radius: 15px;
+}
+
+.secondContainer{
+  padding:2%;
+  border-radius:15px;
+  position: relative;
+  margin: 20px;
+  border-radius:15px;
+  box-shadow: 
+    0 0 0 1px rgb(222, 237, 240);
+}
+
+.welcomeAndByeContainer{
+   display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding:2%;
+  border-radius:15px;
+  position: relative;
+  margin: 20px;
+  border-radius:15px;
+  color: rgb(222, 237, 240);
+}
+
+.SignOutButton{
+  background-color: rgb(222, 237, 240);
+  color:rgb(11, 81, 114);
+  border-radius:15px;
+  width:100px;
+  height:25px;
+}
+
+.noPayments{
+  color: yellow;
+}
+
+.secondContainerTop{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color:rgb(222, 237, 240);
+  padding:2%;
+  border-radius:15px;
+}
+
+.storedBoxes{
+  font-size: 200%;
+  padding:2%
+}
+
+.pendingItems{
+  font-size: 200%;
+  padding:2%
+}
+
+.secondContainerBottom{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+
+.m-10-max-w-sm{
+  max-width:200px;
+  margin-top:2%;
+  border-radius:15px;
+}
+
+.storedBoxesLabel{
+  font-size: 200%;
+  padding:5%;
+  color:rgb(222, 237, 240);
+}
+
+.moreStorageButton{
+  background-color: rgb(222, 237, 240);
+  color:rgb(11, 81, 114);
+  border-radius:15px;
+  padding: 1%;
+  display: inline-block;
+}
+
+.stopProviderButton{
+  background-color: rgb(222, 237, 240);
+  color:rgb(11, 81, 114);
+  border-radius:15px;
+  padding: 1%;
+  display: inline-block;
+}
+
+.containerForBottomButtons{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color:rgb(222, 237, 240);
+  padding:5%;
   margin-top: 5%;
-}
-
-.financialHighlight {
-  color: rgb(41, 21, 223);
-}
-
-.btn-one {
-  width: 200px;
-  color: #fff;
-  background-color: rgb(69, 131, 201);
-  transition: all 0.3s;
-  position: relative;
-  margin: 2%;
-}
-.btn-one span {
-  transition: all 0.3s;
-}
-.btn-one::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-top-color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-  transform: scale(0.1, 1);
-}
-.btn-one:hover span {
-  letter-spacing: 2px;
-}
-.btn-one:hover::before {
-  opacity: 1;
-  transform: scale(1, 1);
-}
-.btn-one::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.3s;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.btn-one:hover::after {
-  opacity: 0;
-  transform: scale(0.1, 1);
-  }
-
-.btn-two {
-  width: 200px;
-  color: #fff;
-  background-color: rgb(69, 131, 201);
-  transition: all 0.3s;
-  position: relative;
-  margin: 2%;
-}
-.btn-two span {
-  transition: all 0.3s;
-}
-.btn-two::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-top-color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-  transform: scale(0.1, 1);
-}
-.btn-two:hover span {
-  letter-spacing: 2px;
-}
-.btn-two:hover::before {
-  opacity: 1;
-  transform: scale(1, 1);
-}
-.btn-two::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.3s;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.btn-two:hover::after {
-  opacity: 0;
-  transform: scale(0.1, 1);
-}
-
-.topForm {
-  padding-top: 1%;
-}
-
-.storedBoxes {
-  color: rgb(60, 29, 199);
-}
-
-.topFormtop {
-  padding-top: 1%;
   text-align: center;
+  background-color: rgb(14, 112, 158);
 }
 
-.btn-three {
-  width: 100px;
-  color: rgb(54, 15, 228);
-  background-color: rgb(192, 203, 216);
-  transition: all 0.3s;
-  position: relative;
-  margin-left: 15%;
-  margin-top: 5%;
-  margin-bottom: 2%;
-  text-align: center;
-}
-.btn-three span {
-  transition: all 0.3s;
-}
-.btn-three::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-top-color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-  transform: scale(0.1, 1);
-}
-.btn-three:hover span {
-  letter-spacing: 2px;
-}
-.btn-three:hover::before {
-  opacity: 1;
-  transform: scale(1, 1);
-}
-.btn-three::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.3s;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.btn-three:hover::after {
-  opacity: 0;
-  transform: scale(0.1, 1);
-}
+
+
+
+
+
