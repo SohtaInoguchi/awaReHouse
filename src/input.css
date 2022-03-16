@@ -32,34 +32,33 @@
   .heart-before {
     @apply animate-bounce;
   }
-  .heart-after {
+
+  .extra {
+    @apply flex flex-col text-center bg-gray-200 text-blue-600 mx-3  my-3  py-3 rounded-3xl shadow-lg transition-all hover:scale-105 duration-700;
   }
 }
 
 .chart {
   max-width: 50%;
-  margin:0 auto;
+  margin: 0 auto;
   background-color: rgb(155, 210, 255);
   padding-left: 2%;
   border-radius: 2%;
 }
 
-.noHistory{
+.noHistory {
   text-align: center;
 }
 
-.formMoreStorage{
+.formMoreStorage {
   max-width: 50%;
-  margin:0 auto;
+  margin: 0 auto;
   background-color: rgb(155, 210, 255);
   padding-left: 2%;
   border-radius: 2%;
-  font-size:15px;
+  font-size: 15px;
 }
 
-.isAvailable{
-  margin-left:2%
+.isAvailable {
+  margin-left: 2%;
 }
-
-
-
