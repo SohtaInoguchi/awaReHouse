@@ -91,8 +91,8 @@ export default function NerCustomer({ setMode }) {
   };
 
   const handleProviderSubmit = (e) => {
-      sendProvider();
-      setRegistrationDone(true);
+    sendProvider();
+    setRegistrationDone(true);
   };
 
   if (registrationDone === false) {
@@ -100,15 +100,12 @@ export default function NerCustomer({ setMode }) {
       <div className="containerNewRegistration">
         <div className="newProvider text-slate-900 m-5">
           Register as a storage provider
-          <Form
-          onSubmit={handleProviderSubmit}>
-
-            <Form.Group 
-            >
-              <Form.Control 
+          <Form onSubmit={handleProviderSubmit}>
+            <Form.Group>
+              <Form.Control
                 type="text"
-                name="firstname"            
-                placeholder="Enter first name"
+                name="firstname"
+                placeholder="first name"
                 value={providerFirstName}
                 onChange={createProviderFirstName}
                 required
@@ -117,106 +114,108 @@ export default function NerCustomer({ setMode }) {
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="lastname"            
-              placeholder="Last name"
-              value={providerLastName}
-              onChange={createProviderLastName}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="lastname"
+                placeholder="Last name"
+                value={providerLastName}
+                onChange={createProviderLastName}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={providerPassword}
-              onChange={createProviderPassword}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={providerPassword}
+                onChange={createProviderPassword}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={providerAddress}
-              onChange={createProviderAddress}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={providerAddress}
+                onChange={createProviderAddress}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={providerEmail}
-              onChange={createProviderEmail}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={providerEmail}
+                onChange={createProviderEmail}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="bankreference"
-              placeholder="Banking reference"
-              value={providerBankReference}
-              onChange={createProviderBankReference}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="bankreference"
+                placeholder="Banking reference"
+                value={providerBankReference}
+                onChange={createProviderBankReference}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="emergencycontact"
-              placeholder="Emergency contact name"
-              value={providerEmergencyContact}
-              onChange={createProviderEmergencyContact}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="emergencycontactphone"
-              placeholder="Emergency contact phone"
-              value={providerEmergencyContactPhone}
-              onChange={createProviderEmergencyContactPhone}
-              required
-              className="my-3"
-            />
+              <Form.Control
+                type="text"
+                name="emergencycontact"
+                placeholder="Emergency contact name"
+                value={providerEmergencyContact}
+                onChange={createProviderEmergencyContact}
+                required
+                className="my-3"
+              />
             </Form.Group>
 
             <Form.Group>
-            <p>Please attach a copy of a valid identification document</p>
-            <Form.Control 
-                type="file" 
-                name="file" 
-                onChange={pictureStorageHandler} 
+              <Form.Control
+                type="text"
+                name="emergencycontactphone"
+                placeholder="Emergency contact phone"
+                value={providerEmergencyContactPhone}
+                onChange={createProviderEmergencyContactPhone}
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <p className="bg-white rounded-sm mx-2 my-2 py-2 px-2">
+                Please attach a copy of a valid identification document
+              </p>
+              <Form.Control
+                type="file"
+                name="file"
+                onChange={pictureStorageHandler}
                 className="my-3"
                 // required
-                />
+              />
             </Form.Group>
 
-            <Button 
-            variant="light" 
-            type="submit"
-            // onClick={handleProviderSubmit}
-            >Submit
+            <Button
+              variant="light"
+              type="submit"
+              // onClick={handleProviderSubmit}
+            >
+              Submit
             </Button>
           </Form>
         </div>
@@ -229,7 +228,9 @@ export default function NerCustomer({ setMode }) {
         <div>
           THANK YOU FOR YOUR REGISTRATION
           <br></br>
-          <button type="button" onClick={() => setMode("homePage")}>Back to homepage</button>
+          <button type="button" onClick={() => setMode("homePage")}>
+            Back to homepage
+          </button>
         </div>
       </div>
     );
