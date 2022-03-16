@@ -48,12 +48,12 @@ function App() {
   // Delete later
   useEffect(() => {
     console.log("items in App", items);
-  }, [items])
+  }, [items]);
 
   return (
     <Router>
-      <button onClick={() => setMessage("")}>
-        <Link to="/">To go back home</Link>
+      <button className="px-3 py-3" onClick={() => setMessage("")}>
+        <Link to="/">Home</Link>
       </button>
       <Routes>
         <Route
@@ -126,7 +126,14 @@ function App() {
 
         <Route
           path="extra-charge"
-          element={<ExtraCharge user={user} items={items} email={email} setItems={setItems}/>}
+          element={
+            <ExtraCharge
+              user={user}
+              items={items}
+              email={email}
+              setItems={setItems}
+            />
+          }
         />
         <Route path="learn" element={<LearnMore />} />
         <Route path="extra-storage" element={<BoxFlow addy={address} />} />
