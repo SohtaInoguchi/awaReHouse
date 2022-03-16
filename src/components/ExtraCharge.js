@@ -14,12 +14,17 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [selectedItems, setSelectedItem] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [localItems, setLocalItems] = useState([]);
-  const listRef = React.createRef();
   const [removedKey, setRemovedKey] = useState();
   const [index, setIndex] = useState();
+  const listRef = React.createRef();
 
   const retrieveItem = (e) => {
     const temp = [...selectedItems];
+    if (e.target.textContent !== "No Items added") {
+      temp.push(e.target.textContent);
+    }
+    setSelectedItem(temp);
+
     const tempForLocal = [...localItems];
     tempForLocal.forEach((item, idx) => {
       for (let key in item) {
@@ -31,10 +36,6 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         }
       }
     })
-    if (e.target.textContent !== "No Items added") {
-      temp.push(e.target.textContent);
-    }
-    setSelectedItem(temp);
     setLocalItems(tempForLocal);
   }
 
@@ -68,7 +69,8 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       temp.splice(index, 1);
       setSelectedItem(temp);
       const tempTwo = [...localItems];
-      tempTwo[index][removedKey] = listRef.current.textContent;
+      console.log()
+      // tempTwo[index][removedKey] = listRef.current.textContent;
       setLocalItems(tempTwo);
     }
   
