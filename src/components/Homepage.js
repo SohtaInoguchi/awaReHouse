@@ -22,16 +22,16 @@ export default function Homepage({
 
   useEffect((e) => {
     const bodyRect = document.body.getBoundingClientRect();
-    const sloganRect = document
-      .getElementById("slogan")
-      .getBoundingClientRect();
+    const sloganRect = document.getElementById("slogan").getClientRects()[0];
 
-    // console.log(bodyRect.top - sloganRect.x);
+    console.log(document.getElementById("slogan").clientY);
     // window.scrollTo(
     //   0,
     //   document.getElementById("slogan").scrollIntoView(true, { block: "end" })
     // );
-    window.scrollTo(0, 200);
+    // document.getElementById("slogan").scrollHeight;
+    window.scroll(0, sloganRect.bottom);
+    // window.scrollTo(0, 200);
   }, []);
 
   useEffect(() => {
@@ -59,7 +59,12 @@ export default function Homepage({
           <div
             id="slogan"
             className="flex flex-col
-           justify-center items-center w-full  py-12 my-10 bg-gray-200 border-2 border-gray-200"
+           justify-center items-center w-full  py-12 bg-gray-200 border-8 border-red-600"
+            onClick={(e) => {
+              const a = document.getElementById("slogan").getClientRects()[0];
+
+              console.log(e, a.bottom);
+            }}
           >
             <h3 className="flex text-gray-500 font-serif text-6xl ">
               More Space, More Life
@@ -81,7 +86,7 @@ export default function Homepage({
             </button>
           </div>
           <div className="flex justify-center items-center bg-gray-50 w-full h-36">
-            <h6>privacy&policy|</h6>
+            <h6>Terms & Conditions|</h6>
             <h6
               className="w-12 cursor-pointer"
               onClick={() => navigate("admin")}

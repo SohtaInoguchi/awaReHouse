@@ -63,7 +63,9 @@ function App() {
           src={require("../pictures/LOGO.png")}
           alt=""
           onClick={() => {
-            window.scrollTo(0, 200);
+            // window.scrollTo(0, 200);
+            // document.getElementById('slogan').scrollHeight
+            // window.scroll(0, document.getElementById('slogan').scrollHeight)
             navigate("/");
           }}
         />
