@@ -522,24 +522,24 @@ justify-content: space-evenly;
   flex-direction:row;
   flex-wrap:wrap;
   justify-content: center;
+  align-items: space-between;
   border-radius:15px;
 }
 
 .m-10-max-w-sm{
   border-radius:15px;
   max-width: 350px;
-  max-height: 0%;
+  height:fit-content;
+  margin:1%;
 }
 
-.m-10-max-w-sm:hover{
-  transform: scale(1.1);
-}
 
 .storedBoxesLabel{
   font-size: 200%;
   color:rgb(222, 237, 240);
   border-radius:15px;
   padding:5%;
+  height:fit-content;
 }
 
 
