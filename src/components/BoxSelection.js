@@ -20,7 +20,8 @@ export default function BoxSelection(props) {
             className="btn-group btn-group-toggle"
             data-toggle="buttons"
         >
-            <label className="btn btn-secondary active">
+            {/* <label id="option-one" className="btn btn-secondary active"> */}
+            <label className="btn btn-secondary active option">
             <input
                 type="radio"
                 name="options"
@@ -29,8 +30,9 @@ export default function BoxSelection(props) {
                 onChange={handleChange}
             />{" "}
             Type A
+            <p className='box-dimension'>Dimension: 27cm x 38cm x 29cm : Max weight = 7.5 kg</p>
             </label>
-            <label className="btn btn-secondary">
+            <label className="btn btn-secondary option">
             <input
                 type="radio"
                 name="options"
@@ -39,8 +41,9 @@ export default function BoxSelection(props) {
                 onChange={handleChange}
             />{" "}
             Type B
+            <p className='box-dimension'>Dimension: 32cm x 46cm x 29cm : Max weight = 10.5 kg</p>
             </label>
-            <label className="btn btn-secondary">
+            <label className="btn btn-secondary option">
             <input
                 type="radio"
                 name="options"
@@ -49,8 +52,9 @@ export default function BoxSelection(props) {
                 onChange={handleChange}
             />{" "}
             Type C
+            <p className='box-dimension'>Dimension: 40cm x 60cm x 40cm : Max weight = 24 kg</p>
             </label>
-            <label className="btn btn-secondary">
+            <label className="btn btn-secondary option">
             <input
                 type="radio"
                 name="options"
@@ -59,6 +63,7 @@ export default function BoxSelection(props) {
                 onChange={handleChange}
             />{" "}
             Type D
+            <p className='box-dimension'>Dimension: 175cm x 30cm x 15cm : Max weight = 20 kg</p>
             </label>
         </div>
         <div className="flex justify-center items-center"></div>
