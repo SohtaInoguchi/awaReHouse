@@ -57,9 +57,9 @@ function App() {
 
   return (
     <div>
-      <div className="header flex flex-row flex-wrap justify-between w-44 ">
+      <div className="header flex flex-row flex-wrap justify-between w-44  ">
         <img
-          className="top-0 w-36 h-36 rounded-3xl cursor-pointer mx-3 my-3 border-8"
+          className="top-0 w-40 h-40 rounded-3xl cursor-pointer mx-3 my-3 border-8"
           src={require("../pictures/LOGO.png")}
           alt=""
           onClick={() => {
@@ -67,47 +67,7 @@ function App() {
             navigate("/");
           }}
         />
-        <div className="flex flex-row flex-wrap justify-center items-center">
-          {/* <div className="flex ">
-            <div className="flex justify-center items-center">
-              <button
-                className="login-button mx-8 my-8 px-8 py-8 text-xl"
-                onClick={() => {
-                  console.log(window.localStorage.getItem("firstName_user"));
-                  if (window.localStorage.getItem("firstName_user")) {
-                    window.localStorage.removeItem("firstName_provider");
-                    window.localStorage.removeItem("email_provider");
-                    window.localStorage.removeItem("token_provider");
-                    navigate("/user");
-                  } else navigate("/login/user");
-                }}
-              >
-                <Icon icon={<FaUser size="24" />} />
-                User
-              </button>
-            </div>
-
-            <div className="">
-              <button
-                className="login-button  mx-8 my-8 px-8 py-8 text-xl"
-                onClick={() => {
-                  console.log(
-                    window.localStorage.getItem("firstName_provider")
-                  );
-                  if (window.localStorage.getItem("firstName_provider")) {
-                    window.localStorage.removeItem("firstName_user");
-                    window.localStorage.removeItem("email_user");
-                    window.localStorage.removeItem("token_user");
-                    navigate("/provider");
-                  } else navigate("/login/provider");
-                }}
-              >
-                <Icon icon={<FaUserTie size="24" />} />
-                Provider
-              </button>
-            </div>
-          </div> */}
-        </div>
+        <div className="flex flex-row flex-wrap justify-center items-center"></div>
       </div>
 
       <Routes>
