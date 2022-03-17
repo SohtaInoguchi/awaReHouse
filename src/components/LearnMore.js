@@ -2,8 +2,8 @@ import React from "react";
 
 export default function LearnMore() {
   return (
-    <div className="flex flex-row justify-center ">
-      <div className="learn-more-e ">
+    <div className="flex flex-row justify-between  w-4/6">
+      <div className="learn-more-e  ">
         <h4 className="text-center my-3">Why using awaReHouse?</h4>
         <img
           className="flex align-end h-60"

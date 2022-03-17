@@ -57,9 +57,9 @@ function App() {
 
   return (
     <div>
-      <div className="header flex flex-row flex-wrap justify-between  ">
+      <div className="header flex flex-row flex-wrap justify-between w-44 ">
         <img
-          className="top-0 w-36 h-36 rounded-3xl cursor-pointer mx-3"
+          className="top-0 w-36 h-36 rounded-3xl cursor-pointer mx-3 my-3 border-8"
           src={require("../pictures/LOGO.png")}
           alt=""
           onClick={() => {
@@ -68,7 +68,7 @@ function App() {
           }}
         />
         <div className="flex flex-row flex-wrap justify-center items-center">
-          <div className="flex ">
+          {/* <div className="flex ">
             <div className="flex justify-center items-center">
               <button
                 className="login-button mx-8 my-8 px-8 py-8 text-xl"
@@ -106,7 +106,7 @@ function App() {
                 Provider
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

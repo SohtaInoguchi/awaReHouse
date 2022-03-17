@@ -32,11 +32,11 @@
   }
 
   .login-button {
-    @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
+    @apply flex  bg-slate-300 text-blue-600  rounded-3xl mx-2 my-2 px-2 py-2 hover:bg-slate-400 hover:text-blue-700;
   }
 
   .learn-more-e {
-    @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
+    @apply w-80 bg-gray-200 rounded-3xl  mx-10 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
   .boxes-after {
     @apply transition-all duration-700 bg-gray-200 opacity-100;
@@ -52,6 +52,13 @@
   .extra {
     @apply flex flex-col text-center bg-gray-200 text-blue-600 mx-3  my-3  py-3 rounded-3xl shadow-lg transition-all hover:scale-105 duration-700;
   }
+  .more-life {
+    @apply bg-cover w-5/6 h-full opacity-80 my-16;
+  }
+}
+
+.more-life {
+  background-image: url("./pictures/clean-house.jpeg");
 }
 
 .chart {
