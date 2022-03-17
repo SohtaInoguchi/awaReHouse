@@ -155,11 +155,11 @@ function Providerpage({ user, email2 }) {
                 <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>
-                      Click to see details for Box <h4 className="boxColor">{item.box_id}</h4>
+                      Details for Box <h4 className="boxColor">{item.box_id}</h4>
                     </Accordion.Header>
                     <Accordion.Body>
-                          <div className="boxHighlight">Storage location:<p className="boxHighlight2"> {providerAddress}</p></div>
-                        <div className="boxHighlight">Box weight: <p className="boxHighlight2">{item.weight_in_kg}kg</p></div>
+                          {/* <div className="boxHighlight">Storage location:<p className="boxHighlight2"> {providerAddress}</p></div> */}
+                        <div className="boxHighlight">Box weight: <p className="boxHighlight2">{item.weight_in_kg} kg</p></div>
                         
                         <div className="boxHighlight">Storage floor:<p className="boxHighlight2"> {storageFloor}</p></div> 
                         <div className="boxHighlight">Expected retrieval period:<p className="boxHighlight2">
@@ -328,10 +328,10 @@ function Providerpage({ user, email2 }) {
            <h5>Boxes in storage: <h6 className="storedBoxes">{providerItems.length}</h6></h5>
            <h5> Incoming boxes: <h6 className="pendingItems">{pendingItems}</h6></h5>
            <h5>Incoming day: <h6 className="pendingItems">{pendingItems===0? "-" : "03/22/2022"}</h6></h5>
-           <img
+           {/* <img
            className="pictureDeliveries"
             src={require("../pictures/deliveries.webp")}
-            />
+            /> */}
            </div>
       </div>
       
@@ -352,7 +352,7 @@ function Providerpage({ user, email2 }) {
             setMoreStorage(!moreStorage);
           }}
          className="btn-one">
-          Add more storage capacity
+          Add storage capacity
         </button>
                   
       </div>
