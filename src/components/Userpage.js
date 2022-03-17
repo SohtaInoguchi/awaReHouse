@@ -192,17 +192,37 @@ function Userpage({
   return (
     <div>
       {/* <div className="flex justify-between"> */}
-      <div id="user-page-nav">
+      <nav id="user-page-nav">
         {/* <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center "> */}
         <p id="user-name">
           Welcome back {window.localStorage.getItem("firstName_user")}
         </p>
 
+        <section id="nav-button">
         {/* <Button id="signout-button" className="mx-5 " onClick={signOut}> */}
         <Button id="signout-button" onClick={signOut}>
           Sign out
         </Button>
-      </div>
+
+        <Button
+            id="retrieve-button"
+            // className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-charge")}
+            >
+            Need to retrieve?
+        <p className="popup-message">Through extra retrieval, items can be removed from storage anytime</p>
+        </Button>
+        <Button
+            id="storage-button"
+            className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-storage")}
+            >
+            Need Extra Storage?
+        <p className="popup-message-storage">Through extra storage, items can be sent to storage anytime</p>
+        </Button>
+        </section>
+
+      </nav>
 
       {/* <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl"> */}
       <h3 id="next-period">
@@ -250,12 +270,12 @@ function Userpage({
             anytime
           </h5> */}
 
-          <Button
+          {/* <Button
             className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-charge")}
           >
             Need to retrieve?
-          </Button>
+          </Button> */}
         {/* </div> */}
         {/* <div className="extra "> */}
           {/* <h4 className="px-3"> Need Extra Storage?</h4> */}
@@ -267,12 +287,12 @@ function Userpage({
           {/* <h5 className="text-center mt-3 pt-3">
             Through extra storage, <br /> items can be sent to storage anytime
           </h5> */}
-          <Button
+          {/* <Button
             className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-storage")}
           >
             Need Extra Storage?
-          </Button>
+          </Button> */}
         {/* </div> */}
       </div>
 
