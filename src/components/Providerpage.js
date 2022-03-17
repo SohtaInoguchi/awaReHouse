@@ -328,10 +328,10 @@ function Providerpage({ user, email2 }) {
            <h5>Boxes in storage: <h6 className="storedBoxes">{providerItems.length}</h6></h5>
            <h5> Incoming boxes: <h6 className="pendingItems">{pendingItems}</h6></h5>
            <h5>Incoming day: <h6 className="pendingItems">{pendingItems===0? "-" : "03/22/2022"}</h6></h5>
-           <img
+           {/* <img
            className="pictureDeliveries"
             src={require("../pictures/deliveries.webp")}
-            />
+            /> */}
            </div>
       </div>
       
