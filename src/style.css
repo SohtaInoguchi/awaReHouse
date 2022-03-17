@@ -1,13 +1,12 @@
 body {
-  background-color: rgb(11, 81, 114) !important;
-  /* background-image: linear-gradient(
+  background-image: linear-gradient(
     to right,
-    rgb(175, 228, 252),
-    rgb(112, 186, 221),
-    rgb(45, 124, 160),
-    rgb(11, 81, 114)
-  ); */
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    rgb(11, 81, 114),
+    rgb(11, 81, 114),    
+    rgb(11, 81, 114),    
+    rgb(11, 81, 114)  
+    );
+  font-family: Georgia (serif);
 }
 
 .welcomeMessage {
@@ -564,7 +563,7 @@ body {
 
 #box-type-selection-wrapper {
   text-align: center;
-  border: solid ;
+  border: none;
 }
 
 #box-type-selection {
@@ -592,6 +591,11 @@ body {
 
 #box-select-header {
   text-align: start;
+}
+
+#box-selection-wrapper {
+  background-color: white;
+  border-radius: 10px;
 }
 
 .item-description-checkbox {
