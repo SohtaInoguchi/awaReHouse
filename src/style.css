@@ -651,7 +651,8 @@ body {
   border-radius: 16px;
   position: relative;
   margin-top: 1rem;
-  margin-right: 1rem
+  margin-right: 1rem;
+  font-size: 1.2rem;
 }
 
 .popup-message {
@@ -688,7 +689,8 @@ body {
   border-radius: 16px;
   position: relative;
   margin-top: 1rem;
-  margin-right: 3rem
+  margin-right: 3rem;
+  font-size: 1.2rem;
 }
 
 #storage-button:hover .popup-message {

@@ -43,7 +43,7 @@ export default function StoredItems(props) {
           {displayTable ? (
             <div
               id="boxes"
-              className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg"
+              className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg text-2xl"
             >
               {items.map((item, index) => {
                 return (
