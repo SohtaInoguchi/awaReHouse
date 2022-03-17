@@ -191,13 +191,16 @@ function Userpage({
 
   return (
     <div>
-      <div className="flex justify-between">
-        <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center ">
+      {/* <div className="flex justify-between"> */}
+      <div id="user-page-nav">
+        {/* <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center "> */}
+        <p id="user-name">
           Welcome back {window.localStorage.getItem("firstName_user")}
         </p>
 
-        <Button className="flex mx-5 " onClick={signOut}>
-          Sign Out
+        {/* <Button id="signout-button" className="mx-5 " onClick={signOut}> */}
+        <Button id="signout-button" onClick={signOut}>
+          Sign out
         </Button>
       </div>
 

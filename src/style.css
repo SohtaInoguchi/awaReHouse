@@ -558,6 +558,30 @@ body {
 
 /* ---------USER PAGE---------- */
 
+#user-page-nav {
+  display: flex;
+  height: min-content;
+  margin: 1rem 1rem;
+  justify-content: space-between;
+}
+
+#user-name {
+  background-color: white;
+  margin: 1rem 1rem;
+  padding: 1rem 1rem;
+  border-radius: 15px;
+  font-size: 1em;
+  font-weight: 800;
+  color: rgb(11, 81, 114);
+}
+
+#signout-button {
+  margin: 1rem 1rem;
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 16px;
+}
+
 #next-period {
   text-align: center;
   background-color: white;
@@ -580,6 +604,7 @@ body {
   display: inline-block;
   color: rgb(11, 81, 114);
   font-size: x-large;
+  font-weight: 500;
 }
 
 #item-description-wrapper {
@@ -592,10 +617,11 @@ body {
 
 #confirmation-form {
   text-align: center;
-  width: 60%;
+  width: 70%;
   margin: auto auto;
   color: rgb(11, 81, 114);
   font-size: 1.2em;
+  line-height: 2.1rem;
 }
 
 #update-button {
@@ -608,7 +634,7 @@ body {
 
 .form-inputs {
   width: 100%;
-  margin: auto auto;
+  margin: 1rem auto;
 }
 
 #box-select-header {
@@ -618,7 +644,7 @@ body {
 #box-selection-wrapper {
   background-color: white;
   border-radius: 10px;
-  width: 90%;
+  width: 85%;
   padding: 25px 0px;
   margin: 2rem auto;
 }
