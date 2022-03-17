@@ -30,7 +30,7 @@ export default function Homepage({
     //   document.getElementById("slogan").scrollIntoView(true, { block: "end" })
     // );
     // document.getElementById("slogan").scrollHeight;
-    window.scroll(0, sloganRect.bottom);
+    window.scroll(500, 350);
     // window.scrollTo(0, 200);
   }, []);
 
@@ -59,7 +59,7 @@ export default function Homepage({
           <div
             id="slogan"
             className="flex flex-col
-           justify-center items-center w-full  py-12 bg-gray-200 border-8 border-red-600"
+           justify-center items-center w-full  py-12 bg-gray-200"
             onClick={(e) => {
               const a = document.getElementById("slogan").getClientRects()[0];
 
