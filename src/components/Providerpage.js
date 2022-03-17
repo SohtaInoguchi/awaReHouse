@@ -158,7 +158,7 @@ function Providerpage({ user, email2 }) {
                       Details for Box <h4 className="boxColor">{item.box_id}</h4>
                     </Accordion.Header>
                     <Accordion.Body>
-                          <div className="boxHighlight">Storage location:<p className="boxHighlight2"> {providerAddress}</p></div>
+                          {/* <div className="boxHighlight">Storage location:<p className="boxHighlight2"> {providerAddress}</p></div> */}
                         <div className="boxHighlight">Box weight: <p className="boxHighlight2">{item.weight_in_kg} kg</p></div>
                         
                         <div className="boxHighlight">Storage floor:<p className="boxHighlight2"> {storageFloor}</p></div> 
