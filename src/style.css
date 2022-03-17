@@ -294,20 +294,27 @@ justify-content: space-evenly;
 
 .innerInner1{
   display:flex;
+  align-items: center;
   flex-direction: column;
-  justify-content: center;
-  align-content: space-between;
-  color:rgb(222, 237, 240);
+  justify-content: space-evenly;
+  color:rgb(11, 81, 114);
   width: 350px;
-  padding: 50px;
-  margin: 20px;
+  margin: 40px;
   border-radius:15px;
+  background-color: white;
+}
+
+.pictureFinancial{
+  width: 350px;
+  min-width: 250px;
+  border-radius: 15px 15px 0 0;
+  margin-bottom: 12%;
 }
 
 .financialHighlight{
   font-size: 200%;
-  padding:3%;
-  margin-top:1%;
+  padding:2%;
+  margin-bottom: 5%;
 }
 
 .innerInner2{
@@ -362,16 +369,7 @@ justify-content: space-evenly;
   transform: scale(1.1);
 }
 
-.pictureFinancial{
-  margin-bottom: 10%;
-  padding-right: 3%;
-  max-width: 200px;
-}
 
-.pictureDeliveries{
-  padding-right: 3%;
-  max-width: 150px;
-}
 
 .noPayments{
   color: yellow;
@@ -529,13 +527,13 @@ justify-content: space-evenly;
 
 .m-10-max-w-sm{
   border-radius:15px;
-  max-width: 200px;
+  max-width: 350px;
   max-height: 0%;
 }
 
-/* .m-10-max-w-sm:hover{
+.m-10-max-w-sm:hover{
   transform: scale(1.1);
-} */
+}
 
 .storedBoxesLabel{
   font-size: 200%;
@@ -544,12 +542,10 @@ justify-content: space-evenly;
   padding:5%;
 }
 
-.m-10-max-w-sm:hover{
-  transform: scale(1.1);
-}
 
 .boxColor{
 color:rgb(11, 81, 114);
+padding-left: 2%;
 }
 
 .boxHighlight{
