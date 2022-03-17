@@ -6,7 +6,7 @@ body {
     rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  font-family:'Georgia (serif)';
+  font-family: "Georgia (serif)";
 }
 
 .welcomeMessage {
@@ -270,55 +270,54 @@ body {
 
 /* ---------PROVIDER PAGE */
 
-.page{
+.page {
   background: rgb(11, 81, 114);
 }
 
-.topContainer{
-padding:2%;
-border-radius:15px;
-position: relative;
-margin: 20px;
-border-radius:15px;
-/* box-shadow: 
+.topContainer {
+  padding: 2%;
+  border-radius: 15px;
+  position: relative;
+  margin: 20px;
+  border-radius: 15px;
+  /* box-shadow: 
   0 0 0 1px rgb(222, 237, 240); */
 }
 
-
-.innerTopContainer{
-display:flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-evenly;
+.innerTopContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-.innerInner1{
-  display:flex;
+.innerInner1 {
+  display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
-  color:rgb(11, 81, 114);
+  color: rgb(11, 81, 114);
   width: 350px;
   margin: 40px;
-  border-radius:15px;
+  border-radius: 15px;
   background-color: white;
 }
 
-.pictureFinancial{
+.pictureFinancial {
   width: 350px;
   min-width: 250px;
   border-radius: 15px 15px 0 0;
   margin-bottom: 12%;
 }
 
-.financialHighlight{
+.financialHighlight {
   font-size: 200%;
-  padding:2%;
+  padding: 2%;
   margin-bottom: 5%;
 }
 
-.innerInner2{
-  display:flex;
+.innerInner2 {
+  display: flex;
   flex-direction: row;
   justify-content: center;
 }
@@ -330,73 +329,69 @@ justify-content: space-evenly;
   border-radius: 15px;
 }
 
-
-.secondContainer{
-  padding:2%;
-  border-radius:15px;
+.secondContainer {
+  padding: 2%;
+  border-radius: 15px;
   position: relative;
   margin-left: 12%;
   margin-right: 12%;
   margin-bottom: 2%;
-  border-radius:15px;
-  box-shadow: 
-    0 0 0 1px rgb(222, 237, 240);
+  border-radius: 15px;
+  box-shadow: 0 0 0 1px rgb(222, 237, 240);
 }
 
-.welcomeAndByeContainer{
-   display:flex;
+.welcomeAndByeContainer {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding:2%;
-  border-radius:15px;
+  padding: 2%;
+  border-radius: 15px;
   position: relative;
   margin: 20px;
-  border-radius:15px;
+  border-radius: 15px;
   color: rgb(222, 237, 240);
 }
 
-.SignOutButton{
+.SignOutButton {
   background-color: rgb(222, 237, 240);
-  color:rgb(11, 81, 114);
-  border-radius:15px;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
   font-weight: bold;
-  width:100px;
-  height:50px;
+  width: 100px;
+  height: 50px;
 }
 
-.SignOutButton:hover{
+.SignOutButton:hover {
   transform: scale(1.1);
 }
 
-
-
-.noPayments{
+.noPayments {
   color: yellow;
 }
 
-.secondContainerTop{
-  display:flex;
+.secondContainerTop {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  color:rgb(222, 237, 240);
-  padding:2%;
-  border-radius:15px;
+  color: rgb(222, 237, 240);
+  padding: 2%;
+  border-radius: 15px;
 }
 
-.storedBoxes{
+.storedBoxes {
   font-size: 200%;
-  padding:2%
+  padding: 2%;
 }
 
-.pendingItems{
+.pendingItems {
   font-size: 200%;
-  padding:2%
+  padding: 2%;
 }
 
-.containerForBottomButtons{
-  display:flex;
+.containerForBottomButtons {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -404,8 +399,8 @@ justify-content: space-evenly;
   margin-bottom: 2%;
 }
 
-.bottomButtons{
-  display:flex;
+.bottomButtons {
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
@@ -417,124 +412,124 @@ justify-content: space-evenly;
   font-weight: bolder;
 }
 
-.moreStorageButton{
+.moreStorageButton {
   background-color: rgb(190, 202, 204);
-  color:rgb(11, 81, 114);
-  border-radius:15px;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
   padding: 1%;
   width: fit-content;
   font-size: 20px;
   font-weight: bold;
-  margin-right:3%;
+  margin-right: 3%;
   margin-top: 5%;
-  margin-bottom:10%;
+  margin-bottom: 10%;
 }
 
-.moreStorageButton:hover{
+.moreStorageButton:hover {
   transform: scale(1.1);
 }
 
-.stopProviderButton{
+.stopProviderButton {
   background-color: rgb(190, 202, 204);
-  color:rgb(11, 81, 114);
-  border-radius:15px;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
   padding: 1%;
   width: fit-content;
   font-size: 20px;
   font-weight: bold;
   margin-top: 10%;
-  margin-bottom:5%;
+  margin-bottom: 5%;
 }
 
-.stopProviderButton:hover{
+.stopProviderButton:hover {
   transform: scale(1.1);
 }
 
-.pictureChange{
+.pictureChange {
   max-width: 20%;
   min-width: 250px;
   border-radius: 15px 0 0 15px;
 }
 
-.moreStorage{
+.moreStorage {
   background-color: rgb(222, 237, 240);
-  padding:2%;
+  padding: 2%;
   width: fit-content;
-  margin:0 auto;
-  border-radius:15px;
-  color:rgb(11, 81, 114);
+  margin: 0 auto;
+  border-radius: 15px;
+  color: rgb(11, 81, 114);
 }
 
-.topForm{
+.topForm {
   margin-top: 1%;
 }
 
-.leaveSuccess{
+.leaveSuccess {
   background-color: rgb(222, 237, 240);
-  padding:2%;
+  padding: 2%;
   width: fit-content;
-  margin:0 auto;
-  border-radius:15px;
-  color:rgb(11, 81, 114);
+  margin: 0 auto;
+  border-radius: 15px;
+  color: rgb(11, 81, 114);
 }
 
-.btn-cancel-quit{
+.btn-cancel-quit {
   background-color: rgb(222, 237, 240);
-  color:rgb(11, 81, 114);
-  border-radius:15px;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
   width: fit-content;
   width: 150px;
   padding: 1%;
 }
 
-.btn-three{
+.btn-three {
   background-color: rgb(11, 81, 114);
-  color:rgb(222, 237, 240);
-  border-radius:15px;
+  color: rgb(222, 237, 240);
+  border-radius: 15px;
   width: fit-content;
   width: 100px;
   padding: 1%;
-  margin-left:1%;
+  margin-left: 1%;
 }
 
-.thanksMessage{
+.thanksMessage {
   background-color: rgb(222, 237, 240);
-  padding:2%;
+  padding: 2%;
   width: fit-content;
-  margin:0 auto;
-  border-radius:15px;
-  color:rgb(11, 81, 114);
+  margin: 0 auto;
+  border-radius: 15px;
+  color: rgb(11, 81, 114);
 }
 
-.goBack{
+.goBack {
   font-size: 15px;
 }
 
-#box-list{
+#box-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border-radius:15px;
+  border-radius: 15px;
 }
 
-.secondContainerBottom{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
+.secondContainerBottom {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: space-between;
   border-radius:15px;
 }
 
-.m-10-max-w-sm{
-  border-radius:15px;
+.m-10-max-w-sm {
+  border-radius: 15px;
   max-width: 350px;
   height:fit-content;
   margin:1%;
 }
 
 
-.storedBoxesLabel{
+.storedBoxesLabel {
   font-size: 200%;
   color:rgb(222, 237, 240);
   border-radius:15px;
@@ -542,19 +537,17 @@ justify-content: space-evenly;
   height:fit-content;
 }
 
-
-.boxColor{
-color:rgb(11, 81, 114);
-padding-left: 2%;
+.boxColor {
+  color: rgb(11, 81, 114);
+  padding-left: 2%;
 }
 
-.boxHighlight{
-  color:rgb(11, 81, 114);
+.boxHighlight {
+  color: rgb(11, 81, 114);
   font-weight: bold;
 }
 
-.boxHighlight2{
+.boxHighlight2 {
   color: rgb(11, 81, 114);
-  font-weight:200;
+  font-weight: 200;
 }
-
