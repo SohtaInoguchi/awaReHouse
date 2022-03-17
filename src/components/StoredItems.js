@@ -47,7 +47,8 @@ export default function StoredItems(props) {
             >
               {items.map((item, index) => {
                 return (
-                  <div className=" text-blue-600 w-full " key={index}>
+                  // <div className=" text-blue-600 w-full " key={index}>
+                  <div className="selected-items" key={index}>
                     <div
                       className="flex justify-center items-center  "
                       key={`${index}a`}
@@ -57,8 +58,8 @@ export default function StoredItems(props) {
                           id="item"
                           className=" flex flex-row justify-center items-center rounded-lg  my-2 "
                         >
-                          <div className="flex min-h-100 max-h-100  bg-green-300 shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
+                          <div className="flex min-h-100 max-h-100  bg-gray-400 shadow-lg rounded-lg py-2 px-3 mr-2">
+                            {item.declared_content_one}
                             {item.fragile === true ? (
                               <Icon icon={<GiShatteredGlass size="24" />} />
                             ) : (
@@ -73,10 +74,10 @@ export default function StoredItems(props) {
 
                           {item.declared_content_two !== "" ? (
                             <div
-                              className="flex min-h-100 max-h-100 bg-green-300  shadow-lg rounded-lg py-2  "
+                              className="flex min-h-100 max-h-100 bg-gray-300  shadow-lg rounded-lg py-2 px-3 "
                               key={`${index}b`}
                             >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
+                              {item.declared_content_two}{" "}
                               {item.fragile === true ? (
                                 <Icon icon={<GiShatteredGlass size="24" />} />
                               ) : (
@@ -94,10 +95,10 @@ export default function StoredItems(props) {
 
                           {item.declared_content_three !== "" ? (
                             <div
-                              className="flex min-h-100 max-h-100 bg-green-300 shadow-lg rounded-lg py-2 ml-2"
+                              className="flex min-h-100 max-h-100 bg-gray-300 shadow-lg rounded-lg py-2 ml-2"
                               key={`${index}c`}
                             >
-                              No.{item.box_id}:{item.declared_content_three}{" "}
+                              {item.declared_content_three}{" "}
                               {item.fragile === true ? (
                                 <Icon icon={<GiShatteredGlass size="24" />} />
                               ) : (
@@ -116,10 +117,10 @@ export default function StoredItems(props) {
                       ) : (
                         <div
                           id="item"
-                          className=" flex flex-row justify-center items-center rounded-lg  my-2 "
+                          className=" flex flex-row justify-center items-center rounded-lg  my-2 px-3"
                         >
-                          <div className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
+                          <div className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 px-3 mr-2">
+                            {item.declared_content_one}
                             {item.fragile === true ? (
                               <Icon icon={<GiShatteredGlass size="24" />} />
                             ) : (
@@ -134,10 +135,10 @@ export default function StoredItems(props) {
 
                           {item.declared_content_two !== "" ? (
                             <div
-                              className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2  "
+                              className="flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 "
                               key={`${index}b`}
                             >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
+                              {item.declared_content_two}{" "}
                               {item.fragile === true ? (
                                 <Icon icon={<GiShatteredGlass size="24" />} />
                               ) : (

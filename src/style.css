@@ -663,5 +663,11 @@ body {
 
 #store-item-button {
   background-color: white;
+  font-size: 1.5rem;
   color: rgb(11, 81, 114);
+  border-radius: 9px;
+}
+
+.user-selected-items {
+  color: rgb(11, 81, 114);  
 }
