@@ -198,13 +198,13 @@ function Userpage({
           Welcome back {window.localStorage.getItem("firstName_user")}
         </p>
 
-        <section id="nav-button">
+        {/* <section id="nav-button"> */}
         {/* <Button id="signout-button" className="mx-5 " onClick={signOut}> */}
         <Button id="signout-button" onClick={signOut}>
           Sign out
         </Button>
 
-        <Button
+        {/* <Button
             id="retrieve-button"
             // className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-charge")}
@@ -219,8 +219,8 @@ function Userpage({
             >
             Need Extra Storage?
         <p className="popup-message-storage">Through extra storage, items can be sent to storage anytime</p>
-        </Button>
-        </section>
+        </Button> */}
+        {/* </section> */}
 
       </nav>
 
@@ -228,6 +228,27 @@ function Userpage({
       <h3 id="next-period">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
+
+      <section id="nav-button">
+
+      <Button
+            id="retrieve-button"
+            // className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-charge")}
+            >
+            Need to retrieve?
+        <p className="popup-message">Through extra retrieval, items can be removed from storage anytime</p>
+        </Button>
+        <Button
+            id="storage-button"
+            // className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-storage")}
+            >
+            Need Extra Storage?
+        {/* <p className="popup-message-storage">Through extra storage, items can be sent to storage anytime</p> */}
+        <p className="popup-message">Through extra storage, items can be sent to storage anytime</p>
+      </Button>
+      </section>
 
       {/* <div className="mx-3 my-3 px-3 py-3"> */}
       <section id="box-select">
