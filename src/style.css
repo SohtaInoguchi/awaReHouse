@@ -318,10 +318,11 @@ justify-content: space-evenly;
 
 .chart {
   min-width: 150%;
-  background-color: rgb(222, 237, 240);
+  background-color: white;
   padding-left: 4%;
   border-radius: 15px;
 }
+
 
 .secondContainer{
   padding:2%;
@@ -355,6 +356,10 @@ justify-content: space-evenly;
   font-weight: bold;
   width:100px;
   height:50px;
+}
+
+.SignOutButton:hover{
+  transform: scale(1.1);
 }
 
 .pictureFinancial{
@@ -392,39 +397,6 @@ justify-content: space-evenly;
   padding:2%
 }
 
-.secondContainerBottom{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  justify-content: center;
-}
-
-.m-10-max-w-sm{
-  max-width:200px;
-  margin-top:2%;
-  border-radius:15px;
-}
-
-.storedBoxesLabel{
-  font-size: 200%;
-  padding:5%;
-  color:rgb(222, 237, 240);
-}
-
-.boxColor{
-color:rgb(11, 81, 114);
-}
-
-.boxHighlight{
-  color: blue;
-  ;
-}
-
-.boxHighlight2{
-  color: rgb(11, 81, 114);
-  ;
-}
-
 .containerForBottomButtons{
   display:flex;
   flex-direction: row;
@@ -438,29 +410,48 @@ color:rgb(11, 81, 114);
   display:flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding-left: 5%;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 0 15px 15px 0;
+  font-weight: bolder;
 }
 
 .moreStorageButton{
-  background-color: rgb(222, 237, 240);
+  background-color: rgb(190, 202, 204);
   color:rgb(11, 81, 114);
   border-radius:15px;
-  width: 150px;
   padding: 1%;
+  width: fit-content;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right:3%;
+}
+
+.moreStorageButton:hover{
+  transform: scale(1.1);
 }
 
 .stopProviderButton{
-  background-color: rgb(222, 237, 240);
+  background-color: rgb(190, 202, 204);
   color:rgb(11, 81, 114);
   border-radius:15px;
-  width: fit-content;
-  width: 150px;
   padding: 1%;
+  width: fit-content;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 15%;
+}
+
+.stopProviderButton:hover{
+  transform: scale(1.1);
 }
 
 .pictureChange{
-  max-width: 15%;
+  max-width: 20%;
+  border-radius: 15px 0 0 15px;
 }
 
 .moreStorage{
@@ -516,3 +507,50 @@ color:rgb(11, 81, 114);
 .goBack{
   font-size: 15px;
 }
+
+
+
+#box-list{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.secondContainerBottom{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+
+.m-10-max-w-sm{
+  max-width:200px;
+  margin-top:5%;
+  border-radius:15px;
+}
+
+.m-10-max-w-sm:hover{
+  transform: scale(1.1);
+}
+
+.storedBoxesLabel{
+  font-size: 200%;
+  padding:5%;
+  color:rgb(222, 237, 240);
+  border-radius:15px;
+}
+
+.boxColor{
+color:rgb(11, 81, 114);
+font-weight: bold;
+}
+
+.boxHighlight{
+  color: blue;
+}
+
+.boxHighlight2{
+  color: rgb(11, 81, 114);
+  font-weight: bold;
+}
+
