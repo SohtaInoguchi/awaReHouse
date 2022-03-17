@@ -130,7 +130,7 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:true
           }
       ]);
     });
