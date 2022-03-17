@@ -15,8 +15,10 @@ export default function StoredItems(props) {
             displayTable } = props;
 
   return (
-        <div className="flex flex-col  w-96 ">
+        // <div className="flex flex-col  w-96 ">
+        <div id='stored-item' className="flex flex-col  w-96 ">
           <Button
+            id='store-item-button'
             className="max-w-lg"
             onClick={() => {
               updateItemList();
@@ -43,7 +45,6 @@ export default function StoredItems(props) {
               id="boxes"
               className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg"
             >
-              Stored Items:
               {items.map((item, index) => {
                 return (
                   <div className=" text-blue-600 w-full " key={index}>

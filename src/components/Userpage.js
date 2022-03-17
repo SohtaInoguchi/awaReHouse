@@ -201,7 +201,8 @@ function Userpage({
         </Button>
       </div>
 
-      <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
+      {/* <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl"> */}
+      <h3 id="next-period">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 

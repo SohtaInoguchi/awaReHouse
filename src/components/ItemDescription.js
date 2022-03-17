@@ -76,7 +76,7 @@ export default function ItemDescription(props) {
               />
             </Form.Group>
             <p id="address">Your address: {address}</p>
-            <Button onClick={submit2}>Update</Button>
+            <Button id="update-button" onClick={submit2}>Update</Button>
             <Button
               id="submit-button"
               className="mx-2"

@@ -556,6 +556,16 @@ body {
   transform: scale(0.1, 1);
 }
 
+/* ---------USER PAGE---------- */
+
+#next-period {
+  text-align: center;
+  background-color: white;
+  padding: 1rem 0px;
+  color: rgb(11, 81, 114);
+  font-size: xx-large;
+}
+
 #box-select {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -568,6 +578,8 @@ body {
 
 #box-type-selection {
   display: inline-block;
+  color: rgb(11, 81, 114);
+  font-size: x-large;
 }
 
 #item-description-wrapper {
@@ -582,10 +594,20 @@ body {
   text-align: center;
   width: 60%;
   margin: auto auto;
+  color: rgb(11, 81, 114);
+  font-size: 1.2em;
+}
+
+#update-button {
+  background-color: rgb(11, 81, 114);
+}
+
+#submit-button {
+  background-color: rgb(11, 81, 114);
 }
 
 .form-inputs {
-  width: 400px;
+  width: 100%;
   margin: auto auto;
 }
 
@@ -596,6 +618,9 @@ body {
 #box-selection-wrapper {
   background-color: white;
   border-radius: 10px;
+  width: 90%;
+  padding: 25px 0px;
+  margin: 2rem auto;
 }
 
 .item-description-checkbox {
@@ -604,4 +629,13 @@ body {
 
 #address {
   text-align: start;
+}
+
+#stored-item {
+  margin: 2rem auto;
+}
+
+#store-item-button {
+  background-color: white;
+  color: rgb(11, 81, 114);
 }
