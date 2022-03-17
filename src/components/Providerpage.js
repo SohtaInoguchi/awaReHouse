@@ -249,8 +249,12 @@ function Providerpage({ user, email2 }) {
       <div className="topContainer">
       <div className="innerTopContainer">
         <div className="innerInner1">
+      <img
+      className="pictureFinancial"
+      src={require("../pictures/financial.jpg")}
+      />
       <h6>Next payment date: <h5 className="financialHighlight">{today}</h5>
-      <h6>Next payment amount: <h5 className="financialHighlight">¥ {1077 * providerItems.length}</h5></h6></h6></div>
+      <h6>Next payment amount: <h5 className="financialHighlight">¥ {(String(1077 * providerItems.length).slice(0,1)+",")+(String(1077 * providerItems.length).slice(1,4))}</h5></h6></h6></div>
       <div className="innerInner2">
         {chartVisible === true && boxNumberNull === false ? (
           <div className="chart">
@@ -334,6 +338,10 @@ function Providerpage({ user, email2 }) {
            <h5>Boxes in storage: <h6 className="storedBoxes">{providerItems.length}</h6></h5>
            <h5> Incoming boxes: <h6 className="pendingItems">{pendingItems}</h6></h5>
            <h5>Incoming day: <h6 className="pendingItems">03/22/2022</h6></h5>
+           <img
+           className="pictureDeliveries"
+            src={require("../pictures/deliveries.webp")}
+            />
            </div>
       </div>
       
