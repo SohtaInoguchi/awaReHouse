@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
     let text;
     if (req === "Where can I check the seasonal retrieval / store period?")
       text = "You can find the period on your user page :)";
-    else if (req === "extra")
+    else if (req === "What do I need to do to get items outside of seasonal period?")
       text =
         "You can click extra retrieval / storage. But please bear in mind it will apply charge :)";
     else

@@ -74,12 +74,12 @@ export default function Chat() {
 
   function chatbot(e) {
     const faq = e.target.value;
-    // let temp = [...chatMessages];
-    // const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
+    let temp = [...chatMessages];
+    const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
     // temp.push(faq);
-    // temp.push(sentMessageObj);
-    // setChatMessages(temp);
-    // console.log(faq);
+    temp.push(sentMessageObj);
+    setChatMessages(temp);
+    console.log(faq);
     socket.emit("bot-message", faq);
   }
 
@@ -106,18 +106,19 @@ export default function Chat() {
                 value="Where can I check the seasonal retrieval / store period?"
                 onClick={chatbot}
                 >
-                When will be the next retrieval/storing period?
+                {/* When will be the next retrieval/storing period? */}
+                Where can I check the seasonal retrieval / store period?
               </button>
               <button
                 id="faq"
-                value="What do I need to do to get items out of seasonal period?"
+                value="What do I need to do to get items outside of seasonal period?"
                 onClick={chatbot}
                 >
                 Can I retrieve items outside the retrieval/storing period?
               </button>
               <button
                 id="faq"
-                value="Where can I check items I store?"
+                value="Where can I check items I stored?"
                 onClick={chatbot}
                 >
                 Where are my stored goods listed?

@@ -141,12 +141,11 @@ body {
 
 /* ------------Chat popup------------- */
 #outer-wrapper {
-  max-width: 40%;
+  max-width: 30%;
   position: -webkit-sticky;
   position: sticky;
-  bottom: 20px;
-  right: 20px;
-  /* position: absolute; */
+  bottom: 2rem;
+  left: 3rem;
 }
 
 #chat-box {
@@ -154,9 +153,10 @@ body {
   background-color: white;
   border: solid 2px rgb(5, 4, 4);
   border-radius: 10px;
-  /* max-width: 40%; */
+  height: 25rem;
   min-height: 300px;
-  max-height: 20rem;
+  max-height: 35rem;
+  min-width: 20rem;
   margin: 10px 10px;
   overflow: scroll;
 }
@@ -181,9 +181,6 @@ body {
 
 .messages {
   width: 80%;
-  /* width: fit-content;
-  min-width: 3rem;
-  max-width: 80%; */
   padding: 5px 5px;
   background-color: rgb(11, 81, 114);
   border-radius: 0.5rem;
@@ -213,7 +210,8 @@ body {
 .bot-message-sent {
   /* position: absolute; */
   width: auto;
-  background-color: rgb(255, 255, 255);
+  max-width: 80%;
+  background-color: rgb(212, 203, 203);
   padding: 5px 5px;
   /* margin: 10px 10px; */
   margin-left: 0px;
@@ -224,12 +222,10 @@ body {
 }
 
 .bot-message-received {
-  /* position: absolute; */
   width: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(11, 81, 114);
   padding: 5px 5px;
-  /* margin: 10px 10px; */
-  /* margin-left: 0px; */
+  color: white;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 100px;
@@ -240,6 +236,7 @@ body {
 #send-section-wrapper {
   display: flex;
   margin: auto auto;
+  min-width: 20rem;
 }
 
 #chat {
