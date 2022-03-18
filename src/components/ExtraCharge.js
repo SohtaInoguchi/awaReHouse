@@ -5,6 +5,7 @@ import axios from "axios";
 import { Button, Badge, ListGroup } from "react-bootstrap";
 import RetrieveConfirmation from "./RetrieveConfirmation";
 import { useNavigate } from "react-router-dom";
+import { keys } from "@material-ui/core/styles/createBreakpoints";
 export default function ExtraCharge({ user, items, email, setItems }) {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState();
@@ -14,14 +15,20 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [modalShow, setModalShow] = useState(false);
   const [localItems, setLocalItems] = useState([]);
   const navigate = useNavigate();
+
   const retrieveItem = (e) => {
     const temp = [...selectedItems];
     const tempForLocal = [...localItems];
     tempForLocal.forEach((item) => {
       for (let key in item) {
-        if (item[key] === e.target.textContent) {
-          item[key] = "No Items added";
-          return null;
+        const tag = document.getElementById(e.target.id);
+
+        if (
+          item[key] === e.target.textContent &&
+          item.box_id === parseInt(tag.id)
+        ) {
+          item[key] = "";
+          return;
         }
       }
     });
@@ -90,45 +97,60 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       </div>
 
       <h1 className="my-6 text-cyan-800 italic bg-white">
-        Which items to retrieve?
+        Select the items you want to retrieve
       </h1>
-
-      {localItems.map((item) => {
-        return (
-          <Badge bg="light" id="user-items">
-            <section key={item.box_id} className="text-left">
-              <div
-                key={`${item.box_id}b`}
-                className="user-items"
-                onClick={retrieveItem}
-              >
-                {item.declared_content_one}
-              </div>
-              <div
-                key={`${item.box_id}c`}
-                className="user-items"
-                onClick={retrieveItem}
-              >
-                {item.declared_content_two ? item.declared_content_two : ""}
-              </div>
-              <div
-                key={`${item.box_id}d`}
-                className="user-items"
-                onClick={retrieveItem}
-              >
-                {item.declared_content_three ? item.declared_content_three : ""}
-              </div>
-            </section>
-          </Badge>
-        );
-      })}
-
+      <div className="flex justify-between flex-row border-8">
+        {localItems.map((item) => {
+          return (
+            <div className="">
+              {item.declared_content_one ||
+              item.declared_content_two ||
+              item.declared_content_three ? (
+                <Badge bg="light" id="user-items">
+                  <section key={item.box_id} className="text-left">
+                    <div
+                      key={`${item.box_id}b`}
+                      id={`${item.box_id}`}
+                      className="user-items"
+                      onClick={retrieveItem}
+                    >
+                      {item.declared_content_one}
+                    </div>
+                    <div
+                      key={`${item.box_id}c`}
+                      id={`${item.box_id}`}
+                      className="user-items"
+                      onClick={retrieveItem}
+                    >
+                      {item.declared_content_two
+                        ? item.declared_content_two
+                        : ""}
+                    </div>
+                    <div
+                      key={`${item.box_id}d`}
+                      id={`${item.box_id}`}
+                      className="user-items"
+                      onClick={retrieveItem}
+                    >
+                      {item.declared_content_three
+                        ? item.declared_content_three
+                        : ""}
+                    </div>
+                  </section>
+                </Badge>
+              ) : (
+                ""
+              )}
+            </div>
+          );
+        })}
+      </div>
       <section
         className="flex 
         flex-wrap 
         items-center m-10 text-sky-900 font-bold"
       >
-        Selected item:
+        <p className="bg-white px-3 py-3 rounded-3xl">Selected item:</p>
         {selectedItems.map((item, idx) => {
           return (
             <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
