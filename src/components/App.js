@@ -41,15 +41,12 @@ function App() {
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
-  //Axios
-  useEffect(() => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, []);
 
-  // Delete later
   useEffect(() => {
-    console.log("items in App", items);
-  }, [items]);
+    axios
+      .post("/allItems", { email: window.localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
+  }, []);
 
   return (
     <div>

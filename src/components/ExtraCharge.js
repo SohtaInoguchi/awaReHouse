@@ -97,31 +97,27 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         return (
           <Badge bg="light" id="user-items">
             <section key={item.box_id} className="text-left">
-              <li
+              <div
                 key={`${item.box_id}b`}
                 className="user-items"
                 onClick={retrieveItem}
               >
                 {item.declared_content_one}
-              </li>
-              <li
+              </div>
+              <div
                 key={`${item.box_id}c`}
                 className="user-items"
                 onClick={retrieveItem}
               >
-                {item.declared_content_two
-                  ? item.declared_content_two
-                  : "No Items added"}
-              </li>
-              <li
+                {item.declared_content_two ? item.declared_content_two : ""}
+              </div>
+              <div
                 key={`${item.box_id}d`}
                 className="user-items"
                 onClick={retrieveItem}
               >
-                {item.declared_content_three
-                  ? item.declared_content_three
-                  : "No Items added"}
-              </li>
+                {item.declared_content_three ? item.declared_content_three : ""}
+              </div>
             </section>
           </Badge>
         );
