@@ -163,12 +163,13 @@ body {
 .chat-icons {
   width: 4rem;
   height: 4rem;
-  margin: 10px 10px;
+  margin-top: 10px;
   position: -webkit-sticky;
   position: sticky;
   bottom: 20px;
-  right: 20px;
-  /* position: absolute; */
+  left: 20px;
+  border-radius: 14px;
+  color: white;
 }
 
 /* .message-wrapper {

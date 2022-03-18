@@ -4,7 +4,8 @@ import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { Accordion } from "react-bootstrap";
-
+import { GoCommentDiscussion } from "react-icons/go";
+import { RiQuestionAnswerLine } from "react-icons/ri"
 
 export default function Chat() {
 
@@ -174,7 +175,7 @@ export default function Chat() {
       // <CloseChatComponent icon={<AiFillCloseCircle size="50"/>}/>
       :
       <OpenChatComponent 
-      icon={<BsChatRightTextFill 
+      icon={<RiQuestionAnswerLine 
       size="50" 
       onClick={toggleChatOpen}
       className="chat-icons"
