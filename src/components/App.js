@@ -23,6 +23,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import LearnMore from "./LearnMore";
+import WelcomingPage from "./WelcomingPage";
 
 function App() {
   //for user
@@ -122,7 +123,9 @@ function App() {
         />
 
         <Route path="signup/user" element={<NewUser />} />
+        <Route path="signup/user/confirmation" element={<WelcomingPage/>}/>
         <Route path="signup/provider" element={<NewProvider />} />
+        <Route path="signup/provider/confirmation" element={<WelcomingPage/>}/>
         <Route
           path="admin"
           element={
