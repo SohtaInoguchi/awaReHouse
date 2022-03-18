@@ -97,23 +97,6 @@ function Userpage({
     retrieveAddress();
   }, [setAddItem]);
 
-  // const submit1 = () => {
-  //   if (typeBox === null) {
-  //     setTryAgain(true);
-  //   }
-  //   if (typeBox !== null) {
-  //     setConfirmation(true);
-  //   }
-  // };
-
-  // const cancel = () => {
-  //   setAddItem(false);
-  //   setTryAgain(false);
-  //   setTypeBox(null);
-  //   setConfirmation(false);
-  //   setBoxOrderReceived(false);
-  // };
-
   function signOut() {
     window.localStorage.removeItem("firstName_user");
     window.localStorage.removeItem("email_user");
@@ -134,6 +117,7 @@ function Userpage({
 
   useEffect(() => {
     possibleStoragelocations();
+    window.scrollTo(200, 200);
   }, []);
 
   const max = storagePlaces.length;
@@ -169,9 +153,7 @@ function Userpage({
   const submit2 = (e) => {
     e.preventDefault();
     updateItemList();
-    // setDescription1("");
-    // setDescription2("");
-    // setDescription3("");
+
     setConfirmation(false);
     setBoxOrderReceived(true);
     setAddItem(false);
@@ -191,131 +173,72 @@ function Userpage({
 
   return (
     <div>
-      {/* <div className="flex justify-between"> */}
       <nav id="user-page-nav">
-        {/* <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center "> */}
         <p id="user-name">
           Welcome back {window.localStorage.getItem("firstName_user")}
         </p>
 
-        {/* <section id="nav-button"> */}
-        {/* <Button id="signout-button" className="mx-5 " onClick={signOut}> */}
         <Button id="signout-button" onClick={signOut}>
           Sign out
         </Button>
-
-        {/* <Button
-            id="retrieve-button"
-            // className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-charge")}
-            >
-            Need to retrieve?
-        <p className="popup-message">Through extra retrieval, items can be removed from storage anytime</p>
-        </Button>
-        <Button
-            id="storage-button"
-            className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-storage")}
-            >
-            Need Extra Storage?
-        <p className="popup-message-storage">Through extra storage, items can be sent to storage anytime</p>
-        </Button> */}
-        {/* </section> */}
-
       </nav>
 
-      {/* <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl"> */}
       <h3 id="next-period">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
       <section id="nav-button">
-
-      <Button
-            id="retrieve-button"
-            // className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-charge")}
-            >
-            Need to retrieve?
-        <p className="popup-message">Through extra retrieval, items can be removed from storage anytime</p>
+        <Button
+          id="retrieve-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-charge")}
+        >
+          Need to retrieve?
+          <p className="popup-message">
+            Through extra retrieval, items can be removed from storage anytime
+          </p>
         </Button>
         <Button
-            id="storage-button"
-            // className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-storage")}
-            >
-            Need Extra Storage?
-        {/* <p className="popup-message-storage">Through extra storage, items can be sent to storage anytime</p> */}
-        <p className="popup-message">Through extra storage, items can be sent to storage anytime</p>
-      </Button>
+          id="storage-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-storage")}
+        >
+          Need Extra Storage?
+          <p className="popup-message">
+            Through extra storage, items can be sent to storage anytime
+          </p>
+        </Button>
       </section>
 
-      {/* <div className="mx-3 my-3 px-3 py-3"> */}
       <section id="box-select">
         <div id="box-selection-wrapper">
-          <BoxSelection handleChange={handleChange}/>
-          <ItemDescription 
-          createDescription1={createDescription1}
-          createDescription2={createDescription2}
-          createDescription3={createDescription3}
-          toggleIsHeavy={toggleIsHeavy}
-          toggleIsFragile={toggleIsFragile}
-          submit2={submit2}
-          typeBox={typeBox}
-          description1={description1}
-          description2={description2}
-          description3={description3}
-          address={address} />
-        </div>    
+          <BoxSelection handleChange={handleChange} />
+          <ItemDescription
+            createDescription1={createDescription1}
+            createDescription2={createDescription2}
+            createDescription3={createDescription3}
+            toggleIsHeavy={toggleIsHeavy}
+            toggleIsFragile={toggleIsFragile}
+            submit2={submit2}
+            typeBox={typeBox}
+            description1={description1}
+            description2={description2}
+            description3={description3}
+            address={address}
+          />
+        </div>
 
-        <StoredItems 
-        updateItemList={updateItemList}
-        setDisplayTable={setDisplayTable}
-        setAddItem={setAddItem}
-        setBoxOrderReceived={setBoxOrderReceived}
-        items={items}
-        displayTable={displayTable}
+        <StoredItems
+          updateItemList={updateItemList}
+          setDisplayTable={setDisplayTable}
+          setAddItem={setAddItem}
+          setBoxOrderReceived={setBoxOrderReceived}
+          items={items}
+          displayTable={displayTable}
         />
       </section>
 
-      <div className="flex flex-row justify-center items-center ">
-        {/* <div className=" extra "> */}
-          {/* <h4 className="px-3">Need Extra Retrieval?</h4> */}
-          {/* <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/extra-retrieve.jpeg")}
-            alt=""
-          /> */}
-          {/* <h5 className="text-center mt-3 pt-3">
-            Through extra retrieval, <br /> items can be removed from storage
-            anytime
-          </h5> */}
-
-          {/* <Button
-            className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-charge")}
-          >
-            Need to retrieve?
-          </Button> */}
-        {/* </div> */}
-        {/* <div className="extra "> */}
-          {/* <h4 className="px-3"> Need Extra Storage?</h4> */}
-          {/* <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/extra-storage.jpeg")}
-            alt=""
-          /> */}
-          {/* <h5 className="text-center mt-3 pt-3">
-            Through extra storage, <br /> items can be sent to storage anytime
-          </h5> */}
-          {/* <Button
-            className="mx-3 my-7 py-7 "
-            onClick={() => navigate("/extra-storage")}
-          >
-            Need Extra Storage?
-          </Button> */}
-        {/* </div> */}
-      </div>
+      <div className="flex flex-row justify-center items-center "></div>
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>
