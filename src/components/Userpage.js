@@ -29,10 +29,6 @@ function Userpage({
   address,
   setAddress,
 }) {
-  function retrieveData() {
-    setMode("extraCharge");
-  }
-
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
   // const [address, setAddress] = useState("");
