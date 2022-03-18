@@ -164,12 +164,13 @@ body {
   min-width: 20rem;
   margin-top: 0px;
   overflow: scroll;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 #faq {
-  /* margin: auto 10px; */
-  border: none;
-  width: inherit;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
 
 
