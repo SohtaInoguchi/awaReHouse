@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BoxFlow } from "./BoxFlow";
 import Response from "./Response";
 import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
+import { ExplanationPage } from "./ExplanationPage";
 
 import Icon from "./Icon";
 import LearnMore from "./LearnMore";
@@ -100,6 +101,7 @@ export default function Homepage({
               </div>
             </div>
           </div> */}
+          <ExplanationPage/>
           <div className="flex flex-row justify-center  text-white rounded-xl text-center w-full  flex-wrap  ">
             <img
               className=" object-contain w-auto rounded-tl-3xl rounded-bl-3xl opacity-80"
