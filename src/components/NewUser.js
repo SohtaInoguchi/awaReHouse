@@ -166,11 +166,8 @@ export default function NewUser({ setMode }) {
   }
   if (registrationDone === true) {
     return (
-      <div className="registrationDone">
-        <div>
-          <WelcomingPage/>>
-          <br></br>
-        </div>
+      <div>
+      <WelcomingPage/>  
       </div>
     );
   }
