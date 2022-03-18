@@ -172,41 +172,38 @@ body {
   color: white;
 }
 
-/* .message-wrapper {
-  position: absolute;
-} */
+.message-wrapper {
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
 
 .messages {
-  /* width: 50%; */
-  max-width: 50%;
-  min-width: 50px;
+  width: 80%;
+  /* width: fit-content;
+  min-width: 3rem;
+  max-width: 80%; */
   padding: 5px 5px;
   background-color: rgb(255, 255, 255);
   border-radius: 0.5rem;
   border: 0px;
-  /* border: 2px rgb(209, 19, 19) solid; */
-  margin-left: 50%;
+  margin-left: 20%;
   margin-top: 10px;
   margin-bottom: 10px;
-  /* margin-right: 0px; */
-  /* word-wrap: break-word; */
   word-break: break-all;
 }
 
 .sent-messages {
-  max-width: 50%;
-  /* width: 50%; */
-  min-width: 50px;
+  width: 80%;
+  /* width: fit-content;
+  min-width: 3rem;
+  max-width: 80%; */
   padding: 5px 5px;
   background-color: rgb(255, 255, 255);
   margin-left: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 0.5rem;
-  /* position: absolute; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* border: 2px rgb(32, 19, 209) solid; */
   border: 0px;
   word-break: break-all;
 }
