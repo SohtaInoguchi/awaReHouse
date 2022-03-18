@@ -15,10 +15,6 @@ import ExtraCharge from "./ExtraCharge";
 import BoxFlow from "./BoxFlow";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
-
-import Icon from "./Icon";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,6 +24,7 @@ import {
 } from "react-router-dom";
 import LearnMore from "./LearnMore";
 import ExplanationPage from "./ExplanationPage";
+import WelcomingPage from "./WelcomingPage";
 
 function App() {
   //for user
@@ -64,9 +61,7 @@ function App() {
           src={require("../pictures/LOGO.png")}
           alt=""
           onClick={() => {
-            // window.scrollTo(0, 200);
-            // document.getElementById('slogan').scrollHeight
-            // window.scroll(0, document.getElementById('slogan').scrollHeight)
+            window.scrollTo(500, 350);
             navigate("/");
           }}
         />
@@ -98,6 +93,7 @@ function App() {
               items={items}
               email={email}
               setItems={setItems}
+              address={address}
               setAddress={setAddress}
             />
           }
@@ -131,7 +127,9 @@ function App() {
         />
 
         <Route path="signup/user" element={<NewUser />} />
+        <Route path="signup/user/confirmation" element={<WelcomingPage/>}/>
         <Route path="signup/provider" element={<NewProvider />} />
+        <Route path="signup/provider/confirmation" element={<WelcomingPage/>}/>
         <Route
           path="admin"
           element={

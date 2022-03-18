@@ -3,6 +3,7 @@ import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form } from "react-bootstrap";
+import WelcomingPage from "./WelcomingPage.js"
 
 export default function NewUser({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
@@ -165,11 +166,8 @@ export default function NewUser({ setMode }) {
   }
   if (registrationDone === true) {
     return (
-      <div className="registrationDone">
-        <div>
-          THANK YOU FOR YOUR REGISTRATION
-          <br></br>
-        </div>
+      <div>
+      <WelcomingPage/>  
       </div>
     );
   }

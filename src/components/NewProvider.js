@@ -3,6 +3,7 @@ import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import WelcomingPage from "./WelcomingPage.js"
 
 export default function NerCustomer({ setMode }) {
   const [providerFirstName, setProviderFirstName] = useState("");
@@ -224,14 +225,8 @@ export default function NerCustomer({ setMode }) {
   }
   if (registrationDone === true) {
     return (
-      <div className="registrationDone">
-        <div>
-          THANK YOU FOR YOUR REGISTRATION
-          <br></br>
-          <button type="button" onClick={() => setMode("homePage")}>
-            Back to homepage
-          </button>
-        </div>
+      <div>
+      <WelcomingPage/>  
       </div>
     );
   }

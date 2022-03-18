@@ -29,10 +29,6 @@ function Userpage({
   address,
   setAddress,
 }) {
-  function retrieveData() {
-    setMode("extraCharge");
-  }
-
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
   // const [address, setAddress] = useState("");
@@ -97,23 +93,6 @@ function Userpage({
     retrieveAddress();
   }, [setAddItem]);
 
-  // const submit1 = () => {
-  //   if (typeBox === null) {
-  //     setTryAgain(true);
-  //   }
-  //   if (typeBox !== null) {
-  //     setConfirmation(true);
-  //   }
-  // };
-
-  // const cancel = () => {
-  //   setAddItem(false);
-  //   setTryAgain(false);
-  //   setTypeBox(null);
-  //   setConfirmation(false);
-  //   setBoxOrderReceived(false);
-  // };
-
   function signOut() {
     window.localStorage.removeItem("firstName_user");
     window.localStorage.removeItem("email_user");
@@ -134,6 +113,7 @@ function Userpage({
 
   useEffect(() => {
     possibleStoragelocations();
+    window.scrollTo(200, 200);
   }, []);
 
   const max = storagePlaces.length;
@@ -169,9 +149,7 @@ function Userpage({
   const submit2 = (e) => {
     e.preventDefault();
     updateItemList();
-    // setDescription1("");
-    // setDescription2("");
-    // setDescription3("");
+
     setConfirmation(false);
     setBoxOrderReceived(true);
     setAddItem(false);
