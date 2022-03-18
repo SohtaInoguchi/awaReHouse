@@ -33,11 +33,8 @@ export default function Chat() {
     socket.on("send-back-message", (res) => {
       console.log("user chat res", res);
       const receivedMessageObj = {receiveOrSent: "received", message: res};
-      // const temp2 = [...receivedMessage];
       const temp2 = [...chatMessages];
-      // temp2.push(res);
       temp2.push(receivedMessageObj);
-      // setReceivedMessage(temp2);
       setChatMessages(temp2);
     });
     return () => socket.off("send-back-message");
@@ -48,12 +45,9 @@ export default function Chat() {
     if (socket == null) return;
     socket.on("bot-send-back", (res) => {
       console.log("user chat res", res);
-      // const temp2 = [...receivedMessage];
       const receivedMessageObj = {receiveOrSent: "botMessageReceived", message: res};
       const temp2 = [...chatMessages];
-      // temp2.push(res);
       temp2.push(receivedMessageObj);
-      // setReceivedMessage(temp2);
       setChatMessages(temp2);
     });
     return () => socket.off("bot-send-back");
@@ -64,10 +58,8 @@ export default function Chat() {
     if (chat.value.length < 1) return;
     let temp = [...chatMessages];
     const sentMessageObj = {receiveOrSent: "sent", message: chat.value};
-    // temp.push(chat.value);
     temp.push(sentMessageObj);
     setChatMessages(temp);
-    // socket.emit("send-message", chat.value);
     socket.emit("send-message", sentMessageObj.message);
     chat.value = "";
   };
@@ -76,7 +68,6 @@ export default function Chat() {
     const faq = e.target.value;
     let temp = [...chatMessages];
     const sentMessageObj = {receiveOrSent: "botMessageSent", message: faq};
-    // temp.push(faq);
     temp.push(sentMessageObj);
     setChatMessages(temp);
     console.log(faq);
@@ -166,12 +157,9 @@ export default function Chat() {
 
   return (
     <>
-    {/* <div className={isChatOpened ? "show" : "hide"}>{renderChatBox()}</div>
-    <button onClick={(e) => toggleChatOpen(e)}>Toggle</button> */}
       {
       isChatOpened ? 
       renderChatBox()
-      // <CloseChatComponent icon={<AiFillCloseCircle size="50"/>}/>
       :
       <OpenChatComponent 
       icon={<RiQuestionAnswerLine 
@@ -183,6 +171,7 @@ export default function Chat() {
     </>
   );
 }
+
 
 // Icon components
 function OpenChatComponent({ icon }) {
