@@ -131,6 +131,58 @@ exports.seed = function(knex) {
             fragile:false,
             heavy:false,
             pending:true
+          },
+          {
+            declared_content_one:"Tennis rackets",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.02,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false
+          },
+          {
+            declared_content_one:"Plastic trains",
+            declared_content_two:"Plastic gundams",
+            declared_content_three:"Lego",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:11.40,
+            declared_as_fragile:false,
+            expected_retrieval_season:"autumn",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false
+          },
+          {
+            declared_content_one:"Printed pictures",
+            declared_content_two:"Polaroids",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.07,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false
+          },
+          {
+            declared_content_one:"Summer table napkins",
+            declared_content_two:"Summer table plates",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:11.91,
+            declared_as_fragile:true,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:true,
+            heavy:false,
+            pending:true
           }
       ]);
     });
