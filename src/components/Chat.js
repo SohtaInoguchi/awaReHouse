@@ -102,26 +102,26 @@ export default function Chat() {
           <Accordion.Header >FAQ</Accordion.Header>
           <Accordion.Body>
               <button
-                id="faq"
+                className="faq"
                 value="Where can I check the seasonal retrieval / store period?"
                 onClick={chatbot}
                 >
                 {/* When will be the next retrieval/storing period? */}
-                Where can I check the seasonal retrieval / store period?
+                - Where can I check the seasonal retrieval / store period?
               </button>
               <button
-                id="faq"
+                className="faq"
                 value="What do I need to do to get items outside of seasonal period?"
                 onClick={chatbot}
                 >
-                Can I retrieve items outside the retrieval/storing period?
+                - Can I retrieve items outside the retrieval/storing period?
               </button>
               <button
-                id="faq"
+                className="faq"
                 value="Where can I check items I stored?"
                 onClick={chatbot}
                 >
-                Where are my stored goods listed?
+                - Where are my stored goods listed?
               </button>
               </Accordion.Body>
               </Accordion.Item>    

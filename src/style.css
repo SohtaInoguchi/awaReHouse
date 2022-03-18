@@ -161,6 +161,14 @@ body {
   overflow: scroll;
 }
 
+.faq {
+  text-align: start;
+}
+
+.faq:hover {
+  background-color: rgb(200, 200, 200);
+}
+
 .chat-icons {
   width: 4rem;
   height: 4rem;
@@ -187,28 +195,24 @@ body {
   border: 0px;
   margin-left: 20%;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   word-break: break-all;
   color: white;
-}
+} 
 
 .sent-messages {
   width: 80%;
-  /* width: fit-content;
-  min-width: 3rem;
-  max-width: 80%; */
   padding: 5px 5px;
   background-color: rgb(212, 203, 203);
   margin-left: 0px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   border-radius: 0.5rem;
   border: 0px;
   word-break: break-all;
 }
 
 .bot-message-sent {
-  /* position: absolute; */
   width: auto;
   max-width: 80%;
   background-color: rgb(212, 203, 203);
