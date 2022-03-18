@@ -27,6 +27,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import LearnMore from "./LearnMore";
+import ExplanationPage from "./ExplanationPage";
 
 function App() {
   //for user
@@ -154,6 +155,7 @@ function App() {
         />
         <Route path="learn" element={<LearnMore />} />
         <Route path="extra-storage" element={<BoxFlow addy={address} />} />
+        <Route path="explanation" element={<ExplanationPage />} />
       </Routes>
     </div>
   );

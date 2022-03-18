@@ -1,30 +1,33 @@
 import * as React from "react";
 import { useState } from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import { Button } from "react-bootstrap";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import axios from "axios";
-
-export const ExplanationPage = ({}) => {
+import { useNavigate } from "react-router-dom";
+export default function ExplanationPage({}) {
   const [plan, setPlan] = useState("");
-  const [usersCurrentPlan, setUsersCurrentPlan] = useState("");
-
+  // const [usersCurrentPlan, setUsersCurrentPlan] = useState("");
+  const navigate = useNavigate();
   // function userSelect() {
   //   setPlan("basic");
   //   console.log(plan)
   // }
 
-  const userEmail = window.localStorage.getItem("email_user")
+  const userEmail = window.localStorage.getItem("email_user");
 
-  const verifyEmail = () => {
-    console.log(`THE EMAIL IS ${userEmail}`)
-    axios.get(`/login/verify/${userEmail}`)
-    .then((res) => {console.log(res.data)})
-  };
-
+  function verifyEmail() {
+    //
+    console.log(`THE EMAIL IS ${userEmail}`);
+    axios.get(`/login/verify/${userEmail}`).then((res) => {
+      // setUsersCurrentPlan(res.data);
+      // usersCurrentPlan === "" ? navigate("/explanation") : navigate("/user");
+    });
+  }
 
   return (
     <div>
@@ -54,27 +57,45 @@ export const ExplanationPage = ({}) => {
         </FormControl>
       </div>
 
-      <div>{plan === "basic" ? <div>
-      <h4>Basic Plan</h4>
-      <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/5Boxes.jpeg")}
-            alt="Picture for 5 boxes"
-          />
-        <p>This is the basic plan that allows you to store up to 5 boxes without any extra monthly cost.  Ideal for a single person.</p>
-      </div> : <div></div>}</div>
-      {plan === "premium" ? <div>
-        <h4>Premium Plan</h4>
-      <img
+      <div>
+        {plan === "basic" ? (
+          <div>
+            <h4>Basic Plan</h4>
+            <img
+              className="max-w-96 max-h-96 "
+              src={require("../pictures/5Boxes.jpeg")}
+              alt="Picture for 5 boxes"
+            />
+            <p>
+              This is the basic plan that allows you to store up to 5 boxes
+              without any extra monthly cost. Ideal for a single person.
+            </p>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      {plan === "premium" ? (
+        <div>
+          <h4>Premium Plan</h4>
+          <img
             className="max-w-96 max-h-96 "
             src={require("../pictures/10Boxes.jpeg")}
             alt="Picture for 10 boxes"
           />
-        <p>This is the premium plan that allows you to store up to 10 boxes without any extra monthly cost.  Ideal for families or couples.</p>
-      </div> : <div></div> }
-      <Button variant="contained" onClick={verifyEmail()}>Confirm</Button>
-      <Button variant="contained">Cancel</Button>
+          <p>
+            This is the premium plan that allows you to store up to 10 boxes
+            without any extra monthly cost. Ideal for families or couples.
+          </p>
+        </div>
+      ) : (
+        <div></div>
+      )}
+      <Button onClick={verifyEmail}>Confirm</Button>
+      <Button variant="contained" onClick={() => navigate("/")}>
+        Cancel
+      </Button>
     </div>
   );
-};
+}
 //Connect to db, check if the user is member.  If so go to user page, if not stay on page.
