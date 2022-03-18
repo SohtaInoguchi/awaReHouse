@@ -91,31 +91,20 @@ app.post("/allItems", async (req, res) => {
 //Verify if user has created account already
 //Currently sends back an arr of objects with sub plan
 app.get("/login/verify/:member", async (req, res) => {
-  // const email = req.body.email;
-  // console.log("------------------------------")
-  // console.log(email)
-  // console.log(req.header.params)
-  console.log(req.params);
+
   const isMember = await db
     .select("subscription_plan")
     .from("users")
     .where("email", req.params.member)
-    .then((e) => console.log(e));
   res.send(isMember);
 });
 
-// app.post("/login/verify", async (req,res) => {
-//   // const isMember = await db("users")
-//   // .insert({subscription_plan: "Premium"})
-//   // .where("email", "hirochanyakosen@yahoo.co.jp")
-//   // .then((e) => console.log(e))
-//   // res.send("isMember")
-
-//   await db("users")
-//   .where("email", "hirochanyakosen@yahoo.co.jp")
-//   .update("subscription_plan", "Premium")
-//   res.send("HIIIIIIIIIIIIII")
-// })
+app.post("/login/verify/:member/:plan", async (req,res) => {
+  await db("users")
+  .where("email", req.params.member)
+  .update("subscription_plan", req.params.plan)
+  res.send("BACK END POST")
+})
 
 app.post("/login", async (req, res) => {
   try {
@@ -125,7 +114,7 @@ app.post("/login", async (req, res) => {
     console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
-          .select("password", "first_name", "email")
+          .select("password", "first_name", "email","subscription_plan")
           .from("users")
           .where("email", req.body.email))
       : (user = await db
@@ -151,12 +140,29 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-    res.json({
-      boolean,
-      first_name: user[0].first_name,
-      email: user[0].email,
-      token,
-    });
+    if(req.body.mode === "user"){
+      res.json({
+        boolean,
+        first_name: user[0].first_name,
+        email: user[0].email,
+        plan: user[0].subscription_plan,
+        token,
+      });
+    } else{
+      res.json({
+        boolean,
+        first_name: user[0].first_name,
+        email: user[0].email,
+        token,
+      });
+    }
+
+    // res.json({
+    //   boolean,
+    //   first_name: user[0].first_name,
+    //   email: user[0].email,
+    //   token,
+    // });
   } catch (err) {
     res.json({
       boolean: false,

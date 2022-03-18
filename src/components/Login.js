@@ -30,9 +30,11 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           window.localStorage.setItem("token_user", res.data.token);
           window.localStorage.setItem("firstName_user", res.data.first_name);
           window.localStorage.setItem("email_user", res.data.email);
+          window.localStorage.setItem("plan_user", res.data.plan)
 
-          if (usersCurrentPlan === "") navigate("/explanation");
-          else navigate("/user");
+          console.log(usersCurrentPlan)
+          if (window.localStorage.getItem("plan_user") === "premium" || window.localStorage.getItem("plan_user")  === "basic") navigate("/user")
+          else navigate("/explanation");
         } else if (res.data.boolean && mode === "provider") {
           window.localStorage.setItem("token_provider", res.data.token);
           window.localStorage.setItem(

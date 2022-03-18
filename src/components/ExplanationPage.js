@@ -11,23 +11,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function ExplanationPage({}) {
   const [plan, setPlan] = useState("");
-  // const [usersCurrentPlan, setUsersCurrentPlan] = useState("");
+
   const navigate = useNavigate();
-  // function userSelect() {
-  //   setPlan("basic");
-  //   console.log(plan)
-  // }
 
   const userEmail = window.localStorage.getItem("email_user");
 
   function verifyEmail() {
-    //
-    console.log(`THE EMAIL IS ${userEmail}`);
-    axios.get(`/login/verify/${userEmail}`).then((res) => {
-      // setUsersCurrentPlan(res.data);
-      // usersCurrentPlan === "" ? navigate("/explanation") : navigate("/user");
+    axios.post(`/login/verify/${userEmail}/${plan}`).then(() => {
+
+      navigate("/user");
     });
+
+    
   }
+  
 
   return (
     <div>
