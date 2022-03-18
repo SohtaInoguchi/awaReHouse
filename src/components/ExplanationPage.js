@@ -6,14 +6,25 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import axios from "axios";
 
 export const ExplanationPage = ({}) => {
   const [plan, setPlan] = useState("");
+  const [usersCurrentPlan, setUsersCurrentPlan] = useState("");
 
-  function userSelect() {
-    setPlan("basic");
-    console.log(plan)
-  }
+  // function userSelect() {
+  //   setPlan("basic");
+  //   console.log(plan)
+  // }
+
+  const userEmail = window.localStorage.getItem("email_user")
+
+  const verifyEmail = () => {
+    console.log(`THE EMAIL IS ${userEmail}`)
+    axios.get(`/login/verify/${userEmail}`)
+    .then((res) => {console.log(res.data)})
+  };
+
 
   return (
     <div>
@@ -61,7 +72,7 @@ export const ExplanationPage = ({}) => {
           />
         <p>This is the premium plan that allows you to store up to 10 boxes without any extra monthly cost.  Ideal for families or couples.</p>
       </div> : <div></div> }
-      <Button variant="contained">Confirm</Button>
+      <Button variant="contained" onClick={verifyEmail()}>Confirm</Button>
       <Button variant="contained">Cancel</Button>
     </div>
   );

@@ -88,6 +88,37 @@ app.post("/allItems", async (req, res) => {
 //   }
 // });
 
+//Verify if user has created account already
+//Currently sends back an arr of objects with sub plan
+app.get("/login/verify/:member", async (req,res) => {
+  // const email = req.body.email;
+  // console.log("------------------------------")
+  // console.log(email)
+  // console.log(req.header.params)
+  // console.log(req.body)
+  // const isMember = await db
+  // .select("subscription_plan")
+  // .from("users")
+  // .where("email", email)
+  // .then((e) => console.log(e))
+  res.send("isMember")
+})
+
+// app.post("/login/verify", async (req,res) => {
+//   // const isMember = await db("users")
+//   // .insert({subscription_plan: "Premium"})
+//   // .where("email", "hirochanyakosen@yahoo.co.jp")
+//   // .then((e) => console.log(e))
+//   // res.send("isMember")
+
+  
+//   await db("users")
+//   .where("email", "hirochanyakosen@yahoo.co.jp")
+//   .update("subscription_plan", "Premium")
+//   res.send("HIIIIIIIIIIIIII")
+// })
+
+
 app.post("/login", async (req, res) => {
   try {
     // for user

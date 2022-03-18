@@ -7,6 +7,7 @@ import Response from "./Response";
 import LearnMore from "./LearnMore";
 import MoreLife from "./MoreLife";
 import { Button } from "bootstrap";
+import { ExplanationPage } from "./ExplanationPage";
 export default function Homepage({
   setMode,
   setNewCustomer,
@@ -70,6 +71,7 @@ export default function Homepage({
               More Space, More Life
             </h3>
           </div>
+          <ExplanationPage/>
           <LearnMore />
           <div className="flex justify-center items-center w-full py-4 ">
             <button
