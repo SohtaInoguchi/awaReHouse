@@ -14,6 +14,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [selectedItems, setSelectedItem] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [localItems, setLocalItems] = useState([]);
+  const [clear, setClear] = useState(false);
   const navigate = useNavigate();
 
   const retrieveItem = (e) => {
@@ -154,12 +155,19 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         {selectedItems.map((item, idx) => {
           return (
             <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
-              <li className="selected-items" key={idx}>
+              <li className="selected-items " key={idx}>
                 {item}
               </li>
             </section>
           );
         })}
+        <Button
+          onClick={() => {
+            window.location.reload(false);
+          }}
+        >
+          Clear
+        </Button>
       </section>
 
       <h2 className="my-8 text-cyan-800 italic bg-white">
