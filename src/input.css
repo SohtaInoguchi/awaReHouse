@@ -58,6 +58,9 @@
   .login {
     @apply bg-repeat;
   }
+  .pending-item {
+    @apply opacity-0 transition-all duration-500;
+  }
 }
 
 .login {
