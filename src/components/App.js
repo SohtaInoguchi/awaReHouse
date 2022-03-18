@@ -15,10 +15,6 @@ import ExtraCharge from "./ExtraCharge";
 import BoxFlow from "./BoxFlow";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
-
-import Icon from "./Icon";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -64,9 +60,7 @@ function App() {
           src={require("../pictures/LOGO.png")}
           alt=""
           onClick={() => {
-            // window.scrollTo(0, 200);
-            // document.getElementById('slogan').scrollHeight
-            // window.scroll(0, document.getElementById('slogan').scrollHeight)
+            window.scrollTo(500, 350);
             navigate("/");
           }}
         />
@@ -98,6 +92,7 @@ function App() {
               items={items}
               email={email}
               setItems={setItems}
+              address={address}
               setAddress={setAddress}
             />
           }
