@@ -97,7 +97,7 @@ export default function NerCustomer({ setMode }) {
 
   if (registrationDone === false) {
     return (
-      <div className="containerNewRegistration">
+      <div className="containerNewRegistration login">
         <div className="newProvider text-slate-900 m-5">
           Register as a storage provider
           <Form onSubmit={handleProviderSubmit}>

@@ -3,11 +3,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BoxFlow } from "./BoxFlow";
 import Response from "./Response";
+<<<<<<< HEAD
 import { FaUserTie, FaUser, FaUserShield } from "react-icons/fa";
 import { ExplanationPage } from "./ExplanationPage";
+=======
+>>>>>>> 37d7d50bd635911de2760c8655791a54e615fa18
 
-import Icon from "./Icon";
 import LearnMore from "./LearnMore";
+import MoreLife from "./MoreLife";
+import { Button } from "bootstrap";
 export default function Homepage({
   setMode,
   setNewCustomer,
@@ -20,6 +24,21 @@ export default function Homepage({
 
   // Check to see if this is a redirect back from Checkout
   const query = new URLSearchParams(window.location.search);
+
+  useEffect((e) => {
+    const bodyRect = document.body.getBoundingClientRect();
+    const sloganRect = document.getElementById("slogan").getClientRects()[0];
+
+    console.log(document.getElementById("slogan").clientY);
+    // window.scrollTo(
+    //   0,
+    //   document.getElementById("slogan").scrollIntoView(true, { block: "end" })
+    // );
+    // document.getElementById("slogan").scrollHeight;
+    window.scroll(500, 350);
+    // window.scrollTo(0, 200);
+  }, []);
+
   useEffect(() => {
     if (query.get("success")) {
       setMessage("Order placed! You will receive an email confirmation.");
@@ -41,6 +60,7 @@ export default function Homepage({
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
+<<<<<<< HEAD
           {/* <div className="homepageContainer flex justify-center items-center flex-wrap ">
             <img
               className="top-0 w-36 h-36 rounded-3xl"
@@ -124,17 +144,40 @@ export default function Homepage({
               </p>
             </div>
           </div>
+=======
+          <MoreLife />
+>>>>>>> 37d7d50bd635911de2760c8655791a54e615fa18
           <div
+            id="slogan"
             className="flex flex-col
-           justify-center items-center border-8 w-full mx-3 my-12 px-3 py-12 bg-gray-200 "
+           justify-center items-center w-full  py-12 bg-gray-200"
+            onClick={(e) => {
+              const a = document.getElementById("slogan").getClientRects()[0];
+
+              console.log(e, a.bottom);
+            }}
           >
             <h3 className="flex text-gray-500 font-serif text-6xl ">
               More Space, More Life
             </h3>
           </div>
           <LearnMore />
-          <div className="flex justify-center items-center bg-gray-600 w-full h-72">
-            <h6>privacy&policy|</h6>
+          <div className="flex justify-center items-center w-full py-4 ">
+            <button
+              className="text-blue-600 bg-gray-200 rounded-lg mx-3 px-3 my-3 py-3 cursor-pointer hover:bg-gray-300"
+              onClick={() => navigate("/signup/user")}
+            >
+              Sign Up as a User
+            </button>
+            <button
+              className="text-blue-600 bg-gray-200 rounded-lg mx-3 px-3 my-3 py-3 cursor-pointer hover:bg-gray-300"
+              onClick={() => navigate("/signup/provider")}
+            >
+              Sign Up as a Provider
+            </button>
+          </div>
+          <div className="flex justify-center items-center bg-gray-50 w-full h-36">
+            <h6>Terms & Conditions|</h6>
             <h6
               className="w-12 cursor-pointer"
               onClick={() => navigate("admin")}
