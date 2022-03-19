@@ -8,6 +8,7 @@ import { OneFiftyStripe } from "./OneFiftyStripe";
 
 import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
+import BoxSelection from "./BoxSelection";
 
 export default function BoxFlow({ email, setItems, addy }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
@@ -150,7 +151,9 @@ export default function BoxFlow({ email, setItems, addy }) {
         <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
       </div>
 
-      <div className=" rounded-3xl mx-8">
+      <BoxSelection handleChange={handleChange} />
+{/* ----------BOX SELECTION ORIGINAL-------------- */}
+      {/* <div className=" rounded-3xl mx-8">
         <Accordion>
           <Accordion.Item className="">
             <Accordion.Header>
@@ -206,7 +209,7 @@ export default function BoxFlow({ email, setItems, addy }) {
                   Type D
                 </label>
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center"> */}
                 {/* <Button
                         className="my-3"
                         onClick={(e) => {
@@ -226,11 +229,12 @@ export default function BoxFlow({ email, setItems, addy }) {
                 {/* <Button onClick={() => setConfirmation(false)}>
                     Go Back
                   </Button> */}
-              </div>
+              {/* </div>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-      </div>
+      </div> */}
+{/* ---------BOX SELECTION END----------- */}
 
       <div className="flex justify-center items-center mx-5 px-5  ">
         <Form
