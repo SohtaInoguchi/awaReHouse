@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
 import BoxSelection from "./BoxSelection";
 
-export default function BoxFlow({ email, setItems, addy }) {
+export default function BoxFlow({ email, setItems, address }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
   const [typeBoxFlow, setTypeBoxFlow] = useState(null);
   // const [address, setAddress] = useState("");
@@ -151,6 +151,9 @@ export default function BoxFlow({ email, setItems, addy }) {
         <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
       </div>
 
+    <section id="box-select">
+      <div id="box-selection-wrapper">
+
       <BoxSelection handleChange={handleChange} />
 {/* ----------BOX SELECTION ORIGINAL-------------- */}
       {/* <div className=" rounded-3xl mx-8">
@@ -236,68 +239,83 @@ export default function BoxFlow({ email, setItems, addy }) {
       </div> */}
 {/* ---------BOX SELECTION END----------- */}
 
-      <div className="flex justify-center items-center mx-5 px-5  ">
-        <Form
-          action="/create-checkout-session"
-          method="POST"
-          id="confirmation-form"
-          className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
-        >
-          You selected a type {typeBoxFlow} box.
-          <br /> Please provide a brief description of the items you want to
-          store (e.g. Snowboard, summer clothes, barbecue set...)
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description1"
-              placeholder="Item description (required)"
-              required
-              value={description1Flow}
-              onChange={createDescription1}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description2"
-              placeholder="Item description (optional)"
-              value={description2Flow}
-              onChange={createDescription2}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description3"
-              placeholder="Item description (optional)"
-              value={description3Flow}
-              onChange={createDescription3}
-            />
-          </Form.Group>
-          {/* Fragile and heavy flag  */}
-          <Form.Group className="w-96">
-            <Form.Check
-              type="checkbox"
-              label="Heavy"
-              onChange={toggleIsHeavy}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Check
-              type="checkbox"
-              label="Fragile"
-              onChange={toggleIsFragile}
-            />
-          </Form.Group>
-          Sending address:{" "}
-          <p className=" bg-blue-200  rounded-lg w-96">{addy}</p>
-          <div className="flex justify-center items-center">
-            <OneFiftyStripe />
-          </div>
-        </Form>
-      </div>
+{/* -------ITEM DESCRIPTION FORM ORIGINAL--------------- */}
+        <section id="item-description-wrapper">
+          <article id="item-description">
+            {/* <div className="flex justify-center items-center mx-5 px-5  "> */}
+              <Form
+                action="/create-checkout-session"
+                method="POST"
+                id="confirmation-form"
+                // className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
+                className=" text-blue-600 px-3 py-3 "
+              >
+              <div id="box-select-header">
+                <p>You selected a type {typeBoxFlow} box.</p>
+                <p>Please provide a brief description of the items you want to
+                store (e.g. Snowboard, summer clothes, barbecue set...)</p>
+              </div>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description1"
+                    placeholder="Item description (required)"
+                    required
+                    value={description1Flow}
+                    onChange={createDescription1}
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description2"
+                    placeholder="Item description (optional)"
+                    value={description2Flow}
+                    onChange={createDescription2}
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description3"
+                    placeholder="Item description (optional)"
+                    value={description3Flow}
+                    onChange={createDescription3}
+                  />
+                </Form.Group>
+                {/* Fragile and heavy flag  */}
+                <Form.Group className="form-inputs">
+                  <Form.Check
+                    type="checkbox"
+                    label="Heavy"
+                    onChange={toggleIsHeavy}
+                    className="item-description-checkbox"
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Check
+                    type="checkbox"
+                    label="Fragile"
+                    onChange={toggleIsFragile}
+                    className="item-description-checkbox"
+                  />
+                </Form.Group>
+                <p id="address">Your address: {address}</p>
 
+                {/* Your address:{address}
+                <p className=" bg-blue-200  rounded-lg w-96">{address}</p> */}
+                <div className="flex justify-center items-center">
+                  <OneFiftyStripe />
+                </div>
+              </Form>
+            </article>
+        </section>
+      {/* </div> */}
+      {/* -------box-selection-wrapper END-------- */}
+      </div>
+    </section>
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
     </div>
+// --------ITEM DESCRIPTION FORM END-------
   );
 }
