@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-export default function Response({ message, isSuccess, plan }) {
+export default function Response({ message, isSuccess }) {
   const navigate = useNavigate();
   const email = window.localStorage.getItem("email_user");
   isSuccess &&

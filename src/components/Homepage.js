@@ -23,6 +23,7 @@ export default function Homepage({
   const query = new URLSearchParams(window.location.search);
 
   useEffect(() => {
+    setMessage("");
     window.scroll(500, 350);
   }, []);
 
