@@ -87,3 +87,22 @@
 .isAvailable {
   margin-left: 2%;
 }
+
+.buttonDiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+.backButtonExtraStorage{
+  background-color: rgb(222, 237, 240);
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  font-weight: bold;
+  width: 150px;
+  height: 50px;
+  margin-bottom: 1%;
+  margin-top:1%;
+  margin-right:2%;
+}

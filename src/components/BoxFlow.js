@@ -1,11 +1,8 @@
 import React from "react";
 import "../input.css";
-
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 import { OneFiftyStripe } from "./OneFiftyStripe";
-
 import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
 
@@ -141,14 +138,9 @@ export default function BoxFlow({ email, setItems, addy }) {
 
   return (
     <div>
-      <div className="flex justify-center items-center  ">
-        <p className="flex bg-gray-200 text-red-600 rounded-lg px-3 py-3 mx-3 my-3">
-          Extra Storage Page
-        </p>
-      </div>
-      <div className="flex justify-end mx-5 my-2 px-2 py-2">
-        <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
-      </div>
+        <div className="buttonDiv">
+          <button className="backButtonExtraStorage" onClick={() => navigate("/user")}>Back To User Page</button>
+        </div>
 
       <div className=" rounded-3xl mx-8">
         <Accordion>
@@ -161,7 +153,7 @@ export default function BoxFlow({ email, setItems, addy }) {
                 <img
                   className=""
                   src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                  style={{ height: 200 }}
+                  style={{ height: 350 }}
                 />
               </div>
               <div className="btn-group btn-group-toggle" data-toggle="buttons">
