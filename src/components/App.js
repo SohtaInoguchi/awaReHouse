@@ -44,6 +44,14 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // window.onunload(() => {
+    //   localStorage.removeItem("first_name_user");
+    //   localStorage.removeItem("email_user");
+    //   localStorage.removeItem("token_user");
+    //   localStorage.removeItem("first_name_provider");
+    //   localStorage.removeItem("email_provider");
+    //   localStorage.removeItem("token_provider");
+    // });
     axios
       .post("/allItems", { email: window.localStorage.getItem("email_user") })
       .then((res) => setItems(res.data));
@@ -123,9 +131,12 @@ function App() {
         />
 
         <Route path="signup/user" element={<NewUser />} />
-        <Route path="signup/user/confirmation" element={<WelcomingPage/>}/>
+        <Route path="signup/user/confirmation" element={<WelcomingPage />} />
         <Route path="signup/provider" element={<NewProvider />} />
-        <Route path="signup/provider/confirmation" element={<WelcomingPage/>}/>
+        <Route
+          path="signup/provider/confirmation"
+          element={<WelcomingPage />}
+        />
         <Route
           path="admin"
           element={
