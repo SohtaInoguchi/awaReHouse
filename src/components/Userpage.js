@@ -17,6 +17,7 @@ import ItemDescription from "./ItemDescription";
 import Icon from "./Icon";
 import StoredItems from "./StoredItems";
 import { ListItem } from "@mui/material";
+import Login from "./Login";
 
 function Userpage({
   user,
@@ -29,8 +30,7 @@ function Userpage({
   email,
   setItems,
   address,
-  setAddress,
-  currentPlan
+  setAddress
 }) {
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
@@ -47,6 +47,7 @@ function Userpage({
   const [storagePlaces, setStoragePlaces] = useState("");
   const [numberOfBoxes, setNumberOfBoxes] = useState(0);
   const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+
 
   const navigate = useNavigate();
 
@@ -77,6 +78,17 @@ function Userpage({
       });
   };
 
+  const planIntoValue = ()=>{
+    if (window.localStorage.getItem("plan_user")==="premium"){
+      setMaxNumberBoxes(10)
+    } else{
+      setMaxNumberBoxes(5)
+    }
+  }
+  
+  useEffect(()=>{
+    planIntoValue()
+  },[items])
 
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
@@ -174,21 +186,13 @@ function Userpage({
   };
 
 
-  console.log({currentPlan})
-const planIntoValue = () => {
-  if ({currentPlan}==="premium"){
-    setMaxNumberBoxes(10)
-    console.log(maxNumberBoxes)
-  } 
-  if ({currentPlan}==="basic"){
-    setMaxNumberBoxes(5)
-    console.log(maxNumberBoxes)
-  } 
-}
+  // if (window.localStorage.getItem("plan_user")==="premium"){
+  //   setMaxNumberBoxes(10)
+  // };
+  // if (window.localStorage.getItem("plan_user")==="basic"){
+  //   setMaxNumberBoxes(5)
+  // } ;
 
-useEffect(()=>{
-  planIntoValue()
-},)
 
 
   const retrieveNumberOfBoxes = async (req, res) => {
@@ -201,9 +205,11 @@ useEffect(()=>{
     }
   };
 
+
+
   useEffect(()=>{
 retrieveNumberOfBoxes()
-  },[items])
+  },[planIntoValue])
 
 
 
@@ -214,7 +220,7 @@ retrieveNumberOfBoxes()
         <p id="user-name">
           Welcome back, {window.localStorage.getItem("firstName_user")} 
         </p>
-        {currentPlan === "premium" ? <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>:<></>}
+        {window.localStorage.getItem("plan_user") === "premium" ? <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>:<></>}
         </div>
 
 

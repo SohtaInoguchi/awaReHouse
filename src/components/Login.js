@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-export default function Login({ setIsLogin, setUser, setEmail, mode, setCurrentPlan }) {
+export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   const navigate = useNavigate();
   const userEmail = window.localStorage.getItem("email_user");
   const [usersCurrentPlan, setUsersCurrentPlan] = useState("");
@@ -25,7 +25,6 @@ export default function Login({ setIsLogin, setUser, setEmail, mode, setCurrentP
         setIsLogin(res.data.boolean);
         setUser(res.data.first_name);
         setEmail(res.data.email);
-        setCurrentPlan(res.data.plan)
         console.log(res.data);
         if (res.data.boolean && mode === "user") {
           window.localStorage.setItem("token_user", res.data.token);
