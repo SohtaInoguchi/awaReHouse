@@ -170,41 +170,26 @@ function Userpage({
   return (
     <div>
       <nav id="user-page-nav">
+        <div className="containerPremium">
         <p id="user-name">
-          Welcome back {window.localStorage.getItem("firstName_user")}
+          Welcome back, {window.localStorage.getItem("firstName_user")} 
         </p>
+        <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>
+        </div>
 
-        <Button id="signout-button" onClick={signOut}>
+
+        <button id="signoutButton" onClick={signOut}>
           Sign out
-        </Button>
+        </button>
       </nav>
 
       <h3 id="next-period">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
-      <section id="nav-button">
-        <Button
-          id="retrieve-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-charge")}
-        >
-          Need to retrieve?
-          <p className="popup-message">
-            Through extra retrieval, items can be removed from storage anytime
-          </p>
-        </Button>
-        <Button
-          id="storage-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-storage")}
-        >
-          Need Extra Storage?
-          <p className="popup-message">
-            Through extra storage, items can be sent to storage anytime
-          </p>
-        </Button>
-      </section>
+      <div className="remainingBoxes">{window.localStorage.getItem("firstName_user")}, YOU CAN STILL STORE XX MORE boxes<p>(If your quota of boxes is exhausted, you can still use the Extra Storage option)</p>
+      
+      </div>
 
       <section id="box-select">
         <div id="box-selection-wrapper">
@@ -235,6 +220,34 @@ function Userpage({
       </section>
 
       <div className="flex flex-row justify-center items-center "></div>
+
+      <h3 id="next-period">
+        Can't wait the next storing/retrieval period or have exhausted your quota of boxes?
+        <section id="nav-button">
+        <Button
+          id="retrieve-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-charge")}
+        >
+          Extra Retrieval?
+          <p className="popup-message">
+           To retrieve items anytime
+          </p>
+        </Button>
+        <Button
+          id="storage-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-storage")}
+        >
+          Extra Storage?
+          <p className="popup-message">
+          To store items anytime
+          </p>
+        </Button>
+      </section> 
+      </h3>
+
+      
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>
