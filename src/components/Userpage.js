@@ -1,6 +1,6 @@
 import "../input.css";
-import Success from "../components/Success";
-import Subscription from "../components/Subscription";
+import Success from "./Success";
+import Subscription from "./Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
@@ -16,6 +16,8 @@ import ItemDescription from "./ItemDescription";
 
 import Icon from "./Icon";
 import StoredItems from "./StoredItems";
+import { ListItem } from "@mui/material";
+
 function Userpage({
   user,
   message,
@@ -28,6 +30,7 @@ function Userpage({
   setItems,
   address,
   setAddress,
+  currentPlan
 }) {
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
@@ -42,6 +45,8 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const [numberOfBoxes, setNumberOfBoxes] = useState(0);
+  const [maxNumberBoxes, setMaxNumberBoxes] = useState();
 
   const navigate = useNavigate();
 
@@ -71,6 +76,7 @@ function Userpage({
         console.log("NOPE! Address data not retrieved");
       });
   };
+
 
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
@@ -167,6 +173,40 @@ function Userpage({
     // navigate("/?success=true");
   };
 
+
+  console.log({currentPlan})
+const planIntoValue = () => {
+  if ({currentPlan}==="premium"){
+    setMaxNumberBoxes(10)
+    console.log(maxNumberBoxes)
+  } 
+  if ({currentPlan}==="basic"){
+    setMaxNumberBoxes(5)
+    console.log(maxNumberBoxes)
+  } 
+}
+
+useEffect(()=>{
+  planIntoValue()
+},)
+
+
+  const retrieveNumberOfBoxes = async (req, res) => {
+    try {
+      await axios.get(`/inventory/${email}`).then((res) => {
+        setNumberOfBoxes(maxNumberBoxes-res.data.length)
+      });
+    } catch {
+      console.log("NOPE! Number of boxes can't be retrieved");
+    }
+  };
+
+  useEffect(()=>{
+retrieveNumberOfBoxes()
+  },[items])
+
+
+
   return (
     <div>
       <nav id="user-page-nav">
@@ -174,7 +214,7 @@ function Userpage({
         <p id="user-name">
           Welcome back, {window.localStorage.getItem("firstName_user")} 
         </p>
-        <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>
+        {currentPlan === "premium" ? <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>:<></>}
         </div>
 
 
@@ -187,8 +227,7 @@ function Userpage({
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
-      <div className="remainingBoxes">{window.localStorage.getItem("firstName_user")}, YOU CAN STILL STORE XX MORE boxes<p>(If your quota of boxes is exhausted, you can still use the Extra Storage option)</p>
-      
+      <div className="remainingBoxes">{window.localStorage.getItem("firstName_user")}, you can order and store <h3 className="numberBoxes">{numberOfBoxes}</h3> more boxes
       </div>
 
       <section id="box-select">

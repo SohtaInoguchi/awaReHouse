@@ -133,5 +133,16 @@
 }
 
 .remainingBoxes{
-  
+margin-top: 2%;
+text-align:center;
+font-size: larger;
+}
+
+#next-period{
+  margin-top: 2%;
+  background-color:rgb(222, 237, 240);
+}
+
+.numberBoxes{
+  color:rgb(222, 237, 240);
 }

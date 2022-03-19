@@ -42,7 +42,9 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
+  const[currentPlan, setCurrentPlan] = useState("");
   const navigate = useNavigate();
+  
   //Axios
   useEffect(() => {
     axios.post("/allItems", { email }).then((res) => setItems(res.data));
@@ -95,6 +97,7 @@ function App() {
               setItems={setItems}
               address={address}
               setAddress={setAddress}
+              currentPlan={currentPlan}
             />
           }
         />
@@ -111,6 +114,7 @@ function App() {
               setUser={setUser}
               setEmail={setEmail}
               mode="user"
+              setCurrentPlan={setCurrentPlan}
             />
           }
         />
