@@ -138,7 +138,7 @@ export default function Chat() {
                 </div>
             </div>
                 <div id="send-section-wrapper">
-                  <input id="chat" type="text" placeholder="  Enter your inquiry" />
+                  <input id="chat" type="text" placeholder={`${""}  Enter your inquiry`} />
                   <SendComponent 
                   icon={<AiOutlineSend 
                     id="send-icon"
