@@ -88,6 +88,24 @@ app.post("/allItems", async (req, res) => {
 //   }
 // });
 
+//Verify if user has created account already
+//Currently sends back an arr of objects with sub plan
+app.get("/login/verify/:member", async (req, res) => {
+
+  const isMember = await db
+    .select("subscription_plan")
+    .from("users")
+    .where("email", req.params.member)
+  res.send(isMember);
+});
+
+app.post("/login/verify/:member/:plan", async (req,res) => {
+  await db("users")
+  .where("email", req.params.member)
+  .update("subscription_plan", req.params.plan)
+  res.send("BACK END POST")
+})
+
 app.post("/login", async (req, res) => {
   try {
     // for user
@@ -96,7 +114,7 @@ app.post("/login", async (req, res) => {
     console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
-          .select("password", "first_name", "email")
+          .select("password", "first_name", "email","subscription_plan")
           .from("users")
           .where("email", req.body.email))
       : (user = await db
@@ -110,7 +128,6 @@ app.post("/login", async (req, res) => {
       password: req.body.password,
     };
 
-    
     const token = await jwt.sign(
       { user: input },
       process.env.ACCESS_TOKEN_SECRET,
@@ -123,12 +140,29 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-    res.json({
-      boolean,
-      first_name: user[0].first_name,
-      email: user[0].email,
-      token,
-    });
+    if(req.body.mode === "user"){
+      res.json({
+        boolean,
+        first_name: user[0].first_name,
+        email: user[0].email,
+        plan: user[0].subscription_plan,
+        token,
+      });
+    } else{
+      res.json({
+        boolean,
+        first_name: user[0].first_name,
+        email: user[0].email,
+        token,
+      });
+    }
+
+    // res.json({
+    //   boolean,
+    //   first_name: user[0].first_name,
+    //   email: user[0].email,
+    //   token,
+    // });
   } catch (err) {
     res.json({
       boolean: false,

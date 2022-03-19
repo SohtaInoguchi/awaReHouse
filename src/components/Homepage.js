@@ -7,6 +7,7 @@ import Response from "./Response";
 import LearnMore from "./LearnMore";
 import MoreLife from "./MoreLife";
 import { Button } from "bootstrap";
+import ExplanationPage from "./ExplanationPage";
 export default function Homepage({
   setMode,
   setNewCustomer,
