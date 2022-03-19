@@ -34,6 +34,7 @@ export default function LoginButtons() {
                 window.localStorage.removeItem("firstName_user");
                 window.localStorage.removeItem("email_user");
                 window.localStorage.removeItem("token_user");
+                window.localStorage.removeItem("plan_user");
                 navigate("/provider");
               } else navigate("/login/provider");
             }}
