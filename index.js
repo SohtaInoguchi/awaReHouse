@@ -38,7 +38,9 @@ io.on("connection", (socket) => {
     let text;
     if (req === "Where can I check the seasonal retrieval / store period?")
       text = "You can find the period on your user page :)";
-    else if (req === "What do I need to do to get items outside of seasonal period?")
+    else if (
+      req === "What do I need to do to get items outside of seasonal period?"
+    )
       text =
         "You can click extra retrieval / storage. But please bear in mind it will apply charge :)";
     else
@@ -91,20 +93,20 @@ app.post("/allItems", async (req, res) => {
 //Verify if user has created account already
 //Currently sends back an arr of objects with sub plan
 app.get("/login/verify/:member", async (req, res) => {
-
   const isMember = await db
     .select("subscription_plan")
     .from("users")
-    .where("email", req.params.member)
+    .where("email", req.params.member);
   res.send(isMember);
 });
 
-app.post("/login/verify/:member/:plan", async (req,res) => {
-  await db("users")
-  .where("email", req.params.member)
-  .update("subscription_plan", req.params.plan)
-  res.send("BACK END POST")
-})
+app.post("/login/verify/:member/:plan", async (req, res) => {
+  const plan = await db("users")
+    .where("email", req.params.member)
+    .update("subscription_plan", req.params.plan);
+
+  res.send("BACK END POST");
+});
 
 app.post("/login", async (req, res) => {
   try {
@@ -114,7 +116,7 @@ app.post("/login", async (req, res) => {
     console.log(req.token);
     req.body.mode === "user"
       ? (user = await db
-          .select("password", "first_name", "email","subscription_plan")
+          .select("password", "first_name", "email", "subscription_plan")
           .from("users")
           .where("email", req.body.email))
       : (user = await db
@@ -140,7 +142,7 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-    if(req.body.mode === "user"){
+    if (req.body.mode === "user") {
       res.json({
         boolean,
         first_name: user[0].first_name,
@@ -148,7 +150,7 @@ app.post("/login", async (req, res) => {
         plan: user[0].subscription_plan,
         token,
       });
-    } else{
+    } else {
       res.json({
         boolean,
         first_name: user[0].first_name,

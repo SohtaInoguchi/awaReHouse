@@ -46,7 +46,9 @@ export default function PlanSelection({ plan, setPlan }) {
                 />
               </div>
               <div className="ex">
-                <h4 className=" border-8 text-center bg-white">Premium Plan</h4>
+                <h4 className=" border-8 text-center bg-white">
+                  Premium Plan JPY5,999
+                </h4>
                 <p className="border-8 border-blue-300 bg-white">
                   This is the premium plan that allows you to store up to 10
                   boxes without any extra monthly cost. Ideal for families or
@@ -64,7 +66,9 @@ export default function PlanSelection({ plan, setPlan }) {
                 alt="Picture for 5 boxes"
               />
               <div className="ex">
-                <h4 className=" border-8 text-center bg-white">Basic Plan</h4>
+                <h4 className=" border-8 text-center bg-white">
+                  Basic Plan JPY3,999
+                </h4>
                 <p className="border-8 border-blue-300 bg-white">
                   This is the basic plan that allows you to store up to 5 boxes
                   without any extra monthly cost. Ideal for a single person.
@@ -73,16 +77,7 @@ export default function PlanSelection({ plan, setPlan }) {
             </div>
           </div>
         ) : (
-          <div className="" className="flex flex-col">
-            <h4 className=" border-8 text-center bg-white ">
-              Please Select a Plan
-            </h4>
-            <img
-              className=" h-80 w-72"
-              src={require("../pictures/selecting.png")}
-              alt="Picture for 5 boxes"
-            />
-          </div>
+          ""
         )}
       </div>
     </div>

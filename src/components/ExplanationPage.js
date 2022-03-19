@@ -1,22 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
 // import Button from "@mui/material/Button";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PlanSelection from "./PlanSelection";
-export default function ExplanationPage({}) {
-  const [plan, setPlan] = useState("");
-
+export default function ExplanationPage({ plan, setPlan }) {
   const navigate = useNavigate();
 
   const userEmail = window.localStorage.getItem("email_user");
-
-  function verifyEmail() {
-    axios.post(`/login/verify/${userEmail}/${plan}`).then(() => {
-      navigate("/user");
-    });
-  }
 
   return (
     <div>
@@ -25,10 +17,18 @@ export default function ExplanationPage({}) {
       </h3>
       <PlanSelection plan={plan} setPlan={setPlan} />
       <div className="buttons border-8">
-        <Button onClick={verifyEmail}>Confirm</Button>
-        <Button variant="contained" onClick={() => navigate("/")}>
-          Cancel
-        </Button>
+        <Form action="/create-checkout-session" method="POST">
+          <Button
+            className="mx-2"
+            name="name"
+            value="Storage fee"
+            type="submit"
+            onClick={() => axios.post(`/login/verify/${userEmail}/${plan}`)}
+          >
+            Checkout
+          </Button>
+          <Button onClick={() => navigate("/")}>Cancel</Button>
+        </Form>
       </div>
     </div>
   );

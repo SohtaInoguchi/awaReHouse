@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-export default function Response({ message, isSuccess }) {
+import axios from "axios";
+export default function Response({ message, isSuccess, plan }) {
   const navigate = useNavigate();
-
+  const email = window.localStorage.getItem("email_user");
   isSuccess &&
     setTimeout(() => {
       document.getElementById("heart").classList.remove("heart-before");
     }, 3500);
+
   return (
     <div>
       <div className="flex justify-center items-center">
