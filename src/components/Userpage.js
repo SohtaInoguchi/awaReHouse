@@ -233,7 +233,10 @@ retrieveNumberOfBoxes()
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
-      <div className="remainingBoxes">{window.localStorage.getItem("firstName_user")}, you can order and store <h3 className="numberBoxes">{numberOfBoxes}</h3> more boxes
+      <div className="remainingBoxes">You can order and store 
+      {
+        numberOfBoxes<2 ? <h3 className="numberBoxesRed">{numberOfBoxes}</h3> : <h3 className="numberBoxes">{numberOfBoxes}</h3> 
+      } more boxes
       </div>
 
       <section id="box-select">

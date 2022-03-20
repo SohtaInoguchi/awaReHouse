@@ -136,6 +136,7 @@
 margin-top: 2%;
 text-align:center;
 font-size: larger;
+color: white;
 }
 
 #next-period{
@@ -145,4 +146,12 @@ font-size: larger;
 
 .numberBoxes{
   color:rgb(222, 237, 240);
+  margin:1%;
+  font-size: 200%;
+}
+
+.numberBoxesRed{
+  color:red;
+  margin:1%;
+  font-size: 200%;
 }
