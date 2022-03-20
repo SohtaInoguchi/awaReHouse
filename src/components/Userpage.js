@@ -239,7 +239,9 @@ retrieveNumberOfBoxes()
       } more boxes
       </div>
 
-      <section id="box-select">
+      {
+        numberOfBoxes>0 ? 
+        <section id="box-select">
         <div id="box-selection-wrapper">
           <BoxSelection handleChange={handleChange} />
           <ItemDescription
@@ -265,7 +267,28 @@ retrieveNumberOfBoxes()
           items={items}
           displayTable={displayTable}
         />
+      </section> : <section id="box-select">
+        <div className="noMoreBoxes">
+          <img
+          className="noboxespic"
+          src={require("../pictures/NOBOXES.png")}
+          />
+          <h3>Unfortunately, you do not have any storage capacity left</h3> 
+          <h4 className="osusume">- If you are a Basic user, please upgrade your plan</h4>
+          <h4 className="osusume">- If you are a Premium user, please use the Extra Storage option</h4>
+        </div>
+
+        <StoredItems
+          updateItemList={updateItemList}
+          setDisplayTable={setDisplayTable}
+          setAddItem={setAddItem}
+          setBoxOrderReceived={setBoxOrderReceived}
+          items={items}
+          displayTable={displayTable}
+        />
       </section>
+      }
+      
 
       <div className="flex flex-row justify-center items-center "></div>
 

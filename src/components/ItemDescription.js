@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import "../input.css";
 
 export default function ItemDescription(props) {
   const {
