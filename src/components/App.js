@@ -49,9 +49,9 @@ function App() {
   }, []);
 
   // Delete later
-  useEffect(() => {
-    console.log("items in App", items);
-  }, [items]);
+  // useEffect(() => {
+  //   console.log("items in App", items);
+  // }, [items]);
 
   return (
     <div>

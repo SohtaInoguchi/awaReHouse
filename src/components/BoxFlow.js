@@ -13,7 +13,7 @@ import ExtraStorageModal from "./ExtraStorageModal";
 
 export default function BoxFlow({ email, setItems, address }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
-  const [typeBoxFlow, setTypeBoxFlow] = useState(null);
+  const [typeBoxFlow, setTypeBoxFlow] = useState("");
   // const [address, setAddress] = useState("");
   const [confirmationFlow, setConfirmationFlow] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
@@ -141,8 +141,6 @@ export default function BoxFlow({ email, setItems, address }) {
     setIsFragileFlow(false);
     setIsHeavyFlow(false);
     sendBoxRequest();
-
-    // document.getElementById("extra-storage").disabled = false;
   };
 
   const check = () => {
@@ -152,13 +150,11 @@ export default function BoxFlow({ email, setItems, address }) {
 
   return (
     <div>
-      <div className="flex justify-center items-center  ">
-        <p className="flex bg-gray-200 text-red-600 rounded-lg px-3 py-3 mx-3 my-3">
-          Extra Storage Page
-        </p>
-      </div>
+      <p id="extra-storage-banner">
+        Extra Storage
+      </p>
       <div className="flex justify-end mx-5 my-2 px-2 py-2">
-        <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
+        <Button id="go-back-to-user-page" onClick={() => navigate("/user")}>Go Back To User Page</Button>
       </div>
 
     <section id="box-select-extra-storage">
@@ -226,17 +222,15 @@ export default function BoxFlow({ email, setItems, address }) {
                   />
                 </Form.Group>
                 <p id="address">Your address: {address}</p>
-
                 <Button 
                 className='ml-10 my-8' 
-                id='extra-storage' 
+                id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'} 
                 onClick={() => setModalShow(true)}
                 >Checkout</Button>
                 <ExtraStorageModal show={modalShow}
                 onHide={setModalShow}
                 submit2={submit2}
                 />
-                <Button onClick={() => console.log("email localSt", localStorage.getItem('email_user'))}>Check email</Button>
                 {/* <div className="flex justify-center items-center">
                   <OneFiftyStripe />
                 </div> */}

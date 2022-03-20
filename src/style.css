@@ -852,7 +852,15 @@ margin:5%;
 #extra-storage {
   color: white;
   background-color: rgb(11, 81, 114);
+  opacity: 0;
 }
+
+#extra-storage-field-filled {
+  opacity: 1;
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
 
 #checkout-and-portal-button {
   display: none;
@@ -870,4 +878,17 @@ margin:5%;
 
 .extra-storage-modal-texts {
   color: rgb(11, 81, 114);
+}
+
+#go-back-to-user-page {
+  color: rgb(11, 81, 114);
+  background-color: white;
+}
+
+#extra-storage-banner {
+  text-align: center;
+  color: rgb(11, 81, 114);
+  font-size: 1rem;
+  background-color: white;
+  padding: 1rem 1rem;
 }
