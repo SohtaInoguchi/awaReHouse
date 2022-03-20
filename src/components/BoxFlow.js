@@ -9,6 +9,7 @@ import { OneFiftyStripe } from "./OneFiftyStripe";
 import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
 import BoxSelection from "./BoxSelection";
+import ExtraStorageModal from "./ExtraStorageModal";
 
 export default function BoxFlow({ email, setItems, address }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
@@ -24,6 +25,8 @@ export default function BoxFlow({ email, setItems, address }) {
   const [isHeavyFlow, setIsHeavyFlow] = useState(false);
   const [isFragileFlow, setIsFragileFlow] = useState(false);
   const [storagePlacesFlow, setStoragePlacesFlow] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const navigate = useNavigate();
 
   const createDescription1 = (e) => {
@@ -111,7 +114,6 @@ export default function BoxFlow({ email, setItems, address }) {
         user_owner: email,
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
-        // send heavy and fragile boolean
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -138,7 +140,18 @@ export default function BoxFlow({ email, setItems, address }) {
     setIsFragileFlow(false);
     setIsHeavyFlow(false);
     sendBoxRequest();
+
+    // document.getElementById("extra-storage").disabled = false;
   };
+
+  const check = () => {
+    console.log("isconfirmed", isConfirmed);
+  }
+
+  const sendDataAndCheckout = () => {
+    setIsConfirmed(!isConfirmed);
+    setModalShow(!modalShow);
+  }
 
   return (
     <div>
@@ -151,103 +164,18 @@ export default function BoxFlow({ email, setItems, address }) {
         <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
       </div>
 
-    <section id="box-select">
+    <section id="box-select-extra-storage">
       <div id="box-selection-wrapper">
 
       <BoxSelection handleChange={handleChange} />
-{/* ----------BOX SELECTION ORIGINAL-------------- */}
-      {/* <div className=" rounded-3xl mx-8">
-        <Accordion>
-          <Accordion.Item className="">
-            <Accordion.Header>
-              PLEASE SELECT A SUITABLE BOX FOR YOUR ITEM
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="flex justify-center items-center">
-                <img
-                  className=""
-                  src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                  style={{ height: 200 }}
-                />
-              </div>
-              <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label className="btn btn-secondary active">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option1"
-                    value="A (27cm x 38cm x 29cm : Max weight = 7.5 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type A
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option2"
-                    value="B (32cm x 46cm x 29cm : Max weight = 10.5 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type B
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option3"
-                    value="C (40cm x 60cm x 40cm : Max weight = 24 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type C
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option4"
-                    value="D (175cm x 30cm x 15cm : Max weight = 20 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type D
-                </label>
-              </div>
-              <div className="flex justify-center items-center"> */}
-                {/* <Button
-                        className="my-3"
-                        onClick={(e) => {
-                          if (typeBox === null || typeBox.length === 0) return;
-                          console.log(e.target);
-                          setConfirmation(true);
-                          document
-                            .getElementById("confirmation-form")
-                            .classList.remove("boxes-before");
-                          document
-                            .getElementById("confirmation-form")
-                            .classList.add("boxes-after");
-                        }}
-                      >
-                        Add Item
-                      </Button> */}
-                {/* <Button onClick={() => setConfirmation(false)}>
-                    Go Back
-                  </Button> */}
-              {/* </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </div> */}
-{/* ---------BOX SELECTION END----------- */}
 
-{/* -------ITEM DESCRIPTION FORM ORIGINAL--------------- */}
+
         <section id="item-description-wrapper">
           <article id="item-description">
-            {/* <div className="flex justify-center items-center mx-5 px-5  "> */}
               <Form
                 action="/create-checkout-session"
                 method="POST"
                 id="confirmation-form"
-                // className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
                 className=" text-blue-600 px-3 py-3 "
               >
               <div id="box-select-header">
@@ -302,11 +230,18 @@ export default function BoxFlow({ email, setItems, address }) {
                 </Form.Group>
                 <p id="address">Your address: {address}</p>
 
-                {/* Your address:{address}
-                <p className=" bg-blue-200  rounded-lg w-96">{address}</p> */}
-                <div className="flex justify-center items-center">
+                <Button 
+                className='ml-10 my-8' 
+                id='extra-storage' 
+                onClick={() => setModalShow(true)}
+                >Checkout</Button>
+                <ExtraStorageModal show={modalShow}
+                onHide={setModalShow}
+                submit2={submit2}
+                />
+                {/* <div className="flex justify-center items-center">
                   <OneFiftyStripe />
-                </div>
+                </div> */}
               </Form>
             </article>
         </section>

@@ -678,6 +678,11 @@ margin:5%;
   grid-template-columns: 2fr 1fr;
 }
 
+#box-select-extra-storage {
+  margin: auto auto;
+  width: 75%;
+}
+
 #box-type-selection-wrapper {
   text-align: center;
   border: none;
@@ -841,4 +846,28 @@ margin:5%;
 
 .user-selected-items {
   color: rgb(11, 81, 114);  
+}
+
+/* --------EXTRA STORAGE----------- */
+#extra-storage {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
+#checkout-and-portal-button {
+  display: none;
+}
+
+#go-button {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
+#invoke-checout-send-data {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
+.extra-storage-modal-texts {
+  color: rgb(11, 81, 114);
 }
