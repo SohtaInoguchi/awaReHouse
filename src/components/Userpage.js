@@ -143,8 +143,8 @@ function Userpage({
   };
 
   const updateItemList = () => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    // axios.post("/allItems", { email: window.localStorage.user_owner }).then((res) => setItems(res.data));
+    // axios.post("/allItems", { email }).then((res) => setItems(res.data));
+    axios.post("/allItems", { email: localStorage.getItem('email_user') }).then((res) => setItems(res.data));
   };
 
   const submit2 = (e) => {

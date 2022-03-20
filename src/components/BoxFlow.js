@@ -112,7 +112,7 @@ export default function BoxFlow({ email, setItems, address }) {
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
         // user_owner: email,
-        user_owner: window.localStorage.email_user,
+        user_owner: localStorage.getItem('email_user'),
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
       })
@@ -149,10 +149,6 @@ export default function BoxFlow({ email, setItems, address }) {
     console.log("isconfirmed", isConfirmed);
   }
 
-  const sendDataAndCheckout = () => {
-    setIsConfirmed(!isConfirmed);
-    setModalShow(!modalShow);
-  }
 
   return (
     <div>
@@ -240,7 +236,7 @@ export default function BoxFlow({ email, setItems, address }) {
                 onHide={setModalShow}
                 submit2={submit2}
                 />
-                <Button onClick={() => console.log("email", email)}>Check email</Button>
+                <Button onClick={() => console.log("email localSt", localStorage.getItem('email_user'))}>Check email</Button>
                 {/* <div className="flex justify-center items-center">
                   <OneFiftyStripe />
                 </div> */}
