@@ -152,7 +152,7 @@ function App() {
           }
         />
         <Route path="learn" element={<LearnMore />} />
-        <Route path="extra-storage" element={<BoxFlow address={address} />} />
+        <Route path="extra-storage" element={<BoxFlow email={email} address={address} setItems={setItems} />} />
         <Route path="explanation" element={<ExplanationPage />} />
       </Routes>
     </div>

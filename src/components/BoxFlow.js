@@ -111,7 +111,8 @@ export default function BoxFlow({ email, setItems, address }) {
         weight_in_kg: "3.41",
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
-        user_owner: email,
+        // user_owner: email,
+        user_owner: window.localStorage.email_user,
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
       })
@@ -239,6 +240,7 @@ export default function BoxFlow({ email, setItems, address }) {
                 onHide={setModalShow}
                 submit2={submit2}
                 />
+                <Button onClick={() => console.log("email", email)}>Check email</Button>
                 {/* <div className="flex justify-center items-center">
                   <OneFiftyStripe />
                 </div> */}
