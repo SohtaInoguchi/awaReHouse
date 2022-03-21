@@ -892,6 +892,15 @@ margin:5%;
   background-color: rgb(11, 81, 114);
 }
 
+.retrieval-modal-texts {
+  color: rgb(11, 81, 114);
+}
+
+#go-back-button {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
 #invoke-checout-send-data {
   color: white;
   background-color: rgb(11, 81, 114);
