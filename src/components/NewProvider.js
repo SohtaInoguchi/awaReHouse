@@ -3,7 +3,7 @@ import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import WelcomingPage from "./WelcomingPage.js"
+import WelcomingPage from "./WelcomingPage.js";
 
 export default function NerCustomer({ setMode }) {
   const [providerFirstName, setProviderFirstName] = useState("");
@@ -106,7 +106,7 @@ export default function NerCustomer({ setMode }) {
               <Form.Control
                 type="text"
                 name="firstname"
-                placeholder="first name"
+                placeholder="First name"
                 value={providerFirstName}
                 onChange={createProviderFirstName}
                 required
@@ -226,7 +226,7 @@ export default function NerCustomer({ setMode }) {
   if (registrationDone === true) {
     return (
       <div>
-      <WelcomingPage/>  
+        <WelcomingPage />
       </div>
     );
   }
