@@ -14,6 +14,7 @@ export default function Homepage({
   updateItemList,
   message,
   setMessage,
+  plan,
 }) {
   const navigate = useNavigate();
   const [isSuccess, setIsSuccess] = useState("");
@@ -21,18 +22,9 @@ export default function Homepage({
   // Check to see if this is a redirect back from Checkout
   const query = new URLSearchParams(window.location.search);
 
-  useEffect((e) => {
-    const bodyRect = document.body.getBoundingClientRect();
-    const sloganRect = document.getElementById("slogan").getClientRects()[0];
-
-    console.log(document.getElementById("slogan").clientY);
-    // window.scrollTo(
-    //   0,
-    //   document.getElementById("slogan").scrollIntoView(true, { block: "end" })
-    // );
-    // document.getElementById("slogan").scrollHeight;
+  useEffect(() => {
+    setMessage("");
     window.scroll(500, 350);
-    // window.scrollTo(0, 200);
   }, []);
 
   useEffect(() => {
@@ -52,7 +44,7 @@ export default function Homepage({
   return (
     <div>
       {message ? (
-        <Response message={message} isSuccess={isSuccess} />
+        <Response message={message} isSuccess={isSuccess} plan={plan} />
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}

@@ -42,6 +42,7 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
+  const [plan, setPlan] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,6 +82,7 @@ function App() {
               setMode={setMode}
               message={message}
               setMessage={setMessage}
+              plan={plan}
             />
           }
         />
@@ -161,7 +163,10 @@ function App() {
         />
         <Route path="learn" element={<LearnMore />} />
         <Route path="extra-storage" element={<BoxFlow addy={address} />} />
-        <Route path="explanation" element={<ExplanationPage />} />
+        <Route
+          path="explanation"
+          element={<ExplanationPage plan={plan} setPlan={setPlan} />}
+        />
       </Routes>
     </div>
   );
