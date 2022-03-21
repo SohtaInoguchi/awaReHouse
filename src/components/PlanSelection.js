@@ -36,7 +36,7 @@ export default function PlanSelection({ plan, setPlan }) {
                 <div className="flex justify-center items-center bg-gray-300">
                   <img src={require("../pictures/PREMIUM.png")} alt="" />
                 </div>
-                <ExplainButtons />
+                <ExplainButtons plan={plan} setPlan={setPlan} />
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@ export default function PlanSelection({ plan, setPlan }) {
                 <div className="flex justify-center items-center bg-gray-300">
                   <img src={require("../pictures/basic.png")} alt="" />
                 </div>
-                <ExplainButtons />
+                <ExplainButtons plan={plan} setPlan={setPlan} />
               </div>
             </div>
           </div>

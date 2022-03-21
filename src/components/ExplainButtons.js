@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function ExplainButtons({ plan, setPlan }) {
   const navigate = useNavigate();
   const userEmail = window.localStorage.getItem("email_user");
+
   return (
     <div className="buttons  flex justify-center items-center my-3 ">
       <Form action="/create-checkout-session" method="POST">
