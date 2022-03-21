@@ -23,10 +23,9 @@ export default function StoredItems(props) {
 
   return (
     // <div className="flex flex-col  w-96 ">
-    <div id="stored-item" className="flex flex-col  w-96 ">
+    <div id="stored-item" className="flex flex-col ">
       <Button
         id="store-item-button"
-        className="max-w-lg"
         onClick={() => {
           updateItemList();
           setDisplayTable(!displayTable);
@@ -50,7 +49,7 @@ export default function StoredItems(props) {
       {displayTable ? (
         <div
           id="boxes"
-          className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg text-2xl"
+          className="boxes-before flex flex-col justify-center items-center rounded-br-lg rounded-bl-lg text-1xl"
         >
           {items.map((item, index) => {
             return (
@@ -69,9 +68,10 @@ export default function StoredItems(props) {
                       </div>
                       <div
                         id="item"
-                        className="group flex flex-row justify-center items-center rounded-lg  my-2 "
+                        className="group flex flex-row justify-around items-center rounded-lg "
                       >
-                        <div className=" flex min-h-100 max-h-100  bg-green-400 shadow-lg rounded-lg py-2 px-3 mr-2">
+                        {/* <div className=" border-4 border-violet-300 flex min-h-100 max-h-100  bg-green-400 shadow-lg rounded-lg py-2 p-3 mx-4"> */}
+                        <div className="each-items  flex min-h-100 max-h-100  bg-green-400 shadow-lg rounded-lg px-3 py-2 mx-2">
                           {item.declared_content_one}
                           {item.fragile === true ? (
                             <Icon icon={<GiShatteredGlass size="24" />} />
@@ -87,7 +87,8 @@ export default function StoredItems(props) {
 
                         {item.declared_content_two !== "" ? (
                           <div
-                            className="flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg py-2 px-3 "
+                            // className="border-4 border-violet-300 flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg py-2 px-3 mx-4 "
+                            className="each-items  flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg px-3 py-2 mx-2 "
                             key={`${index}b`}
                           >
                             {item.declared_content_two}{" "}
@@ -108,7 +109,8 @@ export default function StoredItems(props) {
 
                         {item.declared_content_three !== "" ? (
                           <div
-                            className="flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg py-2 ml-2"
+                            // className=" border-4 border-violet-300 flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg py-2 mx-4"
+                            className="each-items  flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg px-3 py-2 mx-2"
                             key={`${index}c`}
                           >
                             {item.declared_content_three}{" "}
@@ -131,9 +133,11 @@ export default function StoredItems(props) {
                   ) : (
                     <div
                       id="item"
-                      className=" flex flex-row justify-center items-center rounded-lg  my-2 px-3"
+                      // className=" border-4 border-violet-300 flex flex-row justify-center items-center rounded-lg px-3 mx-4"
+                      className="   flex flex-row justify-center items-center rounded-lg px-3 py-2 mx-2"
                     >
-                      <div className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 px-3 mr-2">
+                      {/* <div className=" border-4 border-teal-300 flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 px-3 mx-4"> */}
+                      <div className=" each-items  flex min-h-100 max-h-100  shadow-lg rounded-lg px-3 py-2 mx-2">
                         {item.declared_content_one}
                         {item.fragile === true ? (
                           <Icon icon={<GiShatteredGlass size="24" />} />
@@ -149,7 +153,8 @@ export default function StoredItems(props) {
 
                       {item.declared_content_two !== "" ? (
                         <div
-                          className="flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 "
+                          // className="border-4 border-teal-300 flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 mx-4"
+                          className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
                           key={`${index}b`}
                         >
                           {item.declared_content_two}{" "}
@@ -170,7 +175,8 @@ export default function StoredItems(props) {
 
                       {item.declared_content_three !== "" ? (
                         <div
-                          className="flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 ml-2"
+                          // className=" border-4 border-teal-300 flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 mx-4"
+                          className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
                           key={`${index}c`}
                         >
                           {item.declared_content_three}{" "}
