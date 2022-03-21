@@ -25,7 +25,9 @@ import {
 import LearnMore from "./LearnMore";
 import ExplanationPage from "./ExplanationPage";
 import WelcomingPage from "./WelcomingPage";
-
+window.addEventListener("unload", () => {
+  console.log("toni is printed");
+});
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
