@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
 import { GiShatteredGlass } from "react-icons/gi";
 import Icon from "./Icon";
+import StoredItemsElements from "./StoredItemsElements";
 
 export default function StoredItems(props) {
   const {
@@ -58,135 +59,28 @@ export default function StoredItems(props) {
                   key={`${index}a`}
                 >
                   {item.pending ? (
-                    <div className="group rounded-lg  my-2 ">
-                      <div className="pending-item group-hover:opacity-100 flex items-center justify-center">
-                        <div className="bg-white rounded-lg w-72 text-center text-sm">
-                          Pending Items
-                        </div>
-                      </div>
-                      <div
-                        id="item"
-                        className="group flex flex-row justify-around items-center rounded-lg "
-                      >
-                        {/* <div className=" border-4 border-violet-300 flex min-h-100 max-h-100  bg-green-400 shadow-lg rounded-lg py-2 p-3 mx-4"> */}
-                        <div className="each-items  flex min-h-100 max-h-100  bg-green-400 shadow-lg rounded-lg px-3 py-2 mx-2">
-                          {item.declared_content_one}
-                          {item.fragile === true ? (
-                            <Icon icon={<GiShatteredGlass size="24" />} />
-                          ) : (
-                            ``
-                          )}{" "}
-                          {item.heavy === true ? (
-                            <Icon icon={<FaWeightHanging size="24" />} />
-                          ) : (
-                            ``
-                          )}
-                        </div>
-
-                        {item.declared_content_two !== "" ? (
-                          <div
-                            className="each-items  flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg px-3 py-2 mx-2 "
-                            key={`${index}b`}
-                          >
-                            {item.declared_content_two}{" "}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-
-                        {item.declared_content_three !== "" ? (
-                          <div
-                            className="each-items  flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg px-3 py-2 mx-2"
-                            key={`${index}c`}
-                          >
-                            {item.declared_content_three}{" "}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </div>
+                    <StoredItemsElements
+                      item={item}
+                      index={index}
+                      color={"bg-green-400"}
+                      text={"Pending Items"}
+                      className=""
+                    />
+                  ) : item.pending_retrieval ? (
+                    <StoredItemsElements
+                      item={item}
+                      index={index}
+                      color={"bg-blue-400"}
+                      text={"Requesting Items"}
+                      className=""
+                    />
                   ) : (
-                    <div
-                      id="item"
-                      className="   flex flex-row justify-center items-center rounded-lg px-3 py-2 mx-2"
-                    >
-                      <div className=" each-items  flex min-h-100 max-h-100  shadow-lg rounded-lg px-3 py-2 mx-2">
-                        {item.declared_content_one}
-                        {item.fragile === true ? (
-                          <Icon icon={<GiShatteredGlass size="24" />} />
-                        ) : (
-                          ``
-                        )}{" "}
-                        {item.heavy === true ? (
-                          <Icon icon={<FaWeightHanging size="24" />} />
-                        ) : (
-                          ``
-                        )}
-                      </div>
-
-                      {item.declared_content_two !== "" ? (
-                        <div
-                          className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
-                          key={`${index}b`}
-                        >
-                          {item.declared_content_two}{" "}
-                          {item.fragile === true ? (
-                            <Icon icon={<GiShatteredGlass size="24" />} />
-                          ) : (
-                            ``
-                          )}{" "}
-                          {item.heavy === true ? (
-                            <Icon icon={<FaWeightHanging size="24" />} />
-                          ) : (
-                            ``
-                          )}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-
-                      {item.declared_content_three !== "" ? (
-                        <div
-                          className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
-                          key={`${index}c`}
-                        >
-                          {item.declared_content_three}{" "}
-                          {item.fragile === true ? (
-                            <Icon icon={<GiShatteredGlass size="24" />} />
-                          ) : (
-                            ``
-                          )}{" "}
-                          {item.heavy === true ? (
-                            <Icon icon={<FaWeightHanging size="24" />} />
-                          ) : (
-                            ``
-                          )}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
+                    <StoredItemsElements
+                      item={item}
+                      index={index}
+                      color={""}
+                      className=""
+                    />
                   )}
                 </div>
               </div>
