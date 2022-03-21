@@ -179,7 +179,7 @@ body {
 }
 
 .faq:hover {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(280, 200, 200);
 }
 
 .chat-icons {
@@ -191,8 +191,10 @@ body {
   bottom: 20px;
   left: 20px;
   border-radius: 14px;
-  color: white;
+  color: rgb(180, 180, 180);
+  cursor: pointer;
 }
+
 
 .message-wrapper {
   width: inherit;

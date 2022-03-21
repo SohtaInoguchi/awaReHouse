@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { io } from "socket.io-client";
 import App from "./App";
 import { BsChatRightTextFill } from "react-icons/bs";
-import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineSend, AiFillWechat } from "react-icons/ai";
 import { Accordion } from "react-bootstrap";
 import { GoCommentDiscussion } from "react-icons/go";
 import { RiQuestionAnswerLine } from "react-icons/ri"
@@ -162,7 +162,7 @@ export default function Chat() {
       renderChatBox()
       :
       <OpenChatComponent 
-      icon={<RiQuestionAnswerLine 
+      icon={<AiFillWechat 
       size="50" 
       onClick={toggleChatOpen}
       className="chat-icons"
