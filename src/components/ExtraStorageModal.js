@@ -33,7 +33,7 @@ export default function ExtraStorageModal(props) {
         <Form action="/create-checkout-session" method="POST">
         <Form.Control type="hidden" name="name" value="Extra retrieval"/>
         {/* Below button is invisible */}
-        <Button id="checkout-and-portal-button" type="submit">Yes, I'm sure</Button> 
+        <Button id="hidden-checkout-and-portal-button" type="submit">Yes, I'm sure</Button> 
         </Form>
         <Button id='invoke-checout-send-data' onClick={invokeCheckout}>Yes, I'm sure</Button>
 
