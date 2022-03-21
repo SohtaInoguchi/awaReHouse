@@ -108,6 +108,17 @@ app.post("/login/verify/:member/:plan", async (req, res) => {
   res.send("BACK END POST");
 });
 
+// to update pending_retrieval status
+app.post("/inventory/:box_id", async (req, res) => {
+  const {box_id} = req.body;
+  try {
+    await db("inventory").where({box_id}).update({pending_retrieval: true});
+    res.status(200).json("YEP");
+  } catch (err){
+    res.status(500).json({message: "Error updating new post", error: err})
+  }
+});
+
 app.post("/login", async (req, res) => {
   try {
     // for user
@@ -362,6 +373,7 @@ app.post("/inventory", async (req, res) => {
     console.log("Backend server does not work - inventory");
   }
 });
+
 
 app.get("/inventory/:user_owner", async (req, res) => {
   try {
