@@ -833,7 +833,24 @@ margin:5%;
 }
 
 #stored-item {
-  margin: 2rem auto;
+  margin: 2rem 3rem;
+  width: min-content;
+  min-width: 80%;
+  /* border: solid 2px red; */
+}
+
+#boxes {
+  font-size: 1.2rem;
+  /* border: solid 8px green; */
+}
+
+#item {
+  /* border: solid 4px orange; */
+  margin: 1rem 1rem;
+}
+
+.each-items {
+  border: solid 2px rgb(11, 81, 114);
 }
 
 #store-item-button {
