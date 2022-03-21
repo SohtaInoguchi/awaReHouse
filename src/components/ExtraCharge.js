@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import "../input.css";
+import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -87,66 +88,31 @@ export default function ExtraCharge({ user, items, email, setItems }) {
 
   return (
     <div>
-      {/* <h1>{user}</h1> */}
-      <div className="flex justify-between">
-        <p className="text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2">
-          {localStorage.firstName_user}
-        </p>
-        <Button className="mx-3" onClick={() => navigate("/user")}>
-          Go Back to User Page
-        </Button>
-      </div>
-
-      <h1 className="my-6 text-cyan-800 italic bg-white">
-        Select the items you want to retrieve
-      </h1>
-      <div className="flex justify-between flex-row border-8">
+        <h1 id="next-period">{localStorage.firstName_user}, please select the box you want to retrieve</h1>
+        <div className="containerItemsRetrieval">
         {localItems.map((item) => {
           return (
-            <div className="">
-              {item.declared_content_one ||
-              item.declared_content_two ||
-              item.declared_content_three ? (
-                <Badge bg="light" id="user-items">
-                  <section key={item.box_id} className="text-left">
-                    <div
-                      key={`${item.box_id}b`}
-                      id={`${item.box_id}`}
-                      className="user-items"
-                      onClick={retrieveItem}
-                    >
-                      {item.declared_content_one}
-                    </div>
-                    <div
-                      key={`${item.box_id}c`}
-                      id={`${item.box_id}`}
-                      className="user-items"
-                      onClick={retrieveItem}
-                    >
-                      {item.declared_content_two
-                        ? item.declared_content_two
-                        : ""}
-                    </div>
-                    <div
-                      key={`${item.box_id}d`}
-                      id={`${item.box_id}`}
-                      className="user-items"
-                      onClick={retrieveItem}
-                    >
-                      {item.declared_content_three
-                        ? item.declared_content_three
-                        : ""}
-                    </div>
-                  </section>
-                </Badge>
-              ) : (
-                ""
-              )}
-            </div>
+            <Badge >
+            <section key={item.box_id} className="text-left">
+              <li key={`${item.box_id}b`}  onClick={retrieveItem}>
+                {item.declared_content_one}
+              {console.log(item.pending)}
+                </li>
+              {item.declared_content_two !== "" ? <li
+              key={`${item.box_id}c`}>  
+              {item.declared_content_two}
+              </li> : <></> }
+              {item.declared_content_three !== "" ? <li
+              key={`${item.box_id}d`}>  
+              {item.declared_content_three}
+              </li> : <></> }
+            </section>
+          </Badge>
           );
         })}
-      </div>
-      <section
+        </div>
+
+        <section 
         className="flex 
         flex-wrap 
         items-center m-10 text-sky-900 font-bold"

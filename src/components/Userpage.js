@@ -1,6 +1,6 @@
 import "../input.css";
-import Success from "../components/Success";
-import Subscription from "../components/Subscription";
+import Success from "./Success";
+import Subscription from "./Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
@@ -16,6 +16,9 @@ import ItemDescription from "./ItemDescription";
 
 import Icon from "./Icon";
 import StoredItems from "./StoredItems";
+import { ListItem } from "@mui/material";
+import Login from "./Login";
+
 function Userpage({
   user,
   message,
@@ -27,7 +30,7 @@ function Userpage({
   email,
   setItems,
   address,
-  setAddress,
+  setAddress
 }) {
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
@@ -42,6 +45,9 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const [numberOfBoxes, setNumberOfBoxes] = useState(0);
+  const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+
 
   const navigate = useNavigate();
 
@@ -71,6 +77,18 @@ function Userpage({
         console.log("NOPE! Address data not retrieved");
       });
   };
+
+  const planIntoValue = ()=>{
+    if (window.localStorage.getItem("plan_user")==="premium"){
+      setMaxNumberBoxes(10)
+    } else{
+      setMaxNumberBoxes(5)
+    }
+  }
+  
+  useEffect(()=>{
+    planIntoValue()
+  },[items])
 
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
@@ -168,46 +186,63 @@ function Userpage({
     // navigate("/?success=true");
   };
 
+
+  // if (window.localStorage.getItem("plan_user")==="premium"){
+  //   setMaxNumberBoxes(10)
+  // };
+  // if (window.localStorage.getItem("plan_user")==="basic"){
+  //   setMaxNumberBoxes(5)
+  // } ;
+
+
+
+  const retrieveNumberOfBoxes = async (req, res) => {
+    try {
+      await axios.get(`/inventory/${email}`).then((res) => {
+        setNumberOfBoxes(maxNumberBoxes-res.data.length)
+      });
+    } catch {
+      console.log("NOPE! Number of boxes can't be retrieved");
+    }
+  };
+
+
+
+  useEffect(()=>{
+retrieveNumberOfBoxes()
+  },[planIntoValue])
+
+
+
   return (
     <div>
       <nav id="user-page-nav">
+        <div className="containerPremium">
         <p id="user-name">
-          Welcome back {window.localStorage.getItem("firstName_user")}
+          Welcome back, {window.localStorage.getItem("firstName_user")} 
         </p>
+        {window.localStorage.getItem("plan_user") === "premium" ? <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>:<></>}
+        </div>
 
-        <Button id="signout-button" onClick={signOut}>
+
+        <button id="signoutButton" onClick={signOut}>
           Sign out
-        </Button>
+        </button>
       </nav>
 
       <h3 id="next-period">
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
-      <section id="nav-button">
-        <Button
-          id="retrieve-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-charge")}
-        >
-          Need to retrieve?
-          <p className="popup-message">
-            Through extra retrieval, items can be removed from storage anytime
-          </p>
-        </Button>
-        <Button
-          id="storage-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-storage")}
-        >
-          Need Extra Storage?
-          <p className="popup-message">
-            Through extra storage, items can be sent to storage anytime
-          </p>
-        </Button>
-      </section>
+      <div className="remainingBoxes">You can order and store 
+      {
+        numberOfBoxes<2 ? <h3 className="numberBoxesRed">{numberOfBoxes}</h3> : <h3 className="numberBoxes">{numberOfBoxes}</h3> 
+      } more boxes
+      </div>
 
-      <section id="box-select">
+      {
+        numberOfBoxes>0 ? 
+        <section id="box-select">
         <div id="box-selection-wrapper">
           <BoxSelection handleChange={handleChange} />
           <ItemDescription
@@ -233,9 +268,58 @@ function Userpage({
           items={items}
           displayTable={displayTable}
         />
+      </section> : <section id="box-select">
+        <div className="noMoreBoxes">
+          <img
+          className="noboxespic"
+          src={require("../pictures/NOBOXES.png")}
+          />
+          <h3>Unfortunately, you do not have any storage capacity left</h3> 
+          <h4 className="osusume">- If you are a Basic user, please upgrade your plan</h4>
+          <h4 className="osusume">- If you are a Premium user, please use the Extra Storage option</h4>
+        </div>
+
+        <StoredItems
+          updateItemList={updateItemList}
+          setDisplayTable={setDisplayTable}
+          setAddItem={setAddItem}
+          setBoxOrderReceived={setBoxOrderReceived}
+          items={items}
+          displayTable={displayTable}
+        />
       </section>
+      }
+      
 
       <div className="flex flex-row justify-center items-center "></div>
+
+      <h3 id="next-period">
+        Can't wait the next storing/retrieval period or have exhausted your quota of boxes?
+        <section id="nav-button">
+        <Button
+          id="retrieve-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-charge")}
+        >
+          Extra Retrieval?
+          <p className="popup-message">
+           To retrieve items anytime
+          </p>
+        </Button>
+        <Button
+          id="storage-button"
+          // className="mx-3 my-7 py-7 "
+          onClick={() => navigate("/extra-storage")}
+        >
+          Extra Storage?
+          <p className="popup-message">
+          To store items anytime
+          </p>
+        </Button>
+      </section> 
+      </h3>
+
+      
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>
