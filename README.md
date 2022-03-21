@@ -12,7 +12,15 @@ This app helps people living in dense urban areas where storage is high, to be a
 npm i
 ```
 
-## Usage
+## User Usage
+1. First sign up as a user
+2. Choose basic or premium subscription
+3. List goods
+4. Click send
+## Provider Usage
+1. First sign up as a provider
+2. Register your available space
+3. Wait for confirmation
 
 
 ## Built with
