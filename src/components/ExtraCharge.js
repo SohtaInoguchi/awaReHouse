@@ -92,6 +92,19 @@ export default function ExtraCharge({ user, items, email, setItems }) {
     setLocalItems(items);
   }, [items]);
 
+  const sendRetrievalPending = async (req,res) => {
+    axios.post('/inventory/:box_id', {
+      box_id: boxNumber
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
   return (
     <div>
         <h1 id="next-period">{localStorage.firstName_user}, please select one box to retrieve</h1>
@@ -216,7 +229,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
       onClick={()=>{
         handleOnclickDate();
         setIsValidated(true);
-        console.log(boxNumber, true)
+        sendRetrievalPending();
         }}>
         Please confirm these choices
       </button> : <></>}
@@ -226,7 +239,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         className="confirmButtons" id="lastButtonR"
         onClick={() => setModalShow(true)}
       >
-        Retrieve order
+        Order
       </button> 
       <RetrieveConfirmation
         show={modalShow}
