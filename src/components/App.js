@@ -43,16 +43,20 @@ function App() {
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
-  
-  //Axios
-  useEffect(() => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, []);
 
-  // Delete later
   useEffect(() => {
-    console.log("items in App", items);
-  }, [items]);
+    // window.onunload(() => {
+    //   localStorage.removeItem("first_name_user");
+    //   localStorage.removeItem("email_user");
+    //   localStorage.removeItem("token_user");
+    //   localStorage.removeItem("first_name_provider");
+    //   localStorage.removeItem("email_provider");
+    //   localStorage.removeItem("token_provider");
+    // });
+    axios
+      .post("/allItems", { email: window.localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
+  }, []);
 
   return (
     <div>
@@ -128,9 +132,12 @@ function App() {
         />
 
         <Route path="signup/user" element={<NewUser />} />
-        <Route path="signup/user/confirmation" element={<WelcomingPage/>}/>
+        <Route path="signup/user/confirmation" element={<WelcomingPage />} />
         <Route path="signup/provider" element={<NewProvider />} />
-        <Route path="signup/provider/confirmation" element={<WelcomingPage/>}/>
+        <Route
+          path="signup/provider/confirmation"
+          element={<WelcomingPage />}
+        />
         <Route
           path="admin"
           element={

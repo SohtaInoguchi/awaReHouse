@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Button } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
 import { GiShatteredGlass } from "react-icons/gi";
@@ -10,9 +11,15 @@ export default function StoredItems(props) {
     setDisplayTable,
     setAddItem,
     setBoxOrderReceived,
-    items,
+
     displayTable,
   } = props;
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/allItems", { email: window.localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
+  }, []);
 
   return (
     // <div className="flex flex-col  w-96 ">
