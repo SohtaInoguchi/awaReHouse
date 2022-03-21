@@ -178,3 +178,21 @@ color: white;
   font-weight:300;
   text-align: start;
 }
+
+#user-items{}
+
+.containerItemsRetrieval{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  padding:1%;
+  font-size: larger;
+}
+
+.detailsRetrieval{
+  font-size: large;
+  font-style: italic;
+}

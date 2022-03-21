@@ -1,3 +1,4 @@
+import "../input.css";
 import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -75,31 +76,29 @@ export default function ExtraCharge({ user, items, email, setItems }) {
 
   return (
     <div>
-      {/* <h1>{user}</h1> */}
-      <p className='text-2xl text-cyan-800 ml-10 my-4 m rounded-full bg-white w-fit px-8 py-2'>{localStorage.firstName_user}</p>
-        <h1 className='my-6 text-cyan-800 italic bg-white'>Which items to retrive?</h1>
-
+        <h1 id="next-period">{localStorage.firstName_user}, please select the box you want to retrieve</h1>
+        <div className="containerItemsRetrieval">
         {localItems.map((item) => {
           return (
-            <Badge bg='light' id='user-items'>
+            <Badge >
             <section key={item.box_id} className="text-left">
-              <li key={`${item.box_id}b`} className='user-items' onClick={retrieveItem}>
+              <li key={`${item.box_id}b`}  onClick={retrieveItem}>
                 {item.declared_content_one}
+              {console.log(item.pending)}
                 </li>
-              <li key={`${item.box_id}c`} className='user-items' onClick={retrieveItem}>
-                {item.declared_content_two
-                  ? item.declared_content_two
-                  : "No Items added"}
-              </li>
-              <li key={`${item.box_id}d`} className='user-items' onClick={retrieveItem}>
-                {item.declared_content_three
-                  ? item.declared_content_three
-                  : "No Items added"}
-              </li>
+              {item.declared_content_two !== "" ? <li
+              key={`${item.box_id}c`}>  
+              {item.declared_content_two}
+              </li> : <></> }
+              {item.declared_content_three !== "" ? <li
+              key={`${item.box_id}d`}>  
+              {item.declared_content_three}
+              </li> : <></> }
             </section>
           </Badge>
           );
         })}
+        </div>
 
         <section 
         className='flex 
@@ -114,7 +113,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         })}
         </section>
         
-        <h2 className='my-8 text-cyan-800 italic bg-white'>Select retrieval date</h2>
+        <h2 id="next-period">Please also select a retrieval date<p className="detailsRetrieval">(i.e. the date at which the box will be available for retrieval at your local convenient store)</p></h2>
         <DatePicker 
             className='ml-10'
             selected={startDate} 
