@@ -233,7 +233,10 @@ function Userpage({
               src={require("../pictures/PREMIUM.png")}
             />
           ) : (
-            <></>
+            <img
+              className="premiumIcon"
+              src={require("../pictures/basic.png")}
+            />
           )}
         </div>
 
