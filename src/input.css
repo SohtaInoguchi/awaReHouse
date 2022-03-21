@@ -190,11 +190,6 @@ color: white;
   font-size: larger;
 }
 
-.detailsRetrieval{
-  font-size: large;
-  font-style: italic;
-}
-
 .boxesOfItemsR{
   background-color: rgb(222, 237, 240);
   padding: 2%;
@@ -209,12 +204,21 @@ color: white;
   cursor: pointer;
 }
 
-.confirmationMessage{
-  color: white;
-}
 
 .boxesOfItemsR2{
-  background-color: red;
+  background-color: rgb(18, 223, 18);
+  padding: 2%;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 15px;
+  color: rgb(11, 81, 114);
+  border-width: 5px;
+  font-weight: bold;
+}
+
+.boxesOfItemsR2:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .cancelButtonR{
@@ -228,8 +232,65 @@ color: white;
   margin:1%;
 }
 
-
 .cancelButtonR:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.boxSelection{
+  color:  rgb(224, 236, 238);
+  text-align: center;
+  margin-top:1%;
+  font-size: 255%;
+}
+
+
+.ml-10{
+text-align: center;
+width: 200px;
+}
+
+.detailsR{
+  font-size: large;
+  font-style: italic;
+}
+
+.toSee{
+  color:white;
+}
+
+.confirmButtons{
+  margin: 1rem 1rem;
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 16px;
+  width:fit-content;
+  padding:1%;
+}
+
+.bottomContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: larger;
+}
+
+#lastButtonR{
+  margin: 1rem 1rem;
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 16px;
+  width:fit-content;
+  padding:1%;
+  font-size: 150%;
+  border-width: 5px;
+  font-weight: bold;
+}
+
+#lastButtonR:hover{
   transform: scale(1.1);
   cursor: pointer;
 }
