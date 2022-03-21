@@ -529,18 +529,17 @@ body {
 
 .secondContainerBottom {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: space-between;
+  align-items: center;
   border-radius:15px;
 }
 
 .m-10-max-w-sm {
   border-radius: 15px;
-  max-width: 350px;
+  max-width: 300px;
   height:fit-content;
-  margin:1%;
 }
 
 

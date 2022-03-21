@@ -8,7 +8,7 @@ export default function BoxSelection(props) {
   return (
     <div id='box-type-selection-wrapper'>
     <div id="box-type-selection">
-            PLEASE SELECT THE SIZE OF BOX
+            PLEASE SELECT A SUITABLE BOX SIZE FOR YOUR ITEMS
         <div className="flex justify-center items-center">
             <img
             className=""

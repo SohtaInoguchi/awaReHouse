@@ -1,11 +1,8 @@
 import React from "react";
 import "../input.css";
-
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 import { OneFiftyStripe } from "./OneFiftyStripe";
-
 import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
 import BoxSelection from "./BoxSelection";
