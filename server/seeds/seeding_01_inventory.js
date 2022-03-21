@@ -13,7 +13,8 @@ exports.seed = function(knex) {
             user_owner:"hirochanyakosen@yahoo.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Beach volley ball",
@@ -26,7 +27,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Barbecue set",
@@ -39,7 +41,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:true,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Diving cylinders",
@@ -52,7 +55,8 @@ exports.seed = function(knex) {
             user_owner:"k13.Mizuumi@gmail.com",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Diving camera",
@@ -65,7 +69,8 @@ exports.seed = function(knex) {
             user_owner:"k.nagoshi976@ezweb.ne.jp",
             fragile:true,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Summer tent",
@@ -78,7 +83,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Ski set - parents",
@@ -91,7 +97,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Set of glasses",
@@ -104,7 +111,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:true,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Video tapes",
@@ -117,7 +125,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Summer clothes kids",
@@ -130,7 +139,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:false,
-            pending:true
+            pending:true,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Tennis rackets",
@@ -143,7 +153,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Plastic trains",
@@ -156,7 +167,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Printed pictures",
@@ -169,7 +181,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Summer table napkins",
@@ -182,7 +195,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:true,
             heavy:false,
-            pending:true
+            pending:true,
+            pending_retrieval: false
           }
       ]);
     });
