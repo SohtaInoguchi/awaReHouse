@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# awaReHouse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app helps people living in dense urban areas where storage is high, to be able to store their goods at a reasonable cost.  It also allows for a potential provider to recieve a second stream of income.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+1. Clone the repo to your local machine.
 
-### `npm start`
+2. Use node package manager [npm](https://www.npmjs.com/) to install necessary packages.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm i
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Built with
+[React](https://reactjs.org/)<br/>
+[Nodejs](https://nodejs.org/en/)<br/>
+[Express](https://expressjs.com/)<br/>
+[Knex.js](https://knexjs.org/)<br/>
+[PostgreSQL](https://www.postgresql.org/docs/)<br/>
+[JWT](https://www.postgresql.org/docs/)<br/>
+[Stripe](https://www.postgresql.org/docs/)<br/>
+[Tailwind CSS](https://www.postgresql.org/docs/)<br/>
+[Socket IO](https://www.postgresql.org/docs/)<br/>
+[Victory Charts](https://www.postgresql.org/docs/)<br/>
+[Bootstrap](https://www.postgresql.org/docs/)<br/>
+[Heroku](https://www.postgresql.org/docs/)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Please follow below procedure to make a contribution.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b <featurename>)
+3. Commit your Changes (git commit -m 'feat: Add <featurename>')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
