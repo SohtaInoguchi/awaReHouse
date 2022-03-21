@@ -1,98 +1,35 @@
 import * as React from "react";
 import { useState } from "react";
 // import Button from "@mui/material/Button";
-import { Button } from "react-bootstrap";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function ExplanationPage({}) {
-  const [plan, setPlan] = useState("");
-
+import PlanSelection from "./PlanSelection";
+export default function ExplanationPage({ plan, setPlan }) {
   const navigate = useNavigate();
 
   const userEmail = window.localStorage.getItem("email_user");
 
-  function verifyEmail() {
-    axios.post(`/login/verify/${userEmail}/${plan}`).then(() => {
-
-      navigate("/user");
-    });
-
-    
-  }
-  
-
   return (
     <div>
-      <h1>Welcome</h1>
-      <h3>Please make a selection below for your plan</h3>
-      <p>
-        There are two plans we are currently offering. The basic plan and the
-        premium plan.
-      </p>
-      <div>
-        <FormControl>
-          <FormLabel>Plans:</FormLabel>
-          <RadioGroup defaultValue="Small" name="box-buttons-group">
-            <FormControlLabel
-              value="basic"
-              control={<Radio />}
-              label="Basic"
-              onClick={() => setPlan("basic")}
-            />
-            <FormControlLabel
-              value="premium"
-              control={<Radio />}
-              label="Premium"
-              onClick={() => setPlan("premium")}
-            />
-          </RadioGroup>
-        </FormControl>
+      <h3 className="bg-white px-3 py-3 text-blue-600 text-center">
+        Please make a selection below for your plan
+      </h3>
+      <PlanSelection plan={plan} setPlan={setPlan} />
+      <div className="buttons border-8">
+        <Form action="/create-checkout-session" method="POST">
+          <Button
+            className="mx-2"
+            name="name"
+            value="Storage fee"
+            type="submit"
+            onClick={() => axios.post(`/login/verify/${userEmail}/${plan}`)}
+          >
+            Checkout
+          </Button>
+          <Button onClick={() => navigate("/")}>Cancel</Button>
+        </Form>
       </div>
-
-      <div>
-        {plan === "basic" ? (
-          <div>
-            <h4>Basic Plan</h4>
-            <img
-              className="max-w-96 max-h-96 "
-              src={require("../pictures/5Boxes.jpeg")}
-              alt="Picture for 5 boxes"
-            />
-            <p>
-              This is the basic plan that allows you to store up to 5 boxes
-              without any extra monthly cost. Ideal for a single person.
-            </p>
-          </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
-      {plan === "premium" ? (
-        <div>
-          <h4>Premium Plan</h4>
-          <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/10Boxes.jpeg")}
-            alt="Picture for 10 boxes"
-          />
-          <p>
-            This is the premium plan that allows you to store up to 10 boxes
-            without any extra monthly cost. Ideal for families or couples.
-          </p>
-        </div>
-      ) : (
-        <div></div>
-      )}
-      <Button onClick={verifyEmail}>Confirm</Button>
-      <Button variant="contained" onClick={() => navigate("/")}>
-        Cancel
-      </Button>
     </div>
   );
 }
-//Connect to db, check if the user is member.  If so go to user page, if not stay on page.

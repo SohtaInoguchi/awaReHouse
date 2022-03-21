@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 export default function Response({ message, isSuccess }) {
   const navigate = useNavigate();
-
+  const email = window.localStorage.getItem("email_user");
   isSuccess &&
     setTimeout(() => {
       document.getElementById("heart").classList.remove("heart-before");
     }, 3500);
+
   return (
     <div>
       <div className="flex justify-center items-center">
@@ -19,7 +21,7 @@ export default function Response({ message, isSuccess }) {
         <div className="flex justify-center items-center mx-3 my-3 px-3 py-3 ">
           <img
             id="heart"
-            className="heart-before w-48 h-48 border-8 bg-blue-300 opacity-80  rounded-3xl  px-3 py-3 mx-3 my-3 "
+            className="heart-before   opacity-80  rounded-3xl  px-3 py-3 mx-3 my-3 "
             src={require("../pictures/heart.png")}
             alt=""
           />
