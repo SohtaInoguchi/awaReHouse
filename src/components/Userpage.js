@@ -47,6 +47,9 @@ function Userpage({
   const [storagePlaces, setStoragePlaces] = useState("");
   const [numberOfBoxes, setNumberOfBoxes] = useState(0);
   const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+  let boxCapacity = parseInt(window.localStorage.getItem("boxes_user"));
+
+  const plan = window.localStorage.getItem("plan_user");
 
   const navigate = useNavigate();
 
@@ -115,6 +118,7 @@ function Userpage({
     window.localStorage.removeItem("email_user");
     window.localStorage.removeItem("token_user");
     window.localStorage.removeItem("plan_user");
+    window.localStorage.removeItem("boxes_user");
     navigate("/");
   }
 
@@ -162,7 +166,9 @@ function Userpage({
 
   const updateItemList = () => {
     // axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    axios.post("/allItems", { email: localStorage.getItem('email_user') }).then((res) => setItems(res.data));
+    axios
+      .post("/allItems", { email: localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
   };
 
   const submit2 = (e) => {
@@ -196,7 +202,14 @@ function Userpage({
   const retrieveNumberOfBoxes = async (req, res) => {
     try {
       await axios.get(`/inventory/${email}`).then((res) => {
-        setNumberOfBoxes(maxNumberBoxes - res.data.length);
+        // setNumberOfBoxes(maxNumberBoxes - res.data.length);
+        // setNumberOfBoxes(numberOfBoxes - res.data.length); //boxCapacity
+        console.log(boxCapacity - res.data.length);
+        window.localStorage.setItem(
+          "boxes_user",
+          boxCapacity - res.data.length
+        );
+        // console.log(numberOfBoxes);
       });
     } catch {
       console.log("NOPE! Number of boxes can't be retrieved");
@@ -205,7 +218,7 @@ function Userpage({
 
   useEffect(() => {
     retrieveNumberOfBoxes();
-  }, [planIntoValue]);
+  }, []); //planIntoValue
 
   return (
     <div>
@@ -235,15 +248,15 @@ function Userpage({
 
       <div className="remainingBoxes">
         You can order and store
-        {numberOfBoxes < 2 ? (
-          <h3 className="numberBoxesRed">{numberOfBoxes}</h3>
+        {boxCapacity < 2 ? (
+          <h3 className="numberBoxesRed">{boxCapacity}</h3>
         ) : (
-          <h3 className="numberBoxes">{numberOfBoxes}</h3>
+          <h3 className="numberBoxes">{boxCapacity}</h3>
         )}{" "}
         more boxes
       </div>
 
-      {numberOfBoxes > 0 ? (
+      {boxCapacity > 0 ? (
         <section id="box-select">
           <div id="box-selection-wrapper">
             <BoxSelection handleChange={handleChange} />

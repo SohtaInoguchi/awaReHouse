@@ -16,10 +16,13 @@ export default function ExplanationPage({ plan, setPlan }) {
         Please make a selection below for your plan
       </h3>
       <PlanSelection plan={plan} setPlan={setPlan} />
-      <div className="buttons border-8">
+      <div className="buttons  flex justify-center items-center my-3 ">
         <Form action="/create-checkout-session" method="POST">
+          <Button className="mx-10" onClick={() => navigate("/")}>
+            Cancel
+          </Button>
           <Button
-            className="mx-2"
+            className="mx-10"
             name="name"
             value="Storage fee"
             type="submit"
@@ -27,7 +30,6 @@ export default function ExplanationPage({ plan, setPlan }) {
           >
             Checkout
           </Button>
-          <Button onClick={() => navigate("/")}>Cancel</Button>
         </Form>
       </div>
     </div>
