@@ -30,7 +30,7 @@ function Userpage({
   email,
   setItems,
   address,
-  setAddress
+  setAddress,
 }) {
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
@@ -47,7 +47,9 @@ function Userpage({
   const [storagePlaces, setStoragePlaces] = useState("");
   const [numberOfBoxes, setNumberOfBoxes] = useState(0);
   const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+  let boxCapacity = parseInt(window.localStorage.getItem("boxes_user"));
 
+  const plan = window.localStorage.getItem("plan_user");
 
   const navigate = useNavigate();
 
@@ -78,17 +80,17 @@ function Userpage({
       });
   };
 
-  const planIntoValue = ()=>{
-    if (window.localStorage.getItem("plan_user")==="premium"){
-      setMaxNumberBoxes(10)
-    } else{
-      setMaxNumberBoxes(5)
+  const planIntoValue = () => {
+    if (window.localStorage.getItem("plan_user") === "premium") {
+      setMaxNumberBoxes(10);
+    } else {
+      setMaxNumberBoxes(5);
     }
-  }
-  
-  useEffect(()=>{
-    planIntoValue()
-  },[items])
+  };
+
+  useEffect(() => {
+    planIntoValue();
+  }, [items]);
 
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
@@ -116,6 +118,7 @@ function Userpage({
     window.localStorage.removeItem("email_user");
     window.localStorage.removeItem("token_user");
     window.localStorage.removeItem("plan_user");
+    window.localStorage.removeItem("boxes_user");
     navigate("/");
   }
 
@@ -163,7 +166,9 @@ function Userpage({
 
   const updateItemList = () => {
     // axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    axios.post("/allItems", { email: localStorage.getItem('email_user') }).then((res) => setItems(res.data));
+    axios
+      .post("/allItems", { email: localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
   };
 
   const submit2 = (e) => {
@@ -187,7 +192,6 @@ function Userpage({
     // navigate("/?success=true");
   };
 
-
   // if (window.localStorage.getItem("plan_user")==="premium"){
   //   setMaxNumberBoxes(10)
   // };
@@ -195,36 +199,46 @@ function Userpage({
   //   setMaxNumberBoxes(5)
   // } ;
 
-
-
   const retrieveNumberOfBoxes = async (req, res) => {
     try {
       await axios.get(`/inventory/${email}`).then((res) => {
-        setNumberOfBoxes(maxNumberBoxes-res.data.length)
+        // setNumberOfBoxes(maxNumberBoxes - res.data.length);
+        // setNumberOfBoxes(numberOfBoxes - res.data.length); //boxCapacity
+        console.log(boxCapacity - res.data.length);
+        window.localStorage.setItem(
+          "boxes_user",
+          boxCapacity - res.data.length
+        );
+        // console.log(numberOfBoxes);
       });
     } catch {
       console.log("NOPE! Number of boxes can't be retrieved");
     }
   };
 
-
-
-  useEffect(()=>{
-retrieveNumberOfBoxes()
-  },[planIntoValue])
-
-
+  useEffect(() => {
+    retrieveNumberOfBoxes();
+  }, []); //planIntoValue
 
   return (
     <div>
       <nav id="user-page-nav">
         <div className="containerPremium">
-        <p id="user-name">
-          Welcome back, {window.localStorage.getItem("firstName_user")} 
-        </p>
-        {window.localStorage.getItem("plan_user") === "premium" ? <img className="premiumIcon" src={require("../pictures/PREMIUM.png")}/>:<></>}
+          <p id="user-name">
+            Welcome back {window.localStorage.getItem("firstName_user")}
+          </p>
+          {window.localStorage.getItem("plan_user") === "premium" ? (
+            <img
+              className="premiumIcon"
+              src={require("../pictures/PREMIUM.png")}
+            />
+          ) : (
+            <img
+              className="premiumIcon"
+              src={require("../pictures/basic.png")}
+            />
+          )}
         </div>
-
 
         <button id="signoutButton" onClick={signOut}>
           Sign out
@@ -235,92 +249,95 @@ retrieveNumberOfBoxes()
         Next retrieval/storing period: April 22nd - May 10th
       </h3>
 
-      <div className="remainingBoxes">You can order and store 
-      {
-        numberOfBoxes<2 ? <h3 className="numberBoxesRed">{numberOfBoxes}</h3> : <h3 className="numberBoxes">{numberOfBoxes}</h3> 
-      } more boxes
+      <div className="remainingBoxes">
+        You can order and store
+        {boxCapacity < 2 ? (
+          <h3 className="numberBoxesRed">{boxCapacity}</h3>
+        ) : (
+          <h3 className="numberBoxes">{boxCapacity}</h3>
+        )}{" "}
+        more boxes
       </div>
 
-      {
-        numberOfBoxes>0 ? 
+      {boxCapacity > 0 ? (
         <section id="box-select">
-        <div id="box-selection-wrapper">
-          <BoxSelection handleChange={handleChange} />
-          <ItemDescription
-            createDescription1={createDescription1}
-            createDescription2={createDescription2}
-            createDescription3={createDescription3}
-            toggleIsHeavy={toggleIsHeavy}
-            toggleIsFragile={toggleIsFragile}
-            submit2={submit2}
-            typeBox={typeBox}
-            description1={description1}
-            description2={description2}
-            description3={description3}
-            address={address}
-          />
-        </div>
+          <div id="box-selection-wrapper">
+            <BoxSelection handleChange={handleChange} />
+            <ItemDescription
+              createDescription1={createDescription1}
+              createDescription2={createDescription2}
+              createDescription3={createDescription3}
+              toggleIsHeavy={toggleIsHeavy}
+              toggleIsFragile={toggleIsFragile}
+              submit2={submit2}
+              typeBox={typeBox}
+              description1={description1}
+              description2={description2}
+              description3={description3}
+              address={address}
+            />
+          </div>
 
-        <StoredItems
-          updateItemList={updateItemList}
-          setDisplayTable={setDisplayTable}
-          setAddItem={setAddItem}
-          setBoxOrderReceived={setBoxOrderReceived}
-          items={items}
-          displayTable={displayTable}
-        />
-      </section> : <section id="box-select">
-        <div className="noMoreBoxes">
-          <img
-          className="noboxespic"
-          src={require("../pictures/NOBOXES.png")}
+          <StoredItems
+            updateItemList={updateItemList}
+            setDisplayTable={setDisplayTable}
+            setAddItem={setAddItem}
+            setBoxOrderReceived={setBoxOrderReceived}
+            items={items}
+            displayTable={displayTable}
           />
-          <h3>Unfortunately, you do not have any storage capacity left</h3> 
-          <h4 className="osusume">- If you are a Basic user, please upgrade your plan</h4>
-          <h4 className="osusume">- If you are a Premium user, please use the Extra Storage option</h4>
-        </div>
+        </section>
+      ) : (
+        <section id="box-select">
+          <div className="noMoreBoxes">
+            <img
+              className="noboxespic"
+              src={require("../pictures/NOBOXES.png")}
+            />
+            <h3>Unfortunately, you do not have any storage capacity left</h3>
+            <h4 className="osusume">
+              - If you are a Basic user, please upgrade your plan
+            </h4>
+            <h4 className="osusume">
+              - If you are a Premium user, please use the Extra Storage option
+            </h4>
+          </div>
 
-        <StoredItems
-          updateItemList={updateItemList}
-          setDisplayTable={setDisplayTable}
-          setAddItem={setAddItem}
-          setBoxOrderReceived={setBoxOrderReceived}
-          items={items}
-          displayTable={displayTable}
-        />
-      </section>
-      }
-      
+          <StoredItems
+            updateItemList={updateItemList}
+            setDisplayTable={setDisplayTable}
+            setAddItem={setAddItem}
+            setBoxOrderReceived={setBoxOrderReceived}
+            items={items}
+            displayTable={displayTable}
+          />
+        </section>
+      )}
 
       <div className="flex flex-row justify-center items-center "></div>
 
       <h3 id="next-period">
-        Can't wait the next storing/retrieval period or have exhausted your quota of boxes?
+        Can't wait the next storing/retrieval period or have exhausted your
+        quota of boxes?
         <section id="nav-button">
-        <Button
-          id="retrieve-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-charge")}
-        >
-          Extra Retrieval?
-          <p className="popup-message">
-           To retrieve items anytime
-          </p>
-        </Button>
-        <Button
-          id="storage-button"
-          // className="mx-3 my-7 py-7 "
-          onClick={() => navigate("/extra-storage")}
-        >
-          Extra Storage?
-          <p className="popup-message">
-          To store items anytime
-          </p>
-        </Button>
-      </section> 
+          <Button
+            id="retrieve-button"
+            // className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-charge")}
+          >
+            Extra Retrieval?
+            <p className="popup-message">To retrieve items anytime</p>
+          </Button>
+          <Button
+            id="storage-button"
+            // className="mx-3 my-7 py-7 "
+            onClick={() => navigate("/extra-storage")}
+          >
+            Extra Storage?
+            <p className="popup-message">To store items anytime</p>
+          </Button>
+        </section>
       </h3>
-
-      
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>
