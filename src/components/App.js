@@ -44,15 +44,20 @@ function App() {
   const [address, setAddress] = useState("");
   const [plan, setPlan] = useState("");
   const navigate = useNavigate();
-  //Axios
-  useEffect(() => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
-  }, []);
 
-  // Delete later
   useEffect(() => {
-    console.log("items in App", items);
-  }, [items]);
+    // window.onunload(() => {
+    //   localStorage.removeItem("first_name_user");
+    //   localStorage.removeItem("email_user");
+    //   localStorage.removeItem("token_user");
+    //   localStorage.removeItem("first_name_provider");
+    //   localStorage.removeItem("email_provider");
+    //   localStorage.removeItem("token_provider");
+    // });
+    axios
+      .post("/allItems", { email: window.localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
+  }, []);
 
   return (
     <div>
