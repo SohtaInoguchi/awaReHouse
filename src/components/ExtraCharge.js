@@ -16,30 +16,34 @@ export default function ExtraCharge({ user, items, email, setItems }) {
   const [modalShow, setModalShow] = useState(false);
   const [localItems, setLocalItems] = useState([]);
   const [clear, setClear] = useState(false);
+  const [boxNumber, setBoxNumber] = useState();
+  const [boxIsSelected, setBoxIsSelected] = useState(false)
+
+
   const navigate = useNavigate();
 
-  const retrieveItem = (e) => {
-    const temp = [...selectedItems];
-    const tempForLocal = [...localItems];
-    tempForLocal.forEach((item) => {
-      for (let key in item) {
-        const tag = document.getElementById(e.target.id);
+  // const retrieveItem = (e) => {
+  //   const temp = [...selectedItems];
+  //   const tempForLocal = [...localItems];
+  //   tempForLocal.forEach((item) => {
+  //     for (let key in item) {
+  //       const tag = document.getElementById(e.target.id);
 
-        if (
-          item[key] === e.target.textContent &&
-          item.box_id === parseInt(tag.id)
-        ) {
-          item[key] = "";
-          return;
-        }
-      }
-    });
-    if (e.target.textContent !== "No Items added") {
-      temp.push(e.target.textContent);
-    }
-    setSelectedItem(temp);
-    setLocalItems(tempForLocal);
-  };
+  //       if (
+  //         item[key] === e.target.textContent &&
+  //         item.box_id === parseInt(tag.id)
+  //       ) {
+  //         item[key] = "";
+  //         return;
+  //       }
+  //     }
+  //   });
+  //   if (e.target.textContent !== "No Items added") {
+  //     temp.push(e.target.textContent);
+  //   }
+  //   setSelectedItem(temp);
+  //   setLocalItems(tempForLocal);
+  // };
 
   const handleOnclickDate = () => {
     const selectedDateStr = `${selectedDate.getFullYear()}/${
@@ -91,28 +95,38 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         <h1 id="next-period">{localStorage.firstName_user}, please select the box you want to retrieve</h1>
         <div className="containerItemsRetrieval">
         {localItems.map((item) => {
+          if (item.pending === false)
           return (
-            <Badge >
+            <div key={`${item.box_id}m`}
+            className="boxesOfItemsR" onClick={()=>{
+              setBoxIsSelected(true);
+              setBoxNumber(item.box_id)
+            }}>
+              <p >Box Number: {item.box_id} </p>
             <section key={item.box_id} className="text-left">
-              <li key={`${item.box_id}b`}  onClick={retrieveItem}>
+              <li key={`${item.box_id}g`}  >
                 {item.declared_content_one}
-              {console.log(item.pending)}
                 </li>
               {item.declared_content_two !== "" ? <li
-              key={`${item.box_id}c`}>  
+              key={`${item.box_id}h`}>  
               {item.declared_content_two}
               </li> : <></> }
               {item.declared_content_three !== "" ? <li
-              key={`${item.box_id}d`}>  
+              key={`${item.box_id}k`}>  
               {item.declared_content_three}
               </li> : <></> }
             </section>
-          </Badge>
+          </div>
           );
         })}
         </div>
+        <div>
+        {boxIsSelected===true ? <div className="confirmationMessage">You selected Box Number {boxNumber} </div> : <></>}
+   <button className="cancelButtonR" onClick={()=>{
+       setBoxIsSelected(false);
+   }}>Cancel</button></div>
 
-        <section 
+        {/* <section 
         className="flex 
         flex-wrap 
         items-center m-10 text-sky-900 font-bold"
@@ -134,7 +148,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
         >
           Clear
         </Button>
-      </section>
+      </section> */}
 
       <h2 className="my-8 text-cyan-800 italic bg-white">
         Select retrieval date
