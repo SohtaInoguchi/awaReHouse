@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import "../input.css";
 
 export default function ItemDescription(props) {
   const {
@@ -80,17 +81,7 @@ export default function ItemDescription(props) {
           </Form.Group>
           <p id="address">Your address: {address}</p>
           <Button id="update-button" onClick={submit2}>
-            Update
-          </Button>
-          <Button
-            id="submit-button"
-            className="mx-2"
-            name="name"
-            value="Storage fee"
-            type="submit"
-            disabled="true"
-          >
-            Checkout
+            Order
           </Button>
         </Form>
       </article>

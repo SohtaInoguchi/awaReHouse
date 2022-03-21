@@ -312,6 +312,7 @@ app.get("/users/:email", async (req, res) => {
   }
 });
 
+
 app.get("/payments/:provider_email", async (req, res) => {
   try {
     const { provider_email } = req.params;
@@ -357,6 +358,16 @@ app.post("/inventory", async (req, res) => {
     res.status(201).send("YEP inventory");
   } catch {
     console.log("Backend server does not work - inventory");
+  }
+});
+
+app.get("/inventory/:user_owner", async (req, res) => {
+  try {
+    const { user_owner } = req.params;
+    const userBoxes = await db.select("*").from("inventory").where({ user_owner });
+    res.json(userBoxes);
+  } catch {
+    console.log("Error in retrieving user boxes");
   }
 });
 
