@@ -22,7 +22,6 @@ export default function StoredItems(props) {
   }, []);
 
   return (
-    // <div className="flex flex-col  w-96 ">
     <div id="stored-item" className="flex flex-col ">
       <Button
         id="store-item-button"
@@ -53,7 +52,6 @@ export default function StoredItems(props) {
         >
           {items.map((item, index) => {
             return (
-              // <div className=" text-blue-600 w-full " key={index}>
               <div className="selected-items" key={index}>
                 <div
                   className="flex justify-center items-center  "
@@ -87,7 +85,6 @@ export default function StoredItems(props) {
 
                         {item.declared_content_two !== "" ? (
                           <div
-                            // className="border-4 border-violet-300 flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg py-2 px-3 mx-4 "
                             className="each-items  flex min-h-100 max-h-100 bg-green-400  shadow-lg rounded-lg px-3 py-2 mx-2 "
                             key={`${index}b`}
                           >
@@ -109,7 +106,6 @@ export default function StoredItems(props) {
 
                         {item.declared_content_three !== "" ? (
                           <div
-                            // className=" border-4 border-violet-300 flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg py-2 mx-4"
                             className="each-items  flex min-h-100 max-h-100 bg-green-400 shadow-lg rounded-lg px-3 py-2 mx-2"
                             key={`${index}c`}
                           >
@@ -133,10 +129,8 @@ export default function StoredItems(props) {
                   ) : (
                     <div
                       id="item"
-                      // className=" border-4 border-violet-300 flex flex-row justify-center items-center rounded-lg px-3 mx-4"
                       className="   flex flex-row justify-center items-center rounded-lg px-3 py-2 mx-2"
                     >
-                      {/* <div className=" border-4 border-teal-300 flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 px-3 mx-4"> */}
                       <div className=" each-items  flex min-h-100 max-h-100  shadow-lg rounded-lg px-3 py-2 mx-2">
                         {item.declared_content_one}
                         {item.fragile === true ? (
@@ -153,7 +147,6 @@ export default function StoredItems(props) {
 
                       {item.declared_content_two !== "" ? (
                         <div
-                          // className="border-4 border-teal-300 flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 mx-4"
                           className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
                           key={`${index}b`}
                         >
@@ -175,7 +168,6 @@ export default function StoredItems(props) {
 
                       {item.declared_content_three !== "" ? (
                         <div
-                          // className=" border-4 border-teal-300 flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 mx-4"
                           className="each-items  flex min-h-100 max-h-100 shadow-lg rounded-lg px-3 py-2 mx-2"
                           key={`${index}c`}
                         >
