@@ -164,7 +164,7 @@ function App() {
           }
         />
         <Route path="learn" element={<LearnMore />} />
-        <Route path="extra-storage" element={<BoxFlow addy={address} />} />
+        <Route path="extra-storage" element={<BoxFlow address={address} />} />
         <Route
           path="explanation"
           element={<ExplanationPage plan={plan} setPlan={setPlan} />}
