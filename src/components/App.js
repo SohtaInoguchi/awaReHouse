@@ -1,13 +1,13 @@
 import "../style.css";
 import "../input.css";
-import { io } from "socket.io-client";
+
 import Userpage from "./Userpage.js";
 import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Homepage from "./Homepage";
 import NewUser from "./NewUser";
 import NewProvider from "./NewProvider";
-import Subscription from "./Subscription";
+
 import Providerpage from "./Providerpage";
 import axios from "axios";
 import Admin from "./Admin";
@@ -23,7 +23,11 @@ import {
   useNavigate,
 } from "react-router-dom";
 import LearnMore from "./LearnMore";
-
+import ExplanationPage from "./ExplanationPage";
+import WelcomingPage from "./WelcomingPage";
+window.addEventListener("unload", () => {
+  console.log("toni is printed");
+});
 function App() {
   //for user
   const [isLogin, setIsLogin] = useState(false);
@@ -40,21 +44,38 @@ function App() {
   // email for provider
   const [email2, setEmail2] = useState("");
   const [address, setAddress] = useState("");
-  //Axios
+  const [plan, setPlan] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+    // window.onunload(() => {
+    //   localStorage.removeItem("first_name_user");
+    //   localStorage.removeItem("email_user");
+    //   localStorage.removeItem("token_user");
+    //   localStorage.removeItem("first_name_provider");
+    //   localStorage.removeItem("email_provider");
+    //   localStorage.removeItem("token_provider");
+    // });
+    axios
+      .post("/allItems", { email: window.localStorage.getItem("email_user") })
+      .then((res) => setItems(res.data));
   }, []);
 
-  // Delete later
-  useEffect(() => {
-    console.log("items in App", items);
-  }, [items])
-
   return (
-    <Router>
-      <button onClick={() => setMessage("")}>
-        <Link to="/">To go back home</Link>
-      </button>
+    <div>
+      {/* <div className="header flex flex-row flex-wrap justify-between w-44  ">
+        <img
+          className="top-0 w-40 h-40 rounded-3xl cursor-pointer mx-3 my-3 border-8"
+          src={require("../pictures/LOGO.png")}
+          alt=""
+          onClick={() => {
+            window.scrollTo(500, 350);
+            navigate("/");
+          }}
+        />
+        <div className="flex flex-row flex-wrap justify-center items-center"></div>
+      </div> */}
+
       <Routes>
         <Route
           path="/"
@@ -63,6 +84,7 @@ function App() {
               setMode={setMode}
               message={message}
               setMessage={setMessage}
+              plan={plan}
             />
           }
         />
@@ -80,6 +102,7 @@ function App() {
               items={items}
               email={email}
               setItems={setItems}
+              address={address}
               setAddress={setAddress}
             />
           }
@@ -113,7 +136,12 @@ function App() {
         />
 
         <Route path="signup/user" element={<NewUser />} />
+        <Route path="signup/user/confirmation" element={<WelcomingPage />} />
         <Route path="signup/provider" element={<NewProvider />} />
+        <Route
+          path="signup/provider/confirmation"
+          element={<WelcomingPage />}
+        />
         <Route
           path="admin"
           element={
@@ -126,12 +154,23 @@ function App() {
 
         <Route
           path="extra-charge"
-          element={<ExtraCharge user={user} items={items} email={email} setItems={setItems}/>}
+          element={
+            <ExtraCharge
+              user={user}
+              items={items}
+              email={email}
+              setItems={setItems}
+            />
+          }
         />
         <Route path="learn" element={<LearnMore />} />
-        <Route path="extra-storage" element={<BoxFlow addy={address} />} />
+        <Route path="extra-storage" element={<BoxFlow address={address} />} />
+        <Route
+          path="explanation"
+          element={<ExplanationPage plan={plan} setPlan={setPlan} />}
+        />
       </Routes>
-    </Router>
+    </div>
   );
 }
 

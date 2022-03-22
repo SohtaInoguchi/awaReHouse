@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import WelcomingPage from "./WelcomingPage.js";
+import { useNavigate } from "react-router-dom";
 
-export default function NerCustomer({ setMode }) {
+export default function NerCustomer() {
   const [providerFirstName, setProviderFirstName] = useState("");
   const [providerLastName, setProviderLastName] = useState("");
   const [providerPassword, setProviderPassword] = useState("");
@@ -19,38 +21,11 @@ export default function NerCustomer({ setMode }) {
   const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
-  const createProviderFirstName = (e) => {
-    setProviderFirstName(e.target.value);
-  };
-
-  const createProviderLastName = (e) => {
-    setProviderLastName(e.target.value);
-  };
-
-  const createProviderPassword = (e) => {
-    setProviderPassword(e.target.value);
-  };
-
-  const createProviderAddress = (e) => {
-    setProviderAddress(e.target.value);
-  };
-
-  const createProviderEmail = (e) => {
-    setProviderEmail(e.target.value);
-  };
-
-  const createProviderBankReference = (e) => {
-    setProviderBankReference(e.target.value);
-  };
-
-  const createProviderEmergencyContact = (e) => {
-    setProviderEmergencyContact(e.target.value);
-  };
-
-  const createProviderEmergencyContactPhone = (e) => {
-    setProviderEmergencyContactPhone(e.target.value);
+  const setInputFieldValue = (e, setMethod) => {
+    const input = e.target.value;
+    setMethod(input);
   };
 
   const pictureStorageHandler = (e) => {
@@ -91,133 +66,135 @@ export default function NerCustomer({ setMode }) {
   };
 
   const handleProviderSubmit = (e) => {
-      sendProvider();
-      setRegistrationDone(true);
+    sendProvider();
+    setRegistrationDone(true);
   };
 
   if (registrationDone === false) {
     return (
-      <div className="containerNewRegistration">
-        <div className="newProvider text-slate-900 m-5">
-          Register as a storage provider
-          <Form
-          onSubmit={handleProviderSubmit}>
-
-            <Form.Group 
-            >
-              <Form.Control 
+      <div className="containerNewRegistration login">
+        <div className=" text-slate-900 m-5">
+          <p className="text-white text-center">
+            Register as a storage provider
+          </p>
+          <Form onSubmit={handleProviderSubmit}>
+            <Form.Group>
+              <Form.Control
                 type="text"
-                name="firstname"            
-                placeholder="Enter first name"
-                value={providerFirstName}
-                onChange={createProviderFirstName}
+                name="firstname"
+                placeholder="First name"
+                onChange={(e) => setInputFieldValue(e, setProviderFirstName)}
                 required
                 className="my-3"
               />
             </Form.Group>
 
             <Form.Group>
-            <Form.Control 
-              type="text"
-              name="lastname"            
-              placeholder="Last name"
-              value={providerLastName}
-              onChange={createProviderLastName}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <Form.Control 
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={providerPassword}
-              onChange={createProviderPassword}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={providerAddress}
-              onChange={createProviderAddress}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={providerEmail}
-              onChange={createProviderEmail}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="bankreference"
-              placeholder="Banking reference"
-              value={providerBankReference}
-              onChange={createProviderBankReference}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="emergencycontact"
-              placeholder="Emergency contact name"
-              value={providerEmergencyContact}
-              onChange={createProviderEmergencyContact}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-
-            <Form.Group>
-            <Form.Control 
-              type="text"
-              name="emergencycontactphone"
-              placeholder="Emergency contact phone"
-              value={providerEmergencyContactPhone}
-              onChange={createProviderEmergencyContactPhone}
-              required
-              className="my-3"
-            />
-            </Form.Group>
-
-            <Form.Group>
-            <p>Please attach a copy of a valid identification document</p>
-            <Form.Control 
-                type="file" 
-                name="file" 
-                onChange={pictureStorageHandler} 
+              <Form.Control
+                type="text"
+                name="lastname"
+                placeholder="Last name"
+                onChange={(e) => setInputFieldValue(e, setProviderLastName)}
+                required
                 className="my-3"
-                // required
-                />
+              />
             </Form.Group>
 
-            <Button 
-            variant="light" 
-            type="submit"
-            // onClick={handleProviderSubmit}
-            >Submit
-            </Button>
+            <Form.Group>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(e) => setInputFieldValue(e, setProviderPassword)}
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="address"
+                placeholder="Address"
+                onChange={(e) => setInputFieldValue(e, setProviderAddress)}
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={(e) => setInputFieldValue(e, setProviderEmail)}
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="bankreference"
+                placeholder="Banking reference"
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderBankReference)
+                }
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="emergencycontact"
+                placeholder="Emergency contact name"
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContact)
+                }
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="emergencycontactphone"
+                placeholder="Emergency contact phone"
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContactPhone)
+                }
+                required
+                className="my-3"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <p className=" text-white  ">
+                Please attach a copy of a valid identification document
+              </p>
+              <Form.Control
+                type="file"
+                name="file"
+                onChange={pictureStorageHandler}
+                className="my-3"
+              />
+            </Form.Group>
+            <div className="flex justify-center items-center">
+              <Button
+                className="mx-3"
+                variant="primary"
+                onClick={() => navigate("/")}
+              >
+                Back to Home
+              </Button>
+              <Button className="mx-3" variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       </div>
@@ -225,12 +202,8 @@ export default function NerCustomer({ setMode }) {
   }
   if (registrationDone === true) {
     return (
-      <div className="registrationDone">
-        <div>
-          THANK YOU FOR YOUR REGISTRATION
-          <br></br>
-          <button type="button" onClick={() => setMode("homePage")}>Back to homepage</button>
-        </div>
+      <div>
+        <WelcomingPage />
       </div>
     );
   }

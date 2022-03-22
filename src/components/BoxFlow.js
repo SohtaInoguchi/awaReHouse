@@ -1,17 +1,16 @@
 import React from "react";
 import "../input.css";
-
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 import { OneFiftyStripe } from "./OneFiftyStripe";
-
 import { useNavigate } from "react-router-dom";
 import { Accordion, Button, Form } from "react-bootstrap";
+import BoxSelection from "./BoxSelection";
+import ExtraStorageModal from "./ExtraStorageModal";
 
-export default function BoxFlow({ email, setItems, addy }) {
+export default function BoxFlow({ email, setItems, address }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
-  const [typeBoxFlow, setTypeBoxFlow] = useState(null);
+  const [typeBoxFlow, setTypeBoxFlow] = useState("");
   // const [address, setAddress] = useState("");
   const [confirmationFlow, setConfirmationFlow] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
@@ -23,6 +22,8 @@ export default function BoxFlow({ email, setItems, addy }) {
   const [isHeavyFlow, setIsHeavyFlow] = useState(false);
   const [isFragileFlow, setIsFragileFlow] = useState(false);
   const [storagePlacesFlow, setStoragePlacesFlow] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const navigate = useNavigate();
 
   const createDescription1 = (e) => {
@@ -107,10 +108,10 @@ export default function BoxFlow({ email, setItems, addy }) {
         weight_in_kg: "3.41",
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
-        user_owner: email,
+        // user_owner: email,
+        user_owner: localStorage.getItem('email_user'),
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
-        // send heavy and fragile boolean
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -139,161 +140,111 @@ export default function BoxFlow({ email, setItems, addy }) {
     sendBoxRequest();
   };
 
+  const check = () => {
+    console.log("isconfirmed", isConfirmed);
+  }
+
+
   return (
     <div>
-      <div className="flex justify-center items-center  ">
-        <p className="flex bg-gray-200 text-red-600 rounded-lg px-3 py-3 mx-3 my-3">
-          Extra Storage Page
-        </p>
-      </div>
+      <p id="extra-storage-banner">
+        Extra Storage
+      </p>
       <div className="flex justify-end mx-5 my-2 px-2 py-2">
-        <Button onClick={() => navigate("/user")}>Go Back To User Page</Button>
+        <Button id="go-back-to-user-page" onClick={() => navigate("/user")}>Go Back To User Page</Button>
       </div>
 
-      <div className=" rounded-3xl mx-8">
-        <Accordion>
-          <Accordion.Item className="">
-            <Accordion.Header>
-              PLEASE SELECT A SUITABLE BOX FOR YOUR ITEM
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="flex justify-center items-center">
-                <img
-                  className=""
-                  src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                  style={{ height: 200 }}
+    <section id="box-select-extra-storage">
+      <div id="box-selection-wrapper">
+
+      <BoxSelection handleChange={handleChange} />
+
+
+        <section id="item-description-wrapper">
+          <article id="item-description">
+              <Form
+                action="/create-checkout-session"
+                method="POST"
+                id="confirmation-form"
+                className=" text-blue-600 px-3 py-3 "
+              >
+              <div id="box-select-header">
+                <p>You selected type {typeBoxFlow} box.</p>
+                <p>Please provide a brief description of the items you want to
+                store (e.g. snowboard, summer clothes, barbecue set...)</p>
+              </div>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description1"
+                    placeholder="Item description (required)"
+                    required
+                    value={description1Flow}
+                    onChange={createDescription1}
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description2"
+                    placeholder="Item description (optional)"
+                    value={description2Flow}
+                    onChange={createDescription2}
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Control
+                    type="text"
+                    name="description3"
+                    placeholder="Item description (optional)"
+                    value={description3Flow}
+                    onChange={createDescription3}
+                  />
+                </Form.Group>
+                {/* Fragile and heavy flag  */}
+                <Form.Group className="form-inputs">
+                  <Form.Check
+                    type="checkbox"
+                    label="Heavy"
+                    onChange={toggleIsHeavy}
+                    className="item-description-checkbox"
+                  />
+                </Form.Group>
+                <Form.Group className="form-inputs">
+                  <Form.Check
+                    type="checkbox"
+                    label="Fragile"
+                    onChange={toggleIsFragile}
+                    className="item-description-checkbox"
+                  />
+                </Form.Group>
+                <p id="address">Your address: {address}</p>
+                {
+                  description1Flow && typeBoxFlow ? 
+                  <Button 
+                  className='ml-10 my-8' 
+                  // id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'}
+                  id="extra-storage-field-filled"
+                  onClick={() => setModalShow(true)}
+                  >Checkout</Button> :
+                  <p className="text-lg text-red-500">Please select box type and enter item description.</p>
+                }
+                <ExtraStorageModal show={modalShow}
+                onHide={setModalShow}
+                submit2={submit2}
                 />
-              </div>
-              <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label className="btn btn-secondary active">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option1"
-                    value="A (27cm x 38cm x 29cm : Max weight = 7.5 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type A
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option2"
-                    value="B (32cm x 46cm x 29cm : Max weight = 10.5 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type B
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option3"
-                    value="C (40cm x 60cm x 40cm : Max weight = 24 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type C
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option4"
-                    value="D (175cm x 30cm x 15cm : Max weight = 20 kg)"
-                    onChange={handleChange}
-                  />{" "}
-                  Type D
-                </label>
-              </div>
-              <div className="flex justify-center items-center">
-                {/* <Button
-                        className="my-3"
-                        onClick={(e) => {
-                          if (typeBox === null || typeBox.length === 0) return;
-                          console.log(e.target);
-                          setConfirmation(true);
-                          document
-                            .getElementById("confirmation-form")
-                            .classList.remove("boxes-before");
-                          document
-                            .getElementById("confirmation-form")
-                            .classList.add("boxes-after");
-                        }}
-                      >
-                        Add Item
-                      </Button> */}
-                {/* <Button onClick={() => setConfirmation(false)}>
-                    Go Back
-                  </Button> */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+                {/* <div className="flex justify-center items-center">
+                  <OneFiftyStripe />
+                </div> */}
+              </Form>
+            </article>
+        </section>
+      {/* </div> */}
+      {/* -------box-selection-wrapper END-------- */}
       </div>
-
-      <div className="flex justify-center items-center mx-5 px-5  ">
-        <Form
-          action="/create-checkout-session"
-          method="POST"
-          id="confirmation-form"
-          className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 "
-        >
-          You selected a type {typeBoxFlow} box.
-          <br /> Please provide a brief description of the items you want to
-          store (e.g. Snowboard, summer clothes, barbecue set...)
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description1"
-              placeholder="Item description (required)"
-              required
-              value={description1Flow}
-              onChange={createDescription1}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description2"
-              placeholder="Item description (optional)"
-              value={description2Flow}
-              onChange={createDescription2}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Control
-              type="text"
-              name="description3"
-              placeholder="Item description (optional)"
-              value={description3Flow}
-              onChange={createDescription3}
-            />
-          </Form.Group>
-          {/* Fragile and heavy flag  */}
-          <Form.Group className="w-96">
-            <Form.Check
-              type="checkbox"
-              label="Heavy"
-              onChange={toggleIsHeavy}
-            />
-          </Form.Group>
-          <Form.Group className="w-96">
-            <Form.Check
-              type="checkbox"
-              label="Fragile"
-              onChange={toggleIsFragile}
-            />
-          </Form.Group>
-          Sending address:{" "}
-          <p className=" bg-blue-200  rounded-lg w-96">{addy}</p>
-          <div className="flex justify-center items-center">
-            <OneFiftyStripe />
-          </div>
-        </Form>
-      </div>
-
+    </section>
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
     </div>
+// --------ITEM DESCRIPTION FORM END-------
   );
 }

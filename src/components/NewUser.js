@@ -3,8 +3,10 @@ import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form } from "react-bootstrap";
+import WelcomingPage from "./WelcomingPage.js";
+import { useNavigate } from "react-router-dom";
 
-export default function NewUser({ setMode }) {
+export default function NewUser() {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -17,25 +19,11 @@ export default function NewUser({ setMode }) {
   });
 
   const [registrationDone, setRegistrationDone] = useState(false);
+  const navigate = useNavigate();
 
-  const createFirstName = (e) => {
-    setUserFirstName(e.target.value);
-  };
-
-  const createLastName = (e) => {
-    setUserLastName(e.target.value);
-  };
-
-  const createPassword = (e) => {
-    setUserPassword(e.target.value);
-  };
-
-  const createAddress = (e) => {
-    setUserAddress(e.target.value);
-  };
-
-  const createEmail = (e) => {
-    setUserEmail(e.target.value);
+  const setInputFieldValue = (e, setMethod) => {
+    const input = e.target.value;
+    setMethod(input);
   };
 
   const pictureHandler = (e) => {
@@ -80,8 +68,8 @@ export default function NewUser({ setMode }) {
 
   if (registrationDone === false) {
     return (
-      <div className="containerNewRegistration">
-        <div className="newUser text-gray-600">
+      <div className="containerNewRegistration login  ">
+        <div className=" text-white text-center">
           Register as a storage user
           <Form onSubmit={handleSubmit}>
             <Form.Group>
@@ -89,8 +77,8 @@ export default function NewUser({ setMode }) {
                 type="text"
                 name="firstname"
                 placeholder="First name"
-                value={userFirstName}
-                onChange={createFirstName}
+                id="firstName"
+                onChange={(e) => setInputFieldValue(e, setUserFirstName)}
                 required
                 className="my-3"
               />
@@ -101,8 +89,7 @@ export default function NewUser({ setMode }) {
                 type="text"
                 name="lastname"
                 placeholder="Last name"
-                value={userLastName}
-                onChange={createLastName}
+                onChange={(e) => setInputFieldValue(e, setUserLastName)}
                 required
                 className="my-3"
               />
@@ -113,8 +100,7 @@ export default function NewUser({ setMode }) {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={userPassword}
-                onChange={createPassword}
+                onChange={(e) => setInputFieldValue(e, setUserPassword)}
                 required
                 className="my-3"
               />
@@ -125,8 +111,7 @@ export default function NewUser({ setMode }) {
                 type="text"
                 name="address"
                 placeholder="Address"
-                value={userAddress}
-                onChange={createAddress}
+                onChange={(e) => setInputFieldValue(e, setUserAddress)}
                 required
                 className="my-3"
               />
@@ -137,8 +122,7 @@ export default function NewUser({ setMode }) {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={userEmail}
-                onChange={createEmail}
+                onChange={(e) => setInputFieldValue(e, setUserEmail)}
                 required
                 className="my-3"
               />
@@ -155,7 +139,14 @@ export default function NewUser({ setMode }) {
               />
             </Form.Group>
 
-            <Button variant="light" type="submit">
+            <Button
+              className="mx-3"
+              variant="primary"
+              onClick={() => navigate("/")}
+            >
+              Back to Home
+            </Button>
+            <Button className="mx-3" variant="primary" type="submit">
               Submit
             </Button>
           </Form>
@@ -165,11 +156,8 @@ export default function NewUser({ setMode }) {
   }
   if (registrationDone === true) {
     return (
-      <div className="registrationDone">
-        <div>
-          THANK YOU FOR YOUR REGISTRATION
-          <br></br>
-        </div>
+      <div>
+        <WelcomingPage />
       </div>
     );
   }

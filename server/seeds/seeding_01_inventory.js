@@ -13,7 +13,8 @@ exports.seed = function(knex) {
             user_owner:"hirochanyakosen@yahoo.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Beach volley ball",
@@ -26,7 +27,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Barbecue set",
@@ -39,7 +41,8 @@ exports.seed = function(knex) {
             user_owner:"figo1234@yahoo.co.jp",
             fragile:true,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Diving cylinders",
@@ -52,7 +55,8 @@ exports.seed = function(knex) {
             user_owner:"k13.Mizuumi@gmail.com",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Diving camera",
@@ -65,7 +69,8 @@ exports.seed = function(knex) {
             user_owner:"k.nagoshi976@ezweb.ne.jp",
             fragile:true,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Summer tent",
@@ -78,7 +83,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Ski set - parents",
@@ -91,7 +97,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Set of glasses",
@@ -104,7 +111,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:true,
             heavy:true,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Video tapes",
@@ -117,7 +125,8 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:false,
+            pending_retrieval: false
           },
           {
             declared_content_one:"Summer clothes kids",
@@ -130,7 +139,120 @@ exports.seed = function(knex) {
             user_owner:"cakelover012&3@softbank.co.jp",
             fragile:false,
             heavy:false,
-            pending:false
+            pending:true,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Tennis rackets",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.02,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Plastic trains",
+            declared_content_two:"Plastic gundams",
+            declared_content_three:"Lego",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:11.40,
+            declared_as_fragile:false,
+            expected_retrieval_season:"autumn",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Printed pictures",
+            declared_content_two:"Polaroids",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.07,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Summer table napkins",
+            declared_content_two:"Summer table plates",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:11.91,
+            declared_as_fragile:true,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:true,
+            heavy:false,
+            pending:true,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Printed pictures",
+            declared_content_two:"Polaroids",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.07,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Books",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:8.4,
+            declared_as_fragile:false,
+            expected_retrieval_season:"autumn",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Camping tent",
+            declared_content_two:"Camping table",
+            declared_content_three:"Camping dining set",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:24.5,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:true,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Ice shaver",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:4.83,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
           }
       ]);
     });

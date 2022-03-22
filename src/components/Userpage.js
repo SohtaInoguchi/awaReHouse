@@ -1,6 +1,6 @@
 import "../input.css";
-import Success from "../components/Success";
-import Subscription from "../components/Subscription";
+import Success from "./Success";
+import Subscription from "./Subscription";
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import axios from "axios";
@@ -11,8 +11,14 @@ import { BoxFlow } from "./BoxFlow";
 import { Accordion, Button, Form } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
 import { GiShatteredGlass } from "react-icons/gi";
+import BoxSelection from "./BoxSelection";
+import ItemDescription from "./ItemDescription";
 
 import Icon from "./Icon";
+import StoredItems from "./StoredItems";
+import { ListItem } from "@mui/material";
+import Login from "./Login";
+
 function Userpage({
   user,
   message,
@@ -26,10 +32,6 @@ function Userpage({
   address,
   setAddress,
 }) {
-  function retrieveData() {
-    setMode("extraCharge");
-  }
-
   const [addItem, setAddItem] = useState(false);
   const [typeBox, setTypeBox] = useState(null);
   // const [address, setAddress] = useState("");
@@ -43,6 +45,13 @@ function Userpage({
   const [isHeavy, setIsHeavy] = useState(false);
   const [isFragile, setIsFragile] = useState(false);
   const [storagePlaces, setStoragePlaces] = useState("");
+  const [numberOfBoxes, setNumberOfBoxes] = useState(0);
+  const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+  const [userItems, setUserItems] = [];
+
+  let boxCapacity = parseInt(window.localStorage.getItem("boxes_user"));
+
+  const plan = window.localStorage.getItem("plan_user");
 
   const navigate = useNavigate();
 
@@ -73,6 +82,18 @@ function Userpage({
       });
   };
 
+  const planIntoValue = () => {
+    if (plan === "premium") {
+      setMaxNumberBoxes(10);
+    } else {
+      setMaxNumberBoxes(5);
+    }
+  };
+
+  useEffect(() => {
+    planIntoValue();
+  }, []);
+
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
     if (isHeavy === false) {
@@ -94,27 +115,12 @@ function Userpage({
     retrieveAddress();
   }, [setAddItem]);
 
-  // const submit1 = () => {
-  //   if (typeBox === null) {
-  //     setTryAgain(true);
-  //   }
-  //   if (typeBox !== null) {
-  //     setConfirmation(true);
-  //   }
-  // };
-
-  // const cancel = () => {
-  //   setAddItem(false);
-  //   setTryAgain(false);
-  //   setTypeBox(null);
-  //   setConfirmation(false);
-  //   setBoxOrderReceived(false);
-  // };
-
   function signOut() {
     window.localStorage.removeItem("firstName_user");
     window.localStorage.removeItem("email_user");
     window.localStorage.removeItem("token_user");
+    window.localStorage.removeItem("plan_user");
+    window.localStorage.removeItem("boxes_user");
     navigate("/");
   }
 
@@ -160,15 +166,15 @@ function Userpage({
   };
 
   const updateItemList = () => {
-    axios.post("/allItems", { email }).then((res) => setItems(res.data));
+    axios.get("/inventory", { email }).then((res) => setItems(res.data));
+    // axios
+    //   .post("/allItems", { email: localStorage.getItem("email_user") })
+    //   .then((res) => setItems(res.data));
   };
 
   const submit2 = (e) => {
     e.preventDefault();
-    updateItemList();
-    // setDescription1("");
-    // setDescription2("");
-    // setDescription3("");
+    retrieveNumberOfBoxes();
     setConfirmation(false);
     setBoxOrderReceived(true);
     setAddItem(false);
@@ -176,6 +182,7 @@ function Userpage({
     setIsFragile(false);
     setIsHeavy(false);
     sendBoxRequest();
+    updateItemList();
     document.getElementById("submit-button").disabled = false;
 
     document
@@ -186,366 +193,149 @@ function Userpage({
     // navigate("/?success=true");
   };
 
+  // if (window.localStorage.getItem("plan_user")==="premium"){
+  //   setMaxNumberBoxes(10)
+  // };
+  // if (window.localStorage.getItem("plan_user")==="basic"){
+  //   setMaxNumberBoxes(5)
+  // } ;
+
+  const retrieveNumberOfBoxes = async (req, res) => {
+    try {
+      await axios.get(`/inventory/${email}`).then((res) => {
+        if (maxNumberBoxes - res.data.length >= 0) {
+          setNumberOfBoxes(maxNumberBoxes - res.data.length);
+        } else {
+          setNumberOfBoxes(0);
+        }
+      });
+    } catch {
+      console.log("NOPE! Number of boxes can't be retrieved");
+    }
+  };
+
+  useEffect(() => {
+    retrieveNumberOfBoxes();
+  }, [planIntoValue]);
+
   return (
     <div>
-      <div className="flex justify-between">
-        <p className="px-3 mx-3 py-2 rounded-3xl bg-gray-200 text-blue-600 w-72  text-center ">
-          Welcome back {window.localStorage.getItem("firstName_user")}
-        </p>
-
-        <Button className="flex mx-5 " onClick={signOut}>
-          Sign Out
-        </Button>
-      </div>
-
-      <h3 className=" text-center bg-gray-100 mx-3 my-3 px-3 py-3 text-blue-600 rounded-3xl shadow-2xl">
-        Next retrieval/storing period: April 22nd - May 10th
-      </h3>
-      <div className="flex flex-row justify-center items-start mx-3 my-3 px-3 py-3  ">
-        {/* if I remove flex, looks better on boostrap */}
-        {/* <div className="flex flex-row justify-start items-start mx-5 px-5  "> */}
-        <div className="flex flex-row  ">
-          {/* /// radio button /// */}
-
-          <div className=" rounded-3xl  w-96 ">
-            <Accordion>
-              <Accordion.Item className="">
-                <Accordion.Header>
-                  PLEASE SELECT THE SIZE OF BOX
-                </Accordion.Header>
-                <Accordion.Body>
-                  <div className="flex justify-center items-center">
-                    <img
-                      className=""
-                      src={require("../pictures/plain-shipping-boxes-packhelp-kva.jpeg")}
-                      style={{ height: 200 }}
-                    />
-                  </div>
-                  <div
-                    className="btn-group btn-group-toggle"
-                    data-toggle="buttons"
-                  >
-                    <label className="btn btn-secondary active">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option1"
-                        value="A (27cm x 38cm x 29cm : Max weight = 7.5 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type A
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option2"
-                        value="B (32cm x 46cm x 29cm : Max weight = 10.5 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type B
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option3"
-                        value="C (40cm x 60cm x 40cm : Max weight = 24 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type C
-                    </label>
-                    <label className="btn btn-secondary">
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option4"
-                        value="D (175cm x 30cm x 15cm : Max weight = 20 kg)"
-                        onChange={handleChange}
-                      />{" "}
-                      Type D
-                    </label>
-                  </div>
-                  <div className="flex justify-center items-center"></div>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </div>
-        </div>
-
-        <div className="flex justify-center w-3/6 items-center ">
-          <Form
-            action="/create-checkout-session"
-            method="POST"
-            id="confirmation-form"
-            className="bg-gray-200 text-blue-600 rounded-3xl px-3 py-3 mx-3 my-3 "
-          >
-            You selected a type {typeBox} box. Please provde a brief description
-            of the goods you want to store (e.g. Snowboard, summer clothes,
-            barbecue set...)
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description1"
-                placeholder="Goods description (required)"
-                required
-                value={description1}
-                onChange={createDescription1}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description2"
-                placeholder="Goods description (optional)"
-                value={description2}
-                onChange={createDescription2}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Control
-                type="text"
-                name="description3"
-                placeholder="Goods description (optional)"
-                value={description3}
-                onChange={createDescription3}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Check
-                type="checkbox"
-                label="Heavy"
-                onChange={toggleIsHeavy}
-              />
-            </Form.Group>
-            <Form.Group className="w-96">
-              <Form.Check
-                type="checkbox"
-                label="Fragile"
-                onChange={toggleIsFragile}
-              />
-            </Form.Group>
-            <p>Sending address: {address}</p>
-            <Button onClick={submit2}>Update</Button>
-            <Button
-              id="submit-button"
-              className="mx-2"
-              name="name"
-              value="Storage fee"
-              type="submit"
-              disabled="true"
-            >
-              Checkout
-            </Button>
-          </Form>
-        </div>
-
-        <div className="flex flex-col  w-96 ">
-          <Button
-            className="max-w-lg"
-            onClick={() => {
-              updateItemList();
-              setDisplayTable(!displayTable);
-              setAddItem(false);
-              setBoxOrderReceived(false);
-
-              setTimeout(() => {
-                const boxes = document.getElementById("boxes");
-
-                console.log(document.getElementById("boxes"));
-                if (boxes && boxes.classList.contains("boxes-before")) {
-                  boxes.classList.remove("boxes-before");
-                  boxes.classList.add("boxes-after");
-                }
-              }, 1);
-            }}
-          >
-            {displayTable ? "CLOSE" : "DISPLAY"} Stored Items
-          </Button>
-
-          {displayTable ? (
-            <div
-              id="boxes"
-              className="boxes-before flex flex-col justify-center items-center max-w-lg rounded-br-lg rounded-bl-lg"
-            >
-              Stored Items:
-              {items.map((item, index) => {
-                return (
-                  <div className=" text-blue-600 w-full " key={index}>
-                    <div
-                      className="flex justify-center items-center  "
-                      key={`${index}a`}
-                    >
-                      {item.pending ? (
-                        <div
-                          id="item"
-                          className=" flex flex-row justify-center items-center rounded-lg  my-2 "
-                        >
-                          <div className="flex min-h-100 max-h-100  bg-green-300 shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-
-                          {item.declared_content_two !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 bg-green-300  shadow-lg rounded-lg py-2  "
-                              key={`${index}b`}
-                            >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {item.declared_content_three !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 bg-green-300 shadow-lg rounded-lg py-2 ml-2"
-                              key={`${index}c`}
-                            >
-                              No.{item.box_id}:{item.declared_content_three}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ) : (
-                        <div
-                          id="item"
-                          className=" flex flex-row justify-center items-center rounded-lg  my-2 "
-                        >
-                          <div className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2 mr-2">
-                            No.{item.box_id}:{item.declared_content_one}
-                            {item.fragile === true ? (
-                              <Icon icon={<GiShatteredGlass size="24" />} />
-                            ) : (
-                              ``
-                            )}{" "}
-                            {item.heavy === true ? (
-                              <Icon icon={<FaWeightHanging size="24" />} />
-                            ) : (
-                              ``
-                            )}
-                          </div>
-
-                          {item.declared_content_two !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100  shadow-lg rounded-lg py-2  "
-                              key={`${index}b`}
-                            >
-                              No.{item.box_id}:{item.declared_content_two}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
-                          {item.declared_content_three !== "" ? (
-                            <div
-                              className="flex min-h-100 max-h-100 shadow-lg rounded-lg py-2 ml-2"
-                              key={`${index}c`}
-                            >
-                              No.{item.box_id}:{item.declared_content_three}{" "}
-                              {item.fragile === true ? (
-                                <Icon icon={<GiShatteredGlass size="24" />} />
-                              ) : (
-                                ``
-                              )}{" "}
-                              {item.heavy === true ? (
-                                <Icon icon={<FaWeightHanging size="24" />} />
-                              ) : (
-                                ``
-                              )}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+      <nav id="user-page-nav">
+        <div className="containerPremium">
+          <p id="user-name">
+            Welcome back {window.localStorage.getItem("firstName_user")}
+          </p>
+          {window.localStorage.getItem("plan_user") === "premium" ? (
+            <img
+              className="premiumIcon"
+              src={require("../pictures/PREMIUM.png")}
+            />
           ) : (
-            ""
+            <img
+              className="premiumIcon"
+              src={require("../pictures/basic.png")}
+            />
           )}
         </div>
+
+        <button id="signoutButton" onClick={signOut}>
+          Sign out
+        </button>
+      </nav>
+
+      <h3 id="next-period">
+        Next retrieval/storage period: April 22nd - May 10th
+      </h3>
+
+      <div className="remainingBoxes">
+        You can order and store
+        {numberOfBoxes < 2 ? (
+          <h3 className="numberBoxesRed">{numberOfBoxes}</h3>
+        ) : (
+          <h3 className="numberBoxes">{numberOfBoxes}</h3>
+        )}{" "}
+        more boxes
       </div>
 
-      <div className="flex flex-row justify-center items-center ">
-        <div className=" extra ">
-          <h4 className="px-3">What is Extra Retrieval?</h4>
-          <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/extra-retrieve.jpeg")}
-            alt=""
+      {numberOfBoxes > 0 ? (
+        <section id="box-select">
+          <div id="box-selection-wrapper">
+            <BoxSelection handleChange={handleChange} />
+            <ItemDescription
+              createDescription1={createDescription1}
+              createDescription2={createDescription2}
+              createDescription3={createDescription3}
+              toggleIsHeavy={toggleIsHeavy}
+              toggleIsFragile={toggleIsFragile}
+              submit2={submit2}
+              typeBox={typeBox}
+              description1={description1}
+              description2={description2}
+              description3={description3}
+              address={address}
+            />
+          </div>
+
+          <StoredItems
+            updateItemList={updateItemList}
+            setDisplayTable={setDisplayTable}
+            setAddItem={setAddItem}
+            setBoxOrderReceived={setBoxOrderReceived}
+            items={items}
+            displayTable={displayTable}
           />
-          <h5 className="text-center mt-3 pt-3">
-            It is fetching the item you want on outside of season
-          </h5>
+        </section>
+      ) : (
+        <section id="box-select">
+          <div className="noMoreBoxes">
+            <img
+              className="noboxespic"
+              src={require("../pictures/NOBOXES.png")}
+            />
+            <h3>Unfortunately, you do not have any storage capacity left</h3>
+            <h4 className="osusume">
+              - If you are a Basic user, please upgrade your plan
+            </h4>
+            <h4 className="osusume">
+              - If you are a Premium user, please use the Extra Storage option
+            </h4>
+          </div>
+
+          <StoredItems
+            updateItemList={updateItemList}
+            setDisplayTable={setDisplayTable}
+            setAddItem={setAddItem}
+            setBoxOrderReceived={setBoxOrderReceived}
+            items={items}
+            displayTable={displayTable}
+          />
+        </section>
+      )}
+
+      <div className="flex flex-row justify-center items-center "></div>
+
+      <h3 id="next-period">
+        Can't wait for the next retrieval/storage period or have exhausted your
+        quota of boxes?
+        <section id="nav-button">
           <Button
-            className="mx-3 my-7 py-7 "
+            id="retrieve-button"
+            // className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-charge")}
           >
-            Go To Extra Retrieval
+            Extra Retrieval?
+            <p className="popup-message">To retrieve items anytime</p>
           </Button>
-        </div>
-        <div className="extra ">
-          <h4 className="px-3"> What is Extra Storage?</h4>
-          <img
-            className="max-w-96 max-h-96 "
-            src={require("../pictures/extra-storage.jpeg")}
-            alt=""
-          />
-          <h5 className="text-center mt-3 pt-3">
-            It is sending the item you want on outside of season
-          </h5>
           <Button
-            className="mx-3 my-7 py-7 "
+            id="storage-button"
+            // className="mx-3 my-7 py-7 "
             onClick={() => navigate("/extra-storage")}
           >
-            Go To Extra Storage
+            Extra Storage?
+            <p className="popup-message">To store items anytime</p>
           </Button>
-        </div>
-      </div>
+        </section>
+      </h3>
 
       <Chat chatMessages={chatMessages} setChatMessages={setChatMessages} />
     </div>

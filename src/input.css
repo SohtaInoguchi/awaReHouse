@@ -32,11 +32,11 @@
   }
 
   .login-button {
-    @apply flex  bg-white text-blue-400  rounded-xl mx-2 my-2 px-2 py-2 hover:bg-gray-100 hover:text-blue-500;
+    @apply flex  bg-slate-300 text-blue-600  rounded-3xl mx-2 my-2 px-2 py-2 hover:bg-slate-400 hover:text-blue-700;
   }
 
   .learn-more-e {
-    @apply w-80 bg-gray-200 rounded-3xl  mx-3 mt-3 mb-12 py-3 hover:scale-105 duration-500;
+    @apply w-80 bg-gray-200 rounded-3xl  mx-10 mt-3 mb-12 py-3 hover:scale-105 duration-500;
   }
   .boxes-after {
     @apply transition-all duration-700 bg-gray-200 opacity-100;
@@ -52,14 +52,23 @@
   .extra {
     @apply flex flex-col text-center bg-gray-200 text-blue-600 mx-3  my-3  py-3 rounded-3xl shadow-lg transition-all hover:scale-105 duration-700;
   }
+  .more-life {
+    @apply bg-cover opacity-80;
+  }
+  .login {
+    @apply bg-repeat w-screen h-screen;
+  }
+  .pending-item {
+    @apply opacity-0 transition-all duration-500;
+  }
 }
 
-.chart {
-  max-width: 50%;
-  margin: 0 auto;
-  background-color: rgb(255, 255, 255);
-  padding-left: 2%;
-  border-radius: 2%;
+.login {
+  background-image: url("./pictures/box-icon.webp");
+}
+
+.more-life {
+  background-image: url("./pictures/clean-house.jpeg");
 }
 
 .noHistory {
@@ -77,4 +86,208 @@
 
 .isAvailable {
   margin-left: 2%;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+.backButtonExtraStorage {
+  background-color: rgb(222, 237, 240);
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  font-weight: bold;
+  width: 150px;
+  height: 50px;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  margin-right: 2%;
+}
+
+.premiumIcon {
+  max-width: 15%;
+  border-radius: 15%;
+}
+
+.containerPremium {
+  display: flex;
+  flex-direction: row;
+}
+
+#signoutButton {
+  background-color: rgb(222, 237, 240);
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+  margin-top: 1.2%;
+  margin-right: 1%;
+}
+
+#signoutButton:hover {
+  transform: scale(1.1);
+}
+
+.remainingBoxes {
+  margin-top: 2%;
+  text-align: center;
+  font-size: larger;
+  color: white;
+}
+
+#next-period {
+  margin-top: 2%;
+  background-color: rgb(222, 237, 240);
+}
+
+.numberBoxes {
+  color: rgb(222, 237, 240);
+  margin: 1%;
+  font-size: 200%;
+}
+
+.numberBoxesRed {
+  color: red;
+  margin: 1%;
+  font-size: 200%;
+}
+
+.noMoreBoxes {
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 5%;
+  margin-right: 1%;
+  margin-left: 5%;
+  padding: 1%;
+  text-align: center;
+}
+
+.noboxespic {
+  margin: 0 auto;
+}
+
+.osusume {
+  font-weight: 300;
+  text-align: start;
+}
+
+.containerItemsRetrieval {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  padding: 1%;
+  font-size: larger;
+}
+
+.boxesOfItemsR {
+  background-color: rgb(222, 237, 240);
+  padding: 2%;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 15px;
+  color: rgb(11, 81, 114);
+}
+
+.boxesOfItemsR:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.boxesOfItemsR2 {
+  background-color: rgb(40, 194, 40);
+  padding: 2%;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 15px;
+  color: black;
+  border-width: 5px;
+  font-weight: bold;
+}
+
+.boxesOfItemsR2:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.cancelButtonR {
+  background-color: rgb(190, 202, 204);
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  padding: 1%;
+  width: fit-content;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 1%;
+}
+
+.cancelButtonR:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.boxSelection {
+  color: rgb(224, 236, 238);
+  text-align: center;
+  margin-top: 1%;
+  font-size: 255%;
+}
+
+.ml-10 {
+  text-align: center;
+  width: 200px;
+}
+
+.detailsR {
+  font-size: large;
+  font-style: italic;
+}
+
+.toSee {
+  color: white;
+}
+
+.confirmButtons {
+  margin: 1rem 1rem;
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 16px;
+  width: fit-content;
+  padding: 1%;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: larger;
+}
+
+#lastButtonR {
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 16px;
+  width: fit-content;
+  padding: 5%;
+  font-size: 150%;
+  border-width: 5px;
+  font-weight: bold;
+}
+
+#lastButtonR:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
