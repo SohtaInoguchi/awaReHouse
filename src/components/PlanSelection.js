@@ -67,7 +67,7 @@ export default function PlanSelection({ plan, setPlan }) {
             </div>
           </div>
         ) : (
-          <div className="transition-all duration-300">
+          <div className="transition-all duration-500 hover:scale-105">
             <div className="flex flex-col items-center justify-center bg-gray-200 rounded-3xl px-3 py-3 ">
               <p className="mt-3 text-center bg-gray-200 w-auto text-5xl">
                 Let's start awaReHouse
