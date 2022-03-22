@@ -7,7 +7,7 @@ export default function ExtraStorageModal(props) {
 
     const invokeCheckout = (e) => {
         submit2(e);
-        const checkoutBtn = document.getElementById('checkout-and-portal-button')
+        const checkoutBtn = document.getElementById('hidden-checkout-and-portal-button')
         checkoutBtn.click();
         console.log(checkoutBtn);
     }
