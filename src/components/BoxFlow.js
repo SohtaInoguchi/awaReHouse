@@ -169,9 +169,9 @@ export default function BoxFlow({ email, setItems, address }) {
                 className=" text-blue-600 px-3 py-3 "
               >
               <div id="box-select-header">
-                <p>You selected a type {typeBoxFlow} box.</p>
+                <p>You selected type {typeBoxFlow} box.</p>
                 <p>Please provide a brief description of the items you want to
-                store (e.g. Snowboard, summer clothes, barbecue set...)</p>
+                store (e.g. snowboard, summer clothes, barbecue set...)</p>
               </div>
                 <Form.Group className="form-inputs">
                   <Form.Control
