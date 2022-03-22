@@ -6,7 +6,11 @@ body {
     rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  font-family: "Georgia (serif)";
+  /* font-family: "Georgia (serif)"; */
+}
+
+body * {
+  font-family: 'Fredoka', sans-serif ; 
 }
 
 .welcomeMessage {
