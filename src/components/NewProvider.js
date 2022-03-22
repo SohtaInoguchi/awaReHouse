@@ -20,38 +20,10 @@ export default function NerCustomer({ setMode }) {
   const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
-  const [validated, setValidated] = useState(false);
 
-  const createProviderFirstName = (e) => {
-    setProviderFirstName(e.target.value);
-  };
-
-  const createProviderLastName = (e) => {
-    setProviderLastName(e.target.value);
-  };
-
-  const createProviderPassword = (e) => {
-    setProviderPassword(e.target.value);
-  };
-
-  const createProviderAddress = (e) => {
-    setProviderAddress(e.target.value);
-  };
-
-  const createProviderEmail = (e) => {
-    setProviderEmail(e.target.value);
-  };
-
-  const createProviderBankReference = (e) => {
-    setProviderBankReference(e.target.value);
-  };
-
-  const createProviderEmergencyContact = (e) => {
-    setProviderEmergencyContact(e.target.value);
-  };
-
-  const createProviderEmergencyContactPhone = (e) => {
-    setProviderEmergencyContactPhone(e.target.value);
+  const setInputFieldValue = (e, setMethod) => {
+    const input = e.target.value;
+    setMethod(input);
   };
 
   const pictureStorageHandler = (e) => {
@@ -107,8 +79,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="firstname"
                 placeholder="First name"
-                value={providerFirstName}
-                onChange={createProviderFirstName}
+                onChange={(e) => setInputFieldValue(e, setProviderFirstName)}
                 required
                 className="my-3"
               />
@@ -119,8 +90,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="lastname"
                 placeholder="Last name"
-                value={providerLastName}
-                onChange={createProviderLastName}
+                onChange={(e) => setInputFieldValue(e, setProviderLastName)}
                 required
                 className="my-3"
               />
@@ -131,8 +101,9 @@ export default function NerCustomer({ setMode }) {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={providerPassword}
-                onChange={createProviderPassword}
+                // value={providerPassword}
+                // onChange={createProviderPassword}
+                onChange={(e) => setInputFieldValue(e, setProviderPassword)}
                 required
                 className="my-3"
               />
@@ -143,8 +114,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="address"
                 placeholder="Address"
-                value={providerAddress}
-                onChange={createProviderAddress}
+                // value={providerAddress}
+                // onChange={createProviderAddress}
+                onChange={(e) => setInputFieldValue(e, setProviderAddress)}
                 required
                 className="my-3"
               />
@@ -155,8 +127,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={providerEmail}
-                onChange={createProviderEmail}
+                onChange={(e) => setInputFieldValue(e, setProviderEmail)}
                 required
                 className="my-3"
               />
@@ -167,8 +138,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="bankreference"
                 placeholder="Banking reference"
-                value={providerBankReference}
-                onChange={createProviderBankReference}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderBankReference)
+                }
                 required
                 className="my-3"
               />
@@ -179,8 +151,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="emergencycontact"
                 placeholder="Emergency contact name"
-                value={providerEmergencyContact}
-                onChange={createProviderEmergencyContact}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContact)
+                }
                 required
                 className="my-3"
               />
@@ -191,8 +164,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="emergencycontactphone"
                 placeholder="Emergency contact phone"
-                value={providerEmergencyContactPhone}
-                onChange={createProviderEmergencyContactPhone}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContactPhone)
+                }
                 required
                 className="my-3"
               />
