@@ -380,11 +380,11 @@ body * {
   padding: 2%;
   border-radius: 15px;
   position: relative;
-  margin-left: 12%;
-  margin-right: 12%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-bottom: 2%;
   border-radius: 15px;
-  box-shadow: 0 0 0 1px rgb(222, 237, 240);
+  /* box-shadow: 0 0 0 1px rgb(222, 237, 240); */
 }
 
 .welcomeAndByeContainer {
@@ -561,11 +561,12 @@ body * {
 
 .secondContainerBottom {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   border-radius:15px;
+  margin-left: 2.5%;
 }
 
 .m-10-max-w-sm {
@@ -574,13 +575,19 @@ body * {
   height:fit-content;
 }
 
-
 .storedBoxesLabel {
-  font-size: 200%;
-  color:rgb(222, 237, 240);
-  border-radius:15px;
-  padding:5%;
-  height:fit-content;
+  background-color: white;
+  color: rgb(11, 81, 114);
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: x-large;
+  width: fit-content;
+  height: fit-content;
+  padding:2%;
+}
+
+.storedBoxesLabel:hover {
+  transform: scale(1.1);
 }
 
 .boxColor {
