@@ -44,7 +44,12 @@ export default function Homepage({
   return (
     <div>
       {message ? (
-        <Response message={message} isSuccess={isSuccess} plan={plan} />
+        <Response
+          message={message}
+          isSuccess={isSuccess}
+          plan={plan}
+          setMessage={setMessage}
+        />
       ) : (
         <div className="flex flex-wrap justify-center items-center ">
           {" "}
