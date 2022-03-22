@@ -11,7 +11,7 @@ export default function MoreLife() {
           src={require("../pictures/clean-house.jpeg")}
           alt=""
         /> */}
-        <div className="flex flex-col justify-center  items-center   w-60  text-blue-500 text-center  rounded-3xl border-2 border-gray-50 mx-6  ">
+        <div className="flex flex-col justify-center  items-center   w-60  text-blue-500 text-center  rounded-3xl  mx-6  ">
           <h2>What is awaReHouse?</h2>
 
           <p className="break-words">
