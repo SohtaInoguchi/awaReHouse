@@ -120,10 +120,10 @@ export default function Chat() {
                 <div id="chat-box">
                   <div className="message-wrapper">
                     {chatMessages.map((message, idx) => {
-                    const isLastMessage = chatMessages.length - 1 === idx; 
+                    // const isLastMessage = chatMessages.length - 1 === idx; 
                     return (
                       <div 
-                      ref={isLastMessage ? setRef : null}
+                      // ref={isLastMessage ? setRef : null}
                       key={idx} 
                       className={message.receiveOrSent === "botMessageSent" ? 
                       "bot-message-sent" : 
