@@ -16,7 +16,7 @@ export default function ExplainButtons({ plan, setPlan }) {
         <Button
           className="mx-10"
           name="name"
-          value="Storage fee"
+          value={`Storage fee-${plan}`}
           type="submit"
           onClick={() => axios.post(`/login/verify/${userEmail}/${plan}`)}
         >
