@@ -146,7 +146,9 @@ body * {
 
 /* ------------Chat popup------------- */
 #outer-wrapper {
-  max-width: 30%;
+  width: 25rem;
+  max-width: 25%;
+  min-width: 20%;
   position: -webkit-sticky;
   position: sticky;
   bottom: 2rem;
