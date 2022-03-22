@@ -212,7 +212,7 @@ export default function NerCustomer({ setMode }) {
             </Form.Group>
 
             <Button
-              variant="light"
+              variant="primary"
               type="submit"
               // onClick={handleProviderSubmit}
             >

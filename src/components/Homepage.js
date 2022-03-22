@@ -24,7 +24,7 @@ export default function Homepage({
 
   useEffect(() => {
     setMessage("");
-    window.scroll(500, 350);
+    window.scroll(500, 150);
   }, []);
 
   useEffect(() => {
