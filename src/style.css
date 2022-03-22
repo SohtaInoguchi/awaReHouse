@@ -186,7 +186,20 @@ body * {
   background-color: rgb(280, 200, 200);
 }
 
-.chat-icons {
+.chat-icons-close {
+  width: 4rem;
+  height: 4rem;
+  margin-top: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 14px;
+  color: rgb(180, 180, 180);
+  cursor: pointer;
+}
+
+.chat-icons-open {
   width: 4rem;
   height: 4rem;
   margin-top: 10px;
@@ -197,6 +210,19 @@ body * {
   border-radius: 14px;
   color: rgb(180, 180, 180);
   cursor: pointer;
+}
+
+.chat-icons-open:hover {
+  width: 5rem;
+  height: 5rem;
+  /* margin-top: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  left: 20px;
+  border-radius: 14px;
+  color: rgb(180, 180, 180);
+  cursor: pointer; */
 }
 
 

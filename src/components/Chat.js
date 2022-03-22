@@ -149,7 +149,7 @@ export default function Chat() {
                 icon={<AiFillCloseCircle 
                   size="50" 
                   onClick={toggleChatOpen}
-                  className="chat-icons"
+                  className="chat-icons-close"
                   />}/>
           </div>
           </>
@@ -165,7 +165,7 @@ export default function Chat() {
       icon={<AiFillWechat 
       size="50" 
       onClick={toggleChatOpen}
-      className="chat-icons"
+      className="chat-icons-open"
       /> }/>
       }
     </>
@@ -175,11 +175,11 @@ export default function Chat() {
 
 // Icon components
 function OpenChatComponent({ icon }) {
-  return <div className="chat-icons" >{icon}</div>;
+  return <div className="chat-icons-open" >{icon}</div>;
 }
 
 function CloseChatComponent({ icon }) {
-  return <div className="chat-icons">{icon}</div>;
+  return <div className="chat-icons-close">{icon}</div>;
 }
 
 function SendComponent({ icon }) {
