@@ -56,7 +56,7 @@
     @apply bg-cover  opacity-80;
   }
   .login {
-    @apply bg-repeat;
+    @apply bg-repeat w-screen h-screen;
   }
   .pending-item {
     @apply opacity-0 transition-all duration-500;
@@ -88,14 +88,14 @@
   margin-left: 2%;
 }
 
-.buttonDiv{
+.buttonDiv {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: end;
 }
 
-.backButtonExtraStorage{
+.backButtonExtraStorage {
   background-color: rgb(222, 237, 240);
   color: rgb(11, 81, 114);
   border-radius: 15px;
@@ -103,16 +103,16 @@
   width: 150px;
   height: 50px;
   margin-bottom: 1%;
-  margin-top:1%;
-  margin-right:2%;
+  margin-top: 1%;
+  margin-right: 2%;
 }
 
-.premiumIcon{
+.premiumIcon {
   max-width: 15%;
   border-radius: 15%;
 }
 
-.containerPremium{
+.containerPremium {
   display: flex;
   flex-direction: row;
 }
@@ -132,65 +132,65 @@
   transform: scale(1.1);
 }
 
-.remainingBoxes{
-margin-top: 2%;
-text-align:center;
-font-size: larger;
-color: white;
-}
-
-#next-period{
+.remainingBoxes {
   margin-top: 2%;
-  background-color:rgb(222, 237, 240);
+  text-align: center;
+  font-size: larger;
+  color: white;
 }
 
-.numberBoxes{
-  color:rgb(222, 237, 240);
-  margin:1%;
+#next-period {
+  margin-top: 2%;
+  background-color: rgb(222, 237, 240);
+}
+
+.numberBoxes {
+  color: rgb(222, 237, 240);
+  margin: 1%;
   font-size: 200%;
 }
 
-.numberBoxesRed{
-  color:red;
-  margin:1%;
+.numberBoxesRed {
+  color: red;
+  margin: 1%;
   font-size: 200%;
 }
 
-.noMoreBoxes{
+.noMoreBoxes {
   background-color: white;
   color: rgb(11, 81, 114);
   border-radius: 15px;
   font-weight: bold;
   width: fit-content;
   height: fit-content;
-  margin-top:5%;
-  margin-right:1%;
+  margin-top: 5%;
+  margin-right: 1%;
   margin-left: 5%;
-  padding:1%;
+  padding: 1%;
   text-align: center;
 }
 
-.noboxespic{
- margin:0 auto;
+.noboxespic {
+  margin: 0 auto;
 }
 
-.osusume{
-  font-weight:300;
+.osusume {
+  font-weight: 300;
   text-align: start;
 }
 
-.containerItemsRetrieval{
+.containerItemsRetrieval {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-  padding:1%;
+  padding: 1%;
   font-size: larger;
 }
 
-.boxesOfItemsR{
+.boxesOfItemsR {
   background-color: rgb(222, 237, 240);
   padding: 2%;
   width: fit-content;
@@ -199,13 +199,12 @@ color: white;
   color: rgb(11, 81, 114);
 }
 
-.boxesOfItemsR:hover{
+.boxesOfItemsR:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-
-.boxesOfItemsR2{
+.boxesOfItemsR2 {
   background-color: rgb(40, 194, 40);
   padding: 2%;
   width: fit-content;
@@ -216,12 +215,12 @@ color: white;
   font-weight: bold;
 }
 
-.boxesOfItemsR2:hover{
+.boxesOfItemsR2:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.cancelButtonR{
+.cancelButtonR {
   background-color: rgb(190, 202, 204);
   color: rgb(11, 81, 114);
   border-radius: 15px;
@@ -229,46 +228,45 @@ color: white;
   width: fit-content;
   font-size: 20px;
   font-weight: bold;
-  margin:1%;
+  margin: 1%;
 }
 
-.cancelButtonR:hover{
+.cancelButtonR:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.boxSelection{
-  color:  rgb(224, 236, 238);
+.boxSelection {
+  color: rgb(224, 236, 238);
   text-align: center;
-  margin-top:1%;
+  margin-top: 1%;
   font-size: 255%;
 }
 
-
-.ml-10{
-text-align: center;
-width: 200px;
+.ml-10 {
+  text-align: center;
+  width: 200px;
 }
 
-.detailsR{
+.detailsR {
   font-size: large;
   font-style: italic;
 }
 
-.toSee{
-  color:white;
+.toSee {
+  color: white;
 }
 
-.confirmButtons{
+.confirmButtons {
   margin: 1rem 1rem;
   background-color: white;
   color: rgb(11, 81, 114);
   border-radius: 16px;
-  width:fit-content;
-  padding:1%;
+  width: fit-content;
+  padding: 1%;
 }
 
-.bottomContainer{
+.bottomContainer {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -278,18 +276,18 @@ width: 200px;
   font-size: larger;
 }
 
-#lastButtonR{
+#lastButtonR {
   background-color: white;
   color: rgb(11, 81, 114);
   border-radius: 16px;
-  width:fit-content;
-  padding:5%;
+  width: fit-content;
+  padding: 5%;
   font-size: 150%;
   border-width: 5px;
   font-weight: bold;
 }
 
-#lastButtonR:hover{
+#lastButtonR:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
