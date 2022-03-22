@@ -112,6 +112,7 @@ export default function BoxFlow({ email, setItems, address }) {
         user_owner: localStorage.getItem('email_user'),
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
+        pending: true
       })
       .then(() => {
         console.log("Your database has been updated!");
