@@ -59,7 +59,8 @@ export default function Homepage({
               console.log(e, a.bottom);
             }}
           >
-            <h3 className="flex text-gray-500 font-serif text-6xl ">
+            {/* <h3 className="flex text-gray-500 font-serif text-6xl "> */}
+            <h3 className="flex text-gray-500 text-6xl ">
               More Space, More Life
             </h3>
           </div>
