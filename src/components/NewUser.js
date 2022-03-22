@@ -65,8 +65,8 @@ export default function NewUser() {
 
   if (registrationDone === false) {
     return (
-      <div className="containerNewRegistration login  px-72 py-72">
-        <div className="newUser text-gray-600 text-center">
+      <div className="containerNewRegistration login  ">
+        <div className=" text-white text-center">
           Register as a storage user
           <Form onSubmit={handleSubmit}>
             <Form.Group>
@@ -136,7 +136,7 @@ export default function NewUser() {
               />
             </Form.Group>
 
-            <Button variant="light" type="submit">
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Form>

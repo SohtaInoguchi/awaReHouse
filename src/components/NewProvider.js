@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import WelcomingPage from "./WelcomingPage.js";
 
-export default function NerCustomer({ setMode }) {
+export default function NerCustomer() {
   const [providerFirstName, setProviderFirstName] = useState("");
   const [providerLastName, setProviderLastName] = useState("");
   const [providerPassword, setProviderPassword] = useState("");
@@ -71,8 +71,10 @@ export default function NerCustomer({ setMode }) {
   if (registrationDone === false) {
     return (
       <div className="containerNewRegistration login">
-        <div className="newProvider text-slate-900 m-5">
-          Register as a storage provider
+        <div className=" text-slate-900 m-5">
+          <p className="text-white text-center">
+            Register as a storage provider
+          </p>
           <Form onSubmit={handleProviderSubmit}>
             <Form.Group>
               <Form.Control
@@ -101,8 +103,6 @@ export default function NerCustomer({ setMode }) {
                 type="password"
                 name="password"
                 placeholder="Password"
-                // value={providerPassword}
-                // onChange={createProviderPassword}
                 onChange={(e) => setInputFieldValue(e, setProviderPassword)}
                 required
                 className="my-3"
@@ -114,8 +114,6 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="address"
                 placeholder="Address"
-                // value={providerAddress}
-                // onChange={createProviderAddress}
                 onChange={(e) => setInputFieldValue(e, setProviderAddress)}
                 required
                 className="my-3"
@@ -173,7 +171,7 @@ export default function NerCustomer({ setMode }) {
             </Form.Group>
 
             <Form.Group>
-              <p className="bg-green-600 text-white rounded-md mx-2 my-2 py-2 px-2">
+              <p className=" text-white  ">
                 Please attach a copy of a valid identification document
               </p>
               <Form.Control
@@ -181,17 +179,13 @@ export default function NerCustomer({ setMode }) {
                 name="file"
                 onChange={pictureStorageHandler}
                 className="my-3"
-                // required
               />
             </Form.Group>
-
-            <Button
-              variant="primary"
-              type="submit"
-              // onClick={handleProviderSubmit}
-            >
-              Submit
-            </Button>
+            <div className="flex justify-center items-center">
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       </div>
