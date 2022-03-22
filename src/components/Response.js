@@ -5,9 +5,11 @@ import axios from "axios";
 export default function Response({ message, isSuccess }) {
   const navigate = useNavigate();
   const email = window.localStorage.getItem("email_user");
+  const heart = document.getElementById("heart");
   isSuccess &&
+    heart &&
     setTimeout(() => {
-      document.getElementById("heart").classList.remove("heart-before");
+      heart.classList.remove("heart-before");
     }, 3500);
 
   return (
