@@ -56,7 +56,7 @@ export default function StoredItems(props) {
             return (
               <div className="selected-items" key={index}>
                 <div
-                  className="flex justify-center items-center  "
+                  className=" flex justify-center items-center  "
                   key={`${index}a`}
                 >
                   {item.pending ? (

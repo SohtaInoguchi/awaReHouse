@@ -16,7 +16,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
         className="group flex flex-row justify-around items-center rounded-lg "
       >
         <div
-          className={`each-items  flex min-h-100 max-h-100  ${color}  shadow-lg rounded-lg px-3 py-2 mx-2`}
+          className={` each-items  flex min-h-100 max-h-100  ${color}  shadow-lg rounded-lg px-3 py-2 mx-2`}
         >
           {item.declared_content_one}
           {item.fragile === true ? (
