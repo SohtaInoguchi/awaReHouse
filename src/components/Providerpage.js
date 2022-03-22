@@ -1,3 +1,4 @@
+import "../style.css";
 import "../input.css";
 import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
@@ -50,7 +51,8 @@ function Providerpage({ user, email2 }) {
   const [pendingItems, setPendingItems] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [isQuitProvider, setIsQuitProvider] = useState(false);
-
+  const [amountToPay, setAmountToPay] = useState(0);
+  const [displayBoxes, setDisplayBoxes] = useState(false);
   
   const navigate = useNavigate();
 
@@ -221,6 +223,25 @@ function Providerpage({ user, email2 }) {
     navigate("/");
   }
 
+  const calculateNextPayment = () =>{
+    if (providerItems.length <= 9){
+      let final = String(1077 * providerItems.length).slice(0,1)+","+String(1077 * providerItems.length).slice(1,4)
+      setAmountToPay(final)
+    }
+    if (providerItems.length >= 10 && providerItems.length <= 92){
+      let final = String(1077 * providerItems.length).slice(0,2)+","+String(1077 * providerItems.length).slice(1,4)
+      setAmountToPay(final)
+    }
+    if (providerItems.length >= 93){
+      let final = String(1077 * providerItems.length).slice(0,3)+","+String(1077 * providerItems.length).slice(1,4)
+      setAmountToPay(final)
+    }
+  }
+
+  useEffect(()=>{
+calculateNextPayment()
+  },[retrieveProviderItems])
+
 
   const renderProviderQuitMessage = () => {
     return (
@@ -228,6 +249,10 @@ function Providerpage({ user, email2 }) {
         <h4>Your request has been registered. <br></br>We hope to welcome you back soon as a provider.</h4>
       </h2>
     )
+  }
+
+  const seeBoxes = () => {
+    setDisplayBoxes(!displayBoxes)
   }
 
   return (
@@ -244,7 +269,7 @@ function Providerpage({ user, email2 }) {
       src={require("../pictures/financial.jpg")}
       />
       <h6>Next payment date: <h5 className="financialHighlight">{today}</h5>
-      <h6>Next payment amount: <h5 className="financialHighlight">¥ {(String(1077 * providerItems.length).slice(0,1)+",")+(String(1077 * providerItems.length).slice(1,4))}</h5></h6></h6></div>
+      <h6>Next payment amount: <h5 className="financialHighlight">¥ {amountToPay}</h5></h6></h6></div>
       <div className="innerInner2">
         {chartVisible === true && boxNumberNull === false ? (
           <div className="chart">
@@ -336,8 +361,8 @@ function Providerpage({ user, email2 }) {
       </div>
       
       <div className="secondContainerBottom">
-        <h5 className="storedBoxesLabel" >STORED BOXES:</h5>
-      {providerItems ? renderListOfStorage() : <></>}
+        <button className="storedBoxesLabel" onClick={seeBoxes} >List of stored boxes</button>
+        {displayBoxes === true && providerItems ? renderListOfStorage() : <></>}
       </div>
 
       <div className="containerForBottomButtons">
