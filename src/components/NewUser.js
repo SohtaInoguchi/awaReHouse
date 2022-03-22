@@ -70,7 +70,7 @@ export default function NewUser() {
     return (
       <div className="containerNewRegistration login  ">
         <div className=" text-white text-center">
-          Register as a storage user
+          <p className="text-4xl">Register as a storage user</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Control
