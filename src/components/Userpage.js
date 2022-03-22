@@ -47,10 +47,7 @@ function Userpage({
   const [storagePlaces, setStoragePlaces] = useState("");
   const [numberOfBoxes, setNumberOfBoxes] = useState(0);
   const [maxNumberBoxes, setMaxNumberBoxes] = useState();
-  const[userItems, setUserItems]= [];
-
-  
-
+  const [userItems, setUserItems] = [];
 
   let boxCapacity = parseInt(window.localStorage.getItem("boxes_user"));
 
@@ -92,12 +89,11 @@ function Userpage({
       setMaxNumberBoxes(5);
     }
   };
-  
+
   useEffect(() => {
     planIntoValue();
   }, []);
 
-  
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
     if (isHeavy === false) {
@@ -141,7 +137,6 @@ function Userpage({
 
   useEffect(() => {
     possibleStoragelocations();
-    window.scrollTo(200, 200);
   }, []);
 
   const max = storagePlaces.length;
@@ -208,8 +203,8 @@ function Userpage({
   const retrieveNumberOfBoxes = async (req, res) => {
     try {
       await axios.get(`/inventory/${email}`).then((res) => {
-        if (maxNumberBoxes - res.data.length >= 0){
-          setNumberOfBoxes(maxNumberBoxes - res.data.length);  
+        if (maxNumberBoxes - res.data.length >= 0) {
+          setNumberOfBoxes(maxNumberBoxes - res.data.length);
         } else {
           setNumberOfBoxes(0);
         }
@@ -221,8 +216,7 @@ function Userpage({
 
   useEffect(() => {
     retrieveNumberOfBoxes();
-  }, [planIntoValue]); 
-
+  }, [planIntoValue]);
 
   return (
     <div>

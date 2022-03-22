@@ -64,7 +64,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           <div className="text-center pt-2 text-white">
             Want to become a user?
             <p
-              className=" cursor-pointer hover:text-blue-300"
+              className=" cursor-pointer hover:text-blue-300 text-xl"
               onClick={() => {
                 navigate("/signup/user");
               }}
@@ -83,6 +83,12 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
             </p>
           </div>
         )}
+        <p
+          className="cursor-pointer text-white my-5"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
+        </p>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function LoginForm({ mode, sendLoginRequest }) {
         sendLoginRequest();
       }}
     >
-      <p className="text-white">
+      <p className="text-white text-4xl">
         {mode === "user" ? "User" : "Provider"} Login
       </p>
       <Form.Group>
@@ -31,7 +31,7 @@ export default function LoginForm({ mode, sendLoginRequest }) {
           required
         ></Form.Control>
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button className="px-5 py-2 " variant="primary" type="submit">
         Login
       </Button>
     </Form>
