@@ -1,4 +1,6 @@
 # awaReHouse
+![Screen Shot 2022-03-22 at 4 07 01 PM](https://user-images.githubusercontent.com/81348589/159426420-26586db0-d53a-45da-aa35-f9b3a0516038.png)
+
 
 This app helps people living in dense urban areas where storage is high, to be able to store their goods at a reasonable cost.  It also allows for a potential provider to recieve a second stream of income.
 
@@ -11,7 +13,6 @@ This app helps people living in dense urban areas where storage is high, to be a
 ```bash
 npm i
 ```
-![Screen Shot 2022-03-22 at 4 07 01 PM](https://user-images.githubusercontent.com/81348589/159426420-26586db0-d53a-45da-aa35-f9b3a0516038.png)
 
 
 ## User Usage
