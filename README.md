@@ -29,13 +29,13 @@ npm i
 [Express](https://expressjs.com/)<br/>
 [Knex.js](https://knexjs.org/)<br/>
 [PostgreSQL](https://www.postgresql.org/docs/)<br/>
-[JWT](https://www.postgresql.org/docs/)<br/>
-[Stripe](https://www.postgresql.org/docs/)<br/>
-[Tailwind CSS](https://www.postgresql.org/docs/)<br/>
-[Socket IO](https://www.postgresql.org/docs/)<br/>
-[Victory Charts](https://www.postgresql.org/docs/)<br/>
-[Bootstrap](https://www.postgresql.org/docs/)<br/>
-[Heroku](https://www.postgresql.org/docs/)
+[JWT](https://jwt.io)<br/>
+[Stripe](https://stripe.com/docs/api/)<br/>
+[Tailwind CSS](https://tailwindcss.com)<br/>
+[Socket IO](https://socket.io)<br/>
+[Victory Charts](https://formidable.com/open-source/victory/)<br/>
+[Bootstrap](https://getbootstrap.com)<br/>
+[Heroku](https://www.heroku.com)
 
 
 ## Contributing
