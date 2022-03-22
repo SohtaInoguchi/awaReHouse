@@ -4,6 +4,7 @@ import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form } from "react-bootstrap";
 import WelcomingPage from "./WelcomingPage.js";
+import { useNavigate } from "react-router-dom";
 
 export default function NewUser() {
   const [userFirstName, setUserFirstName] = useState("");
@@ -18,6 +19,8 @@ export default function NewUser() {
   });
 
   const [registrationDone, setRegistrationDone] = useState(false);
+  const navigate = useNavigate();
+
   const setInputFieldValue = (e, setMethod) => {
     const input = e.target.value;
     setMethod(input);
@@ -136,7 +139,14 @@ export default function NewUser() {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button
+              className="mx-3"
+              variant="primary"
+              onClick={() => navigate("/")}
+            >
+              Back to Home
+            </Button>
+            <Button className="mx-3" variant="primary" type="submit">
               Submit
             </Button>
           </Form>

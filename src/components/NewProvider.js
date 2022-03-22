@@ -4,6 +4,7 @@ import "../input.css";
 import Compress from "react-image-file-resizer";
 import { Button, Form } from "react-bootstrap";
 import WelcomingPage from "./WelcomingPage.js";
+import { useNavigate } from "react-router-dom";
 
 export default function NerCustomer() {
   const [providerFirstName, setProviderFirstName] = useState("");
@@ -20,6 +21,7 @@ export default function NerCustomer() {
   const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
+  const navigate = useNavigate();
 
   const setInputFieldValue = (e, setMethod) => {
     const input = e.target.value;
@@ -182,7 +184,14 @@ export default function NerCustomer() {
               />
             </Form.Group>
             <div className="flex justify-center items-center">
-              <Button variant="primary" type="submit">
+              <Button
+                className="mx-3"
+                variant="primary"
+                onClick={() => navigate("/")}
+              >
+                Back to Home
+              </Button>
+              <Button className="mx-3" variant="primary" type="submit">
                 Submit
               </Button>
             </div>
