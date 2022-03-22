@@ -25,7 +25,7 @@ export default function ExtraStorageModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4 className='extra-storage-modal-texts'>Are you sure to store extra item?</h4>
+          <h4 className='extra-storage-modal-texts'>Are you sure you'd like to store extra item?</h4>
         </Modal.Body>
         <Modal.Footer>
 
