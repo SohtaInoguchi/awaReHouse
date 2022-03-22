@@ -74,7 +74,7 @@ export default function NerCustomer() {
     return (
       <div className="containerNewRegistration login">
         <div className=" text-slate-900 m-5">
-          <p className="text-white text-center">
+          <p className="text-white text-center text-4xl">
             Register as a storage provider
           </p>
           <Form onSubmit={handleProviderSubmit}>

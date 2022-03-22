@@ -76,7 +76,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           <div className="text-center pt-2 text-white">
             Want to become a storage provider?
             <p
-              className=" cursor-pointer hover:text-blue-300"
+              className=" cursor-pointer hover:text-blue-300 text-xl"
               onClick={() => navigate("/signup/provider")}
             >
               SIGN UP
