@@ -26,7 +26,7 @@ export default function PlanSelection({ plan, setPlan }) {
                   <PlanRadioButtons setPlan={setPlan} />
                 </div>
                 <h4 className="mt-3  text-center bg-gray-200 w-auto text-5xl">
-                  Premium Plan JPY5,999
+                  Premium Plan ¥ 5,999
                 </h4>
                 <p className=" bg-gray-200 text-2xl break-words  ">
                   This is the premium plan that allows you to store up to 10
@@ -53,7 +53,7 @@ export default function PlanSelection({ plan, setPlan }) {
                   <PlanRadioButtons setPlan={setPlan} />
                 </div>
                 <h4 className="mt-3 text-center bg-gray-200 w-auto text-5xl">
-                  Basic Plan JPY3,999
+                  Basic Plan ¥ 3,999
                 </h4>
                 <p className=" bg-gray-200 text-2xl break-words ">
                   This is the basic plan that allows you to store up to 5 boxes
