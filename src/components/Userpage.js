@@ -47,6 +47,11 @@ function Userpage({
   const [storagePlaces, setStoragePlaces] = useState("");
   const [numberOfBoxes, setNumberOfBoxes] = useState(0);
   const [maxNumberBoxes, setMaxNumberBoxes] = useState();
+  const[userItems, setUserItems]= [];
+
+  
+
+
   let boxCapacity = parseInt(window.localStorage.getItem("boxes_user"));
 
   const plan = window.localStorage.getItem("plan_user");
@@ -92,7 +97,6 @@ function Userpage({
     planIntoValue();
   }, []);
 
-    console.log("PLAN:", maxNumberBoxes);
   
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
@@ -167,16 +171,15 @@ function Userpage({
   };
 
   const updateItemList = () => {
-    // axios.post("/allItems", { email }).then((res) => setItems(res.data));
-    axios
-      .post("/allItems", { email: localStorage.getItem("email_user") })
-      .then((res) => setItems(res.data));
+    axios.get("/inventory", { email }).then((res) => setItems(res.data));
+    // axios
+    //   .post("/allItems", { email: localStorage.getItem("email_user") })
+    //   .then((res) => setItems(res.data));
   };
 
   const submit2 = (e) => {
     e.preventDefault();
-    updateItemList();
-
+    retrieveNumberOfBoxes();
     setConfirmation(false);
     setBoxOrderReceived(true);
     setAddItem(false);
@@ -184,6 +187,7 @@ function Userpage({
     setIsFragile(false);
     setIsHeavy(false);
     sendBoxRequest();
+    updateItemList();
     document.getElementById("submit-button").disabled = false;
 
     document
@@ -204,14 +208,11 @@ function Userpage({
   const retrieveNumberOfBoxes = async (req, res) => {
     try {
       await axios.get(`/inventory/${email}`).then((res) => {
-        setNumberOfBoxes(maxNumberBoxes - res.data.length);
-        // setNumberOfBoxes(numberOfBoxes - res.data.length); //boxCapacity
-        console.log(maxNumberBoxes - res.data.length);
-        // window.localStorage.setItem(
-        //   "boxes_user",
-        //   boxCapacity - res.data.length
-        // );
-        // console.log(numberOfBoxes);
+        if (maxNumberBoxes - res.data.length >= 0){
+          setNumberOfBoxes(maxNumberBoxes - res.data.length);  
+        } else {
+          setNumberOfBoxes(0);
+        }
       });
     } catch {
       console.log("NOPE! Number of boxes can't be retrieved");
@@ -220,9 +221,8 @@ function Userpage({
 
   useEffect(() => {
     retrieveNumberOfBoxes();
-  }, [items]); //planIntoValue
+  }, [planIntoValue]); 
 
-  console.log("NUMBER OF BOXES:",numberOfBoxes)
 
   return (
     <div>
@@ -255,15 +255,15 @@ function Userpage({
 
       <div className="remainingBoxes">
         You can order and store
-        {boxCapacity < 2 ? (
-          <h3 className="numberBoxesRed">{boxCapacity}</h3>
+        {numberOfBoxes < 2 ? (
+          <h3 className="numberBoxesRed">{numberOfBoxes}</h3>
         ) : (
-          <h3 className="numberBoxes">{boxCapacity}</h3>
+          <h3 className="numberBoxes">{numberOfBoxes}</h3>
         )}{" "}
         more boxes
       </div>
 
-      {boxCapacity > 0 ? (
+      {numberOfBoxes > 0 ? (
         <section id="box-select">
           <div id="box-selection-wrapper">
             <BoxSelection handleChange={handleChange} />

@@ -16,11 +16,12 @@ export default function StoredItems(props) {
     displayTable,
   } = props;
   const [items, setItems] = useState([]);
+  
   useEffect(() => {
     axios
       .post("/allItems", { email: window.localStorage.getItem("email_user") })
       .then((res) => setItems(res.data));
-  }, []);
+  }, [items]);
 
   return (
     <div id="stored-item" className="flex flex-col ">
