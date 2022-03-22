@@ -86,7 +86,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
               required
             ></Form.Control>
           </Form.Group>
-          <Button variant="light" type="submit">
+          <Button variant="primary" type="submit">
             Login
           </Button>
         </Form>

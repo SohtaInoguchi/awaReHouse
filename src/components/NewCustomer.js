@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
+import { Button } from "react-bootstrap";
 
 function NewCustomer({ setMode }) {
   const [userFirstName, setUserFirstName] = useState("");
@@ -311,12 +312,12 @@ function NewCustomer({ setMode }) {
               <br></br>
             </label>
             <br></br>
-            <input
+            <Button
               type="submit"
               value="Submit"
               style={{ cursor: "pointer" }}
               onClick={handleProviderSubmit}
-            />
+            ></Button>
           </form>
         </div>
         <button onClick={() => setMode("homePage")}>Back to homepage</button>
