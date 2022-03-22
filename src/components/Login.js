@@ -59,7 +59,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   }
   return (
     <div className="login flex justify-center items-center  px-72 py-72   ">
-      <div className="homeUser flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
+      <div className=" flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
         <Form
           className="text-center "
           onSubmit={(e) => {
@@ -67,7 +67,9 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
             sendLoginRequest();
           }}
         >
-          {mode === "user" ? "User" : "Provider"} Login
+          <p className="text-white">
+            {mode === "user" ? "User" : "Provider"} Login
+          </p>
           <Form.Group>
             <Form.Control
               className="my-3"
@@ -92,10 +94,10 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
         </Form>
 
         {mode === "user" ? (
-          <div className="text-center pt-2">
+          <div className="text-center pt-2 text-white">
             Want to become a user?
             <p
-              className="signup cursor-pointer hover:text-blue-600"
+              className=" cursor-pointer hover:text-blue-300"
               onClick={() => {
                 navigate("/signup/user");
               }}
@@ -104,10 +106,10 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
             </p>
           </div>
         ) : (
-          <div className="text-center pt-2">
+          <div className="text-center pt-2 text-white">
             Want to become a storage provider?
             <p
-              className="signup cursor-pointer hover:text-blue-600"
+              className=" cursor-pointer hover:text-blue-300"
               onClick={() => navigate("/signup/provider")}
             >
               SIGN UP
