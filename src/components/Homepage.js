@@ -53,13 +53,7 @@ export default function Homepage({
             id="slogan"
             className="flex flex-col
            justify-center items-center w-full  py-12 bg-gray-200"
-            onClick={(e) => {
-              const a = document.getElementById("slogan").getClientRects()[0];
-
-              console.log(e, a.bottom);
-            }}
           >
-            {/* <h3 className="flex text-gray-500 font-serif text-6xl "> */}
             <h3 className="flex text-gray-500 text-6xl ">
               More Space, More Life
             </h3>
