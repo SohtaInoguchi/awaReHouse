@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   const navigate = useNavigate();
