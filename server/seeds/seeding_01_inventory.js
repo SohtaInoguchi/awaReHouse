@@ -197,6 +197,62 @@ exports.seed = function(knex) {
             heavy:false,
             pending:true,
             pending_retrieval: false
+          },
+          {
+            declared_content_one:"Printed pictures",
+            declared_content_two:"Polaroids",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:2.07,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Books",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:8.4,
+            declared_as_fragile:false,
+            expected_retrieval_season:"autumn",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Camping tent",
+            declared_content_two:"Camping table",
+            declared_content_three:"Camping dining set",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:24.5,
+            declared_as_fragile:false,
+            expected_retrieval_season:"winter",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:true,
+            pending:false,
+            pending_retrieval: false
+          },
+          {
+            declared_content_one:"Ice shaver",
+            declared_content_two:"",
+            declared_content_three:"",
+            storage_location:"Higashichikuma District, Omi, Hi, Nagano, 399-7702",
+            weight_in_kg:4.83,
+            declared_as_fragile:false,
+            expected_retrieval_season:"spring",
+            user_owner:"figo1234@yahoo.co.jp",
+            fragile:false,
+            heavy:false,
+            pending:false,
+            pending_retrieval: false
           }
       ]);
     });

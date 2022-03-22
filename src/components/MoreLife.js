@@ -16,7 +16,7 @@ export default function MoreLife() {
 
           <p className="break-words">
             awaReHouse is a service connecting private storage providers to
-            storage seekers in Japan and is specifically designed for seasonal
+            storage seekers in Japan specifically designed for seasonal
             items
           </p>
 

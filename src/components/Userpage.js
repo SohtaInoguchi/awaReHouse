@@ -81,17 +81,19 @@ function Userpage({
   };
 
   const planIntoValue = () => {
-    if (window.localStorage.getItem("plan_user") === "premium") {
+    if (plan === "premium") {
       setMaxNumberBoxes(10);
     } else {
       setMaxNumberBoxes(5);
     }
   };
-
+  
   useEffect(() => {
     planIntoValue();
-  }, [items]);
+  }, []);
 
+    console.log("PLAN:", maxNumberBoxes);
+  
   // for toggling isHeavy/fragile
   const toggleIsHeavy = () => {
     if (isHeavy === false) {
@@ -202,13 +204,13 @@ function Userpage({
   const retrieveNumberOfBoxes = async (req, res) => {
     try {
       await axios.get(`/inventory/${email}`).then((res) => {
-        // setNumberOfBoxes(maxNumberBoxes - res.data.length);
+        setNumberOfBoxes(maxNumberBoxes - res.data.length);
         // setNumberOfBoxes(numberOfBoxes - res.data.length); //boxCapacity
-        console.log(boxCapacity - res.data.length);
-        window.localStorage.setItem(
-          "boxes_user",
-          boxCapacity - res.data.length
-        );
+        console.log(maxNumberBoxes - res.data.length);
+        // window.localStorage.setItem(
+        //   "boxes_user",
+        //   boxCapacity - res.data.length
+        // );
         // console.log(numberOfBoxes);
       });
     } catch {
@@ -218,7 +220,9 @@ function Userpage({
 
   useEffect(() => {
     retrieveNumberOfBoxes();
-  }, []); //planIntoValue
+  }, [items]); //planIntoValue
+
+  console.log("NUMBER OF BOXES:",numberOfBoxes)
 
   return (
     <div>
@@ -246,7 +250,7 @@ function Userpage({
       </nav>
 
       <h3 id="next-period">
-        Next retrieval/storing period: April 22nd - May 10th
+        Next retrieval/storage period: April 22nd - May 10th
       </h3>
 
       <div className="remainingBoxes">
@@ -317,7 +321,7 @@ function Userpage({
       <div className="flex flex-row justify-center items-center "></div>
 
       <h3 id="next-period">
-        Can't wait the next storing/retrieval period or have exhausted your
+        Can't wait for the next retrieval/storage period or have exhausted your
         quota of boxes?
         <section id="nav-button">
           <Button
