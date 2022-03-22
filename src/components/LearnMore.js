@@ -4,7 +4,7 @@ export default function LearnMore() {
   return (
     <div className="flex flex-row justify-between min-h-min my-10 ">
       <div className="learn-more-e  ">
-        <h4 className="text-center my-3">Why using awaReHouse?</h4>
+        <h4 className="text-center my-3">Why use awaReHouse?</h4>
         <img
           className="flex align-end h-60"
           src={require("../pictures/Tiny-house.jpeg")}

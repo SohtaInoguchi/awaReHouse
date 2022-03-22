@@ -250,7 +250,7 @@ function Userpage({
       </nav>
 
       <h3 id="next-period">
-        Next retrieval/storing period: April 22nd - May 10th
+        Next retrieval/storage period: April 22nd - May 10th
       </h3>
 
       <div className="remainingBoxes">
@@ -321,7 +321,7 @@ function Userpage({
       <div className="flex flex-row justify-center items-center "></div>
 
       <h3 id="next-period">
-        Can't wait the next storing/retrieval period or have exhausted your
+        Can't wait for the next retrieval/storage period or have exhausted your
         quota of boxes?
         <section id="nav-button">
           <Button
