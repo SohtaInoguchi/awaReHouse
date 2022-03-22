@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../input.css";
 import Compress from "react-image-file-resizer";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import WelcomingPage from "./WelcomingPage.js";
+import { useNavigate } from "react-router-dom";
 
-export default function NerCustomer({ setMode }) {
+export default function NerCustomer() {
   const [providerFirstName, setProviderFirstName] = useState("");
   const [providerLastName, setProviderLastName] = useState("");
   const [providerPassword, setProviderPassword] = useState("");
@@ -20,38 +21,11 @@ export default function NerCustomer({ setMode }) {
   const [providerEmergencyContactPhone, setProviderEmergencyContactPhone] =
     useState("");
   const [registrationDone, setRegistrationDone] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
-  const createProviderFirstName = (e) => {
-    setProviderFirstName(e.target.value);
-  };
-
-  const createProviderLastName = (e) => {
-    setProviderLastName(e.target.value);
-  };
-
-  const createProviderPassword = (e) => {
-    setProviderPassword(e.target.value);
-  };
-
-  const createProviderAddress = (e) => {
-    setProviderAddress(e.target.value);
-  };
-
-  const createProviderEmail = (e) => {
-    setProviderEmail(e.target.value);
-  };
-
-  const createProviderBankReference = (e) => {
-    setProviderBankReference(e.target.value);
-  };
-
-  const createProviderEmergencyContact = (e) => {
-    setProviderEmergencyContact(e.target.value);
-  };
-
-  const createProviderEmergencyContactPhone = (e) => {
-    setProviderEmergencyContactPhone(e.target.value);
+  const setInputFieldValue = (e, setMethod) => {
+    const input = e.target.value;
+    setMethod(input);
   };
 
   const pictureStorageHandler = (e) => {
@@ -99,16 +73,17 @@ export default function NerCustomer({ setMode }) {
   if (registrationDone === false) {
     return (
       <div className="containerNewRegistration login">
-        <div className="newProvider text-slate-900 m-5">
-          Register as a storage provider
+        <div className=" text-slate-900 m-5">
+          <p className="text-white text-center">
+            Register as a storage provider
+          </p>
           <Form onSubmit={handleProviderSubmit}>
             <Form.Group>
               <Form.Control
                 type="text"
                 name="firstname"
                 placeholder="First name"
-                value={providerFirstName}
-                onChange={createProviderFirstName}
+                onChange={(e) => setInputFieldValue(e, setProviderFirstName)}
                 required
                 className="my-3"
               />
@@ -119,8 +94,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="lastname"
                 placeholder="Last name"
-                value={providerLastName}
-                onChange={createProviderLastName}
+                onChange={(e) => setInputFieldValue(e, setProviderLastName)}
                 required
                 className="my-3"
               />
@@ -131,8 +105,7 @@ export default function NerCustomer({ setMode }) {
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={providerPassword}
-                onChange={createProviderPassword}
+                onChange={(e) => setInputFieldValue(e, setProviderPassword)}
                 required
                 className="my-3"
               />
@@ -143,8 +116,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="address"
                 placeholder="Address"
-                value={providerAddress}
-                onChange={createProviderAddress}
+                onChange={(e) => setInputFieldValue(e, setProviderAddress)}
                 required
                 className="my-3"
               />
@@ -155,8 +127,7 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={providerEmail}
-                onChange={createProviderEmail}
+                onChange={(e) => setInputFieldValue(e, setProviderEmail)}
                 required
                 className="my-3"
               />
@@ -167,8 +138,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="bankreference"
                 placeholder="Banking reference"
-                value={providerBankReference}
-                onChange={createProviderBankReference}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderBankReference)
+                }
                 required
                 className="my-3"
               />
@@ -179,8 +151,9 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="emergencycontact"
                 placeholder="Emergency contact name"
-                value={providerEmergencyContact}
-                onChange={createProviderEmergencyContact}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContact)
+                }
                 required
                 className="my-3"
               />
@@ -191,15 +164,16 @@ export default function NerCustomer({ setMode }) {
                 type="text"
                 name="emergencycontactphone"
                 placeholder="Emergency contact phone"
-                value={providerEmergencyContactPhone}
-                onChange={createProviderEmergencyContactPhone}
+                onChange={(e) =>
+                  setInputFieldValue(e, setProviderEmergencyContactPhone)
+                }
                 required
                 className="my-3"
               />
             </Form.Group>
 
             <Form.Group>
-              <p className="bg-green-600 text-white rounded-md mx-2 my-2 py-2 px-2">
+              <p className=" text-white  ">
                 Please attach a copy of a valid identification document
               </p>
               <Form.Control
@@ -207,17 +181,20 @@ export default function NerCustomer({ setMode }) {
                 name="file"
                 onChange={pictureStorageHandler}
                 className="my-3"
-                // required
               />
             </Form.Group>
-
-            <Button
-              variant="primary"
-              type="submit"
-              // onClick={handleProviderSubmit}
-            >
-              Submit
-            </Button>
+            <div className="flex justify-center items-center">
+              <Button
+                className="mx-3"
+                variant="primary"
+                onClick={() => navigate("/")}
+              >
+                Back to Home
+              </Button>
+              <Button className="mx-3" variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       </div>
