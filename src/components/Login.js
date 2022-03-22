@@ -58,7 +58,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
       });
   }
   return (
-    <div className="login flex justify-center items-center w-full  px-72 py-72   ">
+    <div className="login flex justify-center items-center  px-72 py-72   ">
       <div className="homeUser flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
         <Form
           className="text-center "
@@ -77,15 +77,6 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
               required
             ></Form.Control>
           </Form.Group>
-          {/* <Form.Group>
-            <Form.Control
-              className="my-3"
-              id="first_name"
-              type="text"
-              placeholder="First Name"
-              required
-            ></Form.Control>
-          </Form.Group> */}
           <Form.Group>
             <Form.Control
               className="my-3"
@@ -95,7 +86,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
               required
             ></Form.Control>
           </Form.Group>
-          <Button variant="light" type="submit">
+          <Button variant="primary" type="submit">
             Login
           </Button>
         </Form>

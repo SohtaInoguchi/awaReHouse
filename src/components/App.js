@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div>
-      <div className="header flex flex-row flex-wrap justify-between w-44  ">
+      {/* <div className="header flex flex-row flex-wrap justify-between w-44  ">
         <img
           className="top-0 w-40 h-40 rounded-3xl cursor-pointer mx-3 my-3 border-8"
           src={require("../pictures/LOGO.png")}
@@ -74,7 +74,7 @@ function App() {
           }}
         />
         <div className="flex flex-row flex-wrap justify-center items-center"></div>
-      </div>
+      </div> */}
 
       <Routes>
         <Route

@@ -1,6 +1,4 @@
 import React from "react";
-import Icon from "./Icon";
-import { FaUserTie, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 export default function LoginButtons() {
   const navigate = useNavigate();
@@ -20,8 +18,7 @@ export default function LoginButtons() {
               } else navigate("/login/user");
             }}
           >
-            <Icon icon={<FaUser size="24" />} />
-            User
+            Login as a User
           </button>
         </div>
 
@@ -39,8 +36,7 @@ export default function LoginButtons() {
               } else navigate("/login/provider");
             }}
           >
-            <Icon icon={<FaUserTie size="24" />} />
-            Provider
+            Login as a Provider
           </button>
         </div>
       </div>
