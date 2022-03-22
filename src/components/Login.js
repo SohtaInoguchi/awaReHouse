@@ -84,7 +84,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           </div>
         )}
         <p
-          className="cursor-pointer text-white my-5"
+          className="cursor-pointer my-5 text-white"
           onClick={() => navigate("/")}
         >
           Back to Home
