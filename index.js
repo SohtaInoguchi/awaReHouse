@@ -110,12 +110,12 @@ app.post("/login/verify/:member/:plan", async (req, res) => {
 
 // to update pending_retrieval status
 app.post("/inventory/:box_id", async (req, res) => {
-  const {box_id} = req.body;
+  const { box_id } = req.body;
   try {
-    await db("inventory").where({box_id}).update({pending_retrieval: true});
+    await db("inventory").where({ box_id }).update({ pending_retrieval: true });
     res.status(200).json("YEP");
-  } catch (err){
-    res.status(500).json({message: "Error updating new post", error: err})
+  } catch (err) {
+    res.status(500).json({ message: "Error updating new post", error: err });
   }
 });
 
@@ -325,7 +325,6 @@ app.get("/users/:email", async (req, res) => {
   }
 });
 
-
 app.get("/payments/:provider_email", async (req, res) => {
   try {
     const { provider_email } = req.params;
@@ -374,11 +373,13 @@ app.post("/inventory", async (req, res) => {
   }
 });
 
-
 app.get("/inventory/:user_owner", async (req, res) => {
   try {
     const { user_owner } = req.params;
-    const userBoxes = await db.select("*").from("inventory").where({ user_owner });
+    const userBoxes = await db
+      .select("*")
+      .from("inventory")
+      .where({ user_owner });
     res.json(userBoxes);
   } catch {
     console.log("Error in retrieving user boxes");
@@ -395,30 +396,37 @@ app.get("/inventory/:user_owner", async (req, res) => {
 /////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 app.post("/create-checkout-session", async (req, res) => {
-  await console.table(req.body.name);
-  console.log("checkout page");
-  console.log(req.token);
-  console.log(req.body.name === "Storage fee");
   const prices = await stripe.prices.list({
     lookup_keys: [req.body.lookup_key],
     expand: ["data.product"],
   });
-  console.log(prices.data);
 
   let mode;
   let price;
+  let subscriptionPlan = "";
 
-  req.body.name === "Storage fee"
-    ? (mode = "subscription")
-    : (mode = "payment");
+  req.body.name.split("-")[0] === "Storage fee" &&
+  req.body.name.split("-")[1] === "basic"
+    ? (subscriptionPlan = "Storage fee-Basic")
+    : req.body.name.split("-")[0] === "Storage fee" &&
+      req.body.name.split("-")[1] === "premium"
+    ? (subscriptionPlan = "Storage fee-Premium")
+    : "";
 
-  const gotya = prices.data.filter((e) => e.product.name === req.body.name);
-  price = gotya[0].id;
+  if (subscriptionPlan) {
+    subscriptionPlanPrice = prices.data.filter((e) => {
+      if (e.product.name.toLowerCase() === req.body.name.toLowerCase())
+        return e.product.name;
+    });
 
-  console.log(req.body);
+    price = subscriptionPlanPrice[0].id;
+  } else {
+    const gotya = prices.data.filter((e) => e.product.name === req.body.name);
+    price = gotya[0].id;
+  }
 
-  const temp = prices.data.filter((e) => e.product.name === req.body.name);
-  console.log(temp.id);
+  req.body.name.includes("-") ? (mode = "subscription") : (mode = "payment");
+
   const session = await stripe.checkout.sessions.create({
     billing_address_collection: "auto",
     line_items: [
