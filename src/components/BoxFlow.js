@@ -219,11 +219,16 @@ export default function BoxFlow({ email, setItems, address }) {
                   />
                 </Form.Group>
                 <p id="address">Your address: {address}</p>
-                <Button 
-                className='ml-10 my-8' 
-                id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'} 
-                onClick={() => setModalShow(true)}
-                >Checkout</Button>
+                {
+                  description1Flow && typeBoxFlow ? 
+                  <Button 
+                  className='ml-10 my-8' 
+                  // id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'}
+                  id="extra-storage-field-filled"
+                  onClick={() => setModalShow(true)}
+                  >Checkout</Button> :
+                  <p className="text-lg text-red-500">Please select box type and enter item description.</p>
+                }
                 <ExtraStorageModal show={modalShow}
                 onHide={setModalShow}
                 submit2={submit2}

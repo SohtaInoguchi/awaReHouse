@@ -6,7 +6,11 @@ body {
     rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  font-family: "Georgia (serif)";
+  /* font-family: "Georgia (serif)"; */
+}
+
+body * {
+  font-family: 'Fredoka', sans-serif ; 
 }
 
 .welcomeMessage {
@@ -179,10 +183,23 @@ body {
 }
 
 .faq:hover {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(280, 200, 200);
 }
 
-.chat-icons {
+.chat-icons-close {
+  width: 4rem;
+  height: 4rem;
+  margin-top: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 14px;
+  color: rgb(180, 180, 180);
+  cursor: pointer;
+}
+
+.chat-icons-open {
   width: 4rem;
   height: 4rem;
   margin-top: 10px;
@@ -191,8 +208,23 @@ body {
   bottom: 20px;
   left: 20px;
   border-radius: 14px;
-  color: white;
+  color: rgb(180, 180, 180);
+  cursor: pointer;
 }
+
+.chat-icons-open:hover {
+  width: 5rem;
+  height: 5rem;
+  /* margin-top: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 20px;
+  left: 20px;
+  border-radius: 14px;
+  color: rgb(180, 180, 180);
+  cursor: pointer; */
+}
+
 
 .message-wrapper {
   width: inherit;
@@ -259,7 +291,7 @@ body {
 #chat {
   flex-grow: 2;
   margin: -5px 1px -3px 10px;
-  border: solid 0px;
+  border: solid 2px rgb(11, 81, 114);
   border-radius: 12px;
   padding: 0.5rem 0.5rem;
 }
@@ -747,7 +779,7 @@ margin:5%;
   opacity: 0;
   position: absolute;
   top: 2rem;
-  right: 1rem;
+  right: 0%;
   color: white;
   display: none;
   width: 10rem;
@@ -885,11 +917,25 @@ margin:5%;
 }
 
 
-#checkout-and-portal-button {
+#hidden-checkout-and-portal-button {
   display: none;
 }
 
+#checkout-and-portal-button {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
 #go-button {
+  color: white;
+  background-color: rgb(11, 81, 114);
+}
+
+.retrieval-modal-texts {
+  color: rgb(11, 81, 114);
+}
+
+#go-back-button {
   color: white;
   background-color: rgb(11, 81, 114);
 }

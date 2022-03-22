@@ -7,7 +7,7 @@ export default function ExtraStorageModal(props) {
 
     const invokeCheckout = (e) => {
         submit2(e);
-        const checkoutBtn = document.getElementById('checkout-and-portal-button')
+        const checkoutBtn = document.getElementById('hidden-checkout-and-portal-button')
         checkoutBtn.click();
         console.log(checkoutBtn);
     }
@@ -25,7 +25,7 @@ export default function ExtraStorageModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4 className='extra-storage-modal-texts'>Are you sure to store extra item?</h4>
+          <h4 className='extra-storage-modal-texts'>Are you sure you'd like to store extra item?</h4>
         </Modal.Body>
         <Modal.Footer>
 
@@ -33,7 +33,7 @@ export default function ExtraStorageModal(props) {
         <Form action="/create-checkout-session" method="POST">
         <Form.Control type="hidden" name="name" value="Extra retrieval"/>
         {/* Below button is invisible */}
-        <Button id="checkout-and-portal-button" type="submit">Yes, I'm sure</Button> 
+        <Button id="hidden-checkout-and-portal-button" type="submit">Yes, I'm sure</Button> 
         </Form>
         <Button id='invoke-checout-send-data' onClick={invokeCheckout}>Yes, I'm sure</Button>
 
