@@ -29,10 +29,10 @@ export default function ItemDescription(props) {
           className=" text-blue-600 px-3 py-3 "
         >
           <div id="box-select-header">
-            <p>You selected a type {typeBox} box.</p>
+            <p>You selected type {typeBox} box.</p>
             <p>
               Please provide a brief description of the items you want to store
-              (e.g. Snowboard, summer clothes, barbecue set...)
+              (e.g. snowboard, summer clothes, barbecue set...)
             </p>
           </div>
           <Form.Group className="form-inputs">
