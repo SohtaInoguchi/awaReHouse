@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import LoginForm from "./LoginForm";
 export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   const navigate = useNavigate();
   const userEmail = window.localStorage.getItem("email_user");
@@ -10,10 +10,8 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   useEffect(() => {
     axios.get(`/login/verify/${userEmail}`).then((res) => {
       setUsersCurrentPlan(res.data);
-      // usersCurrentPlan === "" ? navigate("/explanation") : navigate("/user");
     });
   });
-
   function sendLoginRequest() {
     axios
       .post("/login", {
@@ -31,7 +29,7 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
           window.localStorage.setItem("firstName_user", res.data.first_name);
           window.localStorage.setItem("email_user", res.data.email);
           window.localStorage.setItem("plan_user", res.data.plan);
-          //
+
           let numberOfBox = "";
           res.data.plan === "basic"
             ? (numberOfBox = "5")
@@ -59,43 +57,14 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
   }
   return (
     <div className="login flex justify-center items-center  px-72 py-72   ">
-      <div className="homeUser flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
-        <Form
-          className="text-center "
-          onSubmit={(e) => {
-            e.preventDefault();
-            sendLoginRequest();
-          }}
-        >
-          {mode === "user" ? "User" : "Provider"} Login
-          <Form.Group>
-            <Form.Control
-              className="my-3"
-              id="email"
-              type="text"
-              placeholder="Email"
-              required
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Control
-              className="my-3"
-              id="password"
-              type="password"
-              placeholder="Password"
-              required
-            ></Form.Control>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Login
-          </Button>
-        </Form>
+      <div className=" flex flex-col justify-center items-center mx-4 my-2 px-4 py-2 rounded-3xl w-96 ">
+        <LoginForm mode={mode} sendLoginRequest={sendLoginRequest} />
 
         {mode === "user" ? (
-          <div className="text-center pt-2">
+          <div className="text-center pt-2 text-white">
             Want to become a user?
             <p
-              className="signup cursor-pointer hover:text-blue-600"
+              className=" cursor-pointer hover:text-blue-300"
               onClick={() => {
                 navigate("/signup/user");
               }}
@@ -104,10 +73,10 @@ export default function Login({ setIsLogin, setUser, setEmail, mode }) {
             </p>
           </div>
         ) : (
-          <div className="text-center pt-2">
+          <div className="text-center pt-2 text-white">
             Want to become a storage provider?
             <p
-              className="signup cursor-pointer hover:text-blue-600"
+              className=" cursor-pointer hover:text-blue-300"
               onClick={() => navigate("/signup/provider")}
             >
               SIGN UP
