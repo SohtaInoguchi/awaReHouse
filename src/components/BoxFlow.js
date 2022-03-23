@@ -109,9 +109,10 @@ export default function BoxFlow({ email, setItems, address }) {
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
         // user_owner: email,
-        user_owner: localStorage.getItem('email_user'),
+        user_owner: localStorage.getItem("email_user"),
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
+        pending: true,
       })
       .then(() => {
         console.log("Your database has been updated!");
@@ -142,37 +143,40 @@ export default function BoxFlow({ email, setItems, address }) {
 
   const check = () => {
     console.log("isconfirmed", isConfirmed);
-  }
-
+  };
 
   return (
     <div>
-      <p id="extra-storage-banner">
-        Extra Storage
-      </p>
+      <p id="extra-storage-banner">Extra Storage</p>
       <div className="flex justify-end mx-5 my-2 px-2 py-2">
-        <Button id="go-back-to-user-page" onClick={() => navigate("/user")}>Go Back To User Page</Button>
+        <Button
+          className="py-3 px-3"
+          id="go-back-to-user-page"
+          onClick={() => navigate("/user")}
+        >
+          Go Back To User Page
+        </Button>
       </div>
 
-    <section id="box-select-extra-storage">
-      <div id="box-selection-wrapper">
+      <section id="box-select-extra-storage">
+        <div id="box-selection-wrapper">
+          <BoxSelection handleChange={handleChange} />
 
-      <BoxSelection handleChange={handleChange} />
-
-
-        <section id="item-description-wrapper">
-          <article id="item-description">
+          <section id="item-description-wrapper">
+            <article id="item-description">
               <Form
                 action="/create-checkout-session"
                 method="POST"
                 id="confirmation-form"
                 className=" text-blue-600 px-3 py-3 "
               >
-              <div id="box-select-header">
-                <p>You selected type {typeBoxFlow} box.</p>
-                <p>Please provide a brief description of the items you want to
-                store (e.g. snowboard, summer clothes, barbecue set...)</p>
-              </div>
+                <div id="box-select-header">
+                  <p>You selected type {typeBoxFlow} box.</p>
+                  <p>
+                    Please provide a brief description of the items you want to
+                    store (e.g. snowboard, summer clothes, barbecue set...)
+                  </p>
+                </div>
                 <Form.Group className="form-inputs">
                   <Form.Control
                     type="text"
@@ -219,32 +223,37 @@ export default function BoxFlow({ email, setItems, address }) {
                   />
                 </Form.Group>
                 <p id="address">Your address: {address}</p>
-                {
-                  description1Flow && typeBoxFlow ? 
-                  <Button 
-                  className='ml-10 my-8' 
-                  // id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'}
-                  id="extra-storage-field-filled"
-                  onClick={() => setModalShow(true)}
-                  >Checkout</Button> :
-                  <p className="text-lg text-red-500">Please select box type and enter item description.</p>
-                }
-                <ExtraStorageModal show={modalShow}
-                onHide={setModalShow}
-                submit2={submit2}
+                {description1Flow && typeBoxFlow ? (
+                  <Button
+                    className="ml-10 my-8"
+                    // id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'}
+                    id="extra-storage-field-filled"
+                    onClick={() => setModalShow(true)}
+                  >
+                    Checkout
+                  </Button>
+                ) : (
+                  <p className="text-lg text-red-500">
+                    Please select box type and enter item description.
+                  </p>
+                )}
+                <ExtraStorageModal
+                  show={modalShow}
+                  onHide={setModalShow}
+                  submit2={submit2}
                 />
                 {/* <div className="flex justify-center items-center">
                   <OneFiftyStripe />
                 </div> */}
               </Form>
             </article>
-        </section>
-      {/* </div> */}
-      {/* -------box-selection-wrapper END-------- */}
-      </div>
-    </section>
+          </section>
+          {/* </div> */}
+          {/* -------box-selection-wrapper END-------- */}
+        </div>
+      </section>
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
     </div>
-// --------ITEM DESCRIPTION FORM END-------
+    // --------ITEM DESCRIPTION FORM END-------
   );
 }

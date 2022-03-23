@@ -1,6 +1,6 @@
 import React from "react";
 import { FaWeightHanging } from "react-icons/fa";
-import { GiShatteredGlass } from "react-icons/gi";
+import { GiShatteredGlass, GiWeight } from "react-icons/gi";
 import Icon from "./Icon";
 
 export default function StoredItemsElements({ item, index, color, text }) {
@@ -16,7 +16,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
         className="group flex flex-row justify-around items-center rounded-lg "
       >
         <div
-          className={` each-items  flex min-h-100 max-h-100  ${color}  shadow-lg rounded-lg px-3 py-2 mx-2`}
+          className={`each-items flex min-h-100 max-h-100  ${color}  shadow-lg rounded-lg px-3 py-2 mx-2`}
         >
           {item.declared_content_one}
           {item.fragile === true ? (
@@ -25,7 +25,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
             ``
           )}{" "}
           {item.heavy === true ? (
-            <Icon icon={<FaWeightHanging size="24" />} />
+            <Icon icon={<GiWeight className="pl-0.5" size="24" />} />
           ) : (
             ``
           )}
@@ -33,7 +33,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
 
         {item.declared_content_two !== "" ? (
           <div
-            className={`each-items  flex min-h-100 max-h-100 ${color}  shadow-lg rounded-lg px-3 py-2 mx-2 `}
+            className={`each-items flex min-h-100 max-h-100 min-w-fit ${color}  shadow-lg rounded-lg px-3 py-2 mx-2 `}
             key={`${index}b`}
           >
             {item.declared_content_two}{" "}
@@ -43,7 +43,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
               ``
             )}{" "}
             {item.heavy === true ? (
-              <Icon icon={<FaWeightHanging size="24" />} />
+              <Icon icon={<GiWeight className="pl-0.5" size="24" />} />
             ) : (
               ``
             )}
@@ -64,7 +64,7 @@ export default function StoredItemsElements({ item, index, color, text }) {
               ``
             )}{" "}
             {item.heavy === true ? (
-              <Icon icon={<FaWeightHanging size="24" />} />
+              <Icon icon={<GiWeight className="pl-0.5" size="24" />} />
             ) : (
               ``
             )}
