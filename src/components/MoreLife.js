@@ -13,9 +13,9 @@ export default function MoreLife() {
           alt=""
         /> */}
         <div className="flex flex-col justify-center  items-center   w-60  text-blue-500 text-center  rounded-3xl  mx-6  ">
-          <p className="text-5xl">What is awaReHouse?</p>
+          <p className="text-5xl ">What is awaReHouse?</p>
 
-          <p className="break-words text-xl">
+          <p className="break-words text-xl ">
             awaReHouse is a service connecting private storage providers to
             storage seekers in Japan specifically designed for seasonal items
           </p>
