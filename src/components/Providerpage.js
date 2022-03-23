@@ -306,7 +306,7 @@ calculateNextPayment()
           }}
             barRatio={1}
             cornerRadius={0}
-            style={{ data: { fill: "#2035d4" } }}
+            style={{ data: { fill: "#0066cc" } }}
             alignment="middle"
             labelComponent={<VictoryTooltip/>}
             data={chartData}
@@ -317,7 +317,7 @@ calculateNextPayment()
                   return [
                     {
                       target: "data",
-                      mutation: () => ({style: {fill: "gold", width: 30}})
+                      mutation: () => ({style: {fill: "#ffcc00", width: 30}})
                     }, {
                       target: "labels",
                       mutation: () => ({ active: true })
@@ -352,7 +352,7 @@ calculateNextPayment()
            <div className="secondContainerTop">
            <h5>Boxes in storage: <h6 className="storedBoxes">{providerItems.length}</h6></h5>
            <h5> Incoming boxes: <h6 className="pendingItems">{pendingItems}</h6></h5>
-           <h5>Incoming day: <h6 className="pendingItems">{pendingItems===0? "-" : "03/22/2022"}</h6></h5>
+           <h5>Incoming day: <h6 className="pendingItems">{pendingItems===0? "-" : "03/30/2022"}</h6></h5>
            {/* <img
            className="pictureDeliveries"
             src={require("../pictures/deliveries.webp")}
@@ -401,9 +401,9 @@ calculateNextPayment()
         ) : (
           <div className="moreStorage">
             <form>
-              <h5 className="topFormtop">Please give us some details.</h5>
+              <h5 className="topFormtop">Please give us some details</h5>
               <label>
-                <h6 className="topForm">Where is this new storage capacity located?</h6>
+                <h6 className="topForm">Where is this new storage located?</h6>
                 <input
                   type="text"
                   name="location"
@@ -411,7 +411,7 @@ calculateNextPayment()
                   value={location}
                   onChange={createLocation}
                 />
-                <h6  className="topForm">What is the storage capacity offered (in m3)?</h6>
+                <h6  className="topForm">How much additional storage capacity is available? (in m3)</h6>
                 <input
                   type="text"
                   name="capacity"
@@ -419,7 +419,7 @@ calculateNextPayment()
                   value={capacity}
                   onChange={createCapacity}
                 />
-                <h6  className="topForm">On which floor is this new storage capacity located?</h6>
+                <h6  className="topForm">On which floor is this new storage located?</h6>
                 <input
                   type="text"
                   name="floor"
@@ -428,7 +428,7 @@ calculateNextPayment()
                   onChange={createFloorAddition}
                 />
 
-                <h6  className="topForm">Please indicate from when this additional capacity will be available</h6>
+                <h6  className="topForm">Please indicate from when this storage will become available</h6>
                 <DatePicker
                   selected={startDate}
                   onSelect={(date) => handleDateSelect(date)}

@@ -569,7 +569,7 @@ body * {
   justify-content: center;
   align-items: center;
   border-radius:15px;
-  margin-left: 2.5%;
+  margin-left: 0.5%;
 }
 
 .m-10-max-w-sm {
@@ -587,6 +587,7 @@ body * {
   width: fit-content;
   height: fit-content;
   padding:2%;
+  margin-bottom: 2%;
 }
 
 .storedBoxesLabel:hover {
