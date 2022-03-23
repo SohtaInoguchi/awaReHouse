@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { FaWeightHanging } from "react-icons/fa";
-import { GiShatteredGlass } from "react-icons/gi";
+import { GiShatteredGlass, GiWeight } from "react-icons/gi";
 import Icon from "./Icon";
 import StoredItemsElements from "./StoredItemsElements";
 
@@ -16,7 +16,7 @@ export default function StoredItems(props) {
     displayTable,
   } = props;
   const [items, setItems] = useState([]);
-  
+
   useEffect(() => {
     axios
       .post("/allItems", { email: window.localStorage.getItem("email_user") })
@@ -44,9 +44,20 @@ export default function StoredItems(props) {
           }, 1);
         }}
       >
-        {displayTable ? "" : "Display"} Stored Items
+        <div className="">
+          {displayTable ? "" : "Display"} Stored Items
+          <div className="flex justify-center  ">
+            <div className="mx-3 flex ">
+              <Icon icon={<GiWeight size="24" />} />
+              <p className=" ml-2 text-base">Heavy</p>
+            </div>
+            <div className="flex mx-3">
+              <Icon icon={<GiShatteredGlass size="24" />} />
+              <p className="ml-2 text-base">Fragile</p>
+            </div>
+          </div>
+        </div>
       </Button>
-
       {displayTable ? (
         <div
           id="boxes"
