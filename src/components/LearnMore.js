@@ -12,12 +12,12 @@ export default function LearnMore() {
         />
         <div className="break-words mx-3 my-3 px-3 py-3">
           <p className="text-xl">
-            To store low-frequency usage items at low cost
+            To store low-frequency usage items at a low cost
           </p>
 
           <p className="text-xl">
             With awaReHouse, you do not have to choose between getting rid of
-            items and enjoying a comfortable living space anymore
+            items and enjoying a comfortable living space
           </p>
         </div>
       </div>
@@ -35,8 +35,8 @@ export default function LearnMore() {
             Generate revenue by simply turning rooms into storage
           </p>
           <p className="text-xl">
-            With awaReHouse, you can create monthly revenues without effort, by
-            simply offering available rooms you have in your property for
+            With awaReHouse, you can create monthly revenues effortlessly, by
+            offering available rooms you have in your property for
             storage
           </p>
         </div>
