@@ -292,13 +292,16 @@ function Userpage({
               className="noboxespic"
               src={require("../pictures/NOBOXES.png")}
             />
-            <h3>Unfortunately, you do not have any storage capacity left</h3>
+            <h3>Unfortunately, you do not have any box left</h3>
             <h4 className="osusume">
+              - Please use the Extra Storage option
+            </h4>
+            {/* <h4 className="osusume">
               - If you are a Basic user, please upgrade your plan
             </h4>
             <h4 className="osusume">
               - If you are a Premium user, please use the Extra Storage option
-            </h4>
+            </h4> */}
           </div>
 
           <StoredItems
