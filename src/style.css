@@ -569,7 +569,7 @@ body * {
   justify-content: center;
   align-items: center;
   border-radius:15px;
-  margin-left: 0.5%;
+  margin-left: 0.55%;
 }
 
 .m-10-max-w-sm {
@@ -661,7 +661,7 @@ body * {
   justify-content: center;
   align-items: center;
   color: rgb(11, 81, 114);
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 .registrationMessage:hover{
