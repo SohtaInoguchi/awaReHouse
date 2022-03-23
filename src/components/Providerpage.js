@@ -306,7 +306,7 @@ calculateNextPayment()
           }}
             barRatio={1}
             cornerRadius={0}
-            style={{ data: { fill: "#2035d4" } }}
+            style={{ data: { fill: "#0066cc" } }}
             alignment="middle"
             labelComponent={<VictoryTooltip/>}
             data={chartData}
@@ -317,7 +317,7 @@ calculateNextPayment()
                   return [
                     {
                       target: "data",
-                      mutation: () => ({style: {fill: "gold", width: 30}})
+                      mutation: () => ({style: {fill: "#ffcc00", width: 30}})
                     }, {
                       target: "labels",
                       mutation: () => ({ active: true })
