@@ -48,14 +48,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // window.onunload(() => {
-    //   localStorage.removeItem("first_name_user");
-    //   localStorage.removeItem("email_user");
-    //   localStorage.removeItem("token_user");
-    //   localStorage.removeItem("first_name_provider");
-    //   localStorage.removeItem("email_provider");
-    //   localStorage.removeItem("token_provider");
-    // });
     axios
       .post("/allItems", { email: window.localStorage.getItem("email_user") })
       .then((res) => setItems(res.data));
@@ -63,19 +55,6 @@ function App() {
 
   return (
     <div>
-      {/* <div className="header flex flex-row flex-wrap justify-between w-44  ">
-        <img
-          className="top-0 w-40 h-40 rounded-3xl cursor-pointer mx-3 my-3 border-8"
-          src={require("../pictures/LOGO.png")}
-          alt=""
-          onClick={() => {
-            window.scrollTo(500, 350);
-            navigate("/");
-          }}
-        />
-        <div className="flex flex-row flex-wrap justify-center items-center"></div>
-      </div> */}
-
       <Routes>
         <Route
           path="/"

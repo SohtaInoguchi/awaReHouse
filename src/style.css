@@ -6,12 +6,10 @@ body {
     rgb(11, 81, 114),
     rgb(11, 81, 114)
   );
-  /* font-family: "Georgia (serif)"; */
 }
 
 body * {
   font-family: 'Fredoka', sans-serif ; 
-  /* font-family: 'Lato', sans-serif; */
 }
 
 .welcomeMessage {
@@ -23,23 +21,6 @@ body * {
 .logo {
   max-height: 200px;
 }
-
-/* .homeImages {
-  padding: 1%;
-  display: inline-block;
-  position: relative;
-  width: 300px;
-  height: 300px;
-  overflow: hidden;
-  border-radius: 50%;
-} */
-
-/* .homepageContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-*/
 
 .containerHomeLeft {
   display: flex;
@@ -68,17 +49,7 @@ body * {
 }
 
 .homeUser {
-  /* padding: 2%;
-  margin-right: 5%;
-  border-radius: 2em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  color: #ffffff; */
   background-color: rgb(131, 206, 241);
-  /* text-align: center;
-  transition: all 0.2s; */
 }
 
 .homeProvider {
@@ -163,7 +134,6 @@ body * {
 }
 
 #chat-box {
-  /* background-color: rgb(212, 203, 203); */
   background-color: rgb(200, 200, 200);
   height: 25rem;
   min-height: 300px;
@@ -218,14 +188,6 @@ body * {
 .chat-icons-open:hover {
   width: 5rem;
   height: 5rem;
-  /* margin-top: 10px;
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 20px;
-  left: 20px;
-  border-radius: 14px;
-  color: rgb(180, 180, 180);
-  cursor: pointer; */
 }
 
 
@@ -265,7 +227,6 @@ body * {
   max-width: 80%;
   background-color: white;
   padding: 5px 5px;
-  /* margin: 10px 10px; */
   margin-left: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -309,13 +270,11 @@ body * {
 }
 
 #send-icon {
-  /* position: absolute; */
   width: 2rem;
   height: 2rem;
   border-radius: 9999px;
   background-color: rgb(11, 81, 114);
   color: rgb(255, 255, 255);
-  /* flex-grow: 1; */
 }
 
 /* ---------PROVIDER PAGE */
@@ -330,8 +289,6 @@ body * {
   position: relative;
   margin: 20px;
   border-radius: 15px;
-  /* box-shadow: 
-  0 0 0 1px rgb(222, 237, 240); */
 }
 
 .innerTopContainer {
@@ -387,7 +344,6 @@ body * {
   margin-right: 10%;
   margin-bottom: 2%;
   border-radius: 15px;
-  /* box-shadow: 0 0 0 1px rgb(222, 237, 240); */
 }
 
 .welcomeAndByeContainer {
@@ -881,16 +837,13 @@ margin:5%;
   margin-right: 3rem;
   width: 90%;
   min-width: fit-content;
-  /* border: solid 2px red; */
 }
 
 #boxes {
   font-size: 1.2rem;
-  /* border: solid 8px green; */
 }
 
 #item {
-  /* border: solid 4px orange; */
   margin: 1rem 1rem;
 }
 
