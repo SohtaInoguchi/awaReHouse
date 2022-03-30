@@ -47,12 +47,9 @@ export default function Chat() {
     if (socket == null) return;
     socket.on("bot-send-back", (res) => {
       console.log("user chat res", res);
-      // const temp2 = [...receivedMessage];
       const receivedMessageObj = {receiveOrSent: "botMessageReceived", message: res};
       const temp2 = [...chatMessages];
-      // temp2.push(res);
       temp2.push(receivedMessageObj);
-      // setReceivedMessage(temp2);
       setChatMessages(temp2);
     });
     return () => socket.off("bot-send-back");
@@ -62,10 +59,8 @@ export default function Chat() {
     const chat = document.getElementById("chat");
     let temp = [...chatMessages];
     const sentMessageObj = {receiveOrSent: "sent", message: chat.value};
-    // temp.push(chat.value);
     temp.push(sentMessageObj);
     setChatMessages(temp);
-    // socket.emit("send-message", chat.value);
     socket.emit("send-message", sentMessageObj.message);
     chat.value = "";
     scrollToBottom();
@@ -83,10 +78,7 @@ export default function Chat() {
   const renderChatBox = () => {
     return <>
           <div id="outer-wrapper">
-          <div id="chat-box">
-              {/* {chatMessages.map((message, idx) => (
-                <div key={idx} className="messages">{message}</div> */}
-                
+          <div id="chat-box">                
               <div className="message-wrapper">
                 {chatMessages.map((message, idx) => {
                   const isLastMessage = chatMessages.length - 1 === idx;
@@ -145,7 +137,6 @@ export default function Chat() {
       {
       isChatOpened ? 
       renderChatBox()
-      // <CloseChatComponent icon={<AiFillCloseCircle size="50"/>}/>
       :
       <OpenChatComponent 
       icon={<BsChatRightTextFill 

@@ -11,7 +11,6 @@ import ExtraStorageModal from "./ExtraStorageModal";
 export default function BoxFlow({ email, setItems, address }) {
   const [addItemFlow, setAddItemFlow] = useState(false);
   const [typeBoxFlow, setTypeBoxFlow] = useState("");
-  // const [address, setAddress] = useState("");
   const [confirmationFlow, setConfirmationFlow] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
   const [description1Flow, setDescription1Flow] = useState("");
@@ -59,26 +58,6 @@ export default function BoxFlow({ email, setItems, address }) {
     }
   };
 
-  // useEffect(() => {
-  //   retrieveAddress();
-  // }, [setAddItemFlow]);
-
-  const submit1 = () => {
-    if (typeBoxFlow === null) {
-      setTryAgain(true);
-    }
-    if (typeBoxFlow !== null) {
-      setConfirmationFlow(true);
-    }
-  };
-
-  const cancel = () => {
-    setAddItemFlow(false);
-    setTryAgain(false);
-    setTypeBoxFlow(null);
-    setConfirmationFlow(false);
-    setBoxOrderReceivedFlow(false);
-  };
 
   const possibleStoragelocations = async () => {
     await axios
@@ -108,7 +87,6 @@ export default function BoxFlow({ email, setItems, address }) {
         weight_in_kg: "3.41",
         declared_as_fragile: false,
         expected_retrieval_season: "autumn",
-        // user_owner: email,
         user_owner: localStorage.getItem("email_user"),
         fragile: isFragileFlow,
         heavy: isHeavyFlow,
@@ -139,10 +117,6 @@ export default function BoxFlow({ email, setItems, address }) {
     setIsFragileFlow(false);
     setIsHeavyFlow(false);
     sendBoxRequest();
-  };
-
-  const check = () => {
-    console.log("isconfirmed", isConfirmed);
   };
 
   return (
@@ -226,7 +200,6 @@ export default function BoxFlow({ email, setItems, address }) {
                 {description1Flow && typeBoxFlow ? (
                   <Button
                     className="ml-10 my-8"
-                    // id={description1Flow && typeBoxFlow ? "extra-storage-field-filled" : 'extra-storage'}
                     id="extra-storage-field-filled"
                     onClick={() => setModalShow(true)}
                   >
@@ -242,18 +215,12 @@ export default function BoxFlow({ email, setItems, address }) {
                   onHide={setModalShow}
                   submit2={submit2}
                 />
-                {/* <div className="flex justify-center items-center">
-                  <OneFiftyStripe />
-                </div> */}
               </Form>
             </article>
           </section>
-          {/* </div> */}
-          {/* -------box-selection-wrapper END-------- */}
         </div>
       </section>
       {tryAgain === true ? <h4> PLEASE SELECT A BOX TYPE</h4> : <div></div>}
     </div>
-    // --------ITEM DESCRIPTION FORM END-------
   );
 }

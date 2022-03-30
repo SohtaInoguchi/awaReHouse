@@ -65,30 +65,7 @@ app.post("/allItems", async (req, res) => {
   }
 });
 
-// app.post("/lastPayments", async (req, res) => {
-//   try {
-//     const payments = await db
-//       .select("*")
-//       .from("payments")
-//       .where("provider_email", req.body.email);
-//     res.send(payments);
-//   } catch {
-//     res.send("No payments found yet");
-//   }
-// });
 
-// // retrieve all goods stored at a single place
-// app.post("/providerItems", async (req, res) => {
-//   try {
-//     const items = await db
-//       .select("*")
-//       .from("inventory")
-//       .where("storage_location", req.body.adress);
-//     res.send(items);
-//   } catch {
-//     res.send("No items found yet");
-//   }
-// });
 
 //Verify if user has created account already
 //Currently sends back an arr of objects with sub plan
@@ -170,12 +147,6 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    // res.json({
-    //   boolean,
-    //   first_name: user[0].first_name,
-    //   email: user[0].email,
-    //   token,
-    // });
   } catch (err) {
     res.json({
       boolean: false,
@@ -387,13 +358,6 @@ app.get("/inventory/:user_owner", async (req, res) => {
 });
 
 /////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
-/////////////////STRIPE API/////////////////////////////
 const YOUR_DOMAIN = process.env.YOUR_DOMAIN;
 app.post("/create-checkout-session", async (req, res) => {
   const prices = await stripe.prices.list({
@@ -431,13 +395,11 @@ app.post("/create-checkout-session", async (req, res) => {
     billing_address_collection: "auto",
     line_items: [
       {
-        // price: "price_1KU0vXJv2BSK7V9OJLfULWxJ",
         price: price,
         // For metered billing, do not pass quantity
         quantity: 1,
       },
     ],
-    // mode: "payment",
     mode: mode,
     success_url: `${YOUR_DOMAIN}?success=true`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,

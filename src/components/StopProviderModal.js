@@ -20,7 +20,6 @@ export default function StopProviderModal(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          {/* Are you sure to stop being provider? */}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

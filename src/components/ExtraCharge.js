@@ -23,29 +23,6 @@ export default function ExtraCharge({ user, items, email, setItems }) {
 
   const navigate = useNavigate();
 
-  // const retrieveItem = (e) => {
-  //   const temp = [...selectedItems];
-  //   const tempForLocal = [...localItems];
-  //   tempForLocal.forEach((item) => {
-  //     for (let key in item) {
-  //       const tag = document.getElementById(e.target.id);
-
-  //       if (
-  //         item[key] === e.target.textContent &&
-  //         item.box_id === parseInt(tag.id)
-  //       ) {
-  //         item[key] = "";
-  //         return;
-  //       }
-  //     }
-  //   });
-  //   if (e.target.textContent !== "No Items added") {
-  //     temp.push(e.target.textContent);
-  //   }
-  //   setSelectedItem(temp);
-  //   setLocalItems(tempForLocal);
-  // };
-
   const handleOnclickDate = () => {
     const selectedDateStr = `${selectedDate.getFullYear()}/${
       selectedDate.getMonth() + 1
@@ -69,15 +46,7 @@ export default function ExtraCharge({ user, items, email, setItems }) {
     return newDate;
   };
 
-  const check = (e) => {
-    e.preventDefault();
-    console.log("items", items);
-    console.log("user", user);
-    console.log("email", email);
-  };
-
   const updateItemList = () => {
-    // axios.post("/allItems", { email }).then((res) => setItems(res.data));
     axios
       .post("/allItems", { email: localStorage.email_user })
       .then((res) => setItems(res.data));
@@ -198,34 +167,6 @@ export default function ExtraCharge({ user, items, email, setItems }) {
           </div>
         )}
       </div>
-      {/* <div>
-   <button className="cancelButtonR" onClick={()=>{
-       setBoxIsSelected(false);
-   }}>Reset</button></div> */}
-
-      {/* <section 
-        className="flex 
-        flex-wrap 
-        items-center m-10 text-sky-900 font-bold"
-      >
-        <p className="bg-white px-3 py-3 rounded-3xl">Selected item:</p>
-        {selectedItems.map((item, idx) => {
-          return (
-            <section className="w-fit m-2 text-cyan-800 bg-white rounded-full py-2 px-4">
-              <li className="selected-items " key={idx}>
-                {item}
-              </li>
-            </section>
-          );
-        })}
-        <Button
-          onClick={() => {
-            window.location.reload(false);
-          }}
-        >
-          Clear
-        </Button>
-      </section> */}
 
       {selectedDate === undefined ? (
         <h2 id="next-period">
@@ -252,18 +193,6 @@ export default function ExtraCharge({ user, items, email, setItems }) {
           {selectedDateString}
         </p>
       )}
-
-      {/* <DatePicker
-        className="ml-10"
-        selected={startDate}
-        onSelect={(date) => handleDateSelect(date)}
-        minDate={addDays(new Date())}
-      />
-      {isSelected ? (
-        <div className="ml-10 italic">You selected {selectedDateString}</div>
-      ) : (
-        <div className="ml-10 italic">Date not selected</div>
-      )} */}
 
       <div className="bottomContainer">
         {selectedDate !== undefined &&
